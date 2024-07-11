@@ -1,11 +1,1 @@
-{
-  "data": {
-    "slug": {
-      "param": "slug",
-      "__resolveType": "website/functions/requestToParam.ts"
-    },
-    "__resolveType": "shopify/loaders/ProductDetailsPage.ts"
-  },
-  "extensions": [],
-  "__resolveType": "commerce/loaders/product/extensions/detailsPage.ts"
-}
+{"data":{"slug":{"param":"slug","__resolveType":"website/functions/requestToParam.ts"},"__resolveType":"shopify/loaders/ProductDetailsPage.ts"},"extensions":[],"__resolveType":"commerce/loaders/product/extensions/detailsPage.ts"}
