@@ -79,21 +79,9 @@
   ],
   "variant": "initial",
   "logo": {
-    "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11097/79077fb4-60f9-4c5d-af22-7ae76e9b29b9",
+    "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11097/3e00d53d-696d-4266-972b-c5c50c5ac2f3",
     "alt": "Deco Storefront",
-    "width": 142,
-    "height": 32
-  },
-  "institutionalItems": [
-    {
-      "name": "sads",
-      "url": "dsad"
-    }
-  ],
-  "socials": [],
-  "helpItems": {
-    "children": [],
-    "title": "dsaddsadasd",
-    "url": "dasdsadasd"
+    "width": 94,
+    "height": 20.26
   }
 }
