@@ -36,6 +36,7 @@ export interface SearchbarProps {
 
   /** @description Loader to run when suggesting new elements */
   loader: Resolved<Suggestion | null>;
+  searchBarDrawer?: boolean;
 }
 
 const script = (formId: string, name: string, popupId: string) => {
@@ -73,30 +74,32 @@ const script = (formId: string, name: string, popupId: string) => {
 const Suggestions = import.meta.resolve("./Suggestions.tsx");
 
 export default function Searchbar(
-  { placeholder = "What are you looking for?", loader }: SearchbarProps,
+  { placeholder = "O que deseja?", loader, searchBarDrawer }: SearchbarProps,
 ) {
   const slot = useId();
 
   return (
     <div
-      class="w-full grid gap-8 px-4 py-6"
-      style={{ gridTemplateRows: "min-content auto" }}
+      class={`w-full flex gap-8 ${searchBarDrawer ? "gap-[unset]" : ""}`}
     >
-      <form id={SEARCHBAR_INPUT_FORM_ID} action={ACTION} class="join">
+      <form id={SEARCHBAR_INPUT_FORM_ID} action={ACTION} class={`join flex gap-[20px]   ${searchBarDrawer ? "my-5 w-full px-5" : ""}`}>
         <button
           type="submit"
-          class="btn join-item btn-square no-animation"
+          class="bg-transparent border-none"
           aria-label="Search"
           for={SEARCHBAR_INPUT_FORM_ID}
           tabIndex={-1}
         >
           <span class="loading loading-spinner loading-xs hidden [.htmx-request_&]:inline" />
-          <Icon id="search" class="inline [.htmx-request_&]:hidden" />
+          {searchBarDrawer ?
+            <Icon id="search-drawer" class="inline [.htmx-request_&]:hidden" />
+            :
+            <Icon id="search" class="inline [.htmx-request_&]:hidden" />
+          }
         </button>
         <input
-          autoFocus
           tabIndex={0}
-          class="input input-bordered join-item flex-grow"
+          className={`lg:focus:w-[619px] 2xl:focus:w-[780px] xl:focus:w-[640px] focus:left-[calc(100%-72vw)] focus:top-[calc(100%-3.65vw)] focus:transform focus:-translate-x-[0vw] focus:transform focus:-translate-y-[0] rounded-[30px] outline-none py-[8.5px] px-5 placeholder-[#D3D3D3] ${searchBarDrawer ? "border border-[#D3D3D3] py-[5px] w-full" : ""}`}
           name={NAME}
           placeholder={placeholder}
           autocomplete="off"
@@ -108,14 +111,6 @@ export default function Searchbar(
           hx-indicator={`#${SEARCHBAR_INPUT_FORM_ID}`}
           hx-swap="innerHTML"
         />
-        <label
-          type="button"
-          class="join-item btn btn-ghost btn-square hidden sm:inline-flex no-animation"
-          for={SEARCHBAR_POPUP_ID}
-          aria-label="Toggle searchbar"
-        >
-          <Icon id="close" />
-        </label>
       </form>
 
       {/* Suggestions slot */}

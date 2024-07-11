@@ -60,7 +60,7 @@ function Drawer({
             "[[data-aside]&_section]:contents", // lazy-loading via useSection
           )}
         >
-          <label for={id} class="drawer-overlay" />
+          <label for={id} />
           {aside}
         </aside>
       </div>
@@ -73,24 +73,32 @@ function Drawer({
 }
 
 function Aside(
-  { title, drawer, children }: {
-    title: string;
+  { title, drawer, children, background = "bg-white", color, sizeMenu, sizeMinicart }: {
+    title?: string;
     drawer: string;
     children: ComponentChildren;
+    background?: string;
+    color?: string;
+    sizeMenu?: boolean;
+    sizeMinicart?: boolean;
   },
 ) {
   return (
     <div
       data-aside
-      class="bg-base-100 grid grid-rows-[auto_1fr] h-full divide-y"
-      style={{ maxWidth: "100vw" }}
+      class={`bg-base-100 grid grid-rows-[auto_1fr] h-full divide-y w-full 
+      ${sizeMenu ? "max-w-[388px]" : ""} 
+      ${sizeMinicart ? "max-w-[390px] lg:max-w-[445px]" : ""}`}
+
     >
-      <div class="flex justify-between items-center">
-        <h1 class="px-4 py-3">
-          <span class="font-medium text-2xl">{title}</span>
-        </h1>
+      <div class={`flex justify-between items-center ${background} lg:${sizeMinicart ? "max-w-[390px] lg:max-w-[445px] w-full" : ""}   ${sizeMenu ? "max-w-[388px]" : ""}`}>
+        {title ?
+          <h1 class="p-5">
+            <span class={`font-medium text-[16px] ${color}`}>{title}</span>
+          </h1>
+          : null}
         <label for={drawer} aria-label="X" class="btn btn-ghost">
-          <Icon id="close" />
+          {background === "bg-[#FFFFFF]" ? <Icon id="close-white" /> : <Icon id="close" />}
         </label>
       </div>
       {children}

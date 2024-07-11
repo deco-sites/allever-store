@@ -8,51 +8,6 @@
       "__resolveType": "Header"
     },
     {
-      "__resolveType": "site/sections/Images/Carousel.tsx",
-      "images": [
-        {
-          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/e5b17750-7164-45a5-9d3a-68076ab407db",
-          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/f50d5ec4-c329-44c0-b504-f74155260d41",
-          "alt": "valentines",
-          "action": {
-            "title": "Valentine's Day",
-            "subTitle": "Celebrate Love with Our Exclusive Offers",
-            "href": "#",
-            "label": "Enjoy!"
-          }
-        },
-        {
-          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/e5b17750-7164-45a5-9d3a-68076ab407db",
-          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/f50d5ec4-c329-44c0-b504-f74155260d41",
-          "alt": "Christmas",
-          "action": {
-            "title": "Christmas",
-            "subTitle": "New deals for santa!",
-            "href": "#",
-            "label": "Enjoy!"
-          }
-        }
-      ]
-    },
-    {
-      "__resolveType": "site/sections/Product/ProductShelf.tsx",
-      "title": "Make Mom's day",
-      "cta": "/mono",
-      "products": {
-        "__resolveType": "shopify/loaders/ProductList.ts",
-        "props": {
-          "sort": "",
-          "count": 12
-        },
-        "filters": {
-          "tags": [],
-          "productTypes": [],
-          "productVendors": [],
-          "variantOptions": []
-        }
-      }
-    },
-    {
       "__resolveType": "site/sections/Category/CategoryGrid.tsx",
       "title": "Featured departments",
       "cta": "/all",
@@ -122,14 +77,14 @@
     {
       "__resolveType": "site/sections/Images/Banner.tsx",
       "title": "Get 40$ off",
+      "cta": {
+        "label": "Apply Now",
+        "href": "#"
+      },
       "description": "<p><span style=\"color: rgb(92, 92, 92);\" data-mce-style=\"color: rgb(92, 92, 92);\">a future qualifying purchase over $40 when approved for a Debit or Credit</span> <span style=\"color: rgb(45, 194, 107);\" data-mce-style=\"color: rgb(45, 194, 107);\">RedCard™</span></p>",
       "images": {
         "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/235f846d-8182-45df-8e88-c72d1e08645d",
         "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/3c800e87-d78d-4179-b4b7-b8b309de3fbe"
-      },
-      "cta": {
-        "label": "Apply Now",
-        "href": "#"
       }
     },
     {

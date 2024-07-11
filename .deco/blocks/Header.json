@@ -1,10 +1,74 @@
 {
   "__resolveType": "site/sections/Header/Header.tsx",
-  "navItems": {
-    "__resolveType": "navbar"
-  },
+  "navItems": [
+    {
+      "children": [],
+      "name": "Entre ou cadastre-se",
+      "url": "/login",
+      "ishighlighted": true
+    },
+    {
+      "children": [],
+      "name": "Atendimento",
+      "url": "/Atendimento"
+    },
+    {
+      "children": [
+        {
+          "name": "Promoções",
+          "url": "/Promoções"
+        },
+        {
+          "name": "Novidades",
+          "url": "/Novidades"
+        },
+        {
+          "name": "Alimentos e bebidas",
+          "url": "/alimentos-e-bebidas"
+        },
+        {
+          "children": [],
+          "name": "Automotivo",
+          "url": "/Automotivo"
+        },
+        {
+          "children": [],
+          "name": "Bebês",
+          "url": "/Bebes"
+        },
+        {
+          "children": [],
+          "name": "Beleza e Bem-estar",
+          "url": "beleza-e-bem-estar"
+        },
+        {
+          "children": [],
+          "name": "Brinquedos e Jogos",
+          "url": "brinquedos-e-jogos"
+        },
+        {
+          "children": [],
+          "name": "Câmeras e Foto",
+          "url": "/cameras-e-foto"
+        },
+        {
+          "children": [
+            {
+              "children": [],
+              "name": "Cozinha",
+              "url": "/cozinha"
+            }
+          ],
+          "name": "Casa",
+          "url": "/casa",
+          "isBold": false
+        }
+      ],
+      "name": "Todos os departamentos"
+    }
+  ],
   "searchbar": {
-    "placeholder": "What are you looking for?",
+    "placeholder": "O que deseja?",
     "loader": {
       "__resolveType": "resolved",
       "data": null
@@ -15,9 +79,21 @@
   ],
   "variant": "initial",
   "logo": {
-    "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/f1faab73-e4ff-4037-b7c4-5d02bd0b1209",
+    "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11097/79077fb4-60f9-4c5d-af22-7ae76e9b29b9",
     "alt": "Deco Storefront",
-    "width": 160,
-    "height": 40
+    "width": 142,
+    "height": 32
+  },
+  "institutionalItems": [
+    {
+      "name": "sads",
+      "url": "dsad"
+    }
+  ],
+  "socials": [],
+  "helpItems": {
+    "children": [],
+    "title": "dsaddsadasd",
+    "url": "dasdsadasd"
   }
 }

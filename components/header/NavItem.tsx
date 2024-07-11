@@ -1,13 +1,40 @@
-import type { SiteNavigationElement } from "apps/commerce/types.ts";
-import Image from "apps/website/components/Image.tsx";
+
+
+
 import {
   HEADER_HEIGHT_DESKTOP,
   NAVBAR_HEIGHT_DESKTOP,
 } from "../../constants.ts";
 
-function NavItem({ item }: { item: SiteNavigationElement }) {
+/** @titleBy name */
+export interface Children {
+  name: string;
+  url: string;
+  isBold?: boolean;
+  /** @title Filhos */
+  children?: Children[];
+}
+
+/** @titleBy name */
+export interface INavItem {
+  /** @title Texto */
+  name: string;
+  /** @title Link */
+  url?: string;
+  /** @title Icone */
+  icon?: string;
+  /** @title Filhos */
+  children?: Children[];
+  /** @title Item possui destaque? */
+  ishighlighted?: boolean;
+}
+
+interface Props {
+  item: INavItem;
+}
+
+function NavItem({ item }: Props) {
   const { url, name, children } = item;
-  const image = item?.image?.[0];
 
   return (
     <li
@@ -31,16 +58,6 @@ function NavItem({ item }: { item: SiteNavigationElement }) {
               marginTop: HEADER_HEIGHT_DESKTOP,
             }}
           >
-            {image?.url && (
-              <Image
-                class="p-6"
-                src={image.url}
-                alt={image.alternateName}
-                width={300}
-                height={332}
-                loading="lazy"
-              />
-            )}
             <ul class="flex items-start justify-center gap-6">
               {children.map((node) => (
                 <li class="p-6">

@@ -41,23 +41,23 @@ function CartItem({ item, index, locale, currency }: Props) {
     <fieldset
       // deno-lint-ignore no-explicit-any
       data-item-id={(item as any).item_id}
-      class="grid grid-rows-1 gap-2"
+      class="grid grid-rows-1 gap-2 bg-white py-2 px-[10px] rounded-[10px]"
       style={{ gridTemplateColumns: "auto 1fr" }}
     >
       <Image
         alt={name}
         src={image}
-        style={{ aspectRatio: "108 / 150" }}
-        width={108}
-        height={150}
+        style={{ aspectRatio: "140 / 192" }}
+        width={140}
+        height={192}
         class="h-full object-contain"
       />
-
+      
       {/* Info */}
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-[10px] ml-[10px]">
         {/* Name and Remove button */}
         <div class="flex justify-between items-center">
-          <legend>{name}</legend>
+          <legend class="text-xs text-black">{name}</legend>
           <button
             class={clx(
               isGift && "hidden",
@@ -70,24 +70,22 @@ function CartItem({ item, index, locale, currency }: Props) {
         </div>
 
         {/* Price Block */}
-        <div class="flex items-center gap-2">
-          <span class="line-through text-sm">
+        <div class="flex flex-col items-start gap-2">
+          <span class="line-through  text-sm text-[#a8a8a8]">
             {formatPrice(listPrice, currency, locale)}
           </span>
-          <span class="text-sm text-secondary">
+          <span class=" text-sm text-[#123ADD] font-semibold">
             {isGift ? "Grátis" : formatPrice(price, currency, locale)}
           </span>
         </div>
 
         {/* Quantity Selector */}
-        <div class={clx(isGift && "hidden")}>
           <QuantitySelector
             min={0}
             max={QUANTITY_MAX_VALUE}
             value={quantity}
             name={`item::${index}`}
           />
-        </div>
       </div>
     </fieldset>
   );
