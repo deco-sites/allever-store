@@ -8,106 +8,107 @@
       "__resolveType": "Header"
     },
     {
+      "__resolveType": "site/sections/Product/ProductShelf.tsx",
+      "products": {
+        "__resolveType": "vtex/loaders/legacy/productList.ts",
+        "props": {
+          "term": "painel",
+          "count": 4
+        }
+      }
+    },
+    {
+      "__resolveType": "site/sections/Images/Carousel.tsx",
+      "images": [
+        {
+          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/69ec3687-74ea-4087-a9c1-40cf90a4a53a",
+          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/c171753b-f415-4753-8914-0c5bf9a7f7ff",
+          "alt": "Spring",
+          "action": {
+            "title": "Step into Spring with Stylish",
+            "subTitle": "Brighten your look with our latest collection.",
+            "href": "#",
+            "label": "Shop Now!"
+          }
+        },
+        {
+          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/494ca764-d5f8-4118-8cb8-47957d512295",
+          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/78a3019b-a31f-420a-9a40-1ddaa1126a2d",
+          "alt": "Special Sunglass",
+          "action": {
+            "title": "Summer Shades Special",
+            "subTitle": "Find your perfect pair for sunny days.",
+            "href": "#",
+            "label": "Grab Yours Now!"
+          }
+        },
+        {
+          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/3e000f89-5b09-4c9c-9625-9d457a571e34",
+          "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/41620285-6915-4589-ab59-981b69c21270",
+          "action": {
+            "label": "Shop the Collection",
+            "href": "#",
+            "title": "Stride into Summer with Fresh Sneakers",
+            "subTitle": "Discover our latest collection for sunny days."
+          },
+          "alt": "Summer"
+        }
+      ]
+    },
+    {
       "__resolveType": "site/sections/Category/CategoryGrid.tsx",
-      "title": "Featured departments",
+      "title": "Departments",
       "cta": "/all",
       "items": [
         {
-          "label": "Grocery",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/9581289b-7ad3-462b-a680-47678f87c0fc",
-          "href": "/"
+          "label": "Men",
+          "href": "/",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/38c33c9f-14a1-4048-973b-dc2a75caf1fa"
         },
         {
           "href": "/",
-          "label": "Home",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/ec749573-4bf4-45d7-ac20-fc66e15cad6e"
+          "label": "Women",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/f6bea2b8-b248-4b42-9246-6e924a0acc8b"
         },
         {
           "href": "/",
-          "label": "Furniture",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/d1731f58-3fff-46e6-9165-d4d698c4e199"
+          "label": "Kids",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/1b0ecaa2-9a13-4de2-bf17-5196948ed128"
         },
         {
           "href": "/",
-          "label": "Toys",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/3a0e5e41-0875-43b9-aaff-27b400c5274c"
+          "label": "Hats",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/36e97897-5cf7-4271-a71c-683dc732ef8c"
         },
         {
           "href": "/",
-          "label": "Electronics",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/4e0b46e9-c5c3-4222-8c9e-4ce98f3d9ad9"
+          "label": "Accessories",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/92129655-fe40-4b29-8fdb-e7f71e67a5d1"
         },
         {
           "href": "/",
-          "label": "Pets",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/edd5d0e2-9e02-4730-bef7-1f1cd750d579"
-        },
-        {
-          "href": "/",
-          "label": "Clothing & Shoes",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/ccb8fefc-3197-45a5-a085-3b6f493d08a0"
-        },
-        {
-          "href": "/",
-          "label": "Baby",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/8afd4bc6-b568-4999-b80d-ef36c78f1153"
-        },
-        {
-          "href": "/",
-          "label": "Sports & Outdoors",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/b81a2f89-0d91-44b6-ac4c-f7f092cf3c46"
-        },
-        {
-          "href": "/",
-          "label": "Beauty",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/6bc77133-8f09-4301-b54e-e4924b51a5c5"
-        },
-        {
-          "href": "/",
-          "label": "Health",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/a9a21762-d617-4b44-8b4f-ec31d36d42f2"
-        },
-        {
-          "href": "/",
-          "label": "Luggage",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/253fc321-0d8c-4f33-8ae6-3ba1ff18c619"
+          "label": "Home & Living",
+          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/d0433c00-cd26-4638-b519-0cb64b9f82e8"
         }
       ]
     },
     {
       "__resolveType": "site/sections/Images/Banner.tsx",
-      "title": "Get 40$ off",
-      "cta": {
-        "label": "Apply Now",
-        "href": "#"
-      },
-      "description": "<p><span style=\"color: rgb(92, 92, 92);\" data-mce-style=\"color: rgb(92, 92, 92);\">a future qualifying purchase over $40 when approved for a Debit or Credit</span> <span style=\"color: rgb(45, 194, 107);\" data-mce-style=\"color: rgb(45, 194, 107);\">RedCard™</span></p>",
+      "title": "Register and Save Big!",
+      "description": "<p><span style=\"color: rgb(45, 194, 107);\" data-mce-style=\"color: rgb(45, 194, 107);\">Sign up now to get up to 50% off on your first order. Limited time offer!</span></p>",
       "images": {
-        "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/235f846d-8182-45df-8e88-c72d1e08645d",
-        "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/3c800e87-d78d-4179-b4b7-b8b309de3fbe"
+        "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/cf96d47f-564f-40da-ad94-7acac5f39327",
+        "mobile": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2177/4d5c3212-3f75-4d50-89f3-970815748b43"
+      },
+      "cta": {
+        "label": "Sign Up",
+        "href": "#"
       }
     },
     {
       "__resolveType": "site/sections/Product/ProductShelfTabbed.tsx",
       "title": "Hottest Deals",
       "tabs": [
-        {
-          "products": {
-            "__resolveType": "shopify/loaders/ProductList.ts",
-            "props": {
-              "sort": "",
-              "query": "Shirts",
-              "count": 10
-            },
-            "filters": {
-              "tags": [],
-              "productTypes": [],
-              "productVendors": [],
-              "variantOptions": []
-            }
-          },
-          "title": "Fashion"
-        },
         {
           "products": {
             "__resolveType": "shopify/loaders/ProductList.ts",
@@ -124,6 +125,23 @@
             }
           },
           "title": "Accessories"
+        },
+        {
+          "products": {
+            "__resolveType": "shopify/loaders/ProductList.ts",
+            "props": {
+              "sort": "",
+              "query": "Shirts",
+              "count": 10
+            },
+            "filters": {
+              "tags": [],
+              "productTypes": [],
+              "productVendors": [],
+              "variantOptions": []
+            }
+          },
+          "title": "Fashion"
         },
         {
           "products": {

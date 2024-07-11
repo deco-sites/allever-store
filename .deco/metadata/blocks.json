@@ -99,7 +99,7 @@
   },
   "/.deco/blocks/pages-productpage-ce4850591828.json": {
     "name": "Product Page",
-    "path": "/products/:slug",
+    "path": "/:slug/p",
     "blockType": "pages",
     "__resolveType": "website/pages/Page.tsx"
   },
@@ -123,6 +123,10 @@
     "blockType": "apps",
     "__resolveType": "site/apps/deco/analytics.ts"
   },
+  "/.deco/blocks/deco-shopify.json": {
+    "blockType": "apps",
+    "__resolveType": "site/apps/deco/shopify.ts"
+  },
   "/.deco/blocks/Deco.json": {
     "blockType": "sections",
     "__resolveType": "site/sections/Theme/Theme.tsx"
@@ -135,37 +139,31 @@
     "blockType": "sections",
     "__resolveType": "site/sections/Header/Header.tsx"
   },
-  "/.deco/blocks/Preview%20site%2Fsections%2FHeader%2FHeader.tsx.json": {
+  "/.deco/blocks/Preview%20site%2Fsections%2FAnimation%2FAnimation.tsx.json": {
     "blockType": "sections",
-    "__resolveType": "site/sections/Header/Header.tsx"
+    "__resolveType": "site/sections/Animation/Animation.tsx"
+  },
+  "/.deco/blocks/Preview%20%2Fsections%2FProduct%2FProductDetails.tsx.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/Product/ProductDetails.tsx"
+  },
+  "/.deco/blocks/Preview%20%2Fsections%2FImages%2FImageGallery.tsx.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/Images/ImageGallery.tsx"
+  },
+  "/.deco/blocks/pages-Landing%2520Page%2520(Woman)-585575.json": {
+    "name": "Landing Page (Women)",
+    "path": "/women",
+    "blockType": "pages",
+    "__resolveType": "website/pages/Page.tsx"
   },
   "/.deco/blocks/deco-vtex.json": {
     "blockType": "apps",
     "__resolveType": "site/apps/deco/vtex.ts"
   },
-  "/.deco/blocks/deco-implementation.json": {
-    "blockType": "apps",
-    "__resolveType": "site/apps/deco/implementation.ts"
-  },
-  "/.deco/blocks/deco-ai-assistants.json": {
-    "blockType": "apps",
-    "__resolveType": "site/apps/deco/ai-assistants.ts"
-  },
-  "/.deco/blocks/deco-typesense.json": {
-    "blockType": "apps",
-    "__resolveType": "site/apps/deco/typesense.ts"
-  },
-  "/.deco/blocks/Preview%20vtex%2Factions%2Fnewsletter%2Fsubscribe.ts.json": {
-    "blockType": "actions",
-    "__resolveType": "vtex/actions/newsletter/subscribe.ts"
-  },
-  "/.deco/blocks/Preview%20vtex%2Floaders%2Fpaths%2FPDPDefaultPath.ts.json": {
-    "blockType": "loaders",
-    "__resolveType": "vtex/loaders/paths/PDPDefaultPath.ts"
-  },
-  "/.deco/blocks/Preview%20vtex%2Floaders%2FintelligentSearch%2FproductList.ts.json": {
-    "blockType": "loaders",
-    "__resolveType": "vtex/loaders/intelligentSearch/productList.ts"
+  "/.deco/blocks/Preview%20%2Fsections%2FProduct%2FProductShelf.tsx.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/Product/ProductShelf.tsx"
   },
   "/.deco/blocks/Preview%20vtex%2Floaders%2Flegacy%2FproductList.ts.json": {
     "blockType": "loaders",
