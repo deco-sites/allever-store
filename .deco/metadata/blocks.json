@@ -168,5 +168,9 @@
   "/.deco/blocks/Preview%20vtex%2Floaders%2Flegacy%2FproductList.ts.json": {
     "blockType": "loaders",
     "__resolveType": "vtex/loaders/legacy/productList.ts"
+  },
+  "/.deco/blocks/Footer%20Component.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/Footer/Footer.tsx"
   }
 }

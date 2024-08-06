@@ -19,15 +19,16 @@ const useStyles = (value: string, checked: boolean) => {
   if (colors[value]) {
     return clx(
       "h-8 w-8 block",
-      "border border-base-300 rounded-full",
+      "border border-base-300",
       "ring-2 ring-offset-2",
       checked ? "ring-primary" : "ring-transparent",
     );
   }
 
   return clx(
-    "btn btn-ghost",
-    checked && "btn-outline",
+    "p-3 rounded-[10px] text-xs font-bold",
+    checked && "bg-[#123ADD] text-white ",
+    !checked && "bg-[#D3D3D3] text-black ",
   );
 };
 
@@ -64,8 +65,8 @@ function VariantSelector({ product }: Props) {
     >
       {Object.keys(possibilities).map((name) => (
         <li class="flex flex-col gap-2">
-          <span class="text-sm">{name}</span>
-          <ul class="flex flex-row gap-4">
+          <span class="text-base font-bold mb-5 uppercase">{name}</span>
+          <ul class="flex flex-row gap-2 mb-[10px]">
             {Object.entries(possibilities[name])
               .filter(([value]) => value)
               .map(([value, link]) => {

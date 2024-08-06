@@ -49,29 +49,31 @@ function Banner(props: SectionProps<ReturnType<typeof loader>>) {
   const { title, subtitle, image } = banner;
 
   return (
-    <div class="grid grid-cols-1 grid-rows-1">
+    <div class="grid grid-cols-1 grid-rows-1 mt-[35px] mb-5 sm:my-[45px]">
       <Picture preload class="col-start-1 col-span-1 row-start-1 row-span-1">
         <Source
           src={image.mobile}
           width={360}
           height={120}
           media="(max-width: 767px)"
+          loading="lazy"
         />
         <Source
           src={image.desktop}
           width={1440}
           height={200}
           media="(min-width: 767px)"
+          loading="lazy"
         />
         <img class="w-full" src={image.desktop} alt={image.alt ?? title} />
       </Picture>
 
       <div class="container flex flex-col items-center justify-center sm:items-start col-start-1 col-span-1 row-start-1 row-span-1 w-full">
-        <h1>
+        <h3>
           <span class="text-5xl font-medium text-base-100">
             {title}
           </span>
-        </h1>
+        </h3>
         <h2>
           <span class="text-xl font-medium text-base-100">
             {subtitle}

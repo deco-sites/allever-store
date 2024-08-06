@@ -5,6 +5,7 @@ import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
 import QuantitySelector from "../ui/QuantitySelector.tsx";
+import Icon from "../../components/ui/Icon.tsx";
 
 export interface Props extends JSX.HTMLAttributes<HTMLButtonElement> {
   product: Product;
@@ -143,7 +144,10 @@ function AddToCartButton(props: Props) {
         class={clx("flex-grow peer-checked:hidden", _class?.toString())}
         hx-on:click={useScript(onClick)}
       >
-        Add to Cart
+        
+        <Icon id="shopping_bag" size={21} />
+
+        COMPRAR
       </button>
 
       {/* Quantity Input */}

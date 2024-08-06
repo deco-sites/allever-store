@@ -9,6 +9,8 @@ import Avatar from "../../components/ui/Avatar.tsx";
 import { clx } from "../../sdk/clx.ts";
 import { formatPrice } from "../../sdk/format.ts";
 
+import Icon from "../ui/Icon.tsx";
+import Collapsable from '../ui/Collapsable.tsx'
 interface Props {
   filters: ProductListingPage["filters"];
 }
@@ -20,11 +22,13 @@ function ValueItem(
   { url, selected, label, quantity }: FilterToggleValue,
 ) {
   return (
-    <a href={url} rel="nofollow" class="flex items-center gap-2">
-      <div aria-checked={selected} class="checkbox" />
-      <span class="text-sm">{label}</span>
-      {quantity > 0 && <span class="text-sm text-base-300">({quantity})</span>}
-    </a>
+    <li>
+      <a href={url} rel="nofollow" class="flex items-center gap-2 py-3">
+        <div aria-checked={selected} class="checkbox" />
+        <span class="text-xs font-semibold">{label}</span>
+        {/* {quantity > 0 && <span class="text-sm text-base-300">({quantity})</span>} */}
+      </a>
+    </li>
   );
 }
 
@@ -33,7 +37,7 @@ function FilterValues({ key, values }: FilterToggle) {
   const flexDirection = avatars ? "flex-row items-center" : "flex-col";
 
   return (
-    <ul class={clx(`flex flex-wrap gap-2`, flexDirection)}>
+    <ul class={clx(`flex flex-wrap gap-2 py-2`, flexDirection)}>
       {values.map((item) => {
         const { url, selected, value } = item;
 
@@ -66,14 +70,29 @@ function FilterValues({ key, values }: FilterToggle) {
 }
 
 function Filters({ filters }: Props) {
+  if (filters.length <= 0) {
+    return null;
+  }
   return (
-    <ul class="flex flex-col gap-6 p-4 sm:p-0">
+    <ul class="flex flex-col gap-[10px] p-5 sm:p-0">
       {filters
         .filter(isToggle)
         .map((filter) => (
-          <li class="flex flex-col gap-4">
-            <span>{filter.label}</span>
-            <FilterValues {...filter} />
+          <li class="flex flex-col gap-4 border-b border-gray-300">
+            <Collapsable
+              class=""
+              title={
+                <div class="flex items-center space-between py-[10px] gap-5 lg:gap-0">
+
+                  <span>{filter.label}</span>
+                  <div class="w-[14px] h-[14px]">
+                    <Icon class="group-open:rotate-180 transition-all ease-in-out duration-[400ms]" id={'arrow-right'} size={13} />
+                  </div>
+                </div>
+              }
+            >
+              <FilterValues {...filter} />
+            </Collapsable>
           </li>
         ))}
     </ul>

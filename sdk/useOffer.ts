@@ -65,6 +65,7 @@ export const useOffer = (aggregateOffer?: AggregateOffer) => {
     listPrice: listPrice?.price,
     availability,
     seller,
+    installment,
     installments: installment && price
       ? installmentToString(installment, price)
       : null,

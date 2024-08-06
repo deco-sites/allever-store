@@ -1,5 +1,7 @@
+import { useState } from "preact/hooks";
 import { ProductListingPage } from "apps/commerce/types.ts";
-import { useScript } from "apps/utils/useScript.ts";
+
+import Icon from "../../components/ui/Icon.tsx";
 
 const SORT_QUERY_PARAM = "sort";
 const PAGE_QUERY_PARAM = "page";
@@ -27,6 +29,8 @@ const labels: Record<string, string> = {
 };
 
 function Sort({ sortOptions, url }: Props) {
+  const [isOpen, setIsOpen] = useState(false);
+
   const current = getUrl(
     url,
     new URL(url).searchParams.get(SORT_QUERY_PARAM) ?? "",
@@ -36,28 +40,102 @@ function Sort({ sortOptions, url }: Props) {
     label,
   }));
 
+
+
+  const toggleDropdown = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const closeDropdown = () => {
+    setIsOpen(false);
+  };
+
+
+  const regex = /sort=([a-zA-Z]+)/;
+
+  const match = current.match(regex);
+  let sortValue = '';
+
+  if (match && match[1]) {
+    sortValue = match[1];
+  }
+
+  let selectedLabel = '';
+
+  switch (sortValue) {
+    case 'OrderByScoreDESC':
+      selectedLabel = "Relevância"
+      break;
+    case 'OrderByPriceDESC':
+      selectedLabel = 'Maior Preço'
+      break;
+    case 'OrderByPriceASC':
+      selectedLabel = 'Menor Preço'
+      break;
+    case 'OrderByTopSaleDESC':
+      selectedLabel = 'Mais vendidos'
+      break;
+    case 'OrderByNameDESC':
+      selectedLabel = 'Nome - de Z a A'
+      break;
+    case 'OrderByNameASC':
+      selectedLabel = 'Nome - de A a Z'
+      break;
+    case 'OrderByReleaseDateDESC':
+      selectedLabel = 'Lançamento'
+      break;
+    case 'OrderByBestDiscountDESC':
+      selectedLabel = 'Maior desconto'
+      break;
+    default:
+      selectedLabel = 'Ordenar por';
+  }
+
+
   return (
-    <>
-      <label for="sort" class="sr-only">Sort by</label>
-      <select
-        name="sort"
-        class="select w-full max-w-sm rounded-lg"
-        hx-on:change={useScript(() => {
-          const select = event!.currentTarget as HTMLSelectElement;
-          window.location.href = select.value;
-        })}
-      >
-        {options.map(({ value, label }) => (
-          <option
-            label={labels[label] ?? label}
-            value={value}
-            selected={value === current}
-          >
-            {label}
-          </option>
-        ))}
-      </select>
-    </>
+    <div class={`relative inline-block text-left w-full max-w-fit ${isOpen && 'bg-white'}`}>
+      <div>
+        <button
+          type="button"
+          class={`flex items-center gap-2 w-full rounded-[10px] border border-gray-300 shadow-sm px-4 py-2  bg-transparent text-xs font-bold text-[#123ADD]  focus:outline-none ${isOpen ? "rounded-b-none border-b-0" : ""
+            }`}
+          id="menu-button"
+          aria-expanded={isOpen}
+          aria-haspopup="true"
+          onClick={toggleDropdown}
+        >
+          {selectedLabel}
+
+          <Icon class={`${isOpen && 'rotate-180'} transition-all ease-in-out duration-[400ms]`} id={'arrowRight'} size={13} />
+        </button>
+      </div>
+
+      {isOpen && (
+        <div
+          class="origin-top-right absolute right-0 mt-[1px] w-full rounded-[10px] rounded-t-none shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-20 overflow-hidden"
+          role="menu"
+          aria-orientation="vertical"
+          aria-labelledby="menu-button"
+          tabIndex={-1}
+        >
+          <div role="none">
+            {options.map(({ value, label }, index) => (
+              <a
+                href={value}
+                class={`block px-[10px] py-2 text-[10px] text-black font-semibold hover:bg-gray-100 border-b border-gray-200  ${index === options.length - 1 ? "border-b-0" : ""}`}
+                role="menuitem"
+                tabIndex={-1}
+                key={value}
+                onClick={closeDropdown}
+                style={{ whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}
+              >
+                {labels[label] ?? label}
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
 

@@ -10,13 +10,13 @@ function Dot(
       {...props}
       data-dot={index}
       aria-label={`go to slider item ${index}`}
-      class={clx("focus:outline-none group", props.class?.toString())}
+      class={clx("focus:outline-none group bg-white", props.class?.toString())}
     />
   );
 }
 
 function Slider(props: JSX.IntrinsicElements["ul"]) {
-  return <ul data-slider {...props} />;
+  return <ul data-slider {...props}  />;
 }
 
 function Item({

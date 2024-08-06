@@ -6,6 +6,7 @@ import { formatPrice } from "../../sdk/format.ts";
 import { useComponent } from "../../sections/Component.tsx";
 import Coupon from "./Coupon.tsx";
 import CartItem, { Item } from "./Item.tsx";
+import Icon from "../ui/Icon.tsx";
 
 
 export interface Minicart {
@@ -167,18 +168,36 @@ export default function Cart({
 
         <div
           class={clx(
-            "flex flex-col flex-grow justify-center items-center overflow-hidden w-full",
+            "flex flex-col flex-grow items-center overflow-hidden w-full",
             "[.htmx-request_&]:pointer-events-none [.htmx-request_&]:opacity-60 [.htmx-request_&]:cursor-wait transition-opacity duration-300",
           )}
         >
-          {count === 0
-            ? (
-              <div class="flex flex-col gap-5">
+              {/* Cart header */}
+              <div class="bg-[#123ADD] flex justify-between text-white w-full gap-[5px] py-[13px] px-[35px] h-[58px] items-center">
+                  <div class="flex gap-[5px]">
+                    <p class="font-semibold text-base">Meu carrinho</p>
+                    {count === 0 ? null : (
+                      <p>
+                        [{count} {items.length === 0 ? "" : items.length === 1 ? 'Produto' : 'Produtos'}]
+                      </p>
+                    )}                    
+                  </div>
+                   <div>
+                      <label class="cursor-pointer" for={MINICART_DRAWER_ID}>
+                       <Icon id="close-white" />
+                     </label>
+                   </div>
+                </div>
+              {count === 0 ? (
+              <div class="flex flex-col m-auto gap-5">
+                <div class="flex justify-center">
+                 <Icon id="bag-blue" />
+                </div>
                 <span class="font-semibold text-base text-center">Seu carrinho está vazio!</span>
                 <p class="text-sm max-w-[184px] m-auto flex text-center leading-[21px]">Você ainda não possuí itens no seu carrinho.</p>
                 <label
                   for={MINICART_DRAWER_ID}
-                  class="bg-[#1BAE32] py-[15px] w-full rounded-full text-white px-4"
+                  class="bg-[#1BAE32] py-[15px] w-full rounded-full text-white px-4 cursor-pointer"
                 >
                   Clique aqui e <b>veja os produtos</b> {">"}
                 </label>
@@ -186,7 +205,7 @@ export default function Cart({
             )
             : (
               <>
-                {/* Cart Items */}
+            
                
                 <ul
                   role="list"
@@ -219,7 +238,9 @@ export default function Cart({
                     )}
                   {shipping !== null && (
                   <div class="flex justify-between items-center pb-[10px] pt-5 px-4">
-                    <span class="text-[#A8A8A8] text-base">Frete</span>
+                    <span class="text-[#A8A8A8] text-base flex gap-5">
+                    <Icon id="delivery-box" />
+                      Frete</span>
 
                     <span class="text-[#A8A8A8] text-base">
                       {/* @ts-ignore shipping is valid */}

@@ -34,10 +34,10 @@ function Bag() {
       >
         <span
           id={id}
-          class="hidden indicator-item badge badge-primary badge-sm font-thin"
+          class={`hidden indicator-item badge badge-primary badge-sm font-thin `}
         />
 
-        <span class="p-0 no-animation justify-end">
+        <span class="p-0 no-animation justify-end cursor-pointer">
           <Icon id="shopping_bag" />
         </span>
       </label>

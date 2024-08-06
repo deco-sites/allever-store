@@ -20,7 +20,18 @@ export type AvailableIcons =
   | "trash"
   | "wishlist-icon"
   | "search-drawer"
-  | "close-white";
+  | "close-white"
+  | "close-black"
+  | "sac"
+  | "account_blue"
+  | "bag-blue"
+  | "ecomm-ticket"
+  | "contact-white"
+  | "arrowRight"
+  | "pix"
+  | "credit-card"
+  | "delivery-box"
+  | "rain";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   /**

@@ -1,6 +1,7 @@
+import { useEffect } from "preact/hooks";
+import { useId } from "../../sdk/useId.ts";
 import { useScript } from "apps/utils/useScript.ts";
 import { ComponentChildren } from "preact";
-import { useId } from "../../sdk/useId.ts";
 
 interface Props {
   open?: boolean;
@@ -27,6 +28,13 @@ const script = (id: string) => {
 };
 
 function Modal({ children, open, id = useId() }: Props) {
+  useEffect(() => {
+    const input = document.getElementById(id) as HTMLInputElement | null;
+    if (input) {
+      input.checked = open ?? false;
+    }
+  }, [open, id]);
+
   return (
     <>
       <input id={id} checked={open} type="checkbox" class="modal-toggle" />

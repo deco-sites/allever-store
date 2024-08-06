@@ -3,75 +3,86 @@
   "navItems": [
     {
       "children": [],
-      "name": "Entre ou cadastre-se",
-      "url": "/login",
+      "name": "Promoções",
+      "url": "/promocoes",
       "ishighlighted": true
     },
     {
       "children": [],
-      "name": "Atendimento",
-      "url": "/Atendimento"
+      "name": "Novidades",
+      "url": "/Novidades",
+      "ishighlighted": true
+    },
+    {
+      "children": [],
+      "name": "Alimentos e bebidas",
+      "url": "/Alimentos-e-bebidas"
+    },
+    {
+      "children": [],
+      "url": "/Automotivo",
+      "name": "Automotivo"
+    },
+    {
+      "children": [],
+      "name": "Bebês",
+      "url": "/Bebes"
+    },
+    {
+      "children": [],
+      "name": "Beleza e Bem-estar",
+      "url": "/Beleza-e-Bem-estar"
+    },
+    {
+      "children": [],
+      "name": "Brinquedos e Jogos",
+      "url": "/brinquedos-e-jogos"
+    },
+    {
+      "children": [],
+      "name": "Câmeras e Foto",
+      "url": "/cameras-e-fotos"
     },
     {
       "children": [
         {
-          "name": "Promoções",
-          "url": "/Promoções"
-        },
-        {
-          "name": "Novidades",
-          "url": "/Novidades"
-        },
-        {
-          "name": "Alimentos e bebidas",
-          "url": "/alimentos-e-bebidas"
+          "children": [],
+          "name": "Cozinha",
+          "url": "/cozinha"
         },
         {
           "children": [],
-          "name": "Automotivo",
-          "url": "/Automotivo"
+          "name": "Iluminação",
+          "url": "/iluminacao"
         },
         {
           "children": [],
-          "name": "Bebês",
-          "url": "/Bebes"
+          "name": "Decoração para Casa",
+          "url": "/decoracao-para-casa"
         },
         {
           "children": [],
-          "name": "Beleza e Bem-estar",
-          "url": "beleza-e-bem-estar"
+          "name": "Banho",
+          "url": "/banho"
         },
         {
           "children": [],
-          "name": "Brinquedos e Jogos",
-          "url": "brinquedos-e-jogos"
-        },
-        {
-          "children": [],
-          "name": "Câmeras e Foto",
-          "url": "/cameras-e-foto"
-        },
-        {
-          "children": [
-            {
-              "children": [],
-              "name": "Cozinha",
-              "url": "/cozinha"
-            }
-          ],
-          "name": "Casa",
-          "url": "/casa",
-          "isBold": false
+          "name": "Ar e Ventilação",
+          "url": "/ar-e-ventilacao"
         }
       ],
-      "name": "Todos os departamentos"
+      "name": "Casa",
+      "url": "/casa"
     }
   ],
   "searchbar": {
     "placeholder": "O que deseja?",
     "loader": {
       "__resolveType": "resolved",
-      "data": null
+      "data": {
+        "__resolveType": "vtex/loaders/intelligentSearch/suggestions.ts",
+        "count": 4
+      }
     }
   },
   "alerts": [
@@ -83,5 +94,27 @@
     "alt": "Deco Storefront",
     "width": 94,
     "height": 20.26
+  },
+  "menuHeader": [
+    {
+      "menu": "login",
+      "link": "/login"
+    }
+  ],
+  "menuInstitucional": [
+    {
+      "text": "login",
+      "link": "/login"
+    }
+  ],
+  "MenuHeader": [
+    {
+      "text": "/login",
+      "link": "login"
+    }
+  ],
+  "menu": {
+    "text": "/login",
+    "link": "login"
   }
 }

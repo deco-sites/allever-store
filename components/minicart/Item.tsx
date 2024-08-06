@@ -47,7 +47,6 @@ function CartItem({ item, index, locale, currency }: Props) {
       <Image
         alt={name}
         src={image}
-        style={{ aspectRatio: "140 / 192" }}
         width={140}
         height={192}
         class="h-full object-contain"

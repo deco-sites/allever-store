@@ -49,20 +49,20 @@ export default function Results({ result }: ComponentProps<typeof action>) {
   }
 
   return (
-    <ul class="flex flex-col gap-4 p-4 border border-base-300 rounded">
+    <ul class="flex flex-col gap-4 pt-2 ">
       {methods.map((method) => (
         <li class="flex justify-between items-center border-base-200 not-first-child:border-t">
-          <span class="text-button text-center">
+          <div class="text-xs text-[#a8a8a8] font-semibold">
             Entrega {method.name}
-          </span>
-          <span class="text-button">
+          </div>
+          <div class="text-xs text-[#a8a8a8] font-semibold">
             até {formatShippingEstimate(method.shippingEstimate)}
-          </span>
-          <span class="text-base font-semibold text-right">
+          </div>
+          <div class="text-xs text-[#a8a8a8] font-semibold text-right">
             {method.price === 0 ? "Grátis" : (
               formatPrice(method.price / 100, "BRL", "pt-BR")
             )}
-          </span>
+          </div>
         </li>
       ))}
       <span class="text-xs font-thin">

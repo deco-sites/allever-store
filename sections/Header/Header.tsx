@@ -1,31 +1,38 @@
 import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
-import type { SiteNavigationElement } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import { useDevice } from "deco/hooks/useDevice.ts";
 import { useSection } from "deco/hooks/useSection.ts";
 import Alert from "../../components/header/Alert.tsx";
 import Bag from "../../components/header/Bag.tsx";
 import Menu from "../../components/header/Menu.tsx";
-import NavItem from "../../components/header/NavItem.tsx";
 import SignIn from "../../components/header/SignIn.tsx";
 import Searchbar, {
   type SearchbarProps,
 } from "../../components/search/Searchbar/Form.tsx";
 import Drawer from "../../components/ui/Drawer.tsx";
 import Icon from "../../components/ui/Icon.tsx";
-import Modal from "../../components/ui/Modal.tsx";
-import {INavItem} from "../../components/header/NavItem.tsx"
+import MicroHeaderSetup from '../../islands/MicroHeaderSetup.tsx'
+import { INavItem, MenuHeader } from "../../components/header/NavItem.tsx"
 import {
   HEADER_HEIGHT_DESKTOP,
   HEADER_HEIGHT_MOBILE,
   NAVBAR_HEIGHT_MOBILE,
   SEARCHBAR_DRAWER_ID,
-  SEARCHBAR_POPUP_ID,
   SIDEMENU_CONTAINER_ID,
   SIDEMENU_DRAWER_ID,
 } from "../../constants.ts";
 
 import Wishlist from "../../components/header/Wishlist.tsx";
+
+import { useScript } from "apps/utils/useScript.ts";
+import { Head } from "$fresh/runtime.ts";
+import Logo from '../../components/header/Logo.tsx'
+
+function script() {
+  const param = 10
+  return <Head><script type="module" src={useScript((value) => { console.log(value) }, param)} /></Head>
+}
+script()
 
 export interface Logo {
   src: ImageWidget;
@@ -41,8 +48,8 @@ export interface SectionProps {
    * @title Navigation items
    * @description Navigation items used both on mobile and desktop menus
    */
-  navItems?: INavItem[] | null;
 
+  navItems?: INavItem[] | null;
   /**
    * @title Searchbar
    * @description Searchbar configuration
@@ -54,28 +61,30 @@ export interface SectionProps {
 
   /** @hide true */
   variant?: "initial" | "menu";
+
+  /**
+   *  @title Ativar sticky?
+   *  @description: Se ativo, o background do header fica azul sempre que a página é rolada. No entanto, se a página estiver no topo, 
+   *  o background fica transparente.
+   */
+  isSticky?: boolean;
 }
 
 type Props = Omit<SectionProps, "alert" | "variant">;
 
+
 const Desktop = (
   { logo, searchbar }: Props,
+
 ) => (
   <>
-    <div
-      class="absolute top-0 bg-base-100 container"
-      style={{ marginTop: HEADER_HEIGHT_MOBILE }}
-    >
-
-    </div>
-
-    <div class="flex flex-col gap-4 py-[45px] container">
+    <div class="flex flex-col gap-4 py-[45px] container desktop">
       <div class="flex items-center space-between">
 
         <div>
           <label
             for={SIDEMENU_DRAWER_ID}
-            class="flex items-center text-white justify-start gap-[10px]"
+            class="flex items-center text-white justify-start gap-[10px] cursor-pointer"
             aria-label="open menu"
             hx-target={`#${SIDEMENU_CONTAINER_ID}`}
             hx-swap="outerHTML"
@@ -89,7 +98,7 @@ const Desktop = (
         <Drawer
           id={SIDEMENU_DRAWER_ID}
           aside={
-            <Drawer.Aside title="Menu" drawer={SIDEMENU_DRAWER_ID} sizeMenu={true}>
+            <Drawer.Aside layout="menu" drawer={SIDEMENU_DRAWER_ID} sizeMenu={true}>
               <div
                 id={SIDEMENU_CONTAINER_ID}
                 class="h-full flex items-center justify-center"
@@ -100,19 +109,16 @@ const Desktop = (
           }
         />
 
-        <div class="place-self-center">
-          <a href="/" aria-label="Store logo">
-            <Image
-              src={logo.src}
-              alt={logo.alt}
-              width={logo.width || 100}
-              height={logo.height || 23}
-            />
-          </a>
+        <div class="place-self-center" >
+          <Logo src={logo.src} alt={logo.alt} />
+
         </div>
 
         <div class="flex gap-4 items-center place-self-end">
-          <Searchbar {...searchbar} />
+          <div>
+
+            <Searchbar {...searchbar} />
+          </div>
           <SignIn variant="desktop" />
           <Wishlist />
           <Bag />
@@ -127,7 +133,7 @@ const Mobile = ({ logo, searchbar }: Props) => (
     <Drawer
       id={SEARCHBAR_DRAWER_ID}
       aside={
-        <Drawer.Aside title="Buscar" drawer={SEARCHBAR_DRAWER_ID} background="bg-[#123ADD]" color="text-white">
+        <Drawer.Aside layout="searchBar" title="Buscar" drawer={SEARCHBAR_DRAWER_ID} background="bg-[#123ADD]" color="text-white">
           <div class="w-screen overflow-y-auto">
             <Searchbar {...searchbar} searchBarDrawer={true} />
           </div>
@@ -137,7 +143,7 @@ const Mobile = ({ logo, searchbar }: Props) => (
     <Drawer
       id={SIDEMENU_DRAWER_ID}
       aside={
-        <Drawer.Aside title="Menu" drawer={SIDEMENU_DRAWER_ID} sizeMenu={true}>
+        <Drawer.Aside layout="menu" title="Menu" drawer={SIDEMENU_DRAWER_ID} sizeMenu={true}>
           <div
             id={SIDEMENU_CONTAINER_ID}
             class="h-full flex items-center justify-center"
@@ -149,60 +155,64 @@ const Mobile = ({ logo, searchbar }: Props) => (
     />
 
     <div
-      class="flex place-items-center w-screen px-5 gap-4 pt-[18px]"
+      class="flex flex-col place-items-center w-screen px-5 gap-4 py-5"
       style={{
         height: NAVBAR_HEIGHT_MOBILE,
       }}
     >
-      <label
-        for={SIDEMENU_DRAWER_ID}
-        class="btn btn-square btn-sm btn-ghost justify-start mt-[5px]"
-        aria-label="open menu"
-        hx-target={`#${SIDEMENU_CONTAINER_ID}`}
-        hx-swap="outerHTML"
-        hx-trigger="click once"
-        hx-get={useSection({ props: { variant: "menu" } })}
-      >
-        <Icon id="menu" />
-      </label>
-
-      {logo && (
-        <a
-          href="/"
-          class="flex-grow inline-flex items-center justify-center"
-          aria-label="Store logo"
+      <div class="flex justify-between w-full">
+        <label
+          for={SIDEMENU_DRAWER_ID}
+          class="btn btn-square btn-sm btn-ghost justify-start"
+          aria-label="open menu"
+          hx-target={`#${SIDEMENU_CONTAINER_ID}`}
+          hx-swap="outerHTML"
+          hx-trigger="click once"
+          hx-get={useSection({ props: { variant: "menu" } })}
         >
-          <Image
-            src={logo.src}
-            alt={logo.alt}
-            width={logo.width || 100}
-            height={logo.height || 13}
-          />
-        </a>
-      )}
+          <Icon id="menu" />
+        </label>
 
-      <div class="flex gap-[15px] items-center max-h-[30px]">
-        <SignIn variant="mobile" />
-        <Bag />
+        {logo && (
+          <a
+            href="/"
+            class="flex-grow inline-flex items-center justify-center"
+            aria-label="Store logo"
+          >
+            <Image
+              src={logo.src}
+              alt={logo.alt}
+              width={logo.width || 100}
+              height={logo.height || 13}
+            />
+          </a>
+        )}
+
+        <div class="flex gap-[15px] items-center max-h-[30px]">
+          <SignIn variant="mobile" />
+          <Bag />
+        </div>
+
       </div>
 
-    </div>
-    <div class="pb-5 pt-[10px]">
-      <label
-        class="px-5 flex items-center gap-[15px]"
-        for={SEARCHBAR_DRAWER_ID}
-        aria-label="search icon button"
-      >
-        <Icon id="search" />
-        <div class="bg-white w-full m-auto rounded-[33px] h-[30px]">
-        </div>
-      </label>
+      <div class="w-full">
+        <label
+          class="flex items-center gap-[15px]"
+          for={SEARCHBAR_DRAWER_ID}
+          aria-label="search icon button"
+        >
+          <Icon id="search" />
+          <div class="bg-white w-full m-auto rounded-[33px] h-[30px]">
+          </div>
+        </label>
+      </div>
     </div>
   </>
 );
 
 function Header({
   alerts = [],
+  isSticky,
   logo = {
     src:
       "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11097/3e00d53d-696d-4266-972b-c5c50c5ac2f3",
@@ -216,6 +226,7 @@ function Header({
 
   return (
     <header
+
       style={{
         height: device === "desktop"
           ? HEADER_HEIGHT_DESKTOP
@@ -229,12 +240,14 @@ function Header({
       hx-target="closest section"
       hx-swap="outerHTML"
     >
-      <div class="bg-[#123ADD] fixed w-full z-40">
+      <div class={`fixed w-full z-40 group-header ease-in duration-500 ${!isSticky && "bg-[#123ADD]"}`} id="header">
         {alerts.length > 0 && <Alert alerts={alerts} />}
         {device === "desktop"
           ? <Desktop logo={logo} {...props} />
-          : <Mobile logo={logo} {...props} />}
+          : <Mobile logo={logo} {...props} />
+        }
       </div>
+      {isSticky ? <MicroHeaderSetup rootId="header" threshold={120} /> : null}
     </header>
   );
 }

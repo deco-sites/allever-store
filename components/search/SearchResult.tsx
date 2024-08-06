@@ -12,7 +12,7 @@ import { useOffer } from "../../sdk/useOffer.ts";
 import { useSendEvent } from "../../sdk/useSendEvent.ts";
 import Breadcrumb from "../ui/Breadcrumb.tsx";
 import Drawer from "../ui/Drawer.tsx";
-import Sort from "./Sort.tsx";
+import Sort from "../../islands/Sort.tsx";
 import { useDevice } from "deco/hooks/useDevice.ts";
 
 export interface Layout {
@@ -67,6 +67,11 @@ function PageResult(props: SectionProps<typeof loader>) {
   const { products, pageInfo } = page;
   const perPage = pageInfo?.recordPerPage || products.length;
   const zeroIndexedOffsetPage = pageInfo.currentPage - startingPage;
+
+
+  const prev = pageInfo.currentPage - startingPage;
+  const next = pageInfo.currentPage + startingPage;
+
   const offset = zeroIndexedOffsetPage * perPage;
 
   const nextPageUrl = useUrlRebased(pageInfo.nextPage, url);
@@ -80,36 +85,19 @@ function PageResult(props: SectionProps<typeof loader>) {
     props: { partial: "hideLess" },
   });
 
+
   const infinite = layout?.pagination !== "pagination";
 
   return (
-    <div class="grid grid-flow-row grid-cols-1 place-items-center">
-      <div
-        class={clx(
-          "pb-2 sm:pb-10",
-          (!prevPageUrl || partial === "hideLess") && "hidden",
-        )}
-      >
-        <a
-          rel="prev"
-          class="btn btn-ghost"
-          hx-swap="outerHTML show:parent:top"
-          hx-get={partialPrev}
-        >
-          <span class="inline [.htmx-request_&]:hidden">
-            Show Less
-          </span>
-          <span class="loading loading-spinner hidden [.htmx-request_&]:block" />
-        </a>
-      </div>
+    <div class="grid grid-flow-row grid-cols-1 place-items-center mx-auto">
 
       <div
         data-product-list
         class={clx(
           "grid items-center",
-          "grid-cols-2 gap-2",
-          "sm:grid-cols-4 sm:gap-10",
-          "w-full",
+          "flex gap-[8px]",
+          "sm:grid-cols-4 lg:gap-[40px]",
+          "w-full pb-5",
         )}
       >
         {products?.map((product, index) => (
@@ -123,51 +111,79 @@ function PageResult(props: SectionProps<typeof loader>) {
         ))}
       </div>
 
-      <div class={clx("pt-2 sm:pt-10 w-full", "")}>
-        {infinite
-          ? (
-            <div class="flex justify-center [&_section]:contents">
-              <a
-                rel="next"
-                class={clx(
-                  "btn btn-ghost",
-                  (!nextPageUrl || partial === "hideMore") && "hidden",
-                )}
-                hx-swap="outerHTML show:parent:top"
-                hx-get={partialNext}
-              >
-                <span class="inline [.htmx-request_&]:hidden">
-                  Show More
-                </span>
-                <span class="loading loading-spinner hidden [.htmx-request_&]:block" />
-              </a>
-            </div>
-          )
-          : (
-            <div class={clx("join", infinite && "hidden")}>
-              <a
-                rel="prev"
-                aria-label="previous page link"
-                href={prevPageUrl ?? "#"}
-                disabled={!prevPageUrl}
-                class="btn btn-ghost join-item"
-              >
-                <Icon id="chevron-right" class="rotate-180" />
-              </a>
-              <span class="btn btn-ghost join-item">
-                Page {zeroIndexedOffsetPage + 1}
-              </span>
-              <a
-                rel="next"
-                aria-label="next page link"
-                href={nextPageUrl ?? "#"}
-                disabled={!nextPageUrl}
-                class="btn btn-ghost join-item"
-              >
-                <Icon id="chevron-right" />
-              </a>
-            </div>
-          )}
+      <div class="py-5 sm:pt-10 w-full flex justify-center">
+        <div class="flex justify-center items-center [&_section]:contents w-full lg:hidden">
+          {nextPageUrl ?
+            <a
+              rel="next"
+              aria-label="next page link"
+              href={nextPageUrl ?? "#"}
+              disabled={!nextPageUrl}
+              class="bg-[#123ADD] text-white font-semibold rounded-[20px] text-base py-[13px] w-full items-center uppercase text-center">
+              ver mais
+            </a>
+            : <a
+              rel="prev"
+              aria-label="previous page link"
+              href={prevPageUrl ?? "#"}
+              disabled={!prevPageUrl}
+              class="bg-[#123ADD] text-white font-semibold rounded-[20px] text-base py-[13px] w-full items-center uppercase text-center">
+              ver menos
+            </a>
+          }
+
+        </div>
+        <div class={clx("join lg:flex gap-[30px] items-center text-base hidden ", infinite && "hidden")}>
+          <a
+            rel="prev"
+            aria-label="previous page link"
+            href={prevPageUrl ?? "#"}
+            disabled={!prevPageUrl}
+            class=""
+          >
+            <Icon id="arrow-right" class="rotate-90" size={13} />
+          </a>
+          {prev === 0
+            ? null :
+            <a
+              rel="prev"
+              aria-label="previous page link"
+              href={prevPageUrl ?? "#"}
+              disabled={!prevPageUrl}
+              class=""
+            >
+
+              {prev}
+            </a>
+          }
+
+
+          <span class="py-2 px-3 border border-[#123ADD]">
+            {zeroIndexedOffsetPage + 1}
+          </span>
+          {nextPageUrl ?
+            <a
+              rel="next"
+              aria-label="next page link"
+              href={nextPageUrl ?? "#"}
+              disabled={!nextPageUrl}
+              class=""
+            >
+              {next}
+            </a>
+            : null
+          }
+
+          <a
+            rel="next"
+            aria-label="next page link"
+            href={nextPageUrl ?? "#"}
+            disabled={!nextPageUrl}
+            class=""
+          >
+            <Icon id="arrow-right" class="-rotate-90" size={13} />
+          </a>
+        </div>
       </div>
     </div>
   );
@@ -202,6 +218,8 @@ const setPageQuerystring = (page: string, id: string) => {
   }).observe(element);
 };
 
+
+
 function Result(props: SectionProps<typeof loader>) {
   const container = useId();
   const controls = useId();
@@ -234,6 +252,18 @@ function Result(props: SectionProps<typeof loader>) {
     },
   });
 
+  function extractSearchTerms(url) {
+    const match = url.match(/q=([^&]*)/);
+    if (match) {
+      return match[1].replace(/\+/g, ' ');
+    } else {
+      const pathMatch = url.match(/\/s\/([^?]*)/);
+      return pathMatch ? pathMatch[1].replace(/\+/g, ' ') : '';
+    }
+  }
+
+  const result = extractSearchTerms(url);
+
   const results = (
     <span class="text-sm font-normal">
       {page.pageInfo.recordPerPage} of {page.pageInfo.records} results
@@ -246,50 +276,82 @@ function Result(props: SectionProps<typeof loader>) {
 
   return (
     <>
+      {device === "desktop" && (
+        <div class="flex justify-between flex-col items-start">
+          <div class="w-full flex flex-col gap-6">
+            <div class="border-b border-gray-300">
+              <div class="flex items-center space-between w-full pt-5 pb-6 container mt-[5px]">
+                <h1 class="lg:text-[32px] uppercase font-semibold flex items-center">{result} <span class="lg:text-[24px] font-normal ml-4">[{page.pageInfo.records}]</span></h1>
+                <div class="w-fit">
+                  {sortBy}
+                </div>
+              </div>
+            </div>
+            <div class="container">
+              <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
+            </div>
+          </div>
+        </div>
+      )}
       <div id={container} {...viewItemListEvent} class="w-full">
         {partial
           ? <PageResult {...props} />
           : (
-            <div class="container flex flex-col gap-4 sm:gap-5 w-full py-4 sm:py-5 px-5 sm:px-0">
-              <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
-
+            <div class="flex flex-col gap-4 sm:gap-5 w-full">
               {device === "mobile" && (
-                <Drawer
-                  id={controls}
-                  aside={
-                    <div class="bg-base-100 flex flex-col h-full divide-y overflow-y-hidden">
-                      <div class="flex justify-between items-center">
-                        <h1 class="px-4 py-3">
-                          <span class="font-medium text-2xl">Filters</span>
-                        </h1>
-                        <label class="btn btn-ghost" for={controls}>
-                          <Icon id="close" />
-                        </label>
-                      </div>
-                      <div class="flex-grow overflow-auto">
-                        <Filters filters={filters} />
+                <>
+                  <div class="w-full flex flex-col gap-6">
+                    <div class="border-b border-gray-300">
+                      <div class="flex items-center space-between w-full pt-5 pb-6 container mt-[5px]">
+                        <h1 class="px-5 text-[20px] uppercase font-semibold flex items-center">{result} <span class="text-[14px] font-normal ml-4">[{page.pageInfo.records}]</span></h1>
                       </div>
                     </div>
-                  }
-                >
-                  <div class="flex sm:hidden justify-between items-end">
-                    <div class="flex flex-col">
-                      {results}
-                      {sortBy}
+                    <div class="container px-5">
+                      <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
                     </div>
-
-                    <label class="btn btn-ghost" for={controls}>
-                      Filters
-                    </label>
                   </div>
-                </Drawer>
+                  <div class="px-5">
+                    <Drawer
+                      id={controls}
+                      aside={
+                        <div class="bg-base-100 flex flex-col h-full divide-y overflow-y-hidden">
+                          <div class="flex justify-between items-center bg-[#123ADD]">
+                            <p class="text-[20px] font-semibold py-[17px] flex items-center text-white px-5">
+                              Filtros
+                            </p>
+                            <label class="btn btn-ghost" for={controls}>
+                              <Icon id="close-white" />
+                            </label>
+                          </div>
+                          <div class="flex-grow overflow-auto">
+                            <Filters filters={filters} />
+                          </div>
+
+                        </div>
+                      }
+                    >
+                      <div class="flex justify-between items-end">
+                        <label class="flex items-center gap-[43px] rounded-[10px] border border-gray-300 shadow-sm px-4 py-2 bg-transparent text-xs font-bold  focus:outline-none" for={controls}>
+                          Filtrar
+
+                          <Icon class={` transition-all ease-in-out duration-[400ms]`} id={'arrowRight'} size={13} />
+                        </label>
+
+                        <div class="flex flex-col">
+                          {/* {results} */}
+                          {sortBy}
+                        </div>
+                      </div>
+                    </Drawer>
+                  </div>
+                </>
               )}
 
-              <div class="grid place-items-center grid-cols-1 sm:grid-cols-[250px_1fr]">
+              <div class="grid grid-cols-1 sm:grid-cols-[250px_1fr] gap-6 container">
                 {device === "desktop" && (
-                  <aside class="place-self-start flex flex-col gap-9">
-                    <span class="text-base font-semibold h-12 flex items-center">
-                      Filters
+                  <aside class="place-self-start flex flex-col max-w-[227px]">
+                    <span class="text-[20px] font-semibold py-[10px] flex items-center border-b border-gray-300 ">
+                      Filtros
                     </span>
 
                     <Filters filters={filters} />
@@ -297,20 +359,12 @@ function Result(props: SectionProps<typeof loader>) {
                 )}
 
                 <div class="flex flex-col gap-9">
-                  {device === "desktop" && (
-                    <div class="flex justify-between items-center">
-                      {results}
-                      <div>
-                        {sortBy}
-                      </div>
-                    </div>
-                  )}
                   <PageResult {...props} />
                 </div>
               </div>
             </div>
           )}
-      </div>
+      </div >
 
       <script
         type="module"

@@ -5,8 +5,8 @@ import { clx } from "../../../sdk/clx.ts";
 import { ComponentProps } from "../../../sections/Component.tsx";
 import ProductCard from "../../product/ProductCard.tsx";
 import Icon from "../../ui/Icon.tsx";
-import Slider from "../../ui/Slider.tsx";
 import { ACTION, NAME } from "./Form.tsx";
+import Image from "apps/website/components/Image.tsx";
 
 export interface Props {
   /**
@@ -52,20 +52,21 @@ function Suggestions(
   const hasProducts = Boolean(products.length);
   const hasTerms = Boolean(searches.length);
 
+
   return (
     <div
-      class={clx(`overflow-y-scroll`, !hasProducts && !hasTerms && "hidden")}
+      class={clx(``, !hasProducts && !hasTerms && "flex")}
     >
-      <div class="gap-4 grid grid-cols-1 sm:grid-rows-1 sm:grid-cols-[150px_1fr]">
-        <div class="flex flex-col gap-6">
+      <div class="flex gap-4 flex-col lg:flex-row">
+        <div class="flex flex-col gap-5 mt-[35px] lg:my-[35px] lg:w-[200px]">
           <span
-            class="font-medium text-xl"
+            class="font-extrabold text-sm uppercase text-[#123ADD]"
             role="heading"
             aria-level={3}
           >
             Sugestões
           </span>
-          <ul class="flex flex-col gap-6">
+          <ul class="flex flex-col gap-5 ">
             {searches.map(({ term }) => (
               <li>
                 {/* TODO @gimenes: use name and action from searchbar form */}
@@ -73,37 +74,40 @@ function Suggestions(
                   href={`${ACTION}?${NAME}=${term}`}
                   class="flex gap-4 items-center"
                 >
-                  <span>
-                    <Icon id="search" />
-                  </span>
-                  <span dangerouslySetInnerHTML={{ __html: term }} />
+
+                  <span class="text-[#888888] text-sm" dangerouslySetInnerHTML={{ __html: term }} />
                 </a>
               </li>
             ))}
           </ul>
         </div>
-        <div class="flex flex-col pt-6 md:pt-0 gap-6 overflow-x-hidden">
-          <span
-            class="font-medium text-xl"
-            role="heading"
-            aria-level={3}
-          >
-            Produtos sugeridos
-          </span>
-          <Slider class="carousel">
-            {products.map((product, index) => (
-              <Slider.Item
-                index={index}
-                class="carousel-item first:ml-4 last:mr-4 min-w-[200px] max-w-[200px]"
-              >
-                <ProductCard
-                  product={product}
-                  index={index}
-                  itemListName="Suggeestions"
-                />
-              </Slider.Item>
-            ))}
-          </Slider>
+        <div class="flex flex-col md:flex-row pt-6 md:pt-0 gap-6 overflow-x-hidden">
+          <div class="gap-4 flex">
+            {
+              products.length > 0 ? (
+                <div class="flex flex-col pt-6 md:py-8 gap-6 overflow-x-hidden">
+                  <div class="flex flex-col gap-y-4  overflow-auto">
+                    {products.map((product, index) => (
+                      <a class="flex items-center gap-x-6 bg-white py-2 px-[10px] rounded-[10px] h-[208px]" href={product.url}>
+                        <div class=" max-w-[140px] max-h-[192px]">
+                          <Image
+                            src={product?.image[0].url!}
+                            alt={product?.image[0].name}
+                            width={140}
+                            height={192}
+                            loading="lazy"
+                            decoding="async"
+                            class="w-full h-full"
+                          />
+                        </div>
+                        <span class="text-sm">{product?.isVariantOf.name}</span>
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              ) : null
+            }
+          </div>
         </div>
       </div>
     </div>

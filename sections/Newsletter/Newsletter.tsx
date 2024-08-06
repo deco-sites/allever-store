@@ -20,7 +20,11 @@ export interface Props {
   label?: string;
 
   /** @description Input placeholder */
-  placeholder?: string;
+  emailPlaceholder?: string;
+  namePlaceholder?: string
+  birthdayPlaceholder?: string;
+
+  textLegal?: string;
 
   /** @hide true */
   status?: "success" | "failed";
@@ -31,11 +35,15 @@ export async function action(props: Props, req: Request, ctx: AppContext) {
 
   const form = await req.formData();
   const email = `${form.get("email") ?? ""}`;
+  const name = `${form.get("name") ?? ""}`;
+  const birthday = `${form.get("birthday") ?? ""}`;
 
   if (platform === "vtex") {
     // deno-lint-ignore no-explicit-any
     await (ctx as any).invoke("vtex/actions/newsletter/subscribe.ts", {
       email,
+      name,
+      birthday,
     });
 
     return { ...props, status: "success" };
@@ -52,11 +60,11 @@ function Notice(
   { title, description }: { title?: string; description?: string },
 ) {
   return (
-    <div class="flex flex-col justify-center items-center sm:items-start gap-4">
-      <span class="text-3xl font-semibold text-center sm:text-start">
+    <div class="flex flex-col justify-center items-start gap-4 max-w-[390px] ">
+      <span class="text-[20px] font-semibold text-center sm:text-start text-white">
         {title}
       </span>
-      <span class="text-sm font-normal text-base-300 text-center sm:text-start">
+      <span class="text-xs font-normal text-base-300 text-start text-white">
         {description}
       </span>
     </div>
@@ -65,9 +73,9 @@ function Notice(
 
 function Newsletter({
   empty = {
-    title: "Get top deals, latest trends, and more.",
+    title: "Assine nossa Newsletter",
     description:
-      "Receive our news and promotions in advance. Enjoy and get 10% off your first purchase. For more information click here.",
+      "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna.",
   },
   success = {
     title: "Thank you for subscribing!",
@@ -79,9 +87,12 @@ function Newsletter({
     description:
       "Something went wrong. Please try again. If the problem persists, please contact us.",
   },
-  label = "Sign up",
-  placeholder = "Enter your email address",
+  label = "Cadastrar",
+  emailPlaceholder = "E-mail",
+  namePlaceholder = "Nome completo",
+  birthdayPlaceholder = "Data de Nascimento",
   status,
+  textLegal = "*Ao clicar em Cadastrar você declara que aceita os <a target='_blank' class='underline' href='https://sac.allever.com/hc/pt-br/articles/10326086768788-Termos-de-Uso'>Termos de Privacidade</a>"
 }: SectionProps<typeof loader, typeof action>) {
   if (status === "success" || status === "failed") {
     return (
@@ -101,35 +112,57 @@ function Newsletter({
   }
 
   return (
-    <Section.Container class="bg-base-200">
-      <div class="p-14 grid grid-flow-row sm:grid-cols-2 gap-10 sm:gap-20 place-items-center">
-        <Notice {...empty} />
+    <div class="bg-[#123ADD]">
 
-        <form
-          hx-target="closest section"
-          hx-swap="outerHTML"
-          hx-post={useComponent(import.meta.url)}
-          class="flex flex-col sm:flex-row gap-4 w-full"
-        >
-          <input
-            name="email"
-            class="input input-bordered flex-grow"
-            type="text"
-            placeholder={placeholder}
-          />
+      <Section.Container >
+        <div class="flex space-between flex-col lg:flex-row items-center px-5 gap-5">
+          <Notice {...empty} />
 
-          <button
-            class="btn btn-primary"
-            type="submit"
-          >
-            <span class="[.htmx-request_&]:hidden inline">
-              {label}
-            </span>
-            <span class="[.htmx-request_&]:inline hidden loading loading-spinner" />
-          </button>
-        </form>
-      </div>
-    </Section.Container>
+          <form
+            hx-target="closest section"
+            hx-swap="outerHTML"
+            hx-post={useComponent(import.meta.url)}
+            class="flex justify-center flex-col  lg:gap-4 w-fit">
+            <div class="flex gap-[13px] lg:gap-[10px] flex-col lg:flex-row">
+              <input
+                name="name"
+                class="px-[39px] py-[13px] border border-white rounded-[20px] bg-transparent placeholder-white outline-0 text-white"
+                type="text"
+                placeholder={namePlaceholder}
+                pattern="^[a-zA-ZÀ-ÿ\s'-]{2,}$"
+              />
+
+              <input
+                name="email"
+                class="px-[39px] py-[13px] border border-white rounded-[20px] bg-transparent placeholder-white outline-0 text-white"
+                type="email"
+                placeholder={emailPlaceholder}
+                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+              />
+              <input
+               id="birthday"
+               name="birthday"
+               class="px-[39px] py-[13px] border border-white rounded-[20px] bg-transparent placeholder-white outline-0 text-white"
+               type="text"
+               pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/(19|20)\d\d$"
+               maxLength={10}
+               placeholder={birthdayPlaceholder}
+              />
+              <button
+                class="bg-[#000] rounded-[20px] px-[21px] py-[13px] "
+                type="submit"
+              >
+                <span class="[.htmx-request_&]:hidden inline text-white ">
+                  {label}
+                </span>
+                <span class="[.htmx-request_&]:inline hidden loading loading-spinner" />
+              </button>
+            </div>
+            <p class="text-white text-[13px] mt-[13px] lg:mt-0" dangerouslySetInnerHTML={{ __html: textLegal }}></p>
+          </form>
+        </div>
+      </Section.Container>
+    </div>
   );
 }
 

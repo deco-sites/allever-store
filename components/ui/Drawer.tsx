@@ -10,6 +10,7 @@ export interface Props {
   children?: ComponentChildren;
   aside: ComponentChildren;
   id?: string;
+  buyTogether?: boolean;
 }
 
 const script = (id: string) => {
@@ -48,16 +49,13 @@ function Drawer({
           class="drawer-toggle"
           aria-label={open ? "open drawer" : "closed drawer"}
         />
-
-        <div class="drawer-content">
-          {children}
-        </div>
+        <div class="drawer-content">{children}</div>
 
         <aside
           data-aside
           class={clx(
             "drawer-side h-full z-40 overflow-hidden",
-            "[[data-aside]&_section]:contents", // lazy-loading via useSection
+            "[[data-aside]&_section]:contents" // lazy-loading via useSection
           )}
         >
           <label for={id} />
@@ -72,38 +70,71 @@ function Drawer({
   );
 }
 
-function Aside(
-  { title, drawer, children, background = "bg-white", color, sizeMenu, sizeMinicart }: {
-    title?: string;
-    drawer: string;
-    children: ComponentChildren;
-    background?: string;
-    color?: string;
-    sizeMenu?: boolean;
-    sizeMinicart?: boolean;
-  },
-) {
-  return (
-    <div
-      data-aside
-      class={`bg-base-100 grid grid-rows-[auto_1fr] h-full divide-y w-full 
-      ${sizeMenu ? "max-w-[388px]" : ""} 
-      ${sizeMinicart ? "max-w-[390px] lg:max-w-[445px]" : ""}`}
+interface AsideProps {
+  title?: string;
+  drawer: string;
+  children: ComponentChildren;
+  background?: string;
+  color?: string;
+  sizeMenu?: boolean;
+  isMinicart?: boolean;
+  layout: "minicart" | "menu" | "searchBar";
+}
 
-    >
-      <div class={`flex justify-between items-center ${background} lg:${sizeMinicart ? "max-w-[390px] lg:max-w-[445px] w-full" : ""}   ${sizeMenu ? "max-w-[388px]" : ""}`}>
-        {title ?
-          <h1 class="p-5">
-            <span class={`font-medium text-[16px] ${color}`}>{title}</span>
-          </h1>
-          : null}
-        <label for={drawer} aria-label="X" class="btn btn-ghost">
-          {background === "bg-[#FFFFFF]" ? <Icon id="close-white" /> : <Icon id="close" />}
-        </label>
-      </div>
-      {children}
-    </div>
-  );
+function Aside({
+  drawer,
+  children,
+  layout,
+}: AsideProps) {
+  switch (layout) {
+    case 'minicart':
+      return (
+        <>
+          <div>
+            dsmalkdmsklamdlkasmd
+          </div>
+          <div
+            data-aside
+            class={`bg-base-100 h-full divide-y w-full max-w-[390px] lg:max-w-[445px] `}
+          >
+            {children}
+          </div>
+        </>
+      );
+    case 'menu':
+      return (
+        <div
+          data-aside
+          class={`bg-base-100 h-full divide-y w-full max-w-[388px] flex flex-col `}
+        >
+          <div
+            class={`flex justify-between items-center pr-5 max-w-[388px] absolute right-0 top-[20px]`}
+          >
+            <label class="cursor-pointer" for={drawer} aria-label="X">
+              <Icon id="close-black" />
+            </label>
+          </div>
+          {children}
+        </div>
+      );
+    case 'searchBar':
+      return (
+        <div
+          data-aside
+          class={`bg-[#F2F2F2] h-full divide-y w-full flex flex-col `}
+        >
+          <div
+            class={`flex justify-between items-center bg-[#123ADD] h-[58px] p-5`}
+          >
+            <p class="text-base font-semibold text-white">Buscar</p>
+            <label for={drawer} aria-label="X">
+              <Icon id="close-white" />
+            </label>
+          </div>
+          {children}
+        </div>
+      );
+  }
 }
 
 Drawer.Aside = Aside;

@@ -1,14 +1,3 @@
-/**
- * We use a custom route at /s?q= to perform the search. This component
- * redirects the user to /s?q={term} when the user either clicks on the
- * button or submits the form. Make sure this page exists in deco.cx/admin
- * of yout site. If not, create a new page on this route and add the appropriate
- * loader.
- *
- * Note that this is the most performatic way to perform a search, since
- * no JavaScript is shipped to the browser!
- */
-
 import { Suggestion } from "apps/commerce/types.ts";
 import { useScript } from "apps/utils/useScript.ts";
 import { asResolved, Resolved } from "deco/mod.ts";
@@ -21,20 +10,13 @@ import { useComponent } from "../../../sections/Component.tsx";
 import Icon from "../../ui/Icon.tsx";
 import { Props as SuggestionProps } from "./Suggestions.tsx";
 
-// When user clicks on the search button, navigate it to
+import ExpandableInput from '../../../islands/ExpandableInput.tsx'
+
 export const ACTION = "/s";
-// Querystring param used when navigating the user
 export const NAME = "q";
 
 export interface SearchbarProps {
-  /**
-   * @title Placeholder
-   * @description Search bar default placeholder message
-   * @default What are you looking for?
-   */
   placeholder?: string;
-
-  /** @description Loader to run when suggesting new elements */
   loader: Resolved<Suggestion | null>;
   searchBarDrawer?: boolean;
 }
@@ -52,19 +34,13 @@ const script = (formId: string, name: string, popupId: string) => {
     }
   });
 
-  // Keyboard event listeners
   addEventListener("keydown", (e: KeyboardEvent) => {
     const isK = e.key === "k" || e.key === "K" || e.keyCode === 75;
 
-    // Open Searchbar on meta+k
     if (e.metaKey === true && isK) {
-      const input = document.getElementById(popupId) as
-        | HTMLInputElement
-        | null;
-
+      const input = document.getElementById(popupId) as HTMLInputElement | null;
       if (input) {
         input.checked = true;
-
         document.getElementById(formId)?.focus();
       }
     }
@@ -79,44 +55,46 @@ export default function Searchbar(
   const slot = useId();
 
   return (
-    <div
-      class={`w-full flex gap-8 ${searchBarDrawer ? "gap-[unset]" : ""}`}
-    >
-      <form id={SEARCHBAR_INPUT_FORM_ID} action={ACTION} class={`join flex gap-[20px]   ${searchBarDrawer ? "my-5 w-full px-5" : ""}`}>
+    <div class={`w-full relative flex flex-col  ${searchBarDrawer ? "gap-[unset]" : ""}`}>
+      <div class="flex flex-row-reverse items-center gap-2">
+        <form id={SEARCHBAR_INPUT_FORM_ID} action={ACTION} class={`flex-1 join flex gap-[20px] ${searchBarDrawer ? "my-5 w-full px-5" : ""}`}>
         <button
           type="submit"
-          class="bg-transparent border-none"
+          form={SEARCHBAR_INPUT_FORM_ID}
+          class="bg-transparent border-none md:hidden"
           aria-label="Search"
-          for={SEARCHBAR_INPUT_FORM_ID}
           tabIndex={-1}
         >
           <span class="loading loading-spinner loading-xs hidden [.htmx-request_&]:inline" />
-          {searchBarDrawer ?
-            <Icon id="search-drawer" class="inline [.htmx-request_&]:hidden" />
-            :
-            <Icon id="search" class="inline [.htmx-request_&]:hidden" />
-          }
+          {searchBarDrawer ? <Icon id="search-drawer" class="inline [.htmx-request_&]:hidden" /> : <Icon id="search" class="inline [.htmx-request_&]:hidden" />}
         </button>
-        <input
-          tabIndex={0}
-          className={`lg:focus:w-[619px] 2xl:focus:w-[780px] xl:focus:w-[640px] focus:left-[calc(100%-72vw)] focus:top-[calc(100%-3.65vw)] focus:transform focus:-translate-x-[0vw] focus:transform focus:-translate-y-[0] rounded-[30px] outline-none py-[8.5px] px-5 placeholder-[#D3D3D3] ${searchBarDrawer ? "border border-[#D3D3D3] py-[5px] w-full" : ""}`}
-          name={NAME}
-          placeholder={placeholder}
-          autocomplete="off"
-          hx-target={`#${slot}`}
-          hx-post={loader && useComponent<SuggestionProps>(Suggestions, {
-            loader: asResolved(loader),
-          })}
-          hx-trigger={`input changed delay:300ms, ${NAME}`}
-          hx-indicator={`#${SEARCHBAR_INPUT_FORM_ID}`}
-          hx-swap="innerHTML"
-        />
-      </form>
+          <ExpandableInput
+            name={NAME}
+            placeholder={placeholder}
+            autocomplete="off"
+            hxTarget={`#${slot}`}
+            hxPost={loader && useComponent<SuggestionProps>(Suggestions, { loader: asResolved(loader) })}
+            hx-trigger={`input changed delay:100ms, ${NAME}`}
+            hx-indicator={`#${SEARCHBAR_INPUT_FORM_ID}`}
+            hxSwap="innerHTML"
+            hx-focus={`border-black`}
+          />
+        </form>
+        <button
+          type="submit"
+          form={SEARCHBAR_INPUT_FORM_ID}
+          class="bg-transparent border-none hidden md:block"
+          aria-label="Search"
+          tabIndex={-1}
+        >
+          <span class="loading loading-spinner loading-xs hidden [.htmx-request_&]:inline" />
+          {searchBarDrawer ? <Icon id="search-drawer" class="inline [.htmx-request_&]:hidden" /> : <Icon id="search" class="inline [.htmx-request_&]:hidden" />}
+        </button>
+      </div>
 
       {/* Suggestions slot */}
-      <div id={slot} />
+      <div class="absolute top-full left-0 w-[calc(100%-32px)] bg-white z-10" id={slot} />
 
-      {/* Send search events as the user types */}
       <script
         type="module"
         dangerouslySetInnerHTML={{

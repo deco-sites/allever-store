@@ -6,6 +6,8 @@ import {
   NAVBAR_HEIGHT_DESKTOP,
 } from "../../constants.ts";
 
+import Icon from "../ui/Icon.tsx";
+
 /** @titleBy name */
 export interface Children {
   name: string;
@@ -22,11 +24,13 @@ export interface INavItem {
   /** @title Link */
   url?: string;
   /** @title Icone */
-  icon?: string;
+  icon?: "sac" | "account_blue";
   /** @title Filhos */
   children?: Children[];
   /** @title Item possui destaque? */
   ishighlighted?: boolean;
+  /** @title Item possui negrito? */
+  isBold?: boolean;
 }
 
 interface Props {

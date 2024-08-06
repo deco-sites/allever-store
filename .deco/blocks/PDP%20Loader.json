@@ -1,7 +1,7 @@
 {
   "data": {
     "slug": {
-      "param": "slug",
+      "param": "/tv-smart-32-aiwa-aws-tv-32-bl-02-a-hd---hdr10-andr-dolby-audio-23851/p",
       "__resolveType": "website/functions/requestToParam.ts"
     },
     "__resolveType": "vtex/loaders/legacy/productDetailsPage.ts"

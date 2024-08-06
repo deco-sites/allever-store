@@ -6,7 +6,7 @@ const Wishlist = () => {
         <>
             <a
                 href="/wishlist"
-                class="font-thin btn-ghost no-animation lg:-mt-[5px] p-0">
+                class="font-thin btn-ghost no-animation p-0">
                 <Icon id="wishlist-icon" />
             </a>
         </>
