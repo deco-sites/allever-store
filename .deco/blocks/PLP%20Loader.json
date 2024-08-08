@@ -1,9 +1,17 @@
 {
   "data": {
-    "__resolveType": "vtex/loaders/legacy/productListingPage.ts",
+    "__resolveType": "shopify/loaders/ProductListingPage.ts",
     "count": 12,
-    "sort": "OrderByPriceDESC",
-    "filters": "dynamic"
+    "@type": "ProductListingPage",
+    "breadcrumb": {
+      "@type": "BreadcrumbList"
+    },
+    "filters": [],
+    "products": [],
+    "pageInfo": {
+      "pageTypes": []
+    },
+    "sortOptions": []
   },
   "extensions": [],
   "__resolveType": "commerce/loaders/product/extensions/listingPage.ts"
