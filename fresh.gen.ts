@@ -3,12 +3,14 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import * as $_app from "./routes/_app.tsx";
+import * as $BuyTogether from "./islands/BuyTogether.tsx";
 import * as $CampaignTimer from "./islands/CampaignTimer.tsx";
 import * as $ExpandableInput from "./islands/ExpandableInput.tsx";
 import * as $MicroHeaderSetup from "./islands/MicroHeaderSetup.tsx";
 import * as $PaymentsMethods from "./islands/PaymentsMethods.tsx";
 import * as $Product_TrustVox from "./islands/Product/TrustVox.tsx";
 import * as $Seals_RaVerifiedSeal from "./islands/Seals/RaVerifiedSeal.tsx";
+import * as $Shipping from "./islands/Shipping.tsx";
 import * as $ShowCaseCounter from "./islands/ShowCaseCounter.tsx";
 import * as $Sort from "./islands/Sort.tsx";
 import { type Manifest } from "$fresh/server.ts";
@@ -18,12 +20,14 @@ const manifest = {
     "./routes/_app.tsx": $_app,
   },
   islands: {
+    "./islands/BuyTogether.tsx": $BuyTogether,
     "./islands/CampaignTimer.tsx": $CampaignTimer,
     "./islands/ExpandableInput.tsx": $ExpandableInput,
     "./islands/MicroHeaderSetup.tsx": $MicroHeaderSetup,
     "./islands/PaymentsMethods.tsx": $PaymentsMethods,
     "./islands/Product/TrustVox.tsx": $Product_TrustVox,
     "./islands/Seals/RaVerifiedSeal.tsx": $Seals_RaVerifiedSeal,
+    "./islands/Shipping.tsx": $Shipping,
     "./islands/ShowCaseCounter.tsx": $ShowCaseCounter,
     "./islands/Sort.tsx": $Sort,
   },

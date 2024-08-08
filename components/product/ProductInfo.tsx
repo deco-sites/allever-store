@@ -29,15 +29,17 @@ function ProductInfo({ page }: Props) {
   const description = product.description || isVariantOf?.description;
   const title = isVariantOf?.name ?? product.name;
 
-
   const {
     price = 0,
     listPrice,
     seller = "1",
     availability,
     installment,
-    installments
+    installments,
+    inventary
   } = useOffer(offers);
+
+  console.log(inventary)
 
   const hasPromotion = additionalProperty?.some(
     (prop) => prop.value === "Promoção"
@@ -46,8 +48,6 @@ function ProductInfo({ page }: Props) {
   const hasNews = additionalProperty?.some(
     (prop) => prop.value === "Novidades"
   );
-
-  console.log(additionalProperty)
 
 
   const percent = listPrice && price
@@ -98,7 +98,7 @@ function ProductInfo({ page }: Props) {
         </div>
         <div class="flex flex-row items-center gap-5">
           <div class="flex flex-col gap-[24px]">
-            
+
             <div>
               {/* Product Name */}
               <h1 class={clx("text-[20px] font-semibold leading-[30px]")}>
@@ -136,9 +136,18 @@ function ProductInfo({ page }: Props) {
         </div>
       </div>
       <hr />
-
       {/* Prices */}
       <div class="flex flex-col gap-[14px] py-[14px]">
+        {hasPromotion &&
+          <div>
+            <p class="text-sm font-semibold text-white bg-[#F22E2E] text-center text-white px-2 py-[10px] rounded-[6px]">Oferta por tempo limitado</p>
+          </div>
+        }
+        {hasPromotion &&
+          <div>
+            <p class="text-xs font-semibold text-white bg-[#000] text-center text-white px-2 py-[10px] rounded-[6px]">Produto internacional <span class="underline">Saiba mais</span></p>
+          </div>
+        }
 
         <div class="flex gap-3 items-center">
           <span class="line-through text-base font-semibold text-[#A8A8A8] leading-[24px]">
@@ -195,16 +204,20 @@ function ProductInfo({ page }: Props) {
             <OutOfStock productID={productID} />
           </div>
         }
-        <div>
-          <p class="text-[24px] font-normal text-black leading-[28.8px]">Restam só <span class="font-bold text-[#123ADD]">08 unidades</span></p>
-        </div>
+        {inventary > 0 && inventary <= 9 && (
+          <div>
+            <p className="text-[24px] font-normal text-black leading-[28.8px]">
+              Restam só <span className="font-bold text-[#123ADD]">{inventary} unidade{inventary > 1 ? 's' : ''}</span>
+            </p>
+          </div>
+        )}
 
         <div class="">
           <p class="text-xs font-normal text-black leading-[14.4px]">Vendido e entregue por: <span class="font-bold capitalize">{seller}</span></p>
         </div>
 
         {/* Shipping Simulation */}
-        <div>
+        <div class="lg:max-w-[338px]">
           <ShippingSimulationForm
             items={[{ id: Number(product.sku), quantity: 1, seller: seller }]}
           />
@@ -213,7 +226,7 @@ function ProductInfo({ page }: Props) {
       </div>
 
 
-      {/* Description card */}
+      {/* Description card
       <div class="mt-4 sm:mt-6">
         <span class="text-sm">
           {description && (
@@ -226,7 +239,7 @@ function ProductInfo({ page }: Props) {
             </details>
           )}
         </span>
-      </div>
+      </div> */}
     </div>
   );
 }

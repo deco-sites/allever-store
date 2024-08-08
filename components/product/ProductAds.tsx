@@ -42,7 +42,6 @@ export default function ProductAds({
 }: SectionProps<typeof loader>) {
   const currentProductLikes = likes[activeIndex] || {};
 
-  console.log("PRODUCTS:", products);
 
   if (!products || products.length === 0) {
     return null;

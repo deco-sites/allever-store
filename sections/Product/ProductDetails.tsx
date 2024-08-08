@@ -1,18 +1,27 @@
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 import ImageGallerySlider from "../../components/product/Gallery.tsx";
 import ProductInfo from "../../components/product/ProductInfo.tsx";
-import Breadcrumb from "../../components/ui/Breadcrumb.tsx";
 import { clx } from "../../sdk/clx.ts";
+import Description from '../../components/product/Description.tsx'
+import ProductGrid from '../../components/product/ProductGrid.tsx'
+import BuyTogether from "../../islands/BuyTogether.tsx";
+// import type { LoaderReturnType } from "$live/types.ts";
+
+import type { Product } from "apps/commerce/types.ts";
 
 export interface Props {
   /** @title Integration */
   page: ProductDetailsPage | null;
+  
+  buyTogetherLoader: Product[] | null;
 }
 
-export default function ProductDetails({ page }: Props) {
-  /**
-   * Rendered when a not found is returned by any of the loaders run on this page
-   */
+
+
+
+export default function ProductDetails({page, buyTogether} : { page: ProductDetailsPage; buyTogether: Product[] | null;})  {
+  const { product } = page;
+
   if (!page) {
     return (
       <div class="w-full flex justify-center items-center py-28">
@@ -27,7 +36,7 @@ export default function ProductDetails({ page }: Props) {
   }
 
   return (
-    <div class="container flex flex-col gap-4 sm:gap-5 w-full py-4 sm:py-5 px-5 sm:px-0">
+    <div class=" flex flex-col gap-4 sm:gap-5 w-full py-4 sm:py-5 px-5 sm:px-0">
 
       <div
         class={clx(
@@ -41,6 +50,18 @@ export default function ProductDetails({ page }: Props) {
         </div>
         <div class="sm:col-span-2">
           <ProductInfo page={page} />
+        </div>
+      </div>
+      <div>
+        {/* Description card */}
+        <div class="mt-4 sm:mt-6 border border-x-0 border-y-[#A8A8A8]">
+          <Description page={page} />
+        </div>
+         <div>
+          <BuyTogether product={product} buyTogether={buyTogether} />
+        </div> 
+        <div>
+          <ProductGrid page={page} />
         </div>
       </div>
     </div>

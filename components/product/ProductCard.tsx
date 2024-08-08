@@ -92,7 +92,6 @@ function ProductCard({
   // const internationalBuy = additionalProperty?.some(
   //   (prop) => prop.value === "Compra Internacional"
   // );
-  console.log(additionalProperty)
 
   return (
     <div {...event} class={clx("card flex flex-col space-between card-compact group text-sm bg-white p-5", _class)}>

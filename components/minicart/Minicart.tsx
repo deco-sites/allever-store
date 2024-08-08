@@ -7,6 +7,7 @@ import { useComponent } from "../../sections/Component.tsx";
 import Coupon from "./Coupon.tsx";
 import CartItem, { Item } from "./Item.tsx";
 import Icon from "../ui/Icon.tsx";
+import Shipping from '../../islands/Shipping.tsx'
 
 
 export interface Minicart {
@@ -244,7 +245,7 @@ export default function Cart({
 
                     <span class="text-[#A8A8A8] text-base">
                       {/* @ts-ignore shipping is valid */}
-                      {shipping === 0 ? "Grátis" : formatPrice(shipping, currency, locale)}
+                      <Shipping />
                     </span>
                   </div>
                 )}
