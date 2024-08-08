@@ -65,16 +65,65 @@
 
 @keyframes scroll {
   0% {
-      transform: translateX(0);
+    transform: translateX(0);
   }
   100% {
-      transform: translateX(-100%);
+    transform: translateX(-100%);
   }
 }
 
 .animate-scroll {
   animation: scroll 20s linear infinite;
 }
+
 .animate-scroll:hover {
   animation-play-state: paused; 
+}
+
+@media (min-width: 1024px) {
+  .search-bar-wrapper .suggestions-wrapper {
+    top: 19px;
+    width: calc(100% - 1px);
+    display: block;
+    z-index: 1;
+    opacity: 0;
+    visibility: hidden;
+    transition: visibility 250ms linear, opacity 100ms linear 250ms;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+
+  .search-bar-container {
+    z-index: 2;
+    position: relative;
+  }
+
+  .search-bar-wrapper:hover .suggestions-wrapper {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .search-bar-wrapper form {
+    width: 100%;
+    display: flex;
+    max-width: 270px;
+    transition: max-width 250ms linear;
+    justify-content: flex-end;
+  }
+
+  .search-bar-wrapper form > input {
+    width: 50vw;
+    max-width: 100%;
+  }
+
+  .search-bar-wrapper:hover form {
+    max-width: 100%;
+  }
+
+  .main-logo {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
 }

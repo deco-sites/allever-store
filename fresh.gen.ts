@@ -6,6 +6,7 @@ import * as $_app from "./routes/_app.tsx";
 import * as $CampaignTimer from "./islands/CampaignTimer.tsx";
 import * as $ExpandableInput from "./islands/ExpandableInput.tsx";
 import * as $MicroHeaderSetup from "./islands/MicroHeaderSetup.tsx";
+import * as $MinicartTotalInstallments from "./islands/MinicartTotalInstallments.tsx";
 import * as $PaymentsMethods from "./islands/PaymentsMethods.tsx";
 import * as $Product_TrustVox from "./islands/Product/TrustVox.tsx";
 import * as $Seals_RaVerifiedSeal from "./islands/Seals/RaVerifiedSeal.tsx";
@@ -21,6 +22,7 @@ const manifest = {
     "./islands/CampaignTimer.tsx": $CampaignTimer,
     "./islands/ExpandableInput.tsx": $ExpandableInput,
     "./islands/MicroHeaderSetup.tsx": $MicroHeaderSetup,
+    "./islands/MinicartTotalInstallments.tsx": $MinicartTotalInstallments,
     "./islands/PaymentsMethods.tsx": $PaymentsMethods,
     "./islands/Product/TrustVox.tsx": $Product_TrustVox,
     "./islands/Seals/RaVerifiedSeal.tsx": $Seals_RaVerifiedSeal,

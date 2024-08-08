@@ -7,7 +7,8 @@ import { useComponent } from "../../sections/Component.tsx";
 import Coupon from "./Coupon.tsx";
 import CartItem, { Item } from "./Item.tsx";
 import Icon from "../ui/Icon.tsx";
-
+import MinicartTotalInstallments from "../../islands/MinicartTotalInstallments.tsx";
+import { Product } from "apps/commerce/types.ts";
 
 export interface Minicart {
   /** Cart from the ecommerce platform */
@@ -26,6 +27,7 @@ export interface Minicart {
     freeShippingTarget: number;
     checkoutHref: string;
   };
+  productRecommendations: Product[];
 }
 
 const onLoad = (formID: string) => {
@@ -127,6 +129,7 @@ export default function Cart({
     },
   },
 }: { cart: Minicart }) {
+  console.log("items", items);
   const count = items.length;
   itemCount = count;
 
@@ -172,29 +175,38 @@ export default function Cart({
             "[.htmx-request_&]:pointer-events-none [.htmx-request_&]:opacity-60 [.htmx-request_&]:cursor-wait transition-opacity duration-300",
           )}
         >
-              {/* Cart header */}
-              <div class="bg-[#123ADD] flex justify-between text-white w-full gap-[5px] py-[13px] px-[35px] h-[58px] items-center">
-                  <div class="flex gap-[5px]">
-                    <p class="font-semibold text-base">Meu carrinho</p>
-                    {count === 0 ? null : (
-                      <p>
-                        [{count} {items.length === 0 ? "" : items.length === 1 ? 'Produto' : 'Produtos'}]
-                      </p>
-                    )}                    
-                  </div>
-                   <div>
-                      <label class="cursor-pointer" for={MINICART_DRAWER_ID}>
-                       <Icon id="close-white" />
-                     </label>
-                   </div>
-                </div>
-              {count === 0 ? (
+          {/* Cart header */}
+          <div class="bg-[#123ADD] flex justify-between text-white w-full gap-[5px] py-[13px] px-[35px] h-[58px] items-center">
+            <div class="flex gap-[5px]">
+              <p class="font-semibold text-base">Meu carrinho</p>
+              {count === 0 ? null : (
+                <p>
+                  [{count} {items.length === 0
+                    ? ""
+                    : items.length === 1
+                    ? "Produto"
+                    : "Produtos"}]
+                </p>
+              )}
+            </div>
+            <div>
+              <label class="cursor-pointer" for={MINICART_DRAWER_ID}>
+                <Icon id="close-white" />
+              </label>
+            </div>
+          </div>
+          {count === 0
+            ? (
               <div class="flex flex-col m-auto gap-5">
                 <div class="flex justify-center">
-                 <Icon id="bag-blue" />
+                  <Icon id="bag-blue" />
                 </div>
-                <span class="font-semibold text-base text-center">Seu carrinho está vazio!</span>
-                <p class="text-sm max-w-[184px] m-auto flex text-center leading-[21px]">Você ainda não possuí itens no seu carrinho.</p>
+                <span class="font-semibold text-base text-center">
+                  Seu carrinho está vazio!
+                </span>
+                <p class="text-sm max-w-[184px] m-auto flex text-center leading-[21px]">
+                  Você ainda não possuí itens no seu carrinho.
+                </p>
                 <label
                   for={MINICART_DRAWER_ID}
                   class="bg-[#1BAE32] py-[15px] w-full rounded-full text-white px-4 cursor-pointer"
@@ -205,8 +217,6 @@ export default function Cart({
             )
             : (
               <>
-            
-               
                 <ul
                   role="list"
                   class="mt-[10px] px-2 flex-grow overflow-y-auto flex flex-col gap-6 w-full"
@@ -232,30 +242,32 @@ export default function Cart({
                         <span class="text-sm">Descontos</span>
                         <span class="text-sm">
                           {formatPrice(discounts, currency, locale)}
-                       
                         </span>
                       </div>
                     )}
-                  {shipping !== null && (
-                  <div class="flex justify-between items-center pb-[10px] pt-5 px-4">
-                    <span class="text-[#A8A8A8] text-base flex gap-5">
-                    <Icon id="delivery-box" />
-                      Frete</span>
+                    {shipping !== null && (
+                      <div class="flex justify-between items-center pb-[10px] pt-5 px-4">
+                        <span class="text-[#A8A8A8] text-base flex gap-5">
+                          <Icon id="delivery-box" />
+                          Frete
+                        </span>
 
-                    <span class="text-[#A8A8A8] text-base">
-                      {/* @ts-ignore shipping is valid */}
-                      {shipping === 0 ? "Grátis" : formatPrice(shipping, currency, locale)}
-                    </span>
-                  </div>
-                )}
-                    
+                        <span class="text-[#A8A8A8] text-base">
+                          {/* @ts-ignore shipping is valid */}
+                          {shipping === 0
+                            ? "Grátis"
+                            : formatPrice(shipping, currency, locale)}
+                        </span>
+                      </div>
+                    )}
+
                     {enableCoupon && <Coupon coupon={coupon} />}
                   </div>
 
                   {/* Total */}
-                  <div class=" flex flex-col justify-end items-end gap-2 mx-4 pb-5">
+                  <div class=" flex flex-col justify-end items-end gap-2 mx-4 pb-1">
                     <div class="flex justify-between items-center w-full">
-                      <span class="text-base	">Total</span>
+                      <span class="text-base">Total</span>
                       <output
                         form={MINICART_FORM_ID}
                         class="font-semibold text-xl"
@@ -264,8 +276,10 @@ export default function Cart({
                       </output>
                     </div>
                   </div>
-
-                    <hr class="max-w-[90%] m-auto" />
+                  <MinicartTotalInstallments
+                    items={items}
+                  />
+                  <hr class="max-w-[90%] m-auto" />
                   <div class="p-4">
                     <a
                       class="bg-[#1BAE32] w-full no-animation flex items-center justify-center py-[10px] w-full rounded-full"
@@ -273,7 +287,7 @@ export default function Cart({
                       hx-on:click={useScript(sendBeginCheckoutEvent)}
                     >
                       <span class="[.htmx-request_&]:hidden text-white text-xl font-semibold">
-                      Finalizar Compra
+                        Finalizar Compra
                       </span>
 
                       <span class="[.htmx-request_&]:inline hidden loading loading-spinner" />

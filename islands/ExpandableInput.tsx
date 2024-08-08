@@ -1,5 +1,4 @@
-import { useState } from 'preact/hooks';
-import { useId } from "../sdk/useId.ts";
+import { useUI } from "../sdk/useUI.ts";
 
 interface ExpandableInputProps {
   placeholder: string;
@@ -31,18 +30,17 @@ function ExpandableInput({
   hxSwap,
   hxFocus
 }: ExpandableInputProps) {
-  const [isExpanded, setIsExpanded] = useState(false);
+  // const { searchBarExpanded } = useUI();
   return (
-    
     <input
       type="text"
       name={name}
       placeholder={placeholder}
       tabIndex={tabIndex}
       autocomplete={autocomplete}
-      className={`transition-all duration-300 ease-in-out rounded-[30px] outline-none py-[8.5px] px-5 placeholder-[#D3D3D3] w-full  ${isExpanded ? 'lg:w-[412px] xl:w-[612px] 2xl:w-[812px] rounded-full' : 'border-transparent w-[200px]'}`}
-      onClick={() => setIsExpanded(true)}
-      onBlur={() => setIsExpanded(true)}
+      className={`transition-all duration-300 ease-in-out rounded-[30px] outline-none py-[8.5px] px-5 placeholder-[#D3D3D3] w-full`}
+      // onClick={() => searchBarExpanded.value = true}
+      // onBlur={() => searchBarExpanded.value = false}
       autoComplete="off"
       data-hx-target={hxTarget}
       data-hx-post={hxPost}
