@@ -47,7 +47,7 @@ export default function ProductShelf({ products, title, cta, expireAt, hideLabel
     });
 
     return (
-        <div id={id} class={`${expireAt && "hidden"}`}>
+        <div id={id}>
           <Section.Container
             {...viewItemListEvent}
             class="[view-transition-name:loading-fallback-2]"

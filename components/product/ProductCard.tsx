@@ -194,7 +194,7 @@ function ProductCard({
                   </span>
                 )}
                 <span class="font-semibold text-[20px] text-[#123ADD]">
-                  {formatPrice(installment?.price)}{" "}
+                  {formatPrice(price)}{" "}
                   <span class="text-[#123ADD] font-normal text-[20px] leading-[30px]">
                     no pix
                   </span>

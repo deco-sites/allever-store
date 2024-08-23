@@ -32,21 +32,21 @@ const CampaignTimer = ({
     return String(time).padStart(2, "0");
   };
   
-  useEffect(() => {
-    if (timeLeft.Segundos > 0) {
-      const docRef = document.getElementById(id);
-      if (docRef) docRef.classList.add("!block");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (timeLeft.Segundos > 0) {
+  //     const docRef = document.getElementById(id);
+  //     if (docRef) docRef.classList.add("!block");
+  //   }
+  // }, []);
 
-  if (timeLeft.Minutos === 0 && timeLeft.Segundos === 0) {
-    useEffect(() => {
-      const docRef = document.getElementById(id);
-      if (docRef) docRef.classList.remove("!block");
-      clearInterval(timerId);
-    }, []);
-    return null;
-  }
+  // if (timeLeft.Minutos === 0 && timeLeft.Segundos === 0) {
+  //   useEffect(() => {
+  //     const docRef = document.getElementById(id);
+  //     if (docRef) docRef.classList.remove("!block");
+  //     clearInterval(timerId);
+  //   }, []);
+  //   return null;
+  // }
 
   return (
     <div class="flex gap-5 justify-center text-white text-center items-center my-4 lg:mb-0">
