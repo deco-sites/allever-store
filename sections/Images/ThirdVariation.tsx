@@ -20,10 +20,10 @@ const ThirdVariation = ({ items, title }: ThirdVariationProps) => {
             )}
           {items &&
             (
-              <div class="my-6 flex  justify-center flex-wrap">
+              <div class="my-6 flex  justify-between flex-wrap">
                 <div class="flex gap-[20.38px] flex-col">
-                  <div class="flex gap-[20.38px]">
-                    <a href={items[0]?.Link} class={`flex`}>
+                  <div class="flex gap-[20.38px] justify-between">
+                    <a href={items[0]?.Link} class={`flex max-w-[900px]`}>
                       <Image
                         src={items[0].desktop?.Image
                           ? items[0].desktop?.Image
@@ -35,10 +35,10 @@ const ThirdVariation = ({ items, title }: ThirdVariationProps) => {
                         width={items[0].desktop?.Width}
                         height={items[0].desktop?.Height}
                         fetchPriority="low"
-                        class="object-cover lg:rounded-[40px] rounded-[20px]"
+                        class="object-cover lg:rounded-[40px] rounded-[20px] w-full"
                       />
                     </a>
-                    <a href={items[1]?.Link} class={`flex`}>
+                    <a href={items[1]?.Link} class={`flex max-w-[450px]`}>
                       <Image
                         src={items[1].desktop?.Image
                           ? items[1].desktop?.Image
@@ -50,12 +50,12 @@ const ThirdVariation = ({ items, title }: ThirdVariationProps) => {
                         width={items[1].desktop?.Width}
                         height={items[1].desktop?.Height}
                         fetchPriority="low"
-                        class="object-cover lg:rounded-[40px] rounded-[20px]"
+                        class="object-cover lg:rounded-[40px] rounded-[20px] w-full"
                       />
                     </a>
                   </div>
-                  <div class="flex gap-[20.38px]">
-                    <a href={items[2]?.Link} class={`flex`}>
+                  <div class="flex gap-[20.38px] justify-between">
+                    <a href={items[2]?.Link} class={`flex max-w-[450px]`}>
                       <Image
                         src={items[2].desktop?.Image
                           ? items[2].desktop?.Image
@@ -67,10 +67,10 @@ const ThirdVariation = ({ items, title }: ThirdVariationProps) => {
                         width={items[2].desktop?.Width}
                         height={items[2].desktop?.Height}
                         fetchPriority="low"
-                        class="object-cover lg:rounded-[40px] rounded-[20px]"
+                        class="object-cover lg:rounded-[40px] rounded-[20px] w-full"
                       />
                     </a>
-                    <a href={items[3]?.Link} class={`flex`}>
+                    <a href={items[3]?.Link} class={`flex max-w-[900px]`}>
                       <Image
                         src={items[3].desktop?.Image
                           ? items[3].desktop?.Image
@@ -82,7 +82,7 @@ const ThirdVariation = ({ items, title }: ThirdVariationProps) => {
                         width={items[3].desktop?.Width}
                         height={items[3].desktop?.Height}
                         fetchPriority="low"
-                        class="object-cover lg:rounded-[40px] rounded-[20px]"
+                        class="object-cover lg:rounded-[40px] rounded-[20px] w-full"
                       />
                     </a>
                   </div>

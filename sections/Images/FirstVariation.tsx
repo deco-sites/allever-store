@@ -33,10 +33,10 @@ const FirstVariation = (
                       {slide.map((item, index) => (
                         <Slider.Item
                           index={index}
-                          class="carousel-item w-full justify-center"
+                          class="carousel-item w-full justify-center max-w-[1440px]"
                           key={index}
                         >
-                          <a href={item.Link} class="flex">
+                          <a href={item.Link} class="flex w-full">
                             <Image
                               src={item.desktop?.Image
                                 ? item.desktop?.Image
@@ -46,7 +46,7 @@ const FirstVariation = (
                               width={item.desktop?.Width}
                               height={item.desktop?.Height}
                               fetchPriority="low"
-                              class="object-cover lg:rounded-[40px] rounded-[20px]"
+                              class="object-cover lg:rounded-[40px] rounded-[20px] w-full"
                             />
                           </a>
                         </Slider.Item>
@@ -69,22 +69,46 @@ const FirstVariation = (
             )}
           {items &&
             (
-              <div class="my-6 flex gap-[24.38px] justify-center">
-                {items.map((item, index) => (
-                  <a href={item.Link} class="flex" key={index}>
+              <div class="my-6 flex gap-[24.38px] justify-between">
+                  <a href={items[0].Link} class="flex max-w-[450px]">
                     <Image
-                      src={item.desktop?.Image
-                        ? item.desktop?.Image
-                        : `https://placehold.co/${item.desktop?.Width}x${item.desktop?.Height}`}
-                      alt={item.Alt ||
+                      src={items[0].desktop?.Image
+                        ? items[0].desktop?.Image
+                        : `https://placehold.co/${items[0].desktop?.Width}x${items[0].desktop?.Height}`}
+                      alt={items[0].Alt ||
                         "esse é um banner de uma marca tradicional"}
-                      width={item.desktop?.Width}
-                      height={item.desktop?.Height}
+                      width={items[0].desktop?.Width}
+                      height={items[0].desktop?.Height}
                       fetchPriority="low"
-                      class="object-cover rounded-[40px]"
+                      class="object-cover rounded-[40px] w-full"
                     />
                   </a>
-                ))}
+                  <a href={items.Link} class="flex max-w-[450px]">
+                    <Image
+                      src={items[1].desktop?.Image
+                        ? items[1].desktop?.Image
+                        : `https://placehold.co/${items[1].desktop?.Width}x${items[1].desktop?.Height}`}
+                      alt={items[1].Alt ||
+                        "esse é um banner de uma marca tradicional"}
+                      width={items[1].desktop?.Width}
+                      height={items[1].desktop?.Height}
+                      fetchPriority="low"
+                      class="object-cover rounded-[40px] w-full"
+                    />
+                  </a>
+                  <a href={items.Link} class="flex max-w-[450px]">
+                    <Image
+                      src={items[2].desktop?.Image
+                        ? items[2].desktop?.Image
+                        : `https://placehold.co/${items[2].desktop?.Width}x${items[2].desktop?.Height}`}
+                      alt={items[2].Alt ||
+                        "esse é um banner de uma marca tradicional"}
+                      width={items[2].desktop?.Width}
+                      height={items[2].desktop?.Height}
+                      fetchPriority="low"
+                      class="object-cover rounded-[40px] w-full"
+                    />
+                  </a>
               </div>
             )}
           {bannerFull &&
@@ -92,7 +116,7 @@ const FirstVariation = (
               <div>
                 <a
                   href={bannerFull.Link}
-                  class="flex justify-center"
+                  class="flex justify-center w-full"
                   key="bannerFull"
                 >
                   <Image
@@ -104,7 +128,7 @@ const FirstVariation = (
                     width={bannerFull.desktop?.Width}
                     height={bannerFull.desktop?.Height}
                     fetchPriority="low"
-                    class="object-cover rounded-[40px]"
+                    class="object-cover rounded-[40px] w-full"
                   />
                 </a>
               </div>

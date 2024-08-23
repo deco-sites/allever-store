@@ -31,7 +31,7 @@ const FifthVariation = ({ slide, title }: FifthVariationProps) => {
                         class="carousel-item w-full justify-center"
                         key={index}
                       >
-                        <a href={item.Link} class="flex">
+                        <a href={item.Link} class="flex w-full">
                           <Image
                             src={item.desktop?.Image
                               ? item.desktop?.Image
@@ -41,7 +41,7 @@ const FifthVariation = ({ slide, title }: FifthVariationProps) => {
                             width={item.desktop?.Width}
                             height={item.desktop?.Height}
                             fetchPriority="low"
-                            class="object-cover lg:rounded-[40px] rounded-[20px]"
+                            class="object-cover lg:rounded-[40px] rounded-[20px] w-full"
                           />
                         </a>
                       </Slider.Item>
@@ -74,7 +74,7 @@ const FifthVariation = ({ slide, title }: FifthVariationProps) => {
                     class="carousel-item justify-center"
                     key={index}
                   >
-                    <a href={item.Link} class="flex">
+                    <a href={item.Link} class="flex ">
                       <Image
                         src={item.mobile?.Image
                           ? item.mobile?.Image
@@ -84,7 +84,7 @@ const FifthVariation = ({ slide, title }: FifthVariationProps) => {
                         width={item.mobile?.Width}
                         height={item.mobile?.Height}
                         fetchPriority="low"
-                        class="object-cover rounded-[20px]"
+                        class="object-cover rounded-[20px] "
                       />
                     </a>
                   </Slider.Item>
