@@ -358,7 +358,7 @@ function Footer({
           </div>
           <div class="bg-[#e7e5e5]">
             <div class="container flex space-between" >
-              <p class="text-[#A8A8A8] text-base leading-[25px] py-5 lg:max-w-[1094px]">
+              <p class="text-[#A8A8A8] text-xs sm:text-sm leading-[25px] py-5 lg:max-w-[1094px]">
                 {copyright}
               </p>
               <div class="flex flex-nowrap items-end justify-center gap-5 p-5">

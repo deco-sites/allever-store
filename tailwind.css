@@ -6,6 +6,7 @@
 
   /* Allow changing font family via CMS */
   html {
+    font-size: 15px;
     font-family: var(--font-family);
   }
 
@@ -21,6 +22,18 @@
   body:has(.modal-toggle:checked) {
     overflow: hidden;
     height: 100vh;
+  }
+
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    max-width: 100%;
+
+    @screen lg {
+      max-width: 1440px;
+    }
   }
 }
 
@@ -126,4 +139,18 @@
     position: absolute;
     transform: translate(-50%, -50%);
   }
+}
+
+.is-scrolled {
+  top: 0;
+  position: fixed;
+  background-color: #123ADD;
+}
+
+.is-homepage {
+  position: fixed;
+}
+
+.is-otherpage {
+  background-color: #123ADD;
 }

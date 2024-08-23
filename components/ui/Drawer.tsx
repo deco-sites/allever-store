@@ -57,7 +57,7 @@ function Drawer({
             "[[data-aside]&_section]:contents" // lazy-loading via useSection
           )}
         >
-          <label for={id} />
+          <label for={id} class="drawer-overlay" />
           {aside}
         </aside>
       </div>
@@ -88,18 +88,18 @@ function Aside({
   switch (layout) {
     case 'minicart':
       return (
-        <div class="grid grid-cols-5 w-full max-w-[100vw] sm:max-w-[400px] lg:max-w-[731px]">
-          <div class="bg-white col-span-2 rounded-l-2xl">
+        <div class="w-full max-w-[100vw] sm:max-w-[438px] h-screen">
+          {/* <div class="bg-white col-span-2 rounded-l-2xl">
             <div class="py-5 text-2xl text-center max-w-[211px] mx-auto">
-              Você também pode <strong>[Gostar]</strong>
+              Você também pode <b>[Gostar]</b>
             </div>
             <div>
 
             </div>
-          </div>
+          </div> */}
           <div
             data-aside
-            class={`bg-base-100 h-full divide-y col-span-3`}
+            class={`bg-base-100 h-full divide-y`}
           >
             {children}
           </div>

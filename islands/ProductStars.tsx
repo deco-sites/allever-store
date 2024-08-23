@@ -29,6 +29,8 @@ export default function ProductStars({
       script.src = "//rate.trustvox.com.br/widget.js";
 
       document.head.append(script);
+    } else {
+      productStars.remove();
     }
   }, []);
 

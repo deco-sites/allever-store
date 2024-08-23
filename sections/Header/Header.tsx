@@ -27,6 +27,7 @@ import Wishlist from "../../components/header/Wishlist.tsx";
 import { useScript } from "apps/utils/useScript.ts";
 import { Head } from "$fresh/runtime.ts";
 import Logo from '../../components/header/Logo.tsx'
+import type { AppContext } from "../../apps/site.ts";
 
 function script() {
   const param = 10
@@ -78,7 +79,7 @@ const Desktop = (
 
 ) => (
   <>
-    <div class="flex flex-col gap-4 py-[45px] container desktop">
+    <div class="flex flex-col gap-4 py-4 container desktop">
       <div class="flex items-center space-between relative">
 
         <div>
@@ -222,30 +223,28 @@ function Header({
 
   return (
     <header
-
-      style={{
-        height: device === "desktop"
-          ? HEADER_HEIGHT_DESKTOP
-          : HEADER_HEIGHT_MOBILE,
-      }}
-      // Refetch the header in two situations
-      // 1. When the window is resized so we have a gracefull Developer Experience
-      // 2. When the user changes tab, so we can update the minicart badge when the user comes back
       hx-trigger="resize from:window, visibilitychange[document.visibilityState === 'visible'] from:document"
       hx-get={useSection()}
       hx-target="closest section"
       hx-swap="outerHTML"
     >
-      <div class={`fixed w-full z-40 group-header ease-in duration-500 ${!isSticky && "bg-[#123ADD]"}`} id="header">
-        {alerts.length > 0 && <Alert alerts={alerts} />}
+      {alerts.length > 0 && <Alert alerts={alerts} />}
+      <div id="header" class={`bg-transparent w-full z-40 group-header ease-in duration-500 ${isSticky && "bg-[#123ADD]"}`}>
         {device === "desktop"
           ? <Desktop logo={logo} {...props} />
           : <Mobile logo={logo} {...props} />
         }
       </div>
-      {isSticky ? <MicroHeaderSetup rootId="header" threshold={120} /> : null}
+      {isSticky ? <MicroHeaderSetup rootId="header" threshold={50} /> : null}
     </header>
   );
+}
+
+export function loader(props: SectionProps, req: Request, ctx: AppContext) {
+
+  console.log("ctx", ctx);
+
+  return { ...props };
 }
 
 export default function Section({ variant, ...props }: SectionProps) {

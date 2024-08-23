@@ -8,8 +8,9 @@ export default {
   },
   content: ["./**/*.tsx"],
   theme: {
-    container: {
-      center: true
+    container: { 
+      center: true,
+      screens: {}
     },
     extend: {
       animation: {

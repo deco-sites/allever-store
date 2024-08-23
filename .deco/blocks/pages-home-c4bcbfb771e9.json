@@ -156,7 +156,7 @@
       "__resolveType": "site/sections/Images/Carousel.tsx",
       "images": [
         {
-          "desktop": "https://placehold.co/1440x719",
+          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11097/18bae574-1324-4994-9929-5cf47fddbf73",
           "alt": "/",
           "action": {
             "href": "/",
@@ -174,6 +174,38 @@
           "image": "https://placehold.co/113x105",
           "Link": "/",
           "Label": "Categoria 1",
+          "width": 113,
+          "height": 105,
+          "desktop": {
+            "Width": 113,
+            "Height": 105
+          },
+          "mobile": {
+            "Width": 113,
+            "Height": 105
+          },
+          "Alt": "categoria"
+        },
+        {
+          "image": "https://placehold.co/113x105",
+          "Link": "/",
+          "Label": "Categoria",
+          "width": 113,
+          "height": 105,
+          "desktop": {
+            "Width": 113,
+            "Height": 105
+          },
+          "mobile": {
+            "Width": 113,
+            "Height": 105
+          },
+          "Alt": "categoria"
+        },
+        {
+          "image": "https://placehold.co/113x105",
+          "Link": "/",
+          "Label": "Categoria",
           "width": 113,
           "height": 105,
           "desktop": {

@@ -8,10 +8,12 @@ import * as $ExpandableInput from "./islands/ExpandableInput.tsx";
 import * as $MicroHeaderSetup from "./islands/MicroHeaderSetup.tsx";
 import * as $MinicartTotalInstallments from "./islands/MinicartTotalInstallments.tsx";
 import * as $PaymentsMethods from "./islands/PaymentsMethods.tsx";
+import * as $ProductStars from "./islands/ProductStars.tsx";
 import * as $Product_TrustVox from "./islands/Product/TrustVox.tsx";
 import * as $Seals_RaVerifiedSeal from "./islands/Seals/RaVerifiedSeal.tsx";
 import * as $ShowCaseCounter from "./islands/ShowCaseCounter.tsx";
 import * as $Sort from "./islands/Sort.tsx";
+import * as $SwiperJS from "./islands/SwiperJS.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -24,10 +26,12 @@ const manifest = {
     "./islands/MicroHeaderSetup.tsx": $MicroHeaderSetup,
     "./islands/MinicartTotalInstallments.tsx": $MinicartTotalInstallments,
     "./islands/PaymentsMethods.tsx": $PaymentsMethods,
+    "./islands/ProductStars.tsx": $ProductStars,
     "./islands/Product/TrustVox.tsx": $Product_TrustVox,
     "./islands/Seals/RaVerifiedSeal.tsx": $Seals_RaVerifiedSeal,
     "./islands/ShowCaseCounter.tsx": $ShowCaseCounter,
     "./islands/Sort.tsx": $Sort,
+    "./islands/SwiperJS.tsx": $SwiperJS,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

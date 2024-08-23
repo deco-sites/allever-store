@@ -6,7 +6,7 @@ const Wishlist = () => {
         <>
             <a
                 href="/wishlist"
-                class="font-thin btn-ghost no-animation p-0">
+                class="font-thin btn-ghost no-animation p-0 hover:bg-transparent">
                 <Icon id="wishlist-icon" />
             </a>
         </>

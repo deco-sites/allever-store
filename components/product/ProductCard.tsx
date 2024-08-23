@@ -13,10 +13,7 @@ import { Ring } from "./ProductVariantSelector.tsx";
 import { useId } from "../../sdk/useId.ts";
 
 import ProductStarCard from "./ProductStarCard.tsx"
-import ProductStars from "./ProductStars.tsx"
-
-
-
+import ProductStars from "../../islands/ProductStars.tsx"
 
 interface Props {
   product: Product;
@@ -47,15 +44,17 @@ function ProductCard({
   class: _class,
   internationalBuy = true,
   offerLimited = true,
-  productGroupID,
+  // productGroupID,
 }: Props) {
   const id = useId();
 
   const { url, image: images, offers, isVariantOf, additionalProperty } = product;
   const hasVariant = isVariantOf?.hasVariant ?? [];
+  const productGroupID = isVariantOf?.productGroupID ?? "";
   const title = isVariantOf?.name ?? product.name;
   const [front, back] = images ?? [];
 
+  // console.log("offers", offers);
   const { listPrice, price, seller = "1", availability, installment } = useOffer(offers);
   const inStock = availability === "https://schema.org/InStock";
   const possibilities = useVariantPossibilities(hasVariant, product);
@@ -89,10 +88,6 @@ function ProductCard({
   const hasNovidade = additionalProperty?.some(
     (prop) => prop.value === "Novidades"
   );
-  // const internationalBuy = additionalProperty?.some(
-  //   (prop) => prop.value === "Compra Internacional"
-  // );
-  console.log(additionalProperty)
 
   return (
     <div {...event} class={clx("card flex flex-col space-between card-compact group text-sm bg-white p-5", _class)}>
@@ -179,7 +174,6 @@ function ProductCard({
             <p class="flex text-center mt-2 justify-center font-semibold"> Produto Indisponível</p>
           )}
         </a>
-        <ProductStarCard storeId="121576" productId={productGroupID ?? ""} />
         <ProductStars storeId="121576" productId={productGroupID ?? ""} />
       </div>
       {/* SKU Selector */}
