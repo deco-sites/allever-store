@@ -1,0 +1,77 @@
+body.body-empty-cart {
+  #cart-title {
+    display: none !important;
+  }
+
+  #alert-box {
+    display: none;
+  }
+
+  .empty-cart-content {
+    position: fixed;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    left: 50%;
+  }
+
+  .empty-cart-title {
+    font-size: 0;
+    line-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+
+    &::before {
+      content: "";
+      background-image: url("data:image/svg+xml,%3Csvg width='32' height='33' viewBox='0 0 32 33' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_3587_15258)'%3E%3Cpath d='M1.33301 1.6377H6.66634L10.2397 19.491C10.3616 20.1049 10.6956 20.6563 11.1831 21.0488C11.6706 21.4412 12.2806 21.6497 12.9063 21.6377H25.8663C26.4921 21.6497 27.1021 21.4412 27.5896 21.0488C28.0771 20.6563 28.4111 20.1049 28.533 19.491L30.6663 8.30436H7.99967M13.333 28.3044C13.333 29.0407 12.7361 29.6377 11.9997 29.6377C11.2633 29.6377 10.6663 29.0407 10.6663 28.3044C10.6663 27.568 11.2633 26.971 11.9997 26.971C12.7361 26.971 13.333 27.568 13.333 28.3044ZM27.9997 28.3044C27.9997 29.0407 27.4027 29.6377 26.6663 29.6377C25.93 29.6377 25.333 29.0407 25.333 28.3044C25.333 27.568 25.93 26.971 26.6663 26.971C27.4027 26.971 27.9997 27.568 27.9997 28.3044Z' stroke='%238CBF3C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_3587_15258'%3E%3Crect width='32' height='32' fill='white' transform='translate(0 0.304443)'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
+      width: 32px;
+      height: 32px;
+      display: block;
+      margin-bottom: 24px;
+    }
+
+    &::after {
+      content: "Seu carrinho ainda está vazio. Aceita algumas sugestões?";
+      font-family: $font-popping;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 18.91px;
+      width: 254px;
+      text-align: center;
+
+      @include desktop {
+        font-size: 18px;
+        width: auto;
+        content: "Seu carrinho ainda \A está vazio. Aceita algumas sugestões?";
+        white-space: pre;
+      }
+    }
+  }
+}
+.empty-cart-title{
+  font-size: 20px;
+}
+
+.empty-cart-message {
+  p {
+    width: 100%;
+    max-width: 348px;
+    color: #888888;
+  }
+}
+
+#cart-choose-products {
+  width: 100%;
+  max-width: 348px;
+  background-image: none;
+  background-color: $color-black;
+  text-transform: uppercase;
+  border: 0;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}

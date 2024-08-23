@@ -151,12 +151,6 @@
     "blockType": "sections",
     "__resolveType": "site/sections/Images/ImageGallery.tsx"
   },
-  "/.deco/blocks/pages-Landing%2520Page%2520(Woman)-585575.json": {
-    "name": "Landing Page (Women)",
-    "path": "/women",
-    "blockType": "pages",
-    "__resolveType": "website/pages/Page.tsx"
-  },
   "/.deco/blocks/deco-vtex.json": {
     "blockType": "apps",
     "__resolveType": "site/apps/deco/vtex.ts"
@@ -172,5 +166,55 @@
   "/.deco/blocks/Footer%20Component.json": {
     "blockType": "sections",
     "__resolveType": "site/sections/Footer/Footer.tsx"
+  },
+  "/.deco/blocks/pages-Fale%2520Conosco-940265.json": {
+    "name": "Sobre",
+    "path": "/sobre",
+    "blockType": "pages",
+    "__resolveType": "website/pages/Page.tsx"
+  },
+  "/.deco/blocks/Newsletter.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/Newsletter/Newsletter.tsx"
+  },
+  "/.deco/blocks/Deals.json": {
+    "blockType": "sections",
+    "__resolveType": "site/sections/Images/Deals.tsx"
+  },
+  "/.deco/blocks/pages-Termos%2520e%2520Condi%25C3%25A7%25C3%25B5es-684389.json": {
+    "name": "Termos e Condições",
+    "path": "/termos-e-condicoes",
+    "blockType": "pages",
+    "__resolveType": "website/pages/Page.tsx"
+  },
+  "/.deco/blocks/pages-Trabalhe%2520Conosco-622880.json": {
+    "name": "Trabalhe Conosco",
+    "path": "/trabalhe-conosco",
+    "blockType": "pages",
+    "__resolveType": "website/pages/Page.tsx"
+  },
+  "/.deco/blocks/pages-Fale%2520Conosco-144784.json": {
+    "name": "Fale Conosco",
+    "path": "/fale-conosco",
+    "blockType": "pages",
+    "__resolveType": "website/pages/Page.tsx"
+  },
+  "/.deco/blocks/pages-Faq-437493.json": {
+    "name": "Faq",
+    "path": "/faq",
+    "blockType": "pages",
+    "__resolveType": "website/pages/Page.tsx"
+  },
+  "/.deco/blocks/pages-Venda%2520na%2520Allever-639156.json": {
+    "name": "Venda na Allever",
+    "path": "/venda-na-allever",
+    "blockType": "pages",
+    "__resolveType": "website/pages/Page.tsx"
+  },
+  "/.deco/blocks/pages-Sac-338806.json": {
+    "name": "Sac",
+    "path": "/sac",
+    "blockType": "pages",
+    "__resolveType": "website/pages/Page.tsx"
   }
 }

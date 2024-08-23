@@ -45,9 +45,11 @@ const ShowCaseCounter = ({ Title = "<p class='flex gap-[5px]'><span class='font-
                             <Icon size={32} id={"rain"} />
                             <h3 class="text-[22px] sm:text-[40px] text-white" dangerouslySetInnerHTML={{ __html: Title }}></h3>
                         </div>
-                        <p class="text-white mt-[10px] text-center break-all text-sm lg:text-[20px]">{Label}</p>
+                        <p class="text-white mt-[20px] lg:mt-[15px] text-center break-all text-sm lg:text-[20px]">{Label}</p>
                     </div>
-                    <CampaignTimer expiresAt={expireAt} hideLabel={hideLabel} onExpire={handleExpire} />
+                    <div class="lg:mt-[33px] mt-[20px]">
+                    <CampaignTimer class="text-[20px] lg:text-[40px] font-bold flex gap-[10px] lg:gap-[14px]" expiresAt={expireAt} hideLabel={hideLabel} onExpire={handleExpire} />
+                    </div>
                 </div>
                 <div class="bg-white max-w-[602px] w-full rounded-[10px]">
                     <ProductAd product={product} />

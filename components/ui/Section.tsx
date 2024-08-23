@@ -44,7 +44,7 @@ function Tabbed(
 
   return (
     <>
-      <div class="flex px-5 sm:px-0 gap-3">
+      <div class="flex sm:px-0 gap-3">
         <div role="tablist" class="tabs gap-3">
           {tabs.map((tab, index) => (
             <button

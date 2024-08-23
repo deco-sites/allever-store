@@ -1,0 +1,1198 @@
+body.body-order-form {
+  background-color: $color-ice;
+  min-height: 100vh;
+  padding: 0;
+
+  @media screen and (max-width: 979px) {
+    .payment-confirmation-wrap {
+      background-color: white;
+      z-index: 999;
+      border: 0;
+
+      .payment-submit-wrap {
+        margin: 0;
+      }
+    }
+  }
+
+  &::before {
+    content: "";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    width: 100%;
+    z-index: 999;
+  }
+
+  .container-order-form {
+    padding: 0 24px !important;
+
+    @include desktop {
+      width: 100%;
+      min-height: 70vh;
+      padding: 0 !important;
+
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
+
+  #orderform-title {
+    display: none !important;
+  }
+
+  .checkout-container {
+    @include desktop {
+      width: 100%;
+      height: 100%;
+      overflow: unset !important;
+    }
+
+    .orderform-template {
+      @include desktop {
+        display: flex;
+        height: auto;
+        min-height: 100%;
+        overflow: hidden;
+
+        &.inactive {
+          display: none;
+        }
+
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  // @include desktop {
+  //   .transactions-container {
+  //     display: none; // TODO: VERIFICAR SE DÁ PROBLEMA
+  //   }
+  // }
+
+  .cart-template.mini-cart {
+    @include desktop {
+      background-color: white;
+      width: 100%;
+      margin: 0 2.56%;
+      border-radius: 10px;
+
+    }
+
+    .cart-fixed {
+      height: max-content!important;
+      @include desktop {
+        position: relative !important;
+        width: 100%;
+        z-index: 88;
+      }
+    }
+  }
+
+  .orderform-template-holder {
+    @include desktop {
+      min-width: 56.55%;
+      padding-left: 72px;
+      // padding-bottom: 56px;
+    }
+
+    .accordion-heading .accordion-toggle {
+      padding: 0;
+    }
+
+    .link-box-edit.btn.btn-small {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      outline: none;
+      opacity: 1;
+
+      &::after {
+        content: "Editar";
+        font-family: $font-inter;
+        font-size: 13px;
+        font-weight: bold;
+        text-transform: none;
+        color: $color-dark;
+      }
+
+      .icon-edit {
+        display: none;
+      }
+    }
+
+    >div.row-fluid {
+      display: flex;
+      flex-direction: column;
+
+      .accordion-heading {
+        font-family: $font-popping;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 14px;
+        line-height: 11px;
+      }
+
+      span.help.error {
+        display: none !important;
+      }
+
+      // Contato
+      #client-profile-data {
+        position: relative;
+        width: 100%;
+
+        a.client-masked-info {
+          display: none;
+        }
+
+        form.client-pre-email {
+          position: static;
+          border-radius: 10px;
+          margin-bottom: 8px;
+          padding: 16px;
+
+          @include desktop {
+            padding: 24px;
+          }
+
+          .emailInfo {
+            display: none;
+          }
+
+          p.link-cart {
+            display: none;
+          }
+
+          h3.client-pre-email-h {
+            display: flex;
+            align-items: center;
+            margin: 0 0 16px 0;
+            padding: 0;
+            font-family: $font-popping;
+
+            @include desktop {
+              margin: 0 0 24px 0;
+            }
+
+            &:before {
+              content: "1";
+              display: grid;
+              place-items: center;
+              color: white;
+              font-size: 14px;
+              line-height: 11px;
+              background-color: $color-blue;
+              border-radius: 50%;
+              width: 32px;
+              height: 32px;
+              margin-right: 16px;
+
+              @include desktop {
+                font-size: 16px;
+                line-height: 13px;
+              }
+            }
+
+            &:after {
+              content: "Email";
+              font-size: 14px;
+              text-transform: uppercase;
+              color: $color-dark;
+
+              @include desktop {
+                font-size: 16px;
+                line-height: 13px;
+              }
+            }
+
+            label {
+              display: none;
+            }
+          }
+
+          div.client-email.input {
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            width: 100%;
+            position: relative;
+
+            &::after {
+              content: "E-mail";
+              font-family: $font-inter;
+              font-size: 11px;
+              font-weight: 500;
+              position: absolute;
+              top: 11px;
+              left: 16px;
+              line-height: 8px;
+              z-index: 10;
+              color: $color-grey;
+            }
+
+            input {
+              width: 100% !important;
+              height: 48px !important;
+              max-width: unset !important;
+              box-sizing: border-box;
+              box-shadow: none;
+              color: $color-dark;
+              font-size: 13px;
+              font-weight: 500;
+              font-family: $font-inter;
+              height: 100%;
+              border: 1px solid $color-stroke2;
+              border-radius: 6px;
+              padding: 15px 0 0 15px;
+              line-height: 9px;
+              box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 3%);
+
+              &.success:not([invalid="true"]) {
+                background-image: url("data:image/svg+xml,%3Csvg width='19' height='18' viewBox='0 0 19 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.9121 4.5L7.66211 12.75L3.91211 9' stroke='%238CBF3C' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+                background-position: calc(100% - 16px) center !important;
+              }
+
+              &.error {
+                border-color: $color-error;
+              }
+
+              &.focus-visible {
+                border: 2px solid $color-dark;
+                padding: 14px 0 0 14px;
+              }
+            }
+
+            #btn-client-pre-email {
+              position: static;
+              height: 40px;
+              background-image: none;
+              background-color: $color-green;
+              font-family: $font-popping;
+              font-weight: bold;
+              font-size: 12px;
+              line-height: normal;
+              border: none;
+              margin: 16px 0 0 0;
+
+              @include desktop {
+                height: 50px;
+                font-size: 13px;
+                margin: 24px 0 0 0;
+              }
+            }
+          }
+        }
+
+        .box-info {
+          font-family: $font-inter;
+          font-size: 13px;
+          color: $color-dark;
+
+          .client-profile-email {
+            font-weight: bold;
+
+            .link-logout-container {
+              font-size: 0;
+              margin-left: 24px;
+
+              #is-not-me {
+                font-size: 0;
+
+                &::after {
+                  content: "Não é você?";
+                  font-family: $font-inter;
+                  font-size: 13px;
+                  font-weight: 500;
+                  text-decoration: underline;
+                  line-height: normal;
+                  color: $color-dark;
+                }
+              }
+            }
+          }
+
+          .client-profile-summary {
+            font-weight: 500;
+            line-height: 26px;
+          }
+        }
+
+        i.icon-user {
+          display: none;
+        }
+
+        .accordion-heading .accordion-toggle span {
+          display: flex;
+          align-items: center;
+          font-size: 0;
+          margin-bottom: 16px;
+
+          &:before {
+            content: "1";
+            display: grid;
+            place-items: center;
+            color: $color-white;
+            border: 2px solid $color-blue;
+            font-size: 14px;
+            line-height: 11px;
+            background-color: $color-blue;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            margin-right: 16px;
+
+            @include desktop {
+              font-size: 16px;
+              line-height: 13px;
+            }
+          }
+
+          &:after {
+            content: "CONTATO";
+            font-size: 14px;
+            color: $color-dark;
+
+            @include desktop {
+              font-size: 16px;
+              line-height: 13px;
+            }
+          }
+        }
+
+        // .accordion-heading
+        //   .accordion-toggle.collapsed:not(.accordion-toggle-active)
+        //   span::before {
+        //   background-color: $color-green;
+        //   color: white;
+        // }
+
+        .accordion-group {
+          background-color: white;
+          border: none;
+          border-radius: 10px;
+          padding: 16px;
+          margin-bottom: 8px;
+
+          &.hide {
+            display: none;
+          }
+
+          @include desktop {
+            padding: 24px;
+          }
+
+          .accordion-inner {
+            padding: 0;
+          }
+
+          p.client-notice.notice {
+            display: none;
+          }
+
+          fieldset.box-client-info-pf,
+          fieldset.box-client-info-health {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin: 0;
+
+            p.text,
+            p.input {
+              position: relative;
+              height: 48px;
+
+              &.client-email {
+                // border: 1px solid $color-stroke2;
+                // border-radius: 6px;
+                // padding: 11px 16px;
+
+                label {
+                  font-size: 0;
+                  color: transparent;
+                  line-height: 8px;
+
+                  &::after {
+                    content: "Email";
+                    font-family: $font-inter;
+                    font-size: 11px;
+                    line-height: 8px;
+                    color: $color-grey;
+                  }
+                }
+
+                span {
+                  color: $color-dark;
+                  font-family: $font-inter;
+                  font-size: 13px;
+                  font-weight: 500;
+                  line-height: 9px;
+                  border: 1px solid #e2e2e2;
+                  border-radius: 6px;
+                  padding: 15px 0 0 15px;
+                  width: 100%;
+                  height: 100%;
+                  display: flex;
+                  align-items: center;
+                }
+              }
+
+              &.client-first-name {
+                label {
+                  font-size: 0;
+                  color: transparent;
+                  line-height: 8px;
+
+                  &::after {
+                    content: "Nome";
+                    font-family: $font-inter;
+                    font-size: 11px;
+                    line-height: 8px;
+                    color: $color-grey;
+                  }
+                }
+              }
+
+              &.client-last-name {
+                label {
+                  font-size: 0;
+                  color: transparent;
+                  line-height: 8px;
+
+                  &::after {
+                    content: "Sobrenome";
+                    font-family: $font-inter;
+                    font-size: 11px;
+                    line-height: 8px;
+                    color: $color-grey;
+                  }
+                }
+              }
+            }
+
+            .client-document {
+              order: 5;
+            }
+
+            .client-document+div {
+              order: 4;
+            }
+
+            .client-phone+.client-phone {
+              display: none;
+            }
+
+            .box-client-info-pf,
+            .client-email,
+            .client-first-name,
+            .client-last-name,
+            .client-document,
+            .client-phone,
+            .client-birth,
+            .client-gender,
+            .health-registry,
+            .health-profession {
+              width: 100%;
+
+              label {
+                font-family: $font-inter;
+                font-size: 11px;
+                font-weight: 500;
+                position: absolute;
+                top: 11px;
+                left: 16px;
+                line-height: 8px;
+                z-index: 10;
+              }
+            }
+
+            input[type="text"],
+            input[type="email"],
+            input[type="tel"],
+            input[type="date"] {
+              width: 100% !important;
+              max-width: unset !important;
+              box-sizing: border-box;
+              box-shadow: none;
+              color: $color-dark;
+              font-size: 13px;
+              font-weight: 500;
+              font-family: $font-inter;
+              height: 100%;
+              border: 1px solid $color-stroke2;
+              border-radius: 6px;
+              padding: 15px 0 0 15px;
+              line-height: 9px;
+              box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 3%);
+
+              &.success:not([invalid="true"]) {
+                background-image: url("data:image/svg+xml,%3Csvg width='19' height='18' viewBox='0 0 19 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.9121 4.5L7.66211 12.75L3.91211 9' stroke='%238CBF3C' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+                background-position: calc(100% - 16px) center !important;
+              }
+
+              &.error {
+                border-color: $color-error;
+              }
+
+              &.focus-visible {
+                border: 2px solid $color-dark;
+                padding: 14px 0 0 14px;
+              }
+            }
+          }
+
+          fieldset.box-client-info-pj {
+            width: 100%;
+            padding-bottom: 16px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid $color-stroke;
+
+            .links.unstyled {
+              margin: 0;
+            }
+
+            .corporate-info-box {
+              flex-direction: column;
+              width: 100%;
+
+              p.input {
+                position: relative;
+                width: 100%;
+                height: 48px;
+
+                label {
+                  font-family: $font-inter;
+                  font-size: 11px;
+                  font-weight: 500;
+                  position: absolute;
+                  top: 11px;
+                  left: 16px;
+                  line-height: 8px;
+                  z-index: 10;
+                }
+              }
+
+              input[type="text"],
+              input[type="email"],
+              input[type="tel"],
+              input[type="date"] {
+                width: 100% !important;
+                max-width: unset !important;
+                box-sizing: border-box;
+                box-shadow: none;
+                color: $color-dark;
+                font-size: 13px;
+                font-weight: 500;
+                font-family: $font-inter;
+                height: 100%;
+                border: 1px solid $color-stroke2;
+                border-radius: 6px;
+                padding: 15px 0 0 15px;
+                line-height: 9px;
+                box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 3%);
+
+                &.success:not([invalid="true"]) {
+                  background-image: url("data:image/svg+xml,%3Csvg width='19' height='18' viewBox='0 0 19 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.9121 4.5L7.66211 12.75L3.91211 9' stroke='%238CBF3C' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+                  background-position: calc(100% - 16px) center !important;
+                }
+
+                &.error {
+                  border-color: $color-error;
+                }
+
+                &.focus-visible {
+                  border: 2px solid $color-dark;
+                  padding: 14px 0 0 14px;
+                }
+              }
+
+              .state-inscription-box {
+                order: 1;
+                margin-top: 9px;
+
+                label.exempt-si-label {
+                  display: flex;
+                  align-items: center;
+                  padding: 0;
+
+                  #state-inscription {
+                    visibility: hidden;
+                    position: relative;
+                    margin: 0;
+                    width: 18px;
+                    height: 18px;
+                    margin-right: 8px;
+
+                    &::after,
+                    &::before {
+                      visibility: visible;
+                    }
+
+                    &::before {
+                      content: "";
+                      display: block;
+                      background-color: white;
+                      border: 2px solid $color-grey;
+                      border-radius: 5px;
+                      box-sizing: border-box;
+                      color: white;
+                      width: 18px;
+                      height: 18px;
+                      margin-right: 8px;
+                    }
+
+                    &:checked::before {
+                      background-color: $color-dark;
+                      border: none;
+                    }
+
+                    &:checked::after {
+                      content: "";
+                      background-image: url("data:image/svg+xml,%3Csvg width='12' height='13' viewBox='0 0 12 13' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 3.95312L4.5 9.45312L2 6.95312' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+                      width: 12px;
+                      height: 13px;
+                      display: block;
+                      position: absolute;
+                      left: 3px;
+                      top: 3px;
+                    }
+                  }
+
+                  .exempt-si-text {
+                    font-family: $font-inter;
+                    font-size: 13px;
+                    line-height: 9px;
+                    font-weight: 500;
+                    color: $color-dark;
+                  }
+                }
+              }
+            }
+
+            #is-corporate-client {
+              font-size: 0;
+              display: flex;
+              align-items: center;
+
+              &:hover {
+                text-decoration: none;
+              }
+
+              &::before {
+                content: "";
+                display: block;
+                background-color: white;
+                border: 2px solid $color-grey;
+                border-radius: 5px;
+                box-sizing: border-box;
+                color: white;
+                width: 18px;
+                height: 18px;
+                margin-right: 8px;
+              }
+
+              &::after {
+                content: "Quero comprar para minha empresa";
+                font-size: 13px;
+                font-family: $font-inter;
+                font-weight: 500;
+                color: $color-dark;
+              }
+            }
+
+            h5.corporate-title {
+              display: none;
+            }
+
+            #not-corporate-client {
+              font-size: 0;
+              display: flex;
+              align-items: center;
+              margin-bottom: 16px;
+
+              &:hover {
+                text-decoration: none;
+              }
+
+              &::before {
+                content: "";
+                display: block;
+                background-color: $color-dark;
+                border-radius: 5px;
+                box-sizing: border-box;
+                color: white;
+                width: 18px;
+                height: 18px;
+                margin-right: 8px;
+                background-image: url("data:image/svg+xml,%3Csvg width='12' height='13' viewBox='0 0 12 13' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 3.95312L4.5 9.45312L2 6.95312' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+                background-repeat: no-repeat;
+                background-position: 3px;
+                border: none;
+              }
+
+              &::after {
+                content: "Quero comprar para minha empresa";
+                font-size: 13px;
+                font-family: $font-inter;
+                font-weight: 500;
+                color: $color-dark;
+              }
+            }
+          }
+
+          .submit.btn-submit-wrapper {
+            margin: 16px 0 0 0;
+
+            @include desktop {
+              margin: 24px 0 0 0;
+            }
+
+            button[type="submit"] {
+              width: 100%;
+              background-color: $color-black;
+              background-image: none;
+              text-transform: uppercase;
+              border: none;
+              border-radius: 30px;
+              line-height: 9px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              padding: 15.5px 0;
+
+              @include desktop {
+                padding: 20px 0;
+              }
+
+            }
+          }
+        }
+      }
+
+      // Entrega
+      #shipping-data {
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 8px;
+        background-color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 16px;
+
+        @include desktop {
+          padding: 24px;
+        }
+
+        .accordion-heading .accordion-toggle {
+          display: flex;
+          align-items: center;
+          margin-bottom: 16px;
+          font-size: 16px;
+          color: $color-dark;
+
+          &.collapsed {
+            margin-bottom: 0;
+          }
+
+          i.icon-home {
+            display: none;
+          }
+
+          &:before {
+            content: "2";
+            display: grid;
+            place-items: center;
+            color: white;
+            font-size: 14px;
+            line-height: 11px;
+            background-color: $color-dark;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            margin-right: 16px;
+
+            @include desktop {
+              font-size: 16px;
+              line-height: 13px;
+            }
+          }
+        }
+
+        .accordion-heading .accordion-toggle.collapsed::before {
+          background-color: $color-blue;
+          border: 2px solid $color-blue;
+          color: $color-white;
+        }
+
+        .accordion-group {
+          border: none;
+          padding: 0;
+          margin: 0;
+
+          &:not(.active) {
+            .accordion-inner {
+              padding: 0;
+
+              .shipping-summary-info {
+                display: none;
+              }
+
+              .address-summary {
+                padding-top: 24px;
+
+                .street,
+                .number {
+                  font-family: $font-inter;
+                  font-size: 13px;
+                  font-weight: bold;
+                  color: $color-dark;
+                }
+
+                .city,
+                .state {
+                  display: inline-block;
+                  margin-top: 13px;
+                  font-family: $font-inter;
+                  font-weight: 500;
+                  color: $color-dark;
+                  font-size: 13px;
+                }
+
+                .neighborhood,
+                .neighborhood-delimiter-after,
+                .postalCode {
+                  display: none;
+                }
+              }
+
+              .vtex-omnishipping-1-x-summaryChange {
+                display: none;
+              }
+            }
+          }
+
+          .shipping-container {
+            padding: 24px 0 0 0;
+
+            .box-step {
+              display: flex;
+              flex-direction: column;
+
+              .vtex-omnishipping-1-x-deliveryGroup {
+                margin: 0;
+                order: 2;
+
+                .vtex-omnishipping-1-x-shippingSectionTitle {
+                  font-size: 0;
+                  padding: 24px 0;
+                  margin: 0;
+
+                  &::after {
+                    content: "Método de envio";
+                    font-family: $font-inter;
+                    font-size: 13px;
+                    font-weight: 500;
+                    color: $color-grey;
+                  }
+                }
+              }
+
+              .btn-go-to-payment-wrapper {
+                order: 3;
+
+                button.btn-go-to-payment {
+                  width: 100%;
+                  background-color: $color-black;
+                  background-image: none;
+                  text-transform: uppercase;
+                  border: none;
+                  border-radius: 30px;
+                  font-weight: 600;
+                  line-height: 9px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  padding: 15.5px 0;
+
+                  @include desktop {
+                    padding: 20px 0;
+                  }
+
+                }
+              }
+
+              .vtex-omnishipping-1-x-address {
+                margin: 0;
+
+                >div {
+                  display: flex;
+                  flex-direction: column;
+
+                  p {
+                    position: relative;
+                  }
+
+                  input,
+                  select {
+                    width: 100% !important;
+                    max-width: unset !important;
+                    box-sizing: border-box;
+                    box-shadow: none;
+                    color: $color-dark;
+                    font-size: 13px;
+                    font-weight: 500;
+                    font-family: $font-inter;
+                    height: 100%;
+                    border: 1px solid $color-stroke2;
+                    border-radius: 6px;
+                    padding: 15px 0 0 15px;
+                    line-height: 9px;
+                    box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 3%);
+                    height: 48px;
+
+                    &.success:not([invalid="true"]) {
+                      background-image: url("data:image/svg+xml,%3Csvg width='19' height='18' viewBox='0 0 19 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.9121 4.5L7.66211 12.75L3.91211 9' stroke='%238CBF3C' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+                      background-position: calc(100% - 16px) center !important;
+                    }
+
+                    &.error {
+                      border-color: $color-error;
+                    }
+
+                    &.focus-visible {
+                      border: 2px solid $color-dark;
+                      padding: 14px 0 0 14px;
+                    }
+                  }
+                }
+              }
+
+              .vtex-omnishipping-1-x-addressForm {
+                .delivery-address-title {
+                  font-size: 0;
+                  padding: 16px 0;
+                  margin: 0;
+
+                  &::after {
+                    content: "Complete as informações do seu endereço";
+                    font-family: $font-inter;
+                    font-size: 13px;
+                    font-weight: 500;
+                    color: $color-grey;
+                  }
+                }
+              }
+            }
+
+            p.ship-postalCode {
+              label {
+                display: none;
+              }
+
+              input#ship-postalCode {
+                padding: 19.5px 16px;
+                font-family: $font-inter;
+                font-size: 13px;
+                box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 3%);
+                min-width: 151px;
+                border-radius: 6px;
+
+                &::placeholder {
+                  color: $color-grey;
+                }
+
+                &.success:not([invalid="true"]) {
+                  background-image: url("data:image/svg+xml,%3Csvg width='19' height='18' viewBox='0 0 19 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.9121 4.5L7.66211 12.75L3.91211 9' stroke='%238CBF3C' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+                  background-position: calc(100% - 16px) center !important;
+                }
+              }
+
+              a {
+                font-family: $font-inter;
+                font-size: 13px;
+                color: $color-dark;
+                font-weight: 500;
+              }
+            }
+          }
+        }
+      }
+
+      // Pagamento
+      #payment-data {
+        width: 100%;
+        margin-left: 0;
+
+        .accordion-heading .accordion-toggle {
+          display: flex;
+          align-items: center;
+          margin-bottom: 16px;
+          color: $color-dark;
+          font-size: 16px;
+
+          &.collapsed {
+            margin-bottom: 0;
+          }
+
+          i.icon-credit-card {
+            display: none;
+          }
+
+          &:before {
+            content: "3";
+            display: grid;
+            place-items: center;
+            color: white;
+            font-size: 14px;
+            line-height: 11px;
+            background-color: $color-dark;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            margin-right: 16px;
+
+            @include desktop {
+              font-size: 16px;
+              line-height: 13px;
+            }
+          }
+        }
+
+        .accordion-heading .accordion-toggle.collapsed::before {
+          background-color: $color-blue;
+          border: 2px solid $color-blue;
+          color: $color-white;
+        }
+
+        .accordion-group {
+          background-color: white;
+          border: none;
+          border-radius: 10px;
+          padding: 16px;
+          margin-bottom: 8px;
+
+          @include desktop {
+            padding: 24px;
+          }
+
+          &:not(.active) {
+            .accordion-inner {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.modal.identified-user-modal {
+  background-color: $color-green;
+  bottom: 0;
+  top: unset !important;
+  width: 100%;
+  height: 246px;
+  left: 0;
+  border: none;
+  border-radius: 20px 20px 0 0;
+  color: white;
+  margin: 0;
+
+  @include desktop {
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    max-width: 400px;
+    border-radius: 20px;
+  }
+
+  .identified-user-modal-body {
+    padding: 40px 32px;
+    width: 100%;
+  }
+
+  .icon-lock {
+    display: none;
+  }
+
+  p.identified-user-hello {
+    font-size: 0;
+    margin-bottom: 24px;
+    max-width: 166px;
+
+    &::after {
+      content: "Olá! E obrigado por estar de volta!";
+      font-family: $font-popping;
+      font-size: 14px;
+      line-height: normal;
+    }
+  }
+
+  p.identified-user-message {
+    font-size: 0;
+    margin: 0 0 24px 0;
+
+    &::after {
+      content: "Para agilizar suas compras, nós preenchemos de maneira segura as suas informações.";
+      font-family: $font-inter;
+      font-size: 14px;
+      line-height: normal;
+    }
+  }
+
+  #btn-identified-user-button {
+    border: none;
+    border-radius: 6px;
+    background-color: white;
+    background-image: none;
+    height: 56px;
+    font-size: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+
+    &::before {
+      content: "Continuar minha compra";
+      font-family: $font-popping;
+      color: $color-green;
+      font-size: 13px;
+      line-height: normal;
+      display: inline-block;
+      margin-right: 24px;
+    }
+
+    &::after {
+      content: "";
+      background-image: url("data:image/svg+xml,%3Csvg width='17' height='16' viewBox='0 0 17 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.83398 1.33337H2.70476C2.86877 1.33337 2.95078 1.33337 3.01677 1.36353C3.07493 1.39011 3.12422 1.43286 3.15875 1.48667C3.19794 1.54774 3.20954 1.62892 3.23273 1.79128L3.54827 4.00004M3.54827 4.00004L4.24953 9.15431C4.33852 9.80839 4.38302 10.1354 4.53938 10.3816C4.67717 10.5985 4.87471 10.771 5.10822 10.8783C5.37323 11 5.70328 11 6.36339 11H12.0686C12.697 11 13.0112 11 13.268 10.887C13.4944 10.7873 13.6886 10.6266 13.8288 10.4229C13.9879 10.1918 14.0467 9.88315 14.1643 9.26588L15.0467 4.63317C15.0881 4.41591 15.1088 4.30728 15.0788 4.22237C15.0525 4.14789 15.0006 4.08516 14.9324 4.04539C14.8545 4.00004 14.744 4.00004 14.5228 4.00004H3.54827ZM7.16732 14C7.16732 14.3682 6.86884 14.6667 6.50065 14.6667C6.13246 14.6667 5.83398 14.3682 5.83398 14C5.83398 13.6319 6.13246 13.3334 6.50065 13.3334C6.86884 13.3334 7.16732 13.6319 7.16732 14ZM12.5007 14C12.5007 14.3682 12.2022 14.6667 11.834 14.6667C11.4658 14.6667 11.1673 14.3682 11.1673 14C11.1673 13.6319 11.4658 13.3334 11.834 13.3334C12.2022 13.3334 12.5007 13.6319 12.5007 14Z' stroke='%238CBF3C' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+      width: 17px;
+      height: 16px;
+    }
+  }
+}
+
+#client-profile-data,
+#shipping-data,
+#payment-data {
+  .step {
+    &.active {
+      .accordion-heading {
+        span {
+          &::before {
+            color: white !important;
+            border-color: $color-black !important;
+            background-color: $color-black !important;
+          }
+        }
+      }
+    }
+  }
+}
+.cart-template{
+  height: fit-content;
+}

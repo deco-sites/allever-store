@@ -1,0 +1,10 @@
+export { default as AlertModule } from "./alert-module";
+export { default as ContactFormModule } from "./contact-form-module";
+export { default as FooterModule } from "./footer-module";
+export { default as HeaderModule } from "./header-module";
+export { default as MiniCartModule } from "./mini-cart-module";
+export { default as ShippingFormModule } from "./shipping-form-module";
+export { default as PaymentFormModule } from "./payment-form-module";
+export { default as EmptyCartModule } from "./empty-cart-module";
+export { default as CartModule } from "./cart-module";
+export { default as FreeFreightModule } from "./free-freight-module";

@@ -6,13 +6,22 @@
       "__resolveType": "Header"
     },
     {
-      "title": "Oh no! You are offline!",
-      "products": null,
-      "description": "Maybe take some time to explore",
-      "__resolveType": "site/sections/Product/ProductShelf.tsx"
+      "title": "Oops!",
+      "__resolveType": "site/sections/Product/Notfound.tsx",
+      "content": "Sua conexão foi perdida. Verifique sua internet e tente novamente.",
+      "cta": {
+        "content": "Atendimento",
+        "link": "/fale-c"
+      }
     },
     {
-      "__resolveType": "Footer"
+      "__resolveType": "site/sections/Product/ProductShelf.tsx",
+      "title": "Oh no! You are offline!",
+      "products": null,
+      "description": "Maybe take some time to explore"
+    },
+    {
+      "__resolveType": "Footer Component"
     }
   ],
   "__resolveType": "website/pages/Page.tsx"

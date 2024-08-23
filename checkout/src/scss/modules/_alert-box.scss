@@ -1,0 +1,45 @@
+#alert-box {
+  width: 100%;
+  border: 2px solid $color-yellow;
+  border-radius: 10px;
+  padding: 24px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.alert-cart {
+    // margin-top: 24px;
+  }
+
+  @include desktop {
+    justify-content: start;
+  }
+
+  > svg {
+    flex-shrink: 0;
+  }
+
+  span {
+    margin-left: 18px;
+    font-family: $font-inter;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 120%;
+
+    @include desktop {
+      max-width: 509px;
+      margin-left: 16px;
+    }
+  }
+
+  button {
+    border: none;
+    outline: none;
+    padding: 0;
+
+    @include desktop {
+      margin-left: auto;
+    }
+  }
+}

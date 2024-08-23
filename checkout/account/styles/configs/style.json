@@ -1,0 +1,59 @@
+{
+    "semanticColors": {
+        "background": {
+            "base": "#F0F0EE",
+            "warning": "#E9B90E",
+            "action-primary": "#8CBF3C",
+            "action-secondary": "#e4003f"
+        },
+        "hover-background": {
+            "action-primary": "#8CBF3C",
+            "action-secondary": "#e4003f"
+        },
+        "active-background": {
+            "action-primary": "#8CBF3C",
+            "action-secondary": "#e4003f"
+        },
+        "hover-border": {
+            "action-primary": "#8CBF3C"
+        },
+        "text": {
+            "muted-3": "#8E8E8D",
+            "action-primary": "#3C3C3B",
+            "action-secondary": "#FFFFFF"
+        },
+        "hover-text": {
+            "muted-3": "#8E8E8D",
+            "action-primary": "#FFFFFF",
+            "action-secondary": "#FFFFFF"
+        },
+        "border": {
+            "action-primary": "#8CBF3C"
+        },
+        "on": {
+            "action-primary": "#FFFFFF",
+            "action-secondary": "#FFFFFF"
+        },
+        "hover-on": {
+            "action-primary": "#FFFFFF",
+            "action-secondary": "#FFFFFF"
+        }
+    },
+    "borderRadius": [0, 0.125, 0.375, 0.5, 1],
+    "typography": {
+        "styles": {
+            "body": {
+                "fontFamily": "Inter"
+            },
+            "action-primary": {
+                "fontFamily": "Lemon Milk"
+            },
+            "action": {
+                "fontFamily": "Inter"
+            },
+            "action--small": {
+                "fontFamily": "Inter"
+            }
+        }
+    }
+}

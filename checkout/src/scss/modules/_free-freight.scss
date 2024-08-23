@@ -1,0 +1,54 @@
+.checkout-free-freight {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid $color-light-grey;
+  padding-top: 25px;
+  margin-top: 24px;
+
+  &.freight-orderform {
+    border-top: 0;
+    padding-top: 0;
+    margin-top: 0;
+    border-bottom: 1px solid $color-light-grey;
+    padding-bottom: 24px;
+    
+    .checkout-free-freight__title {
+      display: none;
+    }
+  }
+
+  &__title {
+    font-family: $font-inter;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  &__bar {
+    margin: 25px 0 16px 0;
+    width: 100%;
+    border-radius: 200px;
+    background-color: $color-light-grey;
+    height: 8px;
+    position: relative;
+
+    &--inner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: $color-green;
+      width: attr(data-width);
+      margin: 0;
+      transition: width 300ms linear;
+    }
+  }
+
+  &__text {
+    font-family: $font-inter;
+    font-size: 14px;
+    font-weight: 400;
+
+    &.congracts {
+      font-weight: 700;
+    }
+  }
+}
