@@ -24,13 +24,17 @@ const CampaignTimer = ({
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
-  const timerId = setInterval(() => {
-    setTimeLeft(calculateTimeLeft());
-  }, 1000);
-
   const formatTime = (time: number) => {
     return String(time).padStart(2, "0");
   };
+
+  useEffect(() => {
+    const timerId = setInterval(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+
+    return () => clearInterval(timerId);
+  }, []);
   
   // useEffect(() => {
   //   if (timeLeft.Segundos > 0) {
