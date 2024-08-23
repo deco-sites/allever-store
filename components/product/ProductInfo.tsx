@@ -38,7 +38,7 @@ function ProductInfo({ page }: Props) {
     installments,
   } = useOffer(offers);
 
-  console.log(inventary)
+  // console.log(inventary)
 
   const hasPromotion = additionalProperty?.some(
     (prop) => prop.value === "Promoção",

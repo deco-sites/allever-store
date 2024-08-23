@@ -36,7 +36,7 @@ function script() {
       <script
         type="module"
         src={useScript((value) => {
-          console.log(value);
+          // console.log(value);
         }, param)}
       />
     </Head>
