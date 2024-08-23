@@ -1,1 +1,1 @@
-export { default } from  '../../islands/ProductShelf.tsx'
+export { default } from  '../../components/product/ProductShelf.tsx'

@@ -259,15 +259,9 @@ function Header({
           ? <Desktop logo={logo} {...props} />
           : <Mobile logo={logo} {...props} />}
       </div>
-      {isSticky ? <MicroHeaderSetup rootId="header" threshold={50} /> : null}
+      <MicroHeaderSetup rootId="header" threshold={50} />
     </header>
   );
-}
-
-export function loader(props: SectionProps, req: Request, ctx: AppContext) {
-  // console.log("ctx", ctx);
-
-  return { ...props };
 }
 
 export default function Section({ variant, ...props }: SectionProps) {

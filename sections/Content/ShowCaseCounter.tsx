@@ -1,1 +1,1 @@
-export { default } from "../../islands/ShowCaseCounter.tsx";
+export { default } from "../../components/product/ShowCaseCounter.tsx";

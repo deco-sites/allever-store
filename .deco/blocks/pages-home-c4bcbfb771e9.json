@@ -434,9 +434,10 @@
       "__resolveType": "site/sections/Content/ShowCaseCounter.tsx",
       "Label": "algum sub titulo",
       "product": {
-        "__resolveType": "vtex/loaders/intelligentSearch/productDetailsPage.ts"
+        "__resolveType": "vtex/loaders/intelligentSearch/productDetailsPage.ts",
+        "slug": "/fone-de-ouvido-estereo--full-sound--tipo-earphone-cor-preta-20344/p?skuId=23891"
       },
-      "expireAt": "2024-09-22T20:59:00.000Z"
+      "expireAt": "2024-09-23T20:59:00.000Z"
     },
     {
       "__resolveType": "site/sections/Product/ProductShelf.tsx",
@@ -457,7 +458,7 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 456,
+            "Width": 405,
             "Height": 398
           },
           "mobile": {
@@ -468,7 +469,7 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 456,
+            "Width": 405,
             "Height": 398
           },
           "mobile": {
@@ -479,7 +480,7 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 456,
+            "Width": 405,
             "Height": 398
           },
           "mobile": {
@@ -492,7 +493,7 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 1440,
+            "Width": 1261,
             "Height": 439
           },
           "mobile": {
@@ -503,7 +504,7 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 1440,
+            "Width": 1261,
             "Height": 439
           },
           "mobile": {
@@ -514,7 +515,7 @@
       ],
       "bannerFull": {
         "desktop": {
-          "Width": 1440,
+          "Width": 1261,
           "Height": 144
         },
         "mobile": {
@@ -568,7 +569,7 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 900,
+            "Width": 820,
             "Height": 398
           },
           "mobile": {
@@ -579,7 +580,7 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 500,
+            "Width": 409,
             "Height": 398
           },
           "mobile": {
@@ -590,7 +591,7 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 500,
+            "Width": 409,
             "Height": 398
           },
           "mobile": {
@@ -601,7 +602,7 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 900,
+            "Width": 820,
             "Height": 398
           },
           "mobile": {
@@ -647,7 +648,7 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 900,
+            "Width": 823,
             "Height": 398
           },
           "mobile": {
@@ -658,7 +659,7 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 500,
+            "Width": 411,
             "Height": 398
           },
           "mobile": {
@@ -669,7 +670,7 @@
       ],
       "bannerFull": {
         "desktop": {
-          "Width": 1440,
+          "Width": 1269,
           "Height": 144
         },
         "mobile": {
@@ -699,7 +700,7 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 1440,
+            "Width": 1261,
             "Height": 439
           },
           "mobile": {
@@ -710,7 +711,7 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 1440,
+            "Width": 1261,
             "Height": 439
           },
           "mobile": {
@@ -741,7 +742,7 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 631,
+            "Width": 556,
             "Height": 451
           },
           "mobile": {
@@ -752,7 +753,7 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 750,
+            "Width": 675,
             "Height": 213
           },
           "mobile": {
@@ -763,7 +764,7 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 750,
+            "Width": 675,
             "Height": 213
           },
           "mobile": {
@@ -779,7 +780,7 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 631,
+            "Width": 556,
             "Height": 505
           },
           "mobile": {
@@ -790,7 +791,7 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 365,
+            "Width": 331,
             "Height": 239
           },
           "mobile": {
@@ -801,7 +802,7 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 365,
+            "Width": 331,
             "Height": 239
           },
           "mobile": {
@@ -812,7 +813,7 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 365,
+            "Width": 331,
             "Height": 239
           },
           "mobile": {
@@ -823,7 +824,7 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 365,
+            "Width": 331,
             "Height": 239
           },
           "mobile": {

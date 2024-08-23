@@ -1,17 +1,19 @@
-import type { Product } from "apps/commerce/types.ts";
+import ProductSlider from "./ProductSlider.tsx";
+import CampaignTimer from '../../islands/CampaignTimer.tsx';
+import Section, { Props as SectionHeaderProps } from "../ui/Section.tsx";
+
+import { useId } from "../../sdk/useId.ts";
+import { useOffer } from "../../sdk/useOffer.ts";
+import { useSendEvent } from "../../sdk/useSendEvent.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
-import ProductSlider from "../components/product/ProductSlider.tsx";
-import Section, { Props as SectionHeaderProps } from "../components/ui/Section.tsx";
-import { useOffer } from "../sdk/useOffer.ts";
-import { useSendEvent } from "../sdk/useSendEvent.ts";
-import { useState } from 'preact/hooks';
-import CampaignTimer from './CampaignTimer.tsx';
+
+import type { Product } from "apps/commerce/types.ts";
 
 export interface Timer {
     /**
- * @title Data Final
- * @format datetime
- */
+     * @title Data Final
+     * @format datetime
+     */
     expireAt?: string;
     hideLabel?: boolean;
 }
@@ -21,7 +23,7 @@ export interface Props extends SectionHeaderProps, Timer {
 }
 
 export default function ProductShelf({ products, title, cta, expireAt, hideLabel = false }: Props) {
-    // console.log('expireAt:', expireAt); 
+    const id = useId();
 
     if (!products || products.length === 0) {
         return null;
@@ -44,37 +46,27 @@ export default function ProductShelf({ products, title, cta, expireAt, hideLabel
         },
     });
 
-    const [expire, setExpire] = useState(false);
-
-    const handleExpire = () => {
-        setExpire(true);
-    };
-
-    if (expire) {
-        return null;
-    }
-
     return (
-        <Section.Container
+        <div id={id}>
+          <Section.Container
             {...viewItemListEvent}
             class="[view-transition-name:loading-fallback-2]"
-        >
-            <div class="flex items-center gap-10">
-                <Section.Header title={title} cta={cta} />
-                {expireAt && (
-                    <div class="bg-primary px-[18px] py-2 lg:px-[25px] lg:py-[15px] rounded-[10px]">
+          >
+              <div class="flex items-center gap-10">
+                  <Section.Header title={title} cta={cta} />
+                  {expireAt && (
+                      <div class="bg-primary px-[18px] py-2 lg:px-[25px] lg:py-[15px] rounded-[10px]">
                         <CampaignTimer
-                            class="flex text-sm lg:text-[20px] gap-[10px] lg:gap-[15px]"
-                            key={expireAt}
-                            expiresAt={expireAt}
-                            hideLabel={hideLabel}
-                            onExpire={handleExpire}
+                          hideLabel={hideLabel}
+                          expiresAt={expireAt}
+                          id={id}
                         />
-                    </div>
-                )}
-            </div>
-            <ProductSlider products={products} itemListName={title} />
-        </Section.Container>
+                      </div>
+                  )}
+              </div>
+              <ProductSlider products={products} itemListName={title} />
+          </Section.Container>
+        </div>
     );
 }
 

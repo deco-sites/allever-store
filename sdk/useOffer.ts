@@ -7,7 +7,6 @@ const bestInstallment = (
   acc: UnitPriceSpecification | null,
   curr: UnitPriceSpecification,
 ) => {
-  // console.log("curr", curr);
 
   if (
     curr.priceComponentType !== "https://schema.org/Installment" ||
