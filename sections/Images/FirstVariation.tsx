@@ -137,7 +137,7 @@ const FirstVariation = (
             </a>
           </div>
           <div class="container">
-            <Slider class="carousel carousel-center w-full gap-4 px-5">
+            <Slider class="carousel carousel-center w-full gap-4 px-5 sm:flex sm:justify-between ">
               {slide?.map((item, index) => (
                 <Slider.Item
                   index={index}
