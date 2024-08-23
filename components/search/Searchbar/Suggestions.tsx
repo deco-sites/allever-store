@@ -54,34 +54,35 @@ function Suggestions(
   return (
     <div class={clx(``, !hasProducts && !hasTerms && "flex")}>
       <div class="flex flex-col lg:grid grid-cols-4 gap-5">
-        {
-          hasTerms && (
-            <div class="flex flex-col col-span-1">
-              <span
-                class="font-extrabold text-sm uppercase text-[#123ADD] pb-3"
-                role="heading"
-                aria-level={3}
-              >
-                Sugestões
-              </span>
-              <ul class="flex flex-col gap-3">
-                {searches.map(({ term }) => (
-                  <li>
-                    {/* TODO @gimenes: use name and action from searchbar form */}
-                    <a href={`${ACTION}?${NAME}=${term}`}>
-                      <span class="text-[#888888] text-sm" dangerouslySetInnerHTML={{ __html: term }} />
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )
-        }
+        {hasTerms && (
+          <div class="flex flex-col col-span-1">
+            <span
+              class="font-extrabold text-sm uppercase text-[#123ADD] pb-3"
+              role="heading"
+              aria-level={3}
+            >
+              Sugestões
+            </span>
+            <ul class="flex flex-col gap-3">
+              {searches.map(({ term }) => (
+                <li>
+                  {/* TODO @gimenes: use name and action from searchbar form */}
+                  <a href={`${ACTION}?${NAME}=${term}`}>
+                    <span
+                      class="text-[#888888] text-sm"
+                      dangerouslySetInnerHTML={{ __html: term }}
+                    />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
         <div class="flex flex-col pb-5 lg:pb-0 col-span-3 lg:inline-grid grid-cols-3 gap-3">
-          {
-            products.length > 0 ? (
+          {products.length > 0
+            ? (
               <>
-                {products.slice(0,3).map((product, index) => (
+                {products.slice(0, 3).map((product, index) => (
                   <div class="col-span-1">
                     <ProductSuggestionsCard
                       index={index}
@@ -90,8 +91,8 @@ function Suggestions(
                   </div>
                 ))}
               </>
-            ) : null
-          }
+            )
+            : null}
         </div>
       </div>
     </div>

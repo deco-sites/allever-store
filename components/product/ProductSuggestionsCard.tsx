@@ -24,13 +24,14 @@ function ProductSuggestionsCard({
   const title = isVariantOf?.name ?? product.name;
   const [front] = images ?? [];
 
-  const { listPrice, price, seller = "1", availability, installment } = useOffer(offers);
+  const { listPrice, price, seller = "1", availability, installment } =
+    useOffer(offers);
   const inStock = availability === "https://schema.org/InStock";
   const relativeUrl = relative(url);
 
   const item = mapProductToAnalyticsItem({ product, price, listPrice, index });
 
-  {/* Add click event to dataLayer */ }
+  {/* Add click event to dataLayer */}
   const event = useSendEvent({
     on: "click",
     event: {
@@ -43,7 +44,10 @@ function ProductSuggestionsCard({
   });
 
   return (
-    <div {...event} class="inline-grid lg:block grid-cols-3 items-center gap-4 bg-white px-3 py-2 lg:p-0 rounded-lg">
+    <div
+      {...event}
+      class="inline-grid lg:block grid-cols-3 items-center gap-4 bg-white px-3 py-2 lg:p-0 rounded-lg"
+    >
       <div class="col-span-1">
         <a href={relativeUrl} aria-label="view product">
           <Image
@@ -60,27 +64,39 @@ function ProductSuggestionsCard({
       </div>
       <div class="col-span-2">
         <a href={relativeUrl} class="pt-5">
-          {seller && inStock ? <p class="my-[5px] text-sm text-[#d3d3d3] capitalize">{seller}</p> : <span class="my-[5px]"></span>}
-          <p class="font-normal text-sm max-h-[63px] overflow-hidden">{title}</p>
-          {inStock ? (
-            <div class="flex gap-2 flex-col pt-2">
-              {listPrice && (
-                <span class="line-through font-normal text-[#a8a8a8] text-sm">
-                  {formatPrice(listPrice, offers?.priceCurrency)}
+          {seller && inStock
+            ? <p class="my-[5px] text-sm text-[#d3d3d3] capitalize">{seller}</p>
+            : <span class="my-[5px]"></span>}
+          <p class="font-normal text-sm max-h-[63px] overflow-hidden">
+            {title}
+          </p>
+          {inStock
+            ? (
+              <div class="flex gap-2 flex-col pt-2">
+                {listPrice && (
+                  <span class="line-through font-normal text-[#a8a8a8] text-sm">
+                    {formatPrice(listPrice, offers?.priceCurrency)}
+                  </span>
+                )}
+                <span class="font-semibold text-[20px] text-[#123ADD]">
+                  {formatPrice(installment?.price)}{" "}
+                  <span class="text-[#123ADD] font-normal text-[20px] leading-[30px]">
+                    no pix
+                  </span>
                 </span>
-              )}
-              <span class="font-semibold text-[20px] text-[#123ADD]">
-                {formatPrice(installment?.price)}{" "}
-                <span class="text-[#123ADD] font-normal text-[20px] leading-[30px]">no pix</span>
-              </span>
-              <span class="text-[#a8a8a8] text-xs">
-                ou {installment?.billingDuration}x de{" "}
-                {formatPrice(installment?.billingIncrement, offers!.priceCurrency!)}
-              </span>
-            </div>
-          ) : (
-            <p class="flex text-center mt-2 justify-center font-semibold"> Produto Indisponível</p>
-          )}
+                <span class="text-[#a8a8a8] text-xs">
+                  ou {installment?.billingDuration}x de {formatPrice(
+                    installment?.billingIncrement,
+                    offers!.priceCurrency!,
+                  )}
+                </span>
+              </div>
+            )
+            : (
+              <p class="flex text-center mt-2 justify-center font-semibold">
+                Produto Indisponível
+              </p>
+            )}
         </a>
       </div>
     </div>

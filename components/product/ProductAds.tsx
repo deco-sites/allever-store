@@ -7,7 +7,6 @@ import _ProductAd from "./ProductAd.tsx";
 import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 import { SectionProps } from "deco/types.ts";
 
-
 export interface Props {
   products: Product[] | null;
   /**
@@ -28,7 +27,7 @@ export async function loader(props: Props, req: Request, ctx: AppContext) {
     return { ...props };
   }
 
-  return { ...props};
+  return { ...props };
 }
 
 export default function ProductAds({
@@ -65,7 +64,7 @@ export default function ProductAds({
               },
             })}
           >
-           Next
+            Next
           </button>
         </div>
         <div class="bg-gray-100 p-3 rounded">{message}</div>

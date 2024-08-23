@@ -68,7 +68,6 @@ function PageResult(props: SectionProps<typeof loader>) {
   const perPage = pageInfo?.recordPerPage || products.length;
   const zeroIndexedOffsetPage = pageInfo.currentPage - startingPage;
 
-
   const prev = pageInfo.currentPage - startingPage;
   const next = pageInfo.currentPage + startingPage;
 
@@ -85,12 +84,10 @@ function PageResult(props: SectionProps<typeof loader>) {
     props: { partial: "hideLess" },
   });
 
-
   const infinite = layout?.pagination !== "pagination";
 
   return (
     <div class="grid grid-flow-row grid-cols-1 place-items-center mx-auto">
-
       <div
         data-product-list
         class={clx(
@@ -113,27 +110,36 @@ function PageResult(props: SectionProps<typeof loader>) {
 
       <div class="py-5 sm:pt-10 w-full flex justify-center">
         <div class="flex justify-center items-center [&_section]:contents w-full lg:hidden">
-          {nextPageUrl ?
-            <a
-              rel="next"
-              aria-label="next page link"
-              href={nextPageUrl ?? "#"}
-              disabled={!nextPageUrl}
-              class="bg-[#123ADD] text-white font-semibold rounded-[20px] text-base py-[13px] w-full items-center uppercase text-center">
-              ver mais
-            </a>
-            : <a
-              rel="prev"
-              aria-label="previous page link"
-              href={prevPageUrl ?? "#"}
-              disabled={!prevPageUrl}
-              class="bg-[#123ADD] text-white font-semibold rounded-[20px] text-base py-[13px] w-full items-center uppercase text-center">
-              ver menos
-            </a>
-          }
-
+          {nextPageUrl
+            ? (
+              <a
+                rel="next"
+                aria-label="next page link"
+                href={nextPageUrl ?? "#"}
+                disabled={!nextPageUrl}
+                class="bg-[#123ADD] text-white font-semibold rounded-[20px] text-base py-[13px] w-full items-center uppercase text-center"
+              >
+                ver mais
+              </a>
+            )
+            : (
+              <a
+                rel="prev"
+                aria-label="previous page link"
+                href={prevPageUrl ?? "#"}
+                disabled={!prevPageUrl}
+                class="bg-[#123ADD] text-white font-semibold rounded-[20px] text-base py-[13px] w-full items-center uppercase text-center"
+              >
+                ver menos
+              </a>
+            )}
         </div>
-        <div class={clx("join lg:flex gap-[30px] items-center text-base hidden ", infinite && "hidden")}>
+        <div
+          class={clx(
+            "join lg:flex gap-[30px] items-center text-base hidden ",
+            infinite && "hidden",
+          )}
+        >
           <a
             rel="prev"
             aria-label="previous page link"
@@ -143,8 +149,7 @@ function PageResult(props: SectionProps<typeof loader>) {
           >
             <Icon id="arrow-right" class="rotate-90" size={13} />
           </a>
-          {prev === 0
-            ? null :
+          {prev === 0 ? null : (
             <a
               rel="prev"
               aria-label="previous page link"
@@ -152,27 +157,26 @@ function PageResult(props: SectionProps<typeof loader>) {
               disabled={!prevPageUrl}
               class=""
             >
-
               {prev}
             </a>
-          }
-
+          )}
 
           <span class="py-2 px-3 border border-[#123ADD]">
             {zeroIndexedOffsetPage + 1}
           </span>
-          {nextPageUrl ?
-            <a
-              rel="next"
-              aria-label="next page link"
-              href={nextPageUrl ?? "#"}
-              disabled={!nextPageUrl}
-              class=""
-            >
-              {next}
-            </a>
-            : null
-          }
+          {nextPageUrl
+            ? (
+              <a
+                rel="next"
+                aria-label="next page link"
+                href={nextPageUrl ?? "#"}
+                disabled={!nextPageUrl}
+                class=""
+              >
+                {next}
+              </a>
+            )
+            : null}
 
           <a
             rel="next"
@@ -218,8 +222,6 @@ const setPageQuerystring = (page: string, id: string) => {
   }).observe(element);
 };
 
-
-
 function Result(props: SectionProps<typeof loader>) {
   const container = useId();
   const controls = useId();
@@ -255,10 +257,10 @@ function Result(props: SectionProps<typeof loader>) {
   function extractSearchTerms(url) {
     const match = url.match(/q=([^&]*)/);
     if (match) {
-      return match[1].replace(/\+/g, ' ');
+      return match[1].replace(/\+/g, " ");
     } else {
       const pathMatch = url.match(/\/s\/([^?]*)/);
-      return pathMatch ? pathMatch[1].replace(/\+/g, ' ') : '';
+      return pathMatch ? pathMatch[1].replace(/\+/g, " ") : "";
     }
   }
 
@@ -281,7 +283,12 @@ function Result(props: SectionProps<typeof loader>) {
           <div class="w-full flex flex-col gap-6">
             <div class="border-b border-gray-300">
               <div class="flex items-center space-between w-full pt-5 pb-6 container mt-[5px]">
-                <h1 class="lg:text-[32px] uppercase font-semibold flex items-center">{result} <span class="lg:text-[24px] font-normal ml-4">[{page.pageInfo.records}]</span></h1>
+                <h1 class="lg:text-[32px] uppercase font-semibold flex items-center">
+                  {result}{" "}
+                  <span class="lg:text-[24px] font-normal ml-4">
+                    [{page.pageInfo.records}]
+                  </span>
+                </h1>
                 <div class="w-fit">
                   {sortBy}
                 </div>
@@ -303,11 +310,18 @@ function Result(props: SectionProps<typeof loader>) {
                   <div class="w-full flex flex-col gap-6">
                     <div class="border-b border-gray-300">
                       <div class="flex items-center space-between w-full pt-5 pb-6 container mt-[5px]">
-                        <h1 class="px-5 text-[20px] uppercase font-semibold flex items-center">{result} <span class="text-[14px] font-normal ml-4">[{page.pageInfo.records}]</span></h1>
+                        <h1 class="px-5 text-[20px] uppercase font-semibold flex items-center">
+                          {result}{" "}
+                          <span class="text-[14px] font-normal ml-4">
+                            [{page.pageInfo.records}]
+                          </span>
+                        </h1>
                       </div>
                     </div>
                     <div class="container px-5">
-                      <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
+                      <Breadcrumb
+                        itemListElement={breadcrumb?.itemListElement}
+                      />
                     </div>
                   </div>
                   <div class="px-5">
@@ -326,15 +340,21 @@ function Result(props: SectionProps<typeof loader>) {
                           <div class="flex-grow overflow-auto">
                             <Filters filters={filters} />
                           </div>
-
                         </div>
                       }
                     >
                       <div class="flex justify-between items-end">
-                        <label class="flex items-center gap-[43px] rounded-[10px] border border-gray-300 shadow-sm px-4 py-2 bg-transparent text-xs font-bold  focus:outline-none" for={controls}>
+                        <label
+                          class="flex items-center gap-[43px] rounded-[10px] border border-gray-300 shadow-sm px-4 py-2 bg-transparent text-xs font-bold  focus:outline-none"
+                          for={controls}
+                        >
                           Filtrar
 
-                          <Icon class={` transition-all ease-in-out duration-[400ms]`} id={'arrowRight'} size={13} />
+                          <Icon
+                            class={` transition-all ease-in-out duration-[400ms]`}
+                            id={"arrowRight"}
+                            size={13}
+                          />
                         </label>
 
                         <div class="flex flex-col">
@@ -364,7 +384,7 @@ function Result(props: SectionProps<typeof loader>) {
               </div>
             </div>
           )}
-      </div >
+      </div>
 
       <script
         type="module"

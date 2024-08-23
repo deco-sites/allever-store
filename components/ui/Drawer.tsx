@@ -54,7 +54,7 @@ function Drawer({
           data-aside
           class={clx(
             "drawer-side h-full z-40 overflow-hidden",
-            "[[data-aside]&_section]:contents" // lazy-loading via useSection
+            "[[data-aside]&_section]:contents", // lazy-loading via useSection
           )}
         >
           <label for={id} class="drawer-overlay" />
@@ -86,17 +86,19 @@ function Aside({
   layout,
 }: AsideProps) {
   switch (layout) {
-    case 'minicart':
+    case "minicart":
       return (
         <div class="w-full max-w-[100vw] sm:max-w-[438px] h-screen">
-          {/* <div class="bg-white col-span-2 rounded-l-2xl">
+          {
+            /* <div class="bg-white col-span-2 rounded-l-2xl">
             <div class="py-5 text-2xl text-center max-w-[211px] mx-auto">
               Você também pode <b>[Gostar]</b>
             </div>
             <div>
 
             </div>
-          </div> */}
+          </div> */
+          }
           <div
             data-aside
             class={`bg-base-100 h-full divide-y`}
@@ -105,7 +107,7 @@ function Aside({
           </div>
         </div>
       );
-    case 'menu':
+    case "menu":
       return (
         <div
           data-aside
@@ -121,7 +123,7 @@ function Aside({
           {children}
         </div>
       );
-    case 'searchBar':
+    case "searchBar":
       return (
         <div
           data-aside

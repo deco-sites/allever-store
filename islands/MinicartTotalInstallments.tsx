@@ -1,5 +1,5 @@
 import { useCart } from "apps/vtex/hooks/useCart.ts";
-import { useState, useEffect } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 import { formatPrice } from "../sdk/format.ts";
 
 interface Item {
@@ -23,28 +23,31 @@ interface PaymentData {
 }
 
 const bestInstallment = (installments: Installment[]) => {
-  const installment = installments.reduce((prev: Installment | null, curr: Installment) => {
-    if (!prev) {
+  const installment = installments.reduce(
+    (prev: Installment | null, curr: Installment) => {
+      if (!prev) {
+        return curr;
+      }
+
+      if (curr.value * curr.count > prev.value * prev.count) {
+        return prev;
+      }
+
+      if (curr.count > prev.count) {
+        return curr;
+      }
+
+      if (curr.count < prev.count) {
+        return prev;
+      }
+
       return curr;
-    }
-
-    if (curr.value * curr.count > prev.value * prev.count) {
-      return prev;
-    }
-
-    if (curr.count > prev.count) {
-      return curr;
-    }
-
-    if (curr.count < prev.count) {
-      return prev;
-    }
-
-    return curr;
-  }, null);
+    },
+    null,
+  );
 
   return installment;
-}
+};
 
 const getInstallment = (paymentOptions: PaymentData[]) => {
   const bestInstallments: Installment[] = [];
@@ -54,17 +57,17 @@ const getInstallment = (paymentOptions: PaymentData[]) => {
     if (!installment) return;
     bestInstallments.push(installment);
   });
-  
+
   const installment = bestInstallment(bestInstallments);
 
   return installment;
-}
+};
 
 export default function MinicartTotalInstallments({
-  items
+  items,
 }: Props) {
   const { simulate } = useCart();
-  const [ installment, setInstallment ] = useState<Installment | null>(null);
+  const [installment, setInstallment] = useState<Installment | null>(null);
 
   useEffect(() => {
     const getData = async () => {
@@ -73,7 +76,7 @@ export default function MinicartTotalInstallments({
           id: Number(item_id),
           quantity,
           seller: affiliation,
-        }
+        };
       });
 
       const response = await simulate({
@@ -84,7 +87,7 @@ export default function MinicartTotalInstallments({
       });
 
       setInstallment(getInstallment(response.paymentData.installmentOptions));
-    }
+    };
 
     getData();
   }, []);

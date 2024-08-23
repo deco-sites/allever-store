@@ -1,6 +1,3 @@
-
-
-
 import {
   HEADER_HEIGHT_DESKTOP,
   NAVBAR_HEIGHT_DESKTOP,

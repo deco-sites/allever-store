@@ -5,9 +5,9 @@ import PoweredByVtex from "./PoweredByVtex.tsx";
 import PoweredByWave from "./PoweredByWave.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import { useDevice } from "deco/hooks/useDevice.ts";
-import Collapsable from '../../components/ui/Collapsable.tsx';
+import Collapsable from "../../components/ui/Collapsable.tsx";
 
-import RaVerifiedSeal from '../../islands/Seals/RaVerifiedSeal.tsx'
+import RaVerifiedSeal from "../../islands/Seals/RaVerifiedSeal.tsx";
 
 /** @titleBy title */
 interface Item {
@@ -161,12 +161,18 @@ function CertifiedComponent({ title, certifieds }: CertifiedProps) {
       {title && <p class="text-base font-normal mb-[21px]">{title}</p>}
       <div class="flex flex-col  gap-3">
         <div class="flex flex-row gap-4">
-          {certifieds?.slice(0, 2).map(({ image, alt, link, width, height }, index) => (
-            <div key={index} class="rounded flex justify-center items-center cursor-pointer">
+          {certifieds?.slice(0, 2).map((
+            { image, alt, link, width, height },
+            index,
+          ) => (
+            <div
+              key={index}
+              class="rounded flex justify-center items-center cursor-pointer"
+            >
               <a href={link} target="_blank">
                 <Image
                   src={image}
-                  alt={alt || 'Certified image'}
+                  alt={alt || "Certified image"}
                   width={width || 53}
                   height={height || 34}
                   loading="lazy"
@@ -176,12 +182,18 @@ function CertifiedComponent({ title, certifieds }: CertifiedProps) {
           ))}
         </div>
         <div class="flex flex-row gap-4">
-          {certifieds?.slice(2, 4).map(({ image, alt, link, width, height }, index) => (
-            <div key={index} class="rounded flex justify-center items-center cursor-pointer">
+          {certifieds?.slice(2, 4).map((
+            { image, alt, link, width, height },
+            index,
+          ) => (
+            <div
+              key={index}
+              class="rounded flex justify-center items-center cursor-pointer"
+            >
               <a href={link} target="_blank">
                 <Image
                   src={image}
-                  alt={alt || 'Certified image'}
+                  alt={alt || "Certified image"}
                   width={width || 53}
                   height={height || 34}
                   loading="lazy"
@@ -221,10 +233,13 @@ function Payments({ title, paymentMethods }: PaymentsProps) {
       {title && <p class="text-base font-normal">{title}</p>}
       <ul class="flex flex-wrap gap-2">
         {paymentMethods?.map(({ image, alt }, index) => (
-          <li key={index} class="border border-base-100 rounded flex justify-center items-center">
+          <li
+            key={index}
+            class="border border-base-100 rounded flex justify-center items-center"
+          >
             <Image
               src={image}
-              alt={alt || 'Payment method image'}
+              alt={alt || "Payment method image"}
               width={53}
               height={34}
               loading="lazy"
@@ -244,196 +259,277 @@ function Footer({
   copyright,
   service,
   certified,
-  label = 'Siga a [allever] nas redes sociais!',
+  label = "Siga a [allever] nas redes sociais!",
 }: Props) {
-
   const device = useDevice();
   return (
     <>
       {device === "desktop" &&
-        <footer
-          class="px-5 sm:px-0 pt-10"
-          style={{ backgroundColor: "#FFF" }}>
-          <div class="container flex flex-col gap-5 sm:gap-10 py-10">
-            <div class="flex space-between">
-              <div class="flex flex-col">
-                <img class="mb-[31px]" loading="lazy" src={logo} alt={label} width={143} />
-                <p class="text-base max-w-[180px]">{label}</p>
-                <ul class="flex mt-5 gap-[3px]">
-                  {social.map(({ image, href, alt }) => (
-                    <li class="bg-[#123ADD] p-[9px] rounded-[7px]">
-                      <a href={href}
-                        target="_blank"
-                      >
-                        <Image
-                          src={image}
-                          alt={alt}
-                          loading="lazy"
-                          width={19}
-                          height={19}
-                        />
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <ul class="flex w-[80%] space-between">
-                <li class="flex flex-col gap-4">
-                  {links[0] && (
-                    <>
-                      <a class="text-base font-normal" target="_blank" href={links[0].href}>{links[0].title}</a>
-                      <ul class="flex flex-col  gap-[21px] mb-[30px]">
-                        {links[0].children && links[0].children.map(({ title, href }) => (
-                          <li>
-                            <a class="text-base font-normal text-[#888888]" href={href}>{title}</a>
-                          </li>
-                        ))}
-                      </ul>
-                    </>
-                  )}
-                  {links[1] && (
-                    <>
-                      <a class="text-base font-normal" target="_blank" href={links[3].href}>{links[3].title}</a>
-                      <ul class="flex flex-col gap-[21px]">
-                        {links[3].children && links[3].children.map(({ title, href }) => (
-                          <li>
-                            <a class="text-base font-normal text-[#888888]" href={href}>{title}</a>
-                          </li>
-                        ))}
-                      </ul>
-                    </>
-                  )}
-                </li>
-
-                <li class="flex flex-col gap-4">
-                  {links[2] && (
-                    <div class="flex gap-4 mb-[30px] flex-col">
-                      <a class="text-base font-normal" target="_blank" href={links[1].href}>{links[1].title}</a>
-                      <ul class="flex flex-col  gap-[21px]">
-                        {links[1].children && links[1].children.map(({ title, href }) => (
-                          <li>
-                            <a class="text-base font-normal text-[#888888]" href={href}>{title}</a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                  {links[3] && (
-                    <Payments title="Formas de Pagamento" paymentMethods={paymentMethods?.paymentMethods} />
-                  )}
-                </li>
-
-                <li class="flex flex-col gap-4">
-                  {links[3] && (
-                    <>
-                      <div class="flex flex-col gap-[21px] pb-[30px]">
-                        <a class="text-base font-normal" target="_blank" href={links[2].href}>{links[2].title}</a>
+        (
+          <footer
+            class="px-5 sm:px-0 pt-10"
+            style={{ backgroundColor: "#FFF" }}
+          >
+            <div class="container flex flex-col gap-5 sm:gap-10 py-10">
+              <div class="flex space-between">
+                <div class="flex flex-col">
+                  <img
+                    class="mb-[31px]"
+                    loading="lazy"
+                    src={logo}
+                    alt={label}
+                    width={143}
+                  />
+                  <p class="text-base max-w-[180px]">{label}</p>
+                  <ul class="flex mt-5 gap-[3px]">
+                    {social.map(({ image, href, alt }) => (
+                      <li class="bg-[#123ADD] p-[9px] rounded-[7px]">
+                        <a href={href} target="_blank">
+                          <Image
+                            src={image}
+                            alt={alt}
+                            loading="lazy"
+                            width={19}
+                            height={19}
+                          />
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <ul class="flex w-[80%] space-between">
+                  <li class="flex flex-col gap-4">
+                    {links[0] && (
+                      <>
+                        <a
+                          class="text-base font-normal"
+                          target="_blank"
+                          href={links[0].href}
+                        >
+                          {links[0].title}
+                        </a>
+                        <ul class="flex flex-col  gap-[21px] mb-[30px]">
+                          {links[0].children &&
+                            links[0].children.map(({ title, href }) => (
+                              <li>
+                                <a
+                                  class="text-base font-normal text-[#888888]"
+                                  href={href}
+                                >
+                                  {title}
+                                </a>
+                              </li>
+                            ))}
+                        </ul>
+                      </>
+                    )}
+                    {links[1] && (
+                      <>
+                        <a
+                          class="text-base font-normal"
+                          target="_blank"
+                          href={links[3].href}
+                        >
+                          {links[3].title}
+                        </a>
                         <ul class="flex flex-col gap-[21px]">
-                          {links[2].children && links[2].children.map(({ title, href }) => (
-                            <li>
-                              <a class="text-base font-normal text-[#888888]" href={href}>{title}</a>
-                            </li>
-                          ))}
+                          {links[3].children &&
+                            links[3].children.map(({ title, href }) => (
+                              <li>
+                                <a
+                                  class="text-base font-normal text-[#888888]"
+                                  href={href}
+                                >
+                                  {title}
+                                </a>
+                              </li>
+                            ))}
+                        </ul>
+                      </>
+                    )}
+                  </li>
+
+                  <li class="flex flex-col gap-4">
+                    {links[2] && (
+                      <div class="flex gap-4 mb-[30px] flex-col">
+                        <a
+                          class="text-base font-normal"
+                          target="_blank"
+                          href={links[1].href}
+                        >
+                          {links[1].title}
+                        </a>
+                        <ul class="flex flex-col  gap-[21px]">
+                          {links[1].children &&
+                            links[1].children.map(({ title, href }) => (
+                              <li>
+                                <a
+                                  class="text-base font-normal text-[#888888]"
+                                  href={href}
+                                >
+                                  {title}
+                                </a>
+                              </li>
+                            ))}
                         </ul>
                       </div>
-                      <div class="mb-[21px]">
-                        {certified && <CertifiedComponent title={certified?.title} certifieds={certified?.certifieds} />}
-                      </div>
+                    )}
+                    {links[3] && (
+                      <Payments
+                        title="Formas de Pagamento"
+                        paymentMethods={paymentMethods?.paymentMethods}
+                      />
+                    )}
+                  </li>
+
+                  <li class="flex flex-col gap-4">
+                    {links[3] && (
+                      <>
+                        <div class="flex flex-col gap-[21px] pb-[30px]">
+                          <a
+                            class="text-base font-normal"
+                            target="_blank"
+                            href={links[2].href}
+                          >
+                            {links[2].title}
+                          </a>
+                          <ul class="flex flex-col gap-[21px]">
+                            {links[2].children &&
+                              links[2].children.map(({ title, href }) => (
+                                <li>
+                                  <a
+                                    class="text-base font-normal text-[#888888]"
+                                    href={href}
+                                  >
+                                    {title}
+                                  </a>
+                                </li>
+                              ))}
+                          </ul>
+                        </div>
+                        <div class="mb-[21px]">
+                          {certified && (
+                            <CertifiedComponent
+                              title={certified?.title}
+                              certifieds={certified?.certifieds}
+                            />
+                          )}
+                        </div>
+                      </>
+                    )}
+                  </li>
+
+                  <li class="flex flex-col gap-4">
+                    <>
+                      <Service
+                        title={service?.title}
+                        label={service?.label}
+                        button={service?.button}
+                      />
                     </>
-                  )}
-                </li>
-
-                <li class="flex flex-col gap-4">
-                  <>
-                    <Service
-                      title={service?.title}
-                      label={service?.label}
-                      button={service?.button}
-                    />
-                  </>
-                </li>
-              </ul>
-
-            </div>
-          </div>
-          <div class="bg-[#e7e5e5]">
-            <div class="container flex space-between" >
-              <p class="text-[#A8A8A8] text-xs sm:text-sm leading-[25px] py-5 lg:max-w-[1094px]">
-                {copyright}
-              </p>
-              <div class="flex flex-nowrap items-end justify-center gap-5 p-5">
-                <PoweredByWave />
-                <PoweredByDeco />
-                <PoweredByVtex />
+                  </li>
+                </ul>
               </div>
             </div>
-          </div>
-        </footer>
-      }
-      {
-        device === "mobile" &&
-        <div class="container px-5">
-          <div class="flex flex-col py-[35px] mt-5">
-            <p class="text-base">{label}</p>
-            <ul class="flex mt-5 gap-[10px]">
-              {social.map(({ image, href, alt }) => (
-                <li class="bg-[#123ADD] p-[9px] rounded-[7px]">
-                  <a href={href}
-                    target="_blank">
-                    <Image
-                      src={image}
-                      alt={alt}
-                      loading="lazy"
-                      width={25}
-                      height={25}
-                    />
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            {links.map(({ title, children }, index) => (
-              <ul key={index} class="flex flex-col gap-2 mb-[10px]">
-                <Collapsable
-                  class="bg-white py-[29px] rounded-[20px]"
-                  title={
-                    <div class=" px-5 flex flex-row space-between  items-center">
-                      <div class="text-base font-normal">{title}</div>
-                      {children && children.length > 0 && <Icon class="group-open:rotate-180 transition-all ease-in-out duration-[400ms]" size={13} id={'arrow-right'} />}
-                    </div>
-                  }
-                >
-                  {children && children.map(({ title, href }) => (
-                    <li class="flex flex-row gap-[10px] px-5 mt-5" key={href}>
-                      <a class="text-base font-normal text-[#888888]"
-                        target="_blank"
-                        href={href}>{title}</a>
-                    </li>
-                  ))}
-                </Collapsable>
+            <div class="bg-[#e7e5e5]">
+              <div class="container flex space-between">
+                <p class="text-[#A8A8A8] text-xs sm:text-sm leading-[25px] py-5 lg:max-w-[1094px]">
+                  {copyright}
+                </p>
+                <div class="flex flex-nowrap items-end justify-center gap-5 p-5">
+                  <PoweredByWave />
+                  <PoweredByDeco />
+                  <PoweredByVtex />
+                </div>
+              </div>
+            </div>
+          </footer>
+        )}
+      {device === "mobile" &&
+        (
+          <div class="container px-5">
+            <div class="flex flex-col py-[35px] mt-5">
+              <p class="text-base">{label}</p>
+              <ul class="flex mt-5 gap-[10px]">
+                {social.map(({ image, href, alt }) => (
+                  <li class="bg-[#123ADD] p-[9px] rounded-[7px]">
+                    <a href={href} target="_blank">
+                      <Image
+                        src={image}
+                        alt={alt}
+                        loading="lazy"
+                        width={25}
+                        height={25}
+                      />
+                    </a>
+                  </li>
+                ))}
               </ul>
-            ))}
+            </div>
+            <div>
+              {links.map(({ title, children }, index) => (
+                <ul key={index} class="flex flex-col gap-2 mb-[10px]">
+                  <Collapsable
+                    class="bg-white py-[29px] rounded-[20px]"
+                    title={
+                      <div class=" px-5 flex flex-row space-between  items-center">
+                        <div class="text-base font-normal">{title}</div>
+                        {children && children.length > 0 && (
+                          <Icon
+                            class="group-open:rotate-180 transition-all ease-in-out duration-[400ms]"
+                            size={13}
+                            id={"arrow-right"}
+                          />
+                        )}
+                      </div>
+                    }
+                  >
+                    {children &&
+                      children.map(({ title, href }) => (
+                        <li
+                          class="flex flex-row gap-[10px] px-5 mt-5"
+                          key={href}
+                        >
+                          <a
+                            class="text-base font-normal text-[#888888]"
+                            target="_blank"
+                            href={href}
+                          >
+                            {title}
+                          </a>
+                        </li>
+                      ))}
+                  </Collapsable>
+                </ul>
+              ))}
+            </div>
+            <div class="flex flex-col gap-[23px] my-[23px]">
+              <Payments
+                title={paymentMethods?.title}
+                paymentMethods={paymentMethods?.paymentMethods}
+              />
+            </div>
+            {certified && (
+              <CertifiedComponent
+                title={certified?.title}
+                certifieds={certified?.certifieds}
+              />
+            )}
+            <div>
+              <img loading="lazy" src={logo} alt={label} width={144} />
+            </div>
+            <div>
+              <p class="text-[#888] text-xs py-5 ">
+                {copyright}
+              </p>
+            </div>
+            <div class="flex flex-nowrap items-center justify-start gap-5 pb-[38px] ">
+              <PoweredByWave />
+              <PoweredByDeco />
+              <PoweredByVtex />
+            </div>
           </div>
-          <div class="flex flex-col gap-[23px] my-[23px]">
-            <Payments title={paymentMethods?.title} paymentMethods={paymentMethods?.paymentMethods} />
-          </div>
-          {certified && <CertifiedComponent title={certified?.title} certifieds={certified?.certifieds} />}
-          <div>
-            <img loading="lazy" src={logo} alt={label} width={144} />
-          </div>
-          <div>
-            <p class="text-[#888] text-xs py-5 ">
-              {copyright}
-            </p>
-          </div>
-          <div class="flex flex-nowrap items-center justify-start gap-5 pb-[38px] ">
-            <PoweredByWave />
-            <PoweredByDeco />
-            <PoweredByVtex />
-          </div>
-        </div>
-      }
+        )}
     </>
   );
 }

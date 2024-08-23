@@ -342,10 +342,14 @@ export default function Session(
         id={MINICART_DRAWER_ID}
         class="drawer-end z-50"
         aside={
-          <Drawer.Aside layout="minicart" drawer={MINICART_DRAWER_ID} background="bg-[#123ADD]" color="text-white" isMinicart={true}>
-            <div
-              class="h-full flex flex-col bg-base-100 items-center justify-center overflow-auto"
-            >
+          <Drawer.Aside
+            layout="minicart"
+            drawer={MINICART_DRAWER_ID}
+            background="bg-[#123ADD]"
+            color="text-white"
+            isMinicart={true}
+          >
+            <div class="h-full flex flex-col bg-base-100 items-center justify-center overflow-auto">
               <CartProvider cart={minicart!} />
             </div>
           </Drawer.Aside>

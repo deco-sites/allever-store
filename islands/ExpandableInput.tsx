@@ -5,7 +5,7 @@ interface ExpandableInputProps {
   name: string;
   tabIndex?: number;
   slot?: string;
-  autocomplete?:string
+  autocomplete?: string;
   loader?: any; // Ajuste o tipo de loader conforme necessário
   searchBarDrawer?: boolean;
   hxTarget?: string;
@@ -28,7 +28,7 @@ function ExpandableInput({
   hxTrigger,
   hxIndicator,
   hxSwap,
-  hxFocus
+  hxFocus,
 }: ExpandableInputProps) {
   // const { searchBarExpanded } = useUI();
   return (

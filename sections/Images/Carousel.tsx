@@ -136,7 +136,7 @@ function Carousel({ images = [], preload, interval }: Props) {
         "grid-cols-[32px_1fr_32px]",
         "sm:grid-cols-[112px_1fr_112px] sm:min-h-min",
         "w-full",
-      )  }
+      )}
     >
       <div class="col-span-full row-span-full">
         <Slider class="carousel carousel-center w-full gap-6">
@@ -147,26 +147,28 @@ function Carousel({ images = [], preload, interval }: Props) {
           ))}
         </Slider>
       </div>
-      {images.length > 1 ?
-        <>
-          <div class="hidden sm:flex items-center justify-center z-10 col-start-1 row-start-2">
-            <Slider.PrevButton
-              class="btn-sm"
-              disabled={false}
-            >
-              <Icon id="chevron-right" class="rotate-180" />
-            </Slider.PrevButton>
-          </div>
+      {images.length > 1
+        ? (
+          <>
+            <div class="hidden sm:flex items-center justify-center z-10 col-start-1 row-start-2">
+              <Slider.PrevButton
+                class="btn-sm"
+                disabled={false}
+              >
+                <Icon id="chevron-right" class="rotate-180" />
+              </Slider.PrevButton>
+            </div>
 
-          <div class="hidden sm:flex items-center justify-center z-10 col-start-3 row-start-2">
-            <Slider.NextButton
-              class="btn-sm"
-              disabled={false}
-            >
-              <Icon id="chevron-right" />
-            </Slider.NextButton>
-          </div>
-        </>
+            <div class="hidden sm:flex items-center justify-center z-10 col-start-3 row-start-2">
+              <Slider.NextButton
+                class="btn-sm"
+                disabled={false}
+              >
+                <Icon id="chevron-right" />
+              </Slider.NextButton>
+            </div>
+          </>
+        )
         : null}
 
       <ul
@@ -176,18 +178,20 @@ function Carousel({ images = [], preload, interval }: Props) {
         )}
       >
         {images.map((_, index) => (
-          (images.length > 1 ?
-            <li class="carousel-item ">
-              <Slider.Dot
-                index={index}
-                class={clx(
-                  "bg-black h-3 w-3 no-animation rounded-full",
-                  "disabled:w-8 disabled:bg-base-100 disabled:opacity-100 transition-[width] bg-[#123ADD]",
-                )}
-              >
-              </Slider.Dot>
-            </li>
-            : null)
+          images.length > 1
+            ? (
+              <li class="carousel-item ">
+                <Slider.Dot
+                  index={index}
+                  class={clx(
+                    "bg-black h-3 w-3 no-animation rounded-full",
+                    "disabled:w-8 disabled:bg-base-100 disabled:opacity-100 transition-[width] bg-[#123ADD]",
+                  )}
+                >
+                </Slider.Dot>
+              </li>
+            )
+            : null
         ))}
       </ul>
 

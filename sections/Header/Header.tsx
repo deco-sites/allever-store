@@ -11,8 +11,8 @@ import Searchbar, {
 } from "../../components/search/Searchbar/Form.tsx";
 import Drawer from "../../components/ui/Drawer.tsx";
 import Icon from "../../components/ui/Icon.tsx";
-import MicroHeaderSetup from '../../islands/MicroHeaderSetup.tsx'
-import { INavItem, MenuHeader } from "../../components/header/NavItem.tsx"
+import MicroHeaderSetup from "../../islands/MicroHeaderSetup.tsx";
+import { INavItem, MenuHeader } from "../../components/header/NavItem.tsx";
 import {
   HEADER_HEIGHT_DESKTOP,
   HEADER_HEIGHT_MOBILE,
@@ -26,14 +26,23 @@ import Wishlist from "../../components/header/Wishlist.tsx";
 
 import { useScript } from "apps/utils/useScript.ts";
 import { Head } from "$fresh/runtime.ts";
-import Logo from '../../components/header/Logo.tsx'
+import Logo from "../../components/header/Logo.tsx";
 import type { AppContext } from "../../apps/site.ts";
 
 function script() {
-  const param = 10
-  return <Head><script type="module" src={useScript((value) => { console.log(value) }, param)} /></Head>
+  const param = 10;
+  return (
+    <Head>
+      <script
+        type="module"
+        src={useScript((value) => {
+          console.log(value);
+        }, param)}
+      />
+    </Head>
+  );
 }
-script()
+script();
 
 export interface Logo {
   src: ImageWidget;
@@ -65,7 +74,7 @@ export interface SectionProps {
 
   /**
    *  @title Ativar sticky?
-   *  @description: Se ativo, o background do header fica azul sempre que a página é rolada. No entanto, se a página estiver no topo, 
+   *  @description: Se ativo, o background do header fica azul sempre que a página é rolada. No entanto, se a página estiver no topo,
    *  o background fica transparente.
    */
   isSticky?: boolean;
@@ -73,15 +82,12 @@ export interface SectionProps {
 
 type Props = Omit<SectionProps, "alert" | "variant">;
 
-
 const Desktop = (
   { logo, searchbar }: Props,
-
 ) => (
   <>
     <div class="flex flex-col gap-4 py-4 container desktop">
       <div class="flex items-center space-between relative">
-
         <div>
           <label
             for={SIDEMENU_DRAWER_ID}
@@ -99,7 +105,11 @@ const Desktop = (
         <Drawer
           id={SIDEMENU_DRAWER_ID}
           aside={
-            <Drawer.Aside layout="menu" drawer={SIDEMENU_DRAWER_ID} sizeMenu={true}>
+            <Drawer.Aside
+              layout="menu"
+              drawer={SIDEMENU_DRAWER_ID}
+              sizeMenu={true}
+            >
               <div
                 id={SIDEMENU_CONTAINER_ID}
                 class="h-full flex items-center justify-center"
@@ -130,7 +140,13 @@ const Mobile = ({ logo, searchbar }: Props) => (
     <Drawer
       id={SEARCHBAR_DRAWER_ID}
       aside={
-        <Drawer.Aside layout="searchBar" title="Buscar" drawer={SEARCHBAR_DRAWER_ID} background="bg-[#123ADD]" color="text-white">
+        <Drawer.Aside
+          layout="searchBar"
+          title="Buscar"
+          drawer={SEARCHBAR_DRAWER_ID}
+          background="bg-[#123ADD]"
+          color="text-white"
+        >
           <div class="w-screen overflow-y-auto">
             <Searchbar {...searchbar} searchBarDrawer={true} />
           </div>
@@ -140,7 +156,12 @@ const Mobile = ({ logo, searchbar }: Props) => (
     <Drawer
       id={SIDEMENU_DRAWER_ID}
       aside={
-        <Drawer.Aside layout="menu" title="Menu" drawer={SIDEMENU_DRAWER_ID} sizeMenu={true}>
+        <Drawer.Aside
+          layout="menu"
+          title="Menu"
+          drawer={SIDEMENU_DRAWER_ID}
+          sizeMenu={true}
+        >
           <div
             id={SIDEMENU_CONTAINER_ID}
             class="h-full flex items-center justify-center"
@@ -189,7 +210,6 @@ const Mobile = ({ logo, searchbar }: Props) => (
           <SignIn variant="mobile" />
           <Bag />
         </div>
-
       </div>
 
       <div class="w-full">
@@ -229,11 +249,15 @@ function Header({
       hx-swap="outerHTML"
     >
       {alerts.length > 0 && <Alert alerts={alerts} />}
-      <div id="header" class={`bg-transparent w-full z-40 group-header ease-in duration-500 ${isSticky && "bg-[#123ADD]"}`}>
+      <div
+        id="header"
+        class={`bg-transparent w-full z-40 group-header ease-in duration-500 ${
+          isSticky && "bg-[#123ADD]"
+        }`}
+      >
         {device === "desktop"
           ? <Desktop logo={logo} {...props} />
-          : <Mobile logo={logo} {...props} />
-        }
+          : <Mobile logo={logo} {...props} />}
       </div>
       {isSticky ? <MicroHeaderSetup rootId="header" threshold={50} /> : null}
     </header>
@@ -241,7 +265,6 @@ function Header({
 }
 
 export function loader(props: SectionProps, req: Request, ctx: AppContext) {
-
   console.log("ctx", ctx);
 
   return { ...props };

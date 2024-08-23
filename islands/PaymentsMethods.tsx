@@ -1,1 +1,1 @@
-export { default } from  '../components/product/PaymentMethods.tsx'
+export { default } from "../components/product/PaymentMethods.tsx";

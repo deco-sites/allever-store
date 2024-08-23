@@ -10,7 +10,8 @@ function Coupon({ coupon }: Props) {
     <div class="flex justify-between items-center px-4 pt-[10px] pb-5">
       <span class="text-base text-[#A8A8A8] flex gap-5">
         <Icon width={29} height={24} id="ecomm-ticket" />
-        Cupom</span>
+        Cupom
+      </span>
 
       {/* Displayed when checkbox is checked=true */}
       <div class="join">

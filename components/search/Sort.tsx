@@ -40,8 +40,6 @@ function Sort({ sortOptions, url }: Props) {
     label,
   }));
 
-
-
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
@@ -50,55 +48,58 @@ function Sort({ sortOptions, url }: Props) {
     setIsOpen(false);
   };
 
-
   const regex = /sort=([a-zA-Z]+)/;
 
   const match = current.match(regex);
-  let sortValue = '';
+  let sortValue = "";
 
   if (match && match[1]) {
     sortValue = match[1];
   }
 
-  let selectedLabel = '';
+  let selectedLabel = "";
 
   switch (sortValue) {
-    case 'OrderByScoreDESC':
-      selectedLabel = "Relevância"
+    case "OrderByScoreDESC":
+      selectedLabel = "Relevância";
       break;
-    case 'OrderByPriceDESC':
-      selectedLabel = 'Maior Preço'
+    case "OrderByPriceDESC":
+      selectedLabel = "Maior Preço";
       break;
-    case 'OrderByPriceASC':
-      selectedLabel = 'Menor Preço'
+    case "OrderByPriceASC":
+      selectedLabel = "Menor Preço";
       break;
-    case 'OrderByTopSaleDESC':
-      selectedLabel = 'Mais vendidos'
+    case "OrderByTopSaleDESC":
+      selectedLabel = "Mais vendidos";
       break;
-    case 'OrderByNameDESC':
-      selectedLabel = 'Nome - de Z a A'
+    case "OrderByNameDESC":
+      selectedLabel = "Nome - de Z a A";
       break;
-    case 'OrderByNameASC':
-      selectedLabel = 'Nome - de A a Z'
+    case "OrderByNameASC":
+      selectedLabel = "Nome - de A a Z";
       break;
-    case 'OrderByReleaseDateDESC':
-      selectedLabel = 'Lançamento'
+    case "OrderByReleaseDateDESC":
+      selectedLabel = "Lançamento";
       break;
-    case 'OrderByBestDiscountDESC':
-      selectedLabel = 'Maior desconto'
+    case "OrderByBestDiscountDESC":
+      selectedLabel = "Maior desconto";
       break;
     default:
-      selectedLabel = 'Ordenar por';
+      selectedLabel = "Ordenar por";
   }
 
-
   return (
-    <div class={`relative inline-block text-left w-full max-w-fit ${isOpen && 'bg-white'}`}>
+    <div
+      class={`relative inline-block text-left w-full max-w-fit ${
+        isOpen && "bg-white"
+      }`}
+    >
       <div>
         <button
           type="button"
-          class={`flex items-center gap-2 w-full rounded-[10px] border border-gray-300 shadow-sm px-4 py-2  bg-transparent text-xs font-bold text-[#123ADD]  focus:outline-none ${isOpen ? "rounded-b-none border-b-0" : ""
-            }`}
+          class={`flex items-center gap-2 w-full rounded-[10px] border border-gray-300 shadow-sm px-4 py-2  bg-transparent text-xs font-bold text-[#123ADD]  focus:outline-none ${
+            isOpen ? "rounded-b-none border-b-0" : ""
+          }`}
           id="menu-button"
           aria-expanded={isOpen}
           aria-haspopup="true"
@@ -106,7 +107,13 @@ function Sort({ sortOptions, url }: Props) {
         >
           {selectedLabel}
 
-          <Icon class={`${isOpen && 'rotate-180'} transition-all ease-in-out duration-[400ms]`} id={'arrowRight'} size={13} />
+          <Icon
+            class={`${
+              isOpen && "rotate-180"
+            } transition-all ease-in-out duration-[400ms]`}
+            id={"arrowRight"}
+            size={13}
+          />
         </button>
       </div>
 
@@ -122,12 +129,18 @@ function Sort({ sortOptions, url }: Props) {
             {options.map(({ value, label }, index) => (
               <a
                 href={value}
-                class={`block px-[10px] py-2 text-[10px] text-black font-semibold hover:bg-gray-100 border-b border-gray-200  ${index === options.length - 1 ? "border-b-0" : ""}`}
+                class={`block px-[10px] py-2 text-[10px] text-black font-semibold hover:bg-gray-100 border-b border-gray-200  ${
+                  index === options.length - 1 ? "border-b-0" : ""
+                }`}
                 role="menuitem"
                 tabIndex={-1}
                 key={value}
                 onClick={closeDropdown}
-                style={{ whiteSpace: 'nowrap', textOverflow: 'ellipsis', overflow: 'hidden' }}
+                style={{
+                  whiteSpace: "nowrap",
+                  textOverflow: "ellipsis",
+                  overflow: "hidden",
+                }}
               >
                 {labels[label] ?? label}
               </a>

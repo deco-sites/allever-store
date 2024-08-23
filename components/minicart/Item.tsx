@@ -51,7 +51,7 @@ function CartItem({ item, index, locale, currency }: Props) {
         height={192}
         class="h-full object-contain"
       />
-      
+
       {/* Info */}
       <div class="flex flex-col gap-[10px] ml-[10px]">
         {/* Name and Remove button */}
@@ -79,12 +79,12 @@ function CartItem({ item, index, locale, currency }: Props) {
         </div>
 
         {/* Quantity Selector */}
-          <QuantitySelector
-            min={0}
-            max={QUANTITY_MAX_VALUE}
-            value={quantity}
-            name={`item::${index}`}
-          />
+        <QuantitySelector
+          min={0}
+          max={QUANTITY_MAX_VALUE}
+          value={quantity}
+          name={`item::${index}`}
+        />
       </div>
     </fieldset>
   );

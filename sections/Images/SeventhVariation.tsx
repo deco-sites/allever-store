@@ -21,8 +21,11 @@ const SeventhVariation = ({ title, items }: SeventhVariationProps) => {
             <div class="col-span-1">
               <a href={items[0].Link} class="flex">
                 <Image
-                  src={items[0].desktop?.Image || `https://placehold.co/${items[0].desktop?.Width}x${items[0].desktop?.Height}`}
-                  alt={items[0].Alt || 'Image'}
+                  src={items[0].desktop?.Image ||
+                    `https://placehold.co/${items[0].desktop?.Width}x${
+                      items[0].desktop?.Height
+                    }`}
+                  alt={items[0].Alt || "Image"}
                   width={items[0].desktop?.Width}
                   height={items[0].desktop?.Height}
                   fetchPriority="low"
@@ -34,8 +37,10 @@ const SeventhVariation = ({ title, items }: SeventhVariationProps) => {
               {items.slice(1, 5).map((item, index) => (
                 <a href={item.Link} class="flex" key={index}>
                   <Image
-                    src={item.desktop?.Image || `https://placehold.co/${item.desktop?.Width}x${item.desktop?.Height}`}
-                    alt={item.Alt || 'esse é um banner de uma marca tradicional'}
+                    src={item.desktop?.Image ||
+                      `https://placehold.co/${item.desktop?.Width}x${item.desktop?.Height}`}
+                    alt={item.Alt ||
+                      "esse é um banner de uma marca tradicional"}
                     width={item.desktop?.Width}
                     height={item.desktop?.Height}
                     fetchPriority="low"
@@ -46,7 +51,6 @@ const SeventhVariation = ({ title, items }: SeventhVariationProps) => {
             </div>
           </div>
         </div>
-
       )}
       {device === "mobile" && (
         <div class="container px-5">
@@ -57,8 +61,11 @@ const SeventhVariation = ({ title, items }: SeventhVariationProps) => {
             <div class="col-span-1">
               <a href={items[0].Link} class="flex justify-center">
                 <Image
-                  src={items[0].mobile?.Image || `https://placehold.co/${items[0].mobile?.Width}x${items[0].mobile?.Height}`}
-                  alt={items[0].Alt || 'Image'}
+                  src={items[0].mobile?.Image ||
+                    `https://placehold.co/${items[0].mobile?.Width}x${
+                      items[0].mobile?.Height
+                    }`}
+                  alt={items[0].Alt || "Image"}
                   width={items[0].mobile?.Width}
                   height={items[0].mobile?.Height}
                   fetchPriority="low"
@@ -70,8 +77,10 @@ const SeventhVariation = ({ title, items }: SeventhVariationProps) => {
               {items.slice(1, 5).map((item, index) => (
                 <a href={item.Link} class="flex justify-center" key={index}>
                   <Image
-                    src={item.mobile?.Image || `https://placehold.co/${item.mobile?.Width}x${item.mobile?.Height}`}
-                    alt={item.Alt || 'esse é um banner de uma marca tradicional'}
+                    src={item.mobile?.Image ||
+                      `https://placehold.co/${item.mobile?.Width}x${item.mobile?.Height}`}
+                    alt={item.Alt ||
+                      "esse é um banner de uma marca tradicional"}
                     width={item.mobile?.Width}
                     height={item.mobile?.Height}
                     fetchPriority="low"
@@ -85,6 +94,6 @@ const SeventhVariation = ({ title, items }: SeventhVariationProps) => {
       )}
     </>
   );
-}
+};
 
 export default SeventhVariation;

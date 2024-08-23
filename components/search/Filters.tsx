@@ -10,7 +10,7 @@ import { clx } from "../../sdk/clx.ts";
 import { formatPrice } from "../../sdk/format.ts";
 
 import Icon from "../ui/Icon.tsx";
-import Collapsable from '../ui/Collapsable.tsx'
+import Collapsable from "../ui/Collapsable.tsx";
 interface Props {
   filters: ProductListingPage["filters"];
 }
@@ -83,10 +83,13 @@ function Filters({ filters }: Props) {
               class=""
               title={
                 <div class="flex items-center space-between py-[10px] gap-5 lg:gap-0">
-
                   <span>{filter.label}</span>
                   <div class="w-[14px] h-[14px]">
-                    <Icon class="group-open:rotate-180 transition-all ease-in-out duration-[400ms]" id={'arrow-right'} size={13} />
+                    <Icon
+                      class="group-open:rotate-180 transition-all ease-in-out duration-[400ms]"
+                      id={"arrow-right"}
+                      size={13}
+                    />
                   </div>
                 </div>
               }

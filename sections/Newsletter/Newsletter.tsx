@@ -21,7 +21,7 @@ export interface Props {
 
   /** @description Input placeholder */
   emailPlaceholder?: string;
-  namePlaceholder?: string
+  namePlaceholder?: string;
   birthdayPlaceholder?: string;
 
   textLegal?: string;
@@ -92,7 +92,8 @@ function Newsletter({
   namePlaceholder = "Nome completo",
   birthdayPlaceholder = "Data de Nascimento",
   status,
-  textLegal = "*Ao clicar em Cadastrar você declara que aceita os <a target='_blank' class='underline' href='https://sac.allever.com/hc/pt-br/articles/10326086768788-Termos-de-Uso'>Termos de Privacidade</a>"
+  textLegal =
+    "*Ao clicar em Cadastrar você declara que aceita os <a target='_blank' class='underline' href='https://sac.allever.com/hc/pt-br/articles/10326086768788-Termos-de-Uso'>Termos de Privacidade</a>",
 }: SectionProps<typeof loader, typeof action>) {
   if (status === "success" || status === "failed") {
     return (
@@ -113,8 +114,7 @@ function Newsletter({
 
   return (
     <div class="bg-[#123ADD]">
-
-      <Section.Container >
+      <Section.Container>
         <div class="flex space-between flex-col lg:flex-row items-center px-5 gap-5">
           <Notice {...empty} />
 
@@ -122,7 +122,8 @@ function Newsletter({
             hx-target="closest section"
             hx-swap="outerHTML"
             hx-post={useComponent(import.meta.url)}
-            class="flex justify-center flex-col  lg:gap-4 w-fit">
+            class="flex justify-center flex-col  lg:gap-4 w-fit"
+          >
             <div class="flex gap-[13px] lg:gap-[10px] flex-col lg:flex-row">
               <input
                 name="name"
@@ -140,13 +141,13 @@ function Newsletter({
                 pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
               />
               <input
-               id="birthday"
-               name="birthday"
-               class="px-[39px] py-[13px] border border-white rounded-[20px] bg-transparent placeholder-white outline-0 text-white"
-               type="text"
-               pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/(19|20)\d\d$"
-               maxLength={10}
-               placeholder={birthdayPlaceholder}
+                id="birthday"
+                name="birthday"
+                class="px-[39px] py-[13px] border border-white rounded-[20px] bg-transparent placeholder-white outline-0 text-white"
+                type="text"
+                pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/(19|20)\d\d$"
+                maxLength={10}
+                placeholder={birthdayPlaceholder}
               />
               <button
                 class="bg-[#000] rounded-[20px] px-[21px] py-[13px] "
@@ -158,7 +159,11 @@ function Newsletter({
                 <span class="[.htmx-request_&]:inline hidden loading loading-spinner" />
               </button>
             </div>
-            <p class="text-white text-[13px] mt-[13px] lg:mt-0" dangerouslySetInnerHTML={{ __html: textLegal }}></p>
+            <p
+              class="text-white text-[13px] mt-[13px] lg:mt-0"
+              dangerouslySetInnerHTML={{ __html: textLegal }}
+            >
+            </p>
           </form>
         </div>
       </Section.Container>

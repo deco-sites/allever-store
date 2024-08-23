@@ -29,7 +29,7 @@ const setup = ({ rootId, threshold = 100 }: Props) => {
     }
     root.classList.add("is-otherpage");
   }
-  
+
   document.addEventListener(
     "scroll",
     (e) => {
@@ -38,7 +38,7 @@ const setup = ({ rootId, threshold = 100 }: Props) => {
       } else {
         root.classList.remove("is-scrolled");
       }
-    }
+    },
   );
 };
 

@@ -9,7 +9,10 @@ const bestInstallment = (
 ) => {
   console.log("curr", curr);
 
-  if (curr.priceComponentType !== "https://schema.org/Installment" || curr.name === "Pix") {
+  if (
+    curr.priceComponentType !== "https://schema.org/Installment" ||
+    curr.name === "Pix"
+  ) {
     return acc;
   }
 
@@ -53,9 +56,10 @@ const installmentToString = (
 };
 
 export const useOffer = (aggregateOffer?: AggregateOffer) => {
-  const offer = aggregateOffer?.offers.find((o) => 
-    o.availability === "https://schema.org/InStock"
-  ) || aggregateOffer?.offers[0];
+  const offer =
+    aggregateOffer?.offers.find((o) =>
+      o.availability === "https://schema.org/InStock"
+    ) || aggregateOffer?.offers[0];
   // console.log("offer", offer);
 
   const listPrice = offer?.priceSpecification.find((spec) =>

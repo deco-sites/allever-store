@@ -12,8 +12,8 @@ import AddToCartButton from "./AddToCartButton.tsx";
 import { Ring } from "./ProductVariantSelector.tsx";
 import { useId } from "../../sdk/useId.ts";
 
-import ProductStarCard from "./ProductStarCard.tsx"
-import ProductStars from "../../islands/ProductStars.tsx"
+import ProductStarCard from "./ProductStarCard.tsx";
+import ProductStars from "../../islands/ProductStars.tsx";
 
 interface Props {
   product: Product;
@@ -48,14 +48,16 @@ function ProductCard({
 }: Props) {
   const id = useId();
 
-  const { url, image: images, offers, isVariantOf, additionalProperty } = product;
+  const { url, image: images, offers, isVariantOf, additionalProperty } =
+    product;
   const hasVariant = isVariantOf?.hasVariant ?? [];
   const productGroupID = isVariantOf?.productGroupID ?? "";
   const title = isVariantOf?.name ?? product.name;
   const [front, back] = images ?? [];
 
   // console.log("offers", offers);
-  const { listPrice, price, seller = "1", availability, installment } = useOffer(offers);
+  const { listPrice, price, seller = "1", availability, installment } =
+    useOffer(offers);
   const inStock = availability === "https://schema.org/InStock";
   const possibilities = useVariantPossibilities(hasVariant, product);
   const firstSkuVariations = Object.entries(possibilities)[0];
@@ -65,10 +67,9 @@ function ProductCard({
     ? Math.round(((listPrice - price) / listPrice) * 100)
     : 0;
 
-
   const item = mapProductToAnalyticsItem({ product, price, listPrice, index });
 
-  {/* Add click event to dataLayer */ }
+  {/* Add click event to dataLayer */}
   const event = useSendEvent({
     on: "click",
     event: {
@@ -80,20 +81,32 @@ function ProductCard({
     },
   });
 
-
   const hasPromocao = additionalProperty?.some(
-    (prop) => prop.value === "Promoção"
+    (prop) => prop.value === "Promoção",
   );
 
   const hasNovidade = additionalProperty?.some(
-    (prop) => prop.value === "Novidades"
+    (prop) => prop.value === "Novidades",
   );
 
   return (
-    <div {...event} class={clx("card flex flex-col space-between card-compact group text-sm bg-white p-5", _class)}>
-      <figure class="relative overflow-hidden" style={{ aspectRatio: `${WIDTH} / ${HEIGHT}` }}>
+    <div
+      {...event}
+      class={clx(
+        "card flex flex-col space-between card-compact group text-sm bg-white p-5",
+        _class,
+      )}
+    >
+      <figure
+        class="relative overflow-hidden"
+        style={{ aspectRatio: `${WIDTH} / ${HEIGHT}` }}
+      >
         {/* Product Images */}
-        <a href={relativeUrl} aria-label="view product" class={"absolute top-4 right-4 z-[9] flex items-center"}>
+        <a
+          href={relativeUrl}
+          aria-label="view product"
+          class={"absolute top-4 right-4 z-[9] flex items-center"}
+        >
           <Image
             src={front.url!}
             alt={front.alternateName}
@@ -117,20 +130,34 @@ function ProductCard({
         </a>
         <div class="absolute  top-2 lg:top-[10px] left-0 z-10 max-w-[200px] flex flex-wrap gap-[5px]">
           {/* Discounts */}
-          {percent > 1 && inStock ? (
-            <span class={clx("text-xs font-semibold text-white uppercase bg-[#123ADD] text-center text-white px-2 py-1 rounded-[6px]")}>
-              {percent} % off
-            </span>
-          ) : null}
+          {percent > 1 && inStock
+            ? (
+              <span
+                class={clx(
+                  "text-xs font-semibold text-white uppercase bg-[#123ADD] text-center text-white px-2 py-1 rounded-[6px]",
+                )}
+              >
+                {percent} % off
+              </span>
+            )
+            : null}
           {/* Notify Me */}
           {hasNovidade && (
-            <span class={clx("text-xs font-semibold text-white uppercase bg-[#FFA318] text-center text-white px-2 py-1 rounded-[6px]")}>
+            <span
+              class={clx(
+                "text-xs font-semibold text-white uppercase bg-[#FFA318] text-center text-white px-2 py-1 rounded-[6px]",
+              )}
+            >
               Novidade
             </span>
           )}
           {/* News */}
           {hasPromocao && (
-            <span class={clx("text-xs font-semibold text-white uppercase bg-[#F22E2E] text-center text-white px-2 py-1 rounded-[6px]")}>
+            <span
+              class={clx(
+                "text-xs font-semibold text-white uppercase bg-[#F22E2E] text-center text-white px-2 py-1 rounded-[6px]",
+              )}
+            >
               Promoção
             </span>
           )}
@@ -152,32 +179,45 @@ function ProductCard({
               Compra Internacional
             </p>
           )}
-          {seller && inStock ? <p class="my-[5px] text-sm text-[#d3d3d3] capitalize">{seller}</p> : <span class="my-[5px]"></span>}
-          <p class="font-normal text-sm max-h-[63px] overflow-hidden">{title}</p>
-          {inStock ? (
-            <div class="flex gap-2 flex-col pt-2">
-              {listPrice && (
-                <span class="line-through font-normal text-[#a8a8a8] text-sm">
-                  {formatPrice(listPrice, offers?.priceCurrency)}
+          {seller && inStock
+            ? <p class="my-[5px] text-sm text-[#d3d3d3] capitalize">{seller}</p>
+            : <span class="my-[5px]"></span>}
+          <p class="font-normal text-sm max-h-[63px] overflow-hidden">
+            {title}
+          </p>
+          {inStock
+            ? (
+              <div class="flex gap-2 flex-col pt-2">
+                {listPrice && (
+                  <span class="line-through font-normal text-[#a8a8a8] text-sm">
+                    {formatPrice(listPrice, offers?.priceCurrency)}
+                  </span>
+                )}
+                <span class="font-semibold text-[20px] text-[#123ADD]">
+                  {formatPrice(installment?.price)}{" "}
+                  <span class="text-[#123ADD] font-normal text-[20px] leading-[30px]">
+                    no pix
+                  </span>
                 </span>
-              )}
-              <span class="font-semibold text-[20px] text-[#123ADD]">
-                {formatPrice(installment?.price)}{" "}
-                <span class="text-[#123ADD] font-normal text-[20px] leading-[30px]">no pix</span>
-              </span>
-              <span class="text-[#a8a8a8] text-xs">
-                ou {installment?.billingDuration}x de{" "}
-                {formatPrice(installment?.billingIncrement, offers!.priceCurrency!)}
-              </span>
-            </div>
-          ) : (
-            <p class="flex text-center mt-2 justify-center font-semibold"> Produto Indisponível</p>
-          )}
+                <span class="text-[#a8a8a8] text-xs">
+                  ou {installment?.billingDuration}x de {formatPrice(
+                    installment?.billingIncrement,
+                    offers!.priceCurrency!,
+                  )}
+                </span>
+              </div>
+            )
+            : (
+              <p class="flex text-center mt-2 justify-center font-semibold">
+                Produto Indisponível
+              </p>
+            )}
         </a>
         <ProductStars storeId="121576" productId={productGroupID ?? ""} />
       </div>
       {/* SKU Selector */}
-      {/* {variants.length > 1 && (
+      {
+        /* {variants.length > 1 && (
         <ul class="flex items-center justify-start gap-2 pt-4 pb-1 pl-1 overflow-x-auto">
           {variants.map(([value, link]) => [value, relative(link)] as const)
             .map(([value, link]) => (
@@ -194,8 +234,10 @@ function ProductCard({
               </li>
             ))}
         </ul>
-      )} */}
-      {/* {inStock ? (
+      )} */
+      }
+      {
+        /* {inStock ? (
         <AddToCartButton
           product={product}
           seller={seller}
@@ -221,7 +263,8 @@ function ProductCard({
         >
           Sold out
         </a>
-      )} */}
+      )} */
+      }
     </div>
   );
 }

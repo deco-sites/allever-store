@@ -112,8 +112,7 @@ export default function Searchbar(
             data-hx-post={loader &&
               useComponent<SuggestionProps>(Suggestions, {
                 loader: asResolved(loader),
-              })
-            }
+              })}
             data-hx-trigger={`input changed delay:100ms, ${NAME}`}
             data-hx-indicator={`#${SEARCHBAR_INPUT_FORM_ID}`}
             data-hx-swap="innerHTML"

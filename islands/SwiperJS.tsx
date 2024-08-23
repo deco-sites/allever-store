@@ -5,9 +5,9 @@ interface Props {
   type?: string;
 }
 
-export default function SwiperJS({ 
+export default function SwiperJS({
   id,
-  type = "default"
+  type = "default",
 }: Props) {
   if (!IS_BROWSER) return null;
 

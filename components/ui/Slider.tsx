@@ -16,7 +16,7 @@ function Dot(
 }
 
 function Slider(props: JSX.IntrinsicElements["ul"]) {
-  return <ul data-slider {...props}  />;
+  return <ul data-slider {...props} />;
 }
 
 function Item({

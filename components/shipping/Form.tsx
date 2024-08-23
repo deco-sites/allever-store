@@ -33,12 +33,21 @@ export default function Form({ items }: Props) {
           maxLength={8}
           size={8}
         />
-        <button type="submit" class="no-animation bg-[#123ADD] text-white text-xs font-semibold rounded-[39px] p-4 max-w-[127px] w-full">
+        <button
+          type="submit"
+          class="no-animation bg-[#123ADD] text-white text-xs font-semibold rounded-[39px] p-4 max-w-[127px] w-full"
+        >
           <span class="[.htmx-request_&]:hidden inline">Calcular</span>
           <span class="[.htmx-request_&]:inline hidden loading loading-spinner loading-xs" />
         </button>
       </form>
-      <a href="https://buscacepinter.correios.com.br/app/endereco/index.php" target="_blank" class="text-xs text-black font-normal underline">Descobrir meu CEP</a>
+      <a
+        href="https://buscacepinter.correios.com.br/app/endereco/index.php"
+        target="_blank"
+        class="text-xs text-black font-normal underline"
+      >
+        Descobrir meu CEP
+      </a>
 
       {/* Results Slot */}
       <div id={slot} />

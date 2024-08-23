@@ -21,46 +21,45 @@ function QuantitySelector(
   return (
     <div class="flex items-center justify-center flex-col w-fit">
       <p class="text-xs">
-      Quantidade
+        Quantidade
       </p>
       <div class="flex ">
-
-      <button
-        type="button"
-        class="text-[#123ADD] text-sm font-bold"
-        hx-on:click={useScript(onClick, -1)}
-        disabled={disabled}
-        >
-        -
-      </button>
-      <div
-        data-tip={`Quantity must be between ${props.min} and ${props.max}`}
-        class={clx(
-          "flex justify-center items-center ",
-          "has-[:invalid]:tooltip has-[:invalid]:tooltip-error has-[:invalid]:tooltip-open has-[:invalid]:tooltip-bottom",
-        )}
-        >
-        <input
-          id={id}
-          class={clx(
-            "text-center [appearance:textfield] bg-transparent text-sm",
-            "invalid:input-error",
-          )}
+        <button
+          type="button"
+          class="text-[#123ADD] text-sm font-bold"
+          hx-on:click={useScript(onClick, -1)}
           disabled={disabled}
-          inputMode="numeric"
-          type="number"
-          {...props}
-          />
-      </div>
-      <button
-        type="button"
-        class="text-[#123ADD] text-sm font-bold"
-        hx-on:click={useScript(onClick, 1)}
-        disabled={disabled}
         >
-        +
-      </button>
+          -
+        </button>
+        <div
+          data-tip={`Quantity must be between ${props.min} and ${props.max}`}
+          class={clx(
+            "flex justify-center items-center ",
+            "has-[:invalid]:tooltip has-[:invalid]:tooltip-error has-[:invalid]:tooltip-open has-[:invalid]:tooltip-bottom",
+          )}
+        >
+          <input
+            id={id}
+            class={clx(
+              "text-center [appearance:textfield] bg-transparent text-sm",
+              "invalid:input-error",
+            )}
+            disabled={disabled}
+            inputMode="numeric"
+            type="number"
+            {...props}
+          />
         </div>
+        <button
+          type="button"
+          class="text-[#123ADD] text-sm font-bold"
+          hx-on:click={useScript(onClick, 1)}
+          disabled={disabled}
+        >
+          +
+        </button>
+      </div>
     </div>
   );
 }
