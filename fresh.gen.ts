@@ -10,8 +10,8 @@ import * as $Form from "./islands/Form.tsx";
 import * as $MicroHeaderSetup from "./islands/MicroHeaderSetup.tsx";
 import * as $MinicartTotalInstallments from "./islands/MinicartTotalInstallments.tsx";
 import * as $PaymentsMethods from "./islands/PaymentsMethods.tsx";
-import * as $ProductStars from "./islands/ProductStars.tsx";
 import * as $Product_TrustVox from "./islands/Product/TrustVox.tsx";
+import * as $ProductStars from "./islands/ProductStars.tsx";
 import * as $Seals_RaVerifiedSeal from "./islands/Seals/RaVerifiedSeal.tsx";
 import * as $Shipping from "./islands/Shipping.tsx";
 import * as $ShowCaseCounter from "./islands/ShowCaseCounter.tsx";
@@ -31,8 +31,8 @@ const manifest = {
     "./islands/MicroHeaderSetup.tsx": $MicroHeaderSetup,
     "./islands/MinicartTotalInstallments.tsx": $MinicartTotalInstallments,
     "./islands/PaymentsMethods.tsx": $PaymentsMethods,
-    "./islands/ProductStars.tsx": $ProductStars,
     "./islands/Product/TrustVox.tsx": $Product_TrustVox,
+    "./islands/ProductStars.tsx": $ProductStars,
     "./islands/Seals/RaVerifiedSeal.tsx": $Seals_RaVerifiedSeal,
     "./islands/Shipping.tsx": $Shipping,
     "./islands/ShowCaseCounter.tsx": $ShowCaseCounter,
