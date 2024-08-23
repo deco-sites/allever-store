@@ -32,7 +32,7 @@ const setup = ({ rootId, threshold = 100 }: Props) => {
 
   document.addEventListener(
     "scroll",
-    (e) => {
+    () => {
       if (globalThis.scrollY > threshold) {
         root.classList.add("is-scrolled");
       } else {

@@ -1,14 +1,17 @@
 import { useEffect, useState } from "preact/hooks";
 
 interface CampaignTimerProps {
+  id: string;
   expiresAt: string;
   hideLabel?: boolean;
-  onExpire: () => void;
 }
 
-const CampaignTimer = (
-  { expiresAt, onExpire, hideLabel }: CampaignTimerProps,
-) => {
+const CampaignTimer = ({ 
+  id, 
+  expiresAt, 
+  hideLabel, 
+}: CampaignTimerProps) => {
+
   const calculateTimeLeft = () => {
     const difference = +new Date(expiresAt) - +new Date();
     return {
@@ -20,27 +23,30 @@ const CampaignTimer = (
   };
 
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-  const [expired, setExpired] = useState(false);
 
-  useEffect(() => {
-    if (Object.values(timeLeft).every((value) => value === 0)) {
-      if (!expired) {
-        onExpire();
-        setExpired(true);
-      }
-      return;
-    }
-
-    const timer = setTimeout(() => {
-      setTimeLeft(calculateTimeLeft());
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, [timeLeft, expired]);
+  const timerId = setInterval(() => {
+    setTimeLeft(calculateTimeLeft());
+  }, 1000);
 
   const formatTime = (time: number) => {
     return String(time).padStart(2, "0");
   };
+  
+  useEffect(() => {
+    if (timeLeft.Segundos > 0) {
+      const docRef = document.getElementById(id);
+      if (docRef) docRef.classList.add("!block");
+    }
+  }, []);
+
+  if (timeLeft.Minutos === 0 && timeLeft.Segundos === 0) {
+    useEffect(() => {
+      const docRef = document.getElementById(id);
+      if (docRef) docRef.classList.remove("!block");
+      clearInterval(timerId);
+    }, []);
+    return null;
+  }
 
   return (
     <div class="flex gap-5 justify-center text-white text-center items-center my-4 lg:mb-0">

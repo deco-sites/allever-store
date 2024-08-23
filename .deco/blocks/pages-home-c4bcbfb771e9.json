@@ -436,7 +436,7 @@
       "product": {
         "__resolveType": "vtex/loaders/intelligentSearch/productDetailsPage.ts"
       },
-      "expireAt": "2024-09-22T20:59:00.000Z"
+      "expireAt": "2024-09-23T20:59:00.000Z"
     },
     {
       "__resolveType": "site/sections/Product/ProductShelf.tsx",
