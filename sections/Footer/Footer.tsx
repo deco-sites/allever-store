@@ -30,7 +30,7 @@ interface Link extends Item {
 }
 
 /** @titleBy alt */
-interface Social {
+export interface Social {
   /**
    * @title Titulo da rede social
    */

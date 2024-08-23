@@ -1,0 +1,69 @@
+{
+  "name": "Venda na Allever",
+  "path": "/venda-na-allever",
+  "sections": [
+    {
+      "__resolveType": "Header"
+    },
+    {
+      "__resolveType": "site/sections/Institutional/ImageComponent.tsx",
+      "desktop": {
+        "Image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11097/b7441d81-301d-49b5-aae2-ffcdaef9b421"
+      },
+      "mobile": {
+        "Image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11097/824c6af0-192c-49fd-b3c7-2b5c798fa334"
+      },
+      "Loading": "lazy",
+      "Alt": "Banner de da marca allever"
+    },
+    {
+      "__resolveType": "site/sections/Institutional/SellerPage.tsx",
+      "cardsRounded": {
+        "text": "texto ",
+        "number": "11"
+      },
+      "cardRounded": {
+        "text": "ssda",
+        "number": "Validar"
+      },
+      "firstSection": {
+        "title": "<h2><span style=\"color: rgb(18, 58, 221); font-size: 18pt;\" data-mce-style=\"color: rgb(18, 58, 221); font-size: 18pt;\"><strong>[Vantagens]</strong></span></h2><p style=\"text-align: left;\" data-mce-style=\"text-align: left;\"><span style=\"font-size: 18pt;\" data-mce-style=\"font-size: 18pt;\"><br>E com enorme prazer que recebemos você aqui!</span><br><span style=\"font-size: 18pt;\" data-mce-style=\"font-size: 18pt;\">Cique no botão abaixo para realizar seu cadastro no nosso banco de talentos.</span></p>",
+        "cards": [
+          {
+            "content": "+26",
+            "label": "<p style=\"text-align: center;\" data-mce-style=\"text-align: center;\"><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\">Atendemos os <strong>26</strong></span><br><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\"><strong> estados brasileiros</strong></span><br> <span style=\"font-size: 10pt;\" data-mce-style=\"font-size: 10pt;\">além do Distrito Federal</span></p>"
+          },
+          {
+            "content": "R$",
+            "label": "<p style=\"text-align: center;\" data-mce-style=\"text-align: center;\"><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\">Atendemos os <strong>26</strong></span><br><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\"><strong> estados brasileiros</strong></span><br> <span style=\"font-size: 10pt;\" data-mce-style=\"font-size: 10pt;\">além do Distrito Federal</span></p>"
+          },
+          {
+            "content": "+26",
+            "label": "<p style=\"text-align: center;\" data-mce-style=\"text-align: center;\"><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\">Atendemos os <strong>26</strong></span><br><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\"><strong> estados brasileiros</strong></span><br> <span style=\"font-size: 10pt;\" data-mce-style=\"font-size: 10pt;\">além do Distrito Federal</span></p>"
+          }
+        ]
+      },
+      "secondSection": {
+        "html": "<p>Prezado(a) Seller,<br>&nbsp;<br>Nosso objetivo é criar uma comunidade de vendedores e compradores onde todos possam se beneficiar de uma experiência de compra e venda confiável, fácil e gratificante.<br>&nbsp;<br>Somos uma plataforma online que reúne diversos vendedores de produtos em um só lugar, oferecendo aos compradores uma experiência única e conveniente. Nossa missão é ajudar a expandir seus negócios, conectando você com compradores em potencial em todo o mundo.<br>&nbsp;<br>Nosso Marketplace oferece diversas vantagens para os vendedores. Além de uma ampla base de clientes, temos uma equipe dedicada a fornecer suporte e assistência em todas as etapas do processo de venda. Nós também oferecemos um sistema de pagamentos e split, seguro e eficiente, que garante que os vendedores recebam o pagamento de forma automática e segura.<br>&nbsp;<br>Com um alcance cada vez maior, nosso Marketplace oferece a você a oportunidade de aumentar sua base de clientes e, consequentemente, suas vendas uma maneira eficaz<br>&nbsp;<br>Além disso, oferecemos um suporte dedicado para ajudá-lo(a) em todos os aspectos do processo de venda, estamos aqui para ajudá-lo(a) em cada etapa.<br>&nbsp;<br>Nosso objetivo é oferecer uma plataforma segura, fácil e gratificante para os vendedores, e uma ótima experiência de compra para os consumidores. Gostaríamos muito de tê-lo(a) como parceiro(a) em nossa jornada e esperamos que você se junte a nós.<br>&nbsp;<br>Não perca esta oportunidade de fazer parte da nossa comunidade de vendedores de sucesso. Junte-se a nós hoje mesmo e comece a expandir seus negócios.<br>&nbsp;<br>Para se cadastrar, basta clicar no botão abaixo.<br>Se tiver alguma dúvida, não hesite em entrar em contato conosco. Estamos ansiosos para trabalhar com você!<br>&nbsp;<br>&nbsp;<br>Atenciosamente,<br>[allever]</p>",
+        "button": {
+          "link": "/venda",
+          "label": "<p><strong><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\">Venda na <span style=\"color: rgb(18, 58, 221);\" data-mce-style=\"color: rgb(18, 58, 221);\">[allever]</span></span></strong></p>"
+        },
+        "title": "<p><span style=\"font-size: 18pt;\" data-mce-style=\"font-size: 18pt;\"><strong>Impulsione suas <span style=\"color: rgb(18, 58, 221);\" data-mce-style=\"color: rgb(18, 58, 221);\">[Vendas]</span></strong></span></p>"
+      }
+    },
+    {
+      "__resolveType": "Deals"
+    },
+    {
+      "__resolveType": "Newsletter"
+    },
+    {
+      "__resolveType": "Footer Component"
+    }
+  ],
+  "seo": {
+    "__resolveType": "website/sections/Seo/SeoV2.tsx"
+  },
+  "__resolveType": "website/pages/Page.tsx"
+}

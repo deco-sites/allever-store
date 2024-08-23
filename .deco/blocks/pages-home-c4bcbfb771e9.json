@@ -147,7 +147,7 @@
           "link": "login"
         }
       ],
-      "isSticky": true,
+      "isSticky": false,
       "menuItems": [
         {}
       ]
@@ -169,6 +169,7 @@
     },
     {
       "__resolveType": "site/sections/Category/CarouselCategory.tsx",
+      "title": "Compre Por Categorias",
       "category": [
         {
           "image": "https://placehold.co/113x105",
@@ -349,8 +350,7 @@
       ],
       "Title": "Compre Por Categorias",
       "layout": "Categoria",
-      "visibleItems": 8,
-      "title": "Compre Por Categorias"
+      "visibleItems": 8
     },
     {
       "__resolveType": "site/sections/Category/CategoryBanner.tsx",
@@ -374,9 +374,12 @@
         "props": {
           "term": "tv",
           "sort": "OrderByPriceDESC",
-          "count": 10
+          "count": 10,
+          "similars": true
         }
-      }
+      },
+      "hideLabel": true,
+      "expireAt": "2024-09-23T19:10:00.000Z"
     },
     {
       "__resolveType": "site/sections/Images/SecondVariation.tsx",
@@ -428,26 +431,12 @@
       ]
     },
     {
-      "__resolveType": "site/sections/Product/ProductShelf.tsx",
-      "title": "Vitrine 1",
-      "cta": "#",
-      "products": {
-        "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
-        "props": {
-          "term": "tv",
-          "count": 6,
-          "query": "tv"
-        }
-      }
-    },
-    {
       "__resolveType": "site/sections/Content/ShowCaseCounter.tsx",
       "Label": "algum sub titulo",
       "product": {
-        "__resolveType": "vtex/loaders/legacy/productDetailsPage.ts",
-        "slug": "camisa"
+        "__resolveType": "vtex/loaders/intelligentSearch/productDetailsPage.ts"
       },
-      "expireAt": "2024-07-30T20:59:00.000Z"
+      "expireAt": "2024-09-22T20:59:00.000Z"
     },
     {
       "__resolveType": "site/sections/Product/ProductShelf.tsx",
@@ -561,6 +550,15 @@
           "count": 12,
           "fuzzy": "automatic",
           "term": "tv"
+        }
+      }
+    },
+    {
+      "__resolveType": "site/sections/Product/ProductShelf.tsx",
+      "products": {
+        "__resolveType": "vtex/loaders/legacy/productList.ts",
+        "props": {
+          "sort": "OrderByPriceDESC"
         }
       }
     },
@@ -776,21 +774,6 @@
       ]
     },
     {
-      "__resolveType": "site/sections/Product/ProductShelf.tsx",
-      "title": "Vitrine 1",
-      "cta": "#",
-      "products": {
-        "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
-        "props": {
-          "query": "fone de ouvido",
-          "sort": "price:asc",
-          "count": 12,
-          "fuzzy": "automatic",
-          "term": "tv"
-        }
-      }
-    },
-    {
       "__resolveType": "site/sections/Images/SeventhVariation.tsx",
       "items": [
         {
@@ -993,45 +976,10 @@
       "visibleItems": 7
     },
     {
-      "__resolveType": "site/sections/Images/Deals.tsx",
-      "deals": [
-        {
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11097/3f4f2d50-989d-435e-8d74-7544c58e7c9b",
-          "label": "Ambiente seguro e certificado",
-          "title": "Compra segura",
-          "width": 48,
-          "height": 48
-        },
-        {
-          "title": "Parcelamento",
-          "label": "Em até 21x",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11097/35f7795a-b79e-4b84-a866-23d68244438b",
-          "width": 39,
-          "height": 39
-        },
-        {
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11097/b5b98d9c-6c84-433b-8fe9-88d94033effc",
-          "title": "Até 2 cartões",
-          "label": "Use até 2 cartões no seu pagamento",
-          "width": 43,
-          "height": 43
-        },
-        {
-          "label": "Em até 7 dias",
-          "title": "Devolva grátis",
-          "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11097/ccdb94b6-e186-4e7a-952f-ee0be220cea5",
-          "width": 30,
-          "height": 30
-        }
-      ],
-      "preload": true
+      "__resolveType": "Deals"
     },
     {
-      "__resolveType": "site/sections/Newsletter/Newsletter.tsx",
-      "empty": {
-        "description": "Receba nossas novidades, promoções exclusivas e muito mais!",
-        "title": "Assine nossa Newsletter"
-      }
+      "__resolveType": "Newsletter"
     },
     {
       "__resolveType": "Footer Component"

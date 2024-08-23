@@ -9,4 +9,8 @@ export default defineConfig({
     // @ts-expect-error somehow this typing doesnt work
     tailwind,
   }),
+  render: (ctx, render) => {
+    ctx.lang = 'pt-BR';
+    render();
+  },
 });

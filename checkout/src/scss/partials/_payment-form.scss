@@ -1,0 +1,345 @@
+#payment-data {
+  form.form-step {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    .gift-card-section {
+      width: 100%;
+      margin: 16px 0;
+      background-color: white;
+      border: 1px solid $color-light-grey;
+      border-radius: 10px;
+      box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.03);
+      padding: 16px;
+
+      .payment-discounts-options {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+
+      label {
+        font-family: $font-inter;
+        font-size: 11px;
+        font-weight: 500;
+        position: absolute;
+        top: 11px;
+        left: 16px;
+        line-height: 8px;
+        z-index: 10;
+      }
+
+      input {
+        width: 100% !important;
+        max-width: unset !important;
+        box-sizing: border-box;
+        box-shadow: none;
+        color: $color-dark;
+        font-size: 13px;
+        font-weight: 500;
+        font-family: $font-inter;
+        height: 100%;
+        border: 1px solid $color-stroke2;
+        border-radius: 6px;
+        padding: 15px 0 0 15px;
+        line-height: 9px;
+        box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 3%);
+        height: 48px;
+
+        &.success:not([invalid="true"]) {
+          background-image: url("data:image/svg+xml,%3Csvg width='19' height='18' viewBox='0 0 19 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15.9121 4.5L7.66211 12.75L3.91211 9' stroke='%238CBF3C' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+          background-position: calc(100% - 16px) center !important;
+        }
+
+        &.error {
+          border-color: $color-error;
+        }
+
+        &.focus-visible {
+          border: 2px solid $color-dark;
+          padding: 14px 0 0 14px;
+        }
+      }
+
+      #btn-add-gift-card {
+        background-color: $color-green;
+        background-image: none;
+        color: white;
+        text-shadow: none;
+        font-family: $font-popping;
+        font-size: 13px;
+        font-weight: 700;
+        border: none;
+        border-radius: 6px;
+        margin-top: 8px;
+        width: 100%;
+        height: 40px;
+        outline: none;
+
+        @include desktop {
+          height: 50px;
+        }
+      }
+    }
+
+    @include desktop {
+      flex-direction: row;
+    }
+
+    .link-gift-card {
+      position: static;
+      display: block;
+      width: 100%;
+
+      #show-gift-card-group {
+        width: fit-content;
+        background-color: $color-dark;
+        color: white;
+        font-family: $font-inter;
+        font-size: 13px;
+        font-weight: 700;
+        padding: 0 24px;
+        height: 40px;
+        border-radius: 6px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-transform: none;
+        text-decoration: none;
+      }
+    }
+
+    .steps-view {
+      @media screen and (max-width: 979px) {
+        width: 100%;
+      }
+
+      @media screen and (max-width: 1407px) {
+        margin-top: 16px;
+      }
+    }
+
+    fieldset.payment-group {
+      margin: 0 0 16px 0;
+      flex: 1;
+
+      @include desktop {
+        margin: 0 16px 0 0;
+      }
+
+      .payment-group-list-btn {
+        width: 100%;
+        display: grid;
+        // grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+        text-decoration: none;
+
+        @include desktop {
+          display: flex;
+          flex-direction: column;
+        }
+
+        &:hover {
+          text-decoration: none;
+        }
+      }
+
+      .payment-group-item:hover,
+      .payment-group-item a:hover,
+      .payment-group-item a:focus {
+        text-decoration: none;
+      }
+
+      .payment-group-item {
+        border: 1px solid $color-stroke;
+        background-color: #D3D3D3;
+        border-radius: 6px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        align-items: center;
+        margin: 0;
+        box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 3%);
+        color: $color-white;
+        text-transform: uppercase;
+        padding: 8px 5.75px;
+        text-decoration: none;
+        text-align: center;
+        width: 100%;
+
+        @include desktop {
+          flex-direction: row;
+          padding: 12px 16px;
+        }
+        span {
+          color: $color-white;
+          text-align: center;
+        }
+
+        &.active {
+          background-color: $color-black;
+        }
+
+        .payment-group-item-text {
+          background: none;
+          height: 100%;
+        }
+
+        span {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          font-family: $font-inter;
+          font-size: 13px;
+          line-height: normal;
+          color: $color-white;
+          font-weight: 500;
+          padding: 0;
+          gap: 8px;
+          text-align: center;
+
+          @include desktop {
+            flex-direction: row;
+          }
+        }
+
+        &#payment-group-creditCardPaymentGroup {
+          order: 1;
+          justify-content: center;
+          border-radius: 30px;
+
+
+
+          // span {
+          //   &::before {
+          //     content: "";
+          //     background-image: url("data:image/svg+xml,%3Csvg width='24' height='25' viewBox='0 0 24 25' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M22 10.9531H2M2 9.15312L2 16.7531C2 17.8732 2 18.4333 2.21799 18.8611C2.40973 19.2374 2.71569 19.5434 3.09202 19.7351C3.51984 19.9531 4.07989 19.9531 5.2 19.9531L18.8 19.9531C19.9201 19.9531 20.4802 19.9531 20.908 19.7351C21.2843 19.5434 21.5903 19.2374 21.782 18.8611C22 18.4333 22 17.8732 22 16.7531V9.15313C22 8.03302 22 7.47297 21.782 7.04515C21.5903 6.66882 21.2843 6.36286 20.908 6.17111C20.4802 5.95313 19.9201 5.95313 18.8 5.95313L5.2 5.95313C4.0799 5.95312 3.51984 5.95312 3.09202 6.17111C2.7157 6.36286 2.40973 6.66882 2.21799 7.04514C2 7.47297 2 8.03302 2 9.15312Z' stroke='%233C3C3B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+          //     width: 24px;
+          //     height: 25px;
+          //     display: block;
+          //     flex-shrink: 0;
+          //   }
+          // }
+        }
+
+        &#payment-group-instantPaymentPaymentGroup {
+          order: 2;
+          justify-content: center;
+          border-radius: 30px;
+
+
+          span {
+            width: 100%;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+
+            // &::before {
+            //   content: "";
+            //   background-image: url("data:image/svg+xml,%3Csvg width='24' height='25' viewBox='0 0 24 25' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16.2583 18.8718L13.5805 21.5424L13.5802 21.5428C13.1583 21.9641 12.5864 22.2008 11.9902 22.2008C11.3939 22.2008 10.822 21.9641 10.4002 21.5428L10.3998 21.5424L7.78382 18.9335C7.98366 18.8784 8.16348 18.8129 8.3266 18.7388C8.83889 18.5061 9.13456 18.2099 9.31462 18.0296C9.32001 18.0242 9.3253 18.0189 9.33049 18.0137L12.1302 15.2141L14.9198 18.0037C15.3479 18.4318 15.7951 18.7041 16.2583 18.8718ZM13.6102 4.36408L13.6105 4.36446L16.2806 7.02729C15.7988 7.19583 15.3306 7.47569 14.8946 7.9283L12.1302 10.6928L9.33049 7.89308C9.32306 7.88566 9.31535 7.87791 9.30734 7.86987C9.14298 7.70483 8.85447 7.41511 8.35607 7.18253C8.19181 7.10587 8.00993 7.03753 7.80718 6.97998L10.4298 4.36446L10.4302 4.36407C10.852 3.94272 11.4239 3.70605 12.0202 3.70605C12.6164 3.70605 13.1883 3.94272 13.6102 4.36408Z' stroke='%233C3C3B' stroke-width='1.5'/%3E%3Cpath d='M20.5788 11.3326L20.581 11.3348C21.01 11.7622 21.2525 12.3421 21.2553 12.9478C21.2581 13.5528 21.0216 14.1344 20.5974 14.5657C20.597 14.5661 20.5965 14.5666 20.596 14.5671L18.5687 16.6034H17.6203C17.2711 16.6034 16.9413 16.4638 16.7006 16.2231L13.6906 13.2131C13.5891 13.1116 13.48 13.0223 13.3651 12.9451C13.4763 12.8694 13.5821 12.7823 13.6806 12.6838L16.6806 9.68377L16.6876 9.67679L16.6944 9.66963C16.9149 9.43725 17.2543 9.29344 17.6003 9.29344H18.5487L20.5788 11.3326ZM10.5897 12.6934C10.6888 12.7889 10.7957 12.8745 10.909 12.9495C10.7965 13.0257 10.6895 13.1135 10.59 13.2131L7.57376 16.2293C7.3178 16.4772 6.9846 16.6134 6.65029 16.6134H5.48191L3.41177 14.5343L3.41095 14.5334C2.9896 14.1116 2.75293 13.5397 2.75293 12.9434C2.75293 12.3472 2.9896 11.7753 3.41095 11.3534L3.41177 11.3526L5.48191 9.27344H6.64029C6.98932 9.27344 7.31893 9.41294 7.55957 9.65337C7.5597 9.65351 7.55983 9.65364 7.55996 9.65377L10.5791 12.6829L10.5844 12.6882L10.5897 12.6934Z' stroke='%233C3C3B' stroke-width='1.5'/%3E%3C/svg%3E%0A");
+            //   width: 24px;
+            //   height: 25px;
+            //   display: inline-block;
+            // }
+
+            // &::after {
+            //   content: "10% OFF";
+            //   background-color: $color-green;
+            //   font-family: $font-inter;
+            //   font-size: 11px;
+            //   line-height: 8px;
+            //   font-weight: 500;
+            //   border-radius: 3px;
+            //   color: white;
+            //   display: flex;
+            //   justify-content: center;
+            //   align-items: center;
+            //   padding: 6px;
+            //   margin: auto auto 0 auto;
+            //   white-space: nowrap;
+
+            //   @include desktop {
+            //     margin: 0 0 0 auto;
+            //     font-size: 13px;
+            //     line-height: 9px;
+            //   }
+            // }
+          }
+        }
+
+        &#payment-group-bankInvoicePaymentGroup {
+          order: 3;
+          justify-content: center;
+          border-radius: 30px;
+
+          span {
+            width: 100%;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+
+            // &::before {
+            //   content: "";
+            //   // background-image: url("data:image/svg+xml,%3Csvg width='24' height='25' viewBox='0 0 24 25' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 4.74805H3.735V21.173H0V4.74805ZM16.5 4.74805H20.235V21.173H16.5V4.74805ZM7.47 4.74805H9.33V21.173H7.47V4.74805ZM11.205 4.74805H13.065V21.173H11.205V4.74805ZM22.14 4.74805H24V21.173H22.14V4.74805Z' fill='black'/%3E%3C/svg%3E%0A");
+            //   width: 24px;
+            //   height: 25px;
+            //   display: inline-block;
+            // }
+
+            // &::after {
+            //   content: "5% OFF";
+            //   background-color: $color-blue;
+            //   font-family: $font-inter;
+            //   font-size: 11px;
+            //   line-height: 8px;
+            //   font-weight: 500;
+            //   border-radius: 3px;
+            //   color: white;
+            //   display: flex;
+            //   justify-content: center;
+            //   align-items: center;
+            //   padding: 6px;
+            //   margin: 0 auto;
+            //   white-space: nowrap;
+
+            //   @include desktop {
+            //     margin: 0 0 0 auto;
+            //     font-size: 13px;
+            //     line-height: 9px;
+            //   }
+            // }
+          }
+        }
+
+        &#payment-group-picPayPaymentGroup {
+          order: 4;
+
+          span {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            // &::before {
+            //   content: "";
+            //   background-image: url("data:image/svg+xml,%3Csvg width='24' height='25' viewBox='0 0 24 25' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16.463 2.54004V10.077H24V2.54004H16.463ZM17.719 3.79604H22.744V8.82104H17.719V3.79604ZM18.975 5.05204V7.56504H21.488V5.05204H18.975ZM3.77 6.30804V9.48304H7.146C9.288 9.48304 10.504 10.523 10.504 12.422C10.504 14.369 9.288 15.433 7.146 15.433H3.769L3.77 9.48304H0V23.367H3.769V18.607H7.339C11.672 18.607 14.154 16.255 14.154 12.287C14.154 8.51604 11.672 6.30904 7.34 6.30904L3.77 6.30804Z' fill='black'/%3E%3C/svg%3E%0A");
+            //   width: 24px;
+            //   height: 25px;
+            //   display: inline-block;
+            // }
+          }
+        }
+      }
+    }
+  }
+}
+.payment-group-item{
+  .payment-group-item-text{
+    text-align: center;
+    text-transform: uppercase;
+    color: $color-white;
+
+  }
+}
+.cart-fixed .cart-fixed-transition{
+  height: unset!important;
+}

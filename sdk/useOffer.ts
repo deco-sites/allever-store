@@ -60,7 +60,6 @@ export const useOffer = (aggregateOffer?: AggregateOffer) => {
     aggregateOffer?.offers.find((o) =>
       o.availability === "https://schema.org/InStock"
     ) || aggregateOffer?.offers[0];
-  // console.log("offer", offer);
 
   const listPrice = offer?.priceSpecification.find((spec) =>
     spec.priceType === "https://schema.org/ListPrice"
@@ -68,14 +67,13 @@ export const useOffer = (aggregateOffer?: AggregateOffer) => {
 
   const availability = offer?.availability;
   const installment = offer?.priceSpecification.reduce(bestInstallment, null);
-  console.log("installment", installment);
 
+  const inventary = offer?.inventoryLevel?.value
   const seller = offer?.seller;
   const price = offer?.price;
 
-  console.log("installmentToString", installmentToString(installment, price));
-
   return {
+    inventary,
     price,
     listPrice: listPrice?.price,
     availability,

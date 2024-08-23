@@ -63,7 +63,6 @@ export default function SellingPrice({
       const total = response.totals.reduce((prev, curr) => {
         return prev + curr.value;
       }, 0);
-      // console.log("response", response);
       setPrice(total / 100);
 
       // @ts-ignore Type InstallmentOptions is not assignable to type Installment

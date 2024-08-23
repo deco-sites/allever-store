@@ -78,14 +78,14 @@ function Newsletter({
       "Lorem ipsum dolor sit amet consectetur adipiscing elit Ut et massa mi. Aliquam in hendrerit urna.",
   },
   success = {
-    title: "Thank you for subscribing!",
+    title: "Obrigado por se inscrever!",
     description:
-      "You’re now signed up to receive the latest news, trends, and exclusive promotions directly to your inbox. Stay tuned!",
+      "Agora você está inscrito para receber as últimas notícias, tendências e promoções exclusivas diretamente em sua caixa de entrada. Fique atento!",
   },
   failed = {
-    title: "Oops. Something went wrong!",
+    title: "Ops. Algo deu errado!",
     description:
-      "Something went wrong. Please try again. If the problem persists, please contact us.",
+      "Algo deu errado. Por favor, tente novamente. Se o problema persistir, entre em contato conosco.",
   },
   label = "Cadastrar",
   emailPlaceholder = "E-mail",
@@ -97,7 +97,7 @@ function Newsletter({
 }: SectionProps<typeof loader, typeof action>) {
   if (status === "success" || status === "failed") {
     return (
-      <Section.Container class="bg-base-200">
+      <Section.Container class="bg-primary">
         <div class="p-14 flex flex-col sm:flex-row items-center justify-center gap-5 sm:gap-10">
           <Icon
             size={80}

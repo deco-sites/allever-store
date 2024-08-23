@@ -1,0 +1,26 @@
+@import "configs/variables";
+@import "configs/fonts";
+@import "configs/reset";
+@import "configs/mixins";
+@import "partials/empty-state";
+@import "partials/payment-form";
+@import "modules/alert-box";
+@import "modules/header";
+@import "modules/footer";
+@import "modules/contact-form";
+@import "modules/shipping-form";
+@import "modules/mini-cart";
+@import "modules/free-freight";
+@import "partials/body-order-form";
+@import "partials/body-cart";
+@import "partials/login-modal";
+
+/* Não apagar - Regra temporária - Início */
+.checkout-free-freight.freight-cart,
+.checkout-free-freight.freight-orderform {
+  display: none;
+}
+
+select[id*="vtexpsubscriptionpassinatura-vtexpsubscriptionpkeypfrequency"] option[value="2 week"] {
+  display: none;
+}

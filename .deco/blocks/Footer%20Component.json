@@ -5,11 +5,11 @@
       "children": [
         {
           "title": "Sobre a [allever]",
-          "href": "#"
+          "href": "/sobre"
         },
         {
           "title": "Termos e condições",
-          "href": "https://sac.allever.com/hc/pt-br/articles/10326086768788-Termos-de-Uso"
+          "href": "/termos-e-condicoes"
         }
       ],
       "href": "https://sac.allever.com/hc/pt-br/articles/11992913554836-Sobre-a-allever",
@@ -20,11 +20,11 @@
       "children": [
         {
           "title": "Fale Conosco",
-          "href": "#"
+          "href": "/fale-conosco"
         },
         {
           "title": "Dúvidas Frequentes",
-          "href": "https://sac.allever.com/hc/pt-br/categories/4416704471572-FAQ"
+          "href": "/faq"
         },
         {
           "title": "Política de Cookie",
@@ -32,11 +32,11 @@
         },
         {
           "title": "Trabalhe Conosco",
-          "href": "https://www.info.allever.com/career"
+          "href": "/trabalhe-conosco"
         },
         {
           "title": "Venda na [allever]",
-          "href": "https://www.info.allever.com/venda"
+          "href": "/venda-na-allever"
         },
         {
           "title": "Trocas e Devoluções",
@@ -113,7 +113,7 @@
       "children": [
         {
           "title": "Acesse nossa área de atendimento",
-          "href": "https://sac.allever.com/hc/pt-br"
+          "href": "/sac"
         }
       ],
       "title": "Sac"

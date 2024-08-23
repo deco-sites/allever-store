@@ -38,6 +38,8 @@ function ProductInfo({ page }: Props) {
     installments,
   } = useOffer(offers);
 
+  console.log(inventary)
+
   const hasPromotion = additionalProperty?.some(
     (prop) => prop.value === "Promoção",
   );
@@ -45,8 +47,6 @@ function ProductInfo({ page }: Props) {
   const hasNews = additionalProperty?.some(
     (prop) => prop.value === "Novidades",
   );
-
-  console.log(additionalProperty);
 
   const percent = listPrice && price
     ? Math.round(((listPrice - price) / listPrice) * 100)
@@ -147,7 +147,6 @@ function ProductInfo({ page }: Props) {
         </div>
       </div>
       <hr />
-
       {/* Prices */}
       <div class="flex flex-col gap-[14px] py-[14px]">
         <div class="flex gap-3 items-center">
@@ -204,16 +203,17 @@ function ProductInfo({ page }: Props) {
             </div>
           )}
         {availability != "https://schema.org/InStock" &&
-          (
-            <div>
-              <OutOfStock productID={productID} />
-            </div>
-          )}
-        <div>
-          <p class="text-[24px] font-normal text-black leading-[28.8px]">
-            Restam só <span class="font-bold text-[#123ADD]">08 unidades</span>
-          </p>
-        </div>
+          <div>
+            <OutOfStock productID={productID} />
+          </div>
+        }
+        {inventary > 0 && inventary <= 9 && (
+          <div>
+            <p className="text-[24px] font-normal text-black leading-[28.8px]">
+              Restam só <span className="font-bold text-[#123ADD]">{inventary} unidade{inventary > 1 ? 's' : ''}</span>
+            </p>
+          </div>
+        )}
 
         <div class="">
           <p class="text-xs font-normal text-black leading-[14.4px]">
@@ -223,14 +223,15 @@ function ProductInfo({ page }: Props) {
         </div>
 
         {/* Shipping Simulation */}
-        <div>
+        <div class="lg:max-w-[338px]">
           <ShippingSimulationForm
             items={[{ id: Number(product.sku), quantity: 1, seller: seller }]}
           />
         </div>
       </div>
 
-      {/* Description card */}
+
+      {/* Description card
       <div class="mt-4 sm:mt-6">
         <span class="text-sm">
           {description && (
@@ -243,7 +244,7 @@ function ProductInfo({ page }: Props) {
             </details>
           )}
         </span>
-      </div>
+      </div> */}
     </div>
   );
 }

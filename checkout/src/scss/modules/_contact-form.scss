@@ -1,0 +1,207 @@
+.desk-input-group {
+  #client-gender,
+  #health-profession {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: 1px solid $color-stroke2;
+    box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.03);
+    padding: 15px 0 0 15px;
+    font-family: $font-inter;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 9px;
+    outline: none;
+
+    appearance: none;
+    &::-ms-expand {
+      display: none;
+    }
+  }
+
+  p.client-gender,
+  p.health-profession {
+    &::after {
+      content: "";
+      background-image: url("data:image/svg+xml,%3Csvg width='19' height='18' viewBox='0 0 19 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5.41211 6.75L9.91211 11.25L14.4121 6.75' stroke='%233C3C3B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+      background-repeat: no-repeat;
+      background-position: center;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 50px;
+      height: 100%;
+      border-left: 1px solid $color-light-grey;
+      pointer-events: none;
+    }
+  }
+
+  p.client-gender label,
+  p.health-profession label,
+  p.client-phone label,
+  p.health-registry label,
+  p.client-birth label {
+    color: $color-grey;
+  }
+
+  @include desktop {
+    display: flex;
+
+    p.client-document {
+      margin: 0;
+    }
+
+    p.health-profession,
+    p.health-registry {
+      margin-bottom: 0;
+    }
+
+    p.client-phone,
+    p.client-birth,
+    p.client-company-name,
+    p.health-profession {
+      margin-right: 8px;
+    }
+  }
+}
+
+.box-client-info-health {
+  .health-label {
+    padding: 0;
+    margin: 24px 0 16px 0;
+  }
+
+  #chk-health-client {
+    display: none;
+  }
+
+  .health-text {
+    display: flex;
+    align-items: center;
+    font-family: $font-inter;
+    font-size: 13px;
+    font-weight: 500;
+
+    &::before {
+      content: "";
+      display: block;
+      background-color: white;
+      border: 2px solid $color-grey;
+      border-radius: 5px;
+      box-sizing: border-box;
+      color: white;
+      width: 18px;
+      height: 18px;
+      margin-right: 8px;
+    }
+  }
+
+  #chk-health-client:checked + .health-text::before {
+    content: "";
+    display: block;
+    background-color: $color-dark;
+    border-radius: 5px;
+    box-sizing: border-box;
+    color: white;
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='13' viewBox='0 0 12 13' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 3.95312L4.5 9.45312L2 6.95312' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+  }
+
+  .health-info-box {
+    display: none;
+    margin-bottom: 16px;
+
+    &.visible {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+.box-client-info {
+  p.newsletter {
+    margin: 0 0 16px 0;
+  }
+
+  p.newsletter,
+  p.whatsapp {
+    input[type="checkbox"] {
+      visibility: hidden;
+      position: relative;
+      margin: 0;
+      width: 18px;
+      height: 18px;
+      margin-right: 8px;
+
+      &::after,
+      &::before {
+        visibility: visible;
+      }
+    }
+
+    .newsletter-label,
+    .whatsapp-label {
+      padding: 0;
+      margin: 0;
+    }
+
+    .newsletter-text {
+      display: flex;
+      align-items: center;
+      font-size: 0;
+
+      &::after {
+        content: "Quero receber novidades e ofertas por e-mail";
+        font-family: $font-inter;
+        font-size: 13px;
+        font-weight: 500;
+      }
+    }
+
+    .whatsapp-text {
+      display: flex;
+      align-items: center;
+      font-family: $font-inter;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    input[type="checkbox"]::before {
+      content: "";
+      display: block;
+      background-color: white;
+      border: 2px solid $color-grey;
+      border-radius: 5px;
+      box-sizing: border-box;
+      color: white;
+      width: 18px;
+      height: 18px;
+      margin-right: 8px;
+    }
+
+    input[type="checkbox"]:checked::before {
+      background-color: $color-dark;
+      border: none;
+    }
+
+    input[type="checkbox"]:checked {
+      &::after {
+        content: "";
+        background-image: url("data:image/svg+xml,%3Csvg width='12' height='13' viewBox='0 0 12 13' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 3.95312L4.5 9.45312L2 6.95312' stroke='white' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E%0A");
+        width: 12px;
+        height: 13px;
+        display: block;
+        position: absolute;
+        left: 3px;
+        top: 3px;
+      }
+    }
+  }
+}

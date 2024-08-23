@@ -145,9 +145,21 @@
             "param": "slug"
           }
         },
-        "extensions": []
+        "extensions": [],
+        "seo": {
+          "noIndexing": false
+        },
+        "product": {
+          "isAccessoryOrSparePartFor": [
+            {}
+          ]
+        }
       },
-      "__resolveType": "site/sections/Product/ProductDetails.tsx"
+      "__resolveType": "site/sections/Product/ProductDetails.tsx",
+      "buyTogether": {
+        "__resolveType": "vtex/loaders/legacy/productList.ts",
+        "props": {}
+      }
     },
     {
       "__resolveType": "site/sections/Newsletter/Newsletter.tsx"
