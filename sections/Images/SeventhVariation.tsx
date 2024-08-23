@@ -29,7 +29,7 @@ const SeventhVariation = ({ title, items }: SeventhVariationProps) => {
                   width={items[0].desktop?.Width}
                   height={items[0].desktop?.Height}
                   fetchPriority="low"
-                  class="object-cover lg:rounded-[40px] rounded-[20px]"
+                  class="object-cover lg:rounded-[40px] rounded-[20px] "
                 />
               </a>
             </div>
@@ -59,7 +59,7 @@ const SeventhVariation = ({ title, items }: SeventhVariationProps) => {
           </div>
           <div class="my-6 grid grid-cols-1 gap-4 justify-center md:grid-cols-2">
             <div class="col-span-1">
-              <a href={items[0].Link} class="flex justify-center">
+              <a href={items[0].Link} class="flex justify-center  sm:h-[100%]">
                 <Image
                   src={items[0].mobile?.Image ||
                     `https://placehold.co/${items[0].mobile?.Width}x${
@@ -69,7 +69,7 @@ const SeventhVariation = ({ title, items }: SeventhVariationProps) => {
                   width={items[0].mobile?.Width}
                   height={items[0].mobile?.Height}
                   fetchPriority="low"
-                  class="object-cover lg:rounded-[40px] rounded-[20px]"
+                  class="object-cover lg:rounded-[40px] rounded-[20px] sm:h-[100%]"
                 />
               </a>
             </div>

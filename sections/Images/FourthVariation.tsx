@@ -70,7 +70,7 @@ const FourthVariation = (
               <div class="mt-[10px] overflow-x-hidden">
                 <div id={id} class="grid grid-rows-1">
                   <div class="col-start-1 col-span-3 row-start-1 row-span-1">
-                    <Slider class="carousel carousel-center w-full gap-[0.5rem] px-5">
+                    <Slider class="carousel carousel-center w-full gap-[0.5rem] px-5 sm:justify-between">
                       {items.map((item, index) => (
                         <Slider.Item
                           index={index}
