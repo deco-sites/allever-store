@@ -69,7 +69,7 @@ const FirstVariation = (
             )}
           {items &&
             (
-              <div class="my-6 flex gap-[24.38px] justify-center flex-wrap">
+              <div class="my-6 flex gap-[24.38px] justify-center">
                 {items.map((item, index) => (
                   <a href={item.Link} class="flex" key={index}>
                     <Image

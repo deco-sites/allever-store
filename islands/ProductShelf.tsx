@@ -21,7 +21,7 @@ export interface Props extends SectionHeaderProps, Timer {
 }
 
 export default function ProductShelf({ products, title, cta, expireAt, hideLabel = false }: Props) {
-    console.log('expireAt:', expireAt); 
+    // console.log('expireAt:', expireAt); 
 
     if (!products || products.length === 0) {
         return null;

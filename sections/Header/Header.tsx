@@ -36,7 +36,7 @@ function script() {
       <script
         type="module"
         src={useScript((value) => {
-          console.log(value);
+          // console.log(value);
         }, param)}
       />
     </Head>
@@ -265,7 +265,7 @@ function Header({
 }
 
 export function loader(props: SectionProps, req: Request, ctx: AppContext) {
-  console.log("ctx", ctx);
+  // console.log("ctx", ctx);
 
   return { ...props };
 }

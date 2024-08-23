@@ -20,22 +20,73 @@ const ThirdVariation = ({ items, title }: ThirdVariationProps) => {
             )}
           {items &&
             (
-              <div class="my-6 flex gap-[34.38px] justify-center flex-wrap">
-                {items.map((item, index) => (
-                  <a href={item.Link} class={`flex`} key={index}>
-                    <Image
-                      src={item.desktop?.Image
-                        ? item.desktop?.Image
-                        : `https://placehold.co/${item.desktop?.Width}x${item.desktop?.Height}`}
-                      alt={item.Alt ||
-                        "esse é um banner de uma marca tradicional"}
-                      width={item.desktop?.Width}
-                      height={item.desktop?.Height}
-                      fetchPriority="low"
-                      class="object-cover lg:rounded-[40px] rounded-[20px]"
-                    />
-                  </a>
-                ))}
+              <div class="my-6 flex  justify-center flex-wrap">
+                <div class="flex gap-[20.38px] flex-col">
+                  <div class="flex gap-[20.38px]">
+                    <a href={items[0]?.Link} class={`flex`}>
+                      <Image
+                        src={items[0].desktop?.Image
+                          ? items[0].desktop?.Image
+                          : `https://placehold.co/${items[0].desktop?.Width}x${
+                            items[0].desktop?.Height
+                          }`}
+                        alt={items[0].Alt ||
+                          "esse é um banner de uma marca tradicional"}
+                        width={items[0].desktop?.Width}
+                        height={items[0].desktop?.Height}
+                        fetchPriority="low"
+                        class="object-cover lg:rounded-[40px] rounded-[20px]"
+                      />
+                    </a>
+                    <a href={items[1]?.Link} class={`flex`}>
+                      <Image
+                        src={items[1].desktop?.Image
+                          ? items[1].desktop?.Image
+                          : `https://placehold.co/${items[1].desktop?.Width}x${
+                            items[1].desktop?.Height
+                          }`}
+                        alt={items[1].Alt ||
+                          "esse é um banner de uma marca tradicional"}
+                        width={items[1].desktop?.Width}
+                        height={items[1].desktop?.Height}
+                        fetchPriority="low"
+                        class="object-cover lg:rounded-[40px] rounded-[20px]"
+                      />
+                    </a>
+                  </div>
+                  <div class="flex gap-[20.38px]">
+                    <a href={items[2]?.Link} class={`flex`}>
+                      <Image
+                        src={items[2].desktop?.Image
+                          ? items[2].desktop?.Image
+                          : `https://placehold.co/${items[2].desktop?.Width}x${
+                            items[2].desktop?.Height
+                          }`}
+                        alt={items[2].Alt ||
+                          "esse é um banner de uma marca tradicional"}
+                        width={items[2].desktop?.Width}
+                        height={items[2].desktop?.Height}
+                        fetchPriority="low"
+                        class="object-cover lg:rounded-[40px] rounded-[20px]"
+                      />
+                    </a>
+                    <a href={items[3]?.Link} class={`flex`}>
+                      <Image
+                        src={items[3].desktop?.Image
+                          ? items[3].desktop?.Image
+                          : `https://placehold.co/${items[3].desktop?.Width}x${
+                            items[3].desktop?.Height
+                          }`}
+                        alt={items[3].Alt ||
+                          "esse é um banner de uma marca tradicional"}
+                        width={items[3].desktop?.Width}
+                        height={items[3].desktop?.Height}
+                        fetchPriority="low"
+                        class="object-cover lg:rounded-[40px] rounded-[20px]"
+                      />
+                    </a>
+                  </div>
+                </div>
               </div>
             )}
         </div>

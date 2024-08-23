@@ -16,7 +16,7 @@ const setup = ({ rootId, threshold = 100 }: Props) => {
   const parsedUrl = new URL(window.location.href);
   const homePage = parsedUrl.pathname === "/";
 
-  console.log("homePage", homePage);
+  // console.log("homePage", homePage);
 
   if (homePage) {
     if (root.classList.contains("is-otherpage")) {
