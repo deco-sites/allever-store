@@ -1,82 +1,10 @@
 {
   "__resolveType": "site/sections/Header/Header.tsx",
-  "navItems": [
-    {
-      "children": [],
-      "name": "Promoções",
-      "url": "/promocoes",
-      "ishighlighted": true
-    },
-    {
-      "children": [],
-      "name": "Novidades",
-      "url": "/Novidades",
-      "ishighlighted": true
-    },
-    {
-      "children": [],
-      "name": "Alimentos e bebidas",
-      "url": "/Alimentos-e-bebidas"
-    },
-    {
-      "children": [],
-      "url": "/Automotivo",
-      "name": "Automotivo"
-    },
-    {
-      "children": [],
-      "name": "Bebês",
-      "url": "/Bebes"
-    },
-    {
-      "children": [],
-      "name": "Beleza e Bem-estar",
-      "url": "/Beleza-e-Bem-estar"
-    },
-    {
-      "children": [],
-      "name": "Brinquedos e Jogos",
-      "url": "/brinquedos-e-jogos"
-    },
-    {
-      "children": [],
-      "name": "Câmeras e Foto",
-      "url": "/cameras-e-fotos"
-    },
-    {
-      "children": [
-        {
-          "children": [],
-          "name": "Cozinha",
-          "url": "/cozinha"
-        },
-        {
-          "children": [],
-          "name": "Iluminação",
-          "url": "/iluminacao"
-        },
-        {
-          "children": [],
-          "name": "Decoração para Casa",
-          "url": "/decoracao-para-casa"
-        },
-        {
-          "children": [],
-          "name": "Banho",
-          "url": "/banho"
-        },
-        {
-          "children": [],
-          "name": "Ar e Ventilação",
-          "url": "/ar-e-ventilacao"
-        }
-      ],
-      "name": "Casa",
-      "url": "/casa"
-    }
-  ],
+  "navItems": {
+    "__resolveType": "navbar"
+  },
   "searchbar": {
-    "placeholder": "O que deseja?",
+    "placeholder": "What are you looking for?",
     "loader": {
       "__resolveType": "resolved",
       "data": {
@@ -94,27 +22,5 @@
     "alt": "Deco Storefront",
     "width": 94,
     "height": 20.26
-  },
-  "menuHeader": [
-    {
-      "menu": "login",
-      "link": "/login"
-    }
-  ],
-  "menuInstitucional": [
-    {
-      "text": "login",
-      "link": "/login"
-    }
-  ],
-  "MenuHeader": [
-    {
-      "text": "/login",
-      "link": "login"
-    }
-  ],
-  "menu": {
-    "text": "/login",
-    "link": "login"
   }
 }

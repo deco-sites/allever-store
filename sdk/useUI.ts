@@ -12,6 +12,7 @@ const displaySearchPopup = signal(false);
 const displaySearchDrawer = signal(false);
 const displaySubscriptionPopup = signal(false);
 const displayVideoModal = signal<null | string>(null);
+const searchBarExpanded = signal(false);
 
 const currentSubscription = signal<Props | null>(null);
 
@@ -22,6 +23,7 @@ const state = {
   displaySearchDrawer,
   displaySubscriptionPopup,
   displayVideoModal,
+  searchBarExpanded,
   currentSubscription,
 };
 

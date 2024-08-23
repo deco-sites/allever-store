@@ -79,7 +79,7 @@ const Desktop = (
 ) => (
   <>
     <div class="flex flex-col gap-4 py-[45px] container desktop">
-      <div class="flex items-center space-between">
+      <div class="flex items-center space-between relative">
 
         <div>
           <label
@@ -109,16 +109,12 @@ const Desktop = (
           }
         />
 
-        <div class="place-self-center" >
+        <div class="main-logo">
           <Logo src={logo.src} alt={logo.alt} />
-
         </div>
 
         <div class="flex gap-4 items-center place-self-end">
-          <div>
-
-            <Searchbar {...searchbar} />
-          </div>
+          <Searchbar {...searchbar} />
           <SignIn variant="desktop" />
           <Wishlist />
           <Bag />

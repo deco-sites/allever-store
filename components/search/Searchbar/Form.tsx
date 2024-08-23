@@ -10,7 +10,7 @@ import { useComponent } from "../../../sections/Component.tsx";
 import Icon from "../../ui/Icon.tsx";
 import { Props as SuggestionProps } from "./Suggestions.tsx";
 
-import ExpandableInput from '../../../islands/ExpandableInput.tsx'
+import ExpandableInput from "../../../islands/ExpandableInput.tsx";
 
 export const ACTION = "/s";
 export const NAME = "q";
@@ -55,45 +55,78 @@ export default function Searchbar(
   const slot = useId();
 
   return (
-    <div class={`w-full relative flex flex-col  ${searchBarDrawer ? "gap-[unset]" : ""}`}>
-      <div class="flex flex-row-reverse items-center gap-2">
-        <form id={SEARCHBAR_INPUT_FORM_ID} action={ACTION} class={`flex-1 join flex gap-[20px] ${searchBarDrawer ? "my-5 w-full px-5" : ""}`}>
+    <div
+      class={`search-bar-wrapper w-full relative lg:hover:w-[50vw] ${
+        searchBarDrawer ? "gap-[unset]" : ""
+      }`}
+    >
+      <div class="search-bar-container flex items-center justify-end gap-2">
         <button
           type="submit"
           form={SEARCHBAR_INPUT_FORM_ID}
-          class="bg-transparent border-none md:hidden"
+          class="bg-transparent border-none hidden md:block w-6 p-0"
           aria-label="Search"
           tabIndex={-1}
         >
           <span class="loading loading-spinner loading-xs hidden [.htmx-request_&]:inline" />
-          {searchBarDrawer ? <Icon id="search-drawer" class="inline [.htmx-request_&]:hidden" /> : <Icon id="search" class="inline [.htmx-request_&]:hidden" />}
+          {searchBarDrawer
+            ? (
+              <Icon
+                id="search-drawer"
+                class="inline [.htmx-request_&]:hidden"
+              />
+            )
+            : <Icon id="search" class="inline [.htmx-request_&]:hidden" />}
         </button>
-          <ExpandableInput
+        <form
+          id={SEARCHBAR_INPUT_FORM_ID}
+          action={ACTION}
+          class={`join flex gap-[20px] ${
+            searchBarDrawer ? "my-5 w-full px-5" : ""
+          }`}
+        >
+          <button
+            type="submit"
+            form={SEARCHBAR_INPUT_FORM_ID}
+            class="bg-transparent border-none md:hidden"
+            aria-label="Search"
+            tabIndex={-1}
+          >
+            {searchBarDrawer
+              ? (
+                <Icon
+                  id="search-drawer"
+                  class="inline"
+                />
+              )
+              : <Icon id="search" class="inline" />}
+          </button>
+          <input
+            type="text"
             name={NAME}
+            class={`rounded-[30px] outline-none py-[8.5px] px-5 placeholder-[#D3D3D3] w-full lg:w-auto`}
             placeholder={placeholder}
             autocomplete="off"
-            hxTarget={`#${slot}`}
-            hxPost={loader && useComponent<SuggestionProps>(Suggestions, { loader: asResolved(loader) })}
-            hx-trigger={`input changed delay:100ms, ${NAME}`}
-            hx-indicator={`#${SEARCHBAR_INPUT_FORM_ID}`}
-            hxSwap="innerHTML"
-            hx-focus={`border-black`}
+            autoComplete="off"
+            data-hx-target={`#${slot}`}
+            data-hx-post={loader &&
+              useComponent<SuggestionProps>(Suggestions, {
+                loader: asResolved(loader),
+              })
+            }
+            data-hx-trigger={`input changed delay:100ms, ${NAME}`}
+            data-hx-indicator={`#${SEARCHBAR_INPUT_FORM_ID}`}
+            data-hx-swap="innerHTML"
+            data-hx-focus={`border-black`}
           />
         </form>
-        <button
-          type="submit"
-          form={SEARCHBAR_INPUT_FORM_ID}
-          class="bg-transparent border-none hidden md:block"
-          aria-label="Search"
-          tabIndex={-1}
-        >
-          <span class="loading loading-spinner loading-xs hidden [.htmx-request_&]:inline" />
-          {searchBarDrawer ? <Icon id="search-drawer" class="inline [.htmx-request_&]:hidden" /> : <Icon id="search" class="inline [.htmx-request_&]:hidden" />}
-        </button>
       </div>
 
       {/* Suggestions slot */}
-      <div class="absolute top-full left-0 w-[calc(100%-32px)] bg-white z-10" id={slot} />
+      <div
+        class="suggestions-wrapper lg:absolute right-0 lg:bg-white px-5 pt-0 lg:py-8"
+        id={slot}
+      />
 
       <script
         type="module"

@@ -8,6 +8,7 @@ import * as $CampaignTimer from "./islands/CampaignTimer.tsx";
 import * as $ExpandableInput from "./islands/ExpandableInput.tsx";
 import * as $Form from "./islands/Form.tsx";
 import * as $MicroHeaderSetup from "./islands/MicroHeaderSetup.tsx";
+import * as $MinicartTotalInstallments from "./islands/MinicartTotalInstallments.tsx";
 import * as $PaymentsMethods from "./islands/PaymentsMethods.tsx";
 import * as $ProductShelf from "./islands/ProductShelf.tsx";
 import * as $Product_TrustVox from "./islands/Product/TrustVox.tsx";
@@ -27,6 +28,7 @@ const manifest = {
     "./islands/ExpandableInput.tsx": $ExpandableInput,
     "./islands/Form.tsx": $Form,
     "./islands/MicroHeaderSetup.tsx": $MicroHeaderSetup,
+    "./islands/MinicartTotalInstallments.tsx": $MinicartTotalInstallments,
     "./islands/PaymentsMethods.tsx": $PaymentsMethods,
     "./islands/ProductShelf.tsx": $ProductShelf,
     "./islands/Product/TrustVox.tsx": $Product_TrustVox,
