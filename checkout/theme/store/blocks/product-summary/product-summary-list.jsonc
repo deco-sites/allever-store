@@ -36,7 +36,7 @@
     ]
   },
   "flex-layout.row#summaryListDesktop": {
-    "props":{
+    "props": {
       "fullWidth": true,
       "colSizing": "auto",
       "blockClass": "summaryListDesktop"
@@ -144,7 +144,7 @@
     }
   },
   "flex-layout.row#summaryListMobile": {
-    "props":{
+    "props": {
       "preserveLayoutOnMobile": true,
       "colSizing": "auto",
       "blockClass": "summaryListMobile",

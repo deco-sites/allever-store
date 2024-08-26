@@ -26,32 +26,36 @@ const FourthVariation = (
             (
               <div class="my-6 flex flex-col gap-4 justify-between">
                 <div class="flex gap-4 justify-center">
-                    <a href={items[0].Link} class="flex max-w-[900px]">
-                      <Image
-                        src={items[0]?.desktop?.Image
-                          ? items[0]?.desktop?.Image
-                          : `https://placehold.co/${items[0]?.desktop?.Width}x${items[0]?.desktop?.Height}`}
-                        alt={items[0]?.Alt ||
-                          "esse é um banner de uma marca tradicional"}
-                        width={items[0]?.desktop?.Width}
-                        height={items[0]?.desktop?.Height}
-                        fetchPriority="low"
-                        class="object-cover lg:rounded-[40px] rounded-[20px] w-full"
-                      />
-                    </a>
-                    <a href={items[1].Link} class="flex max-w-[500px]">
-                      <Image
-                        src={items[1]?.desktop?.Image
-                          ? items[1]?.desktop?.Image
-                          : `https://placehold.co/${items[1]?.desktop?.Width}x${items[1]?.desktop?.Height}`}
-                        alt={items[1]?.Alt ||
-                          "esse é um banner de uma marca tradicional"}
-                        width={items[1]?.desktop?.Width}
-                        height={items[1]?.desktop?.Height}
-                        fetchPriority="low"
-                        class="object-cover lg:rounded-[40px] rounded-[20px] w-full"
-                      />
-                    </a>
+                  <a href={items[0].Link} class="flex max-w-[900px]">
+                    <Image
+                      src={items[0]?.desktop?.Image
+                        ? items[0]?.desktop?.Image
+                        : `https://placehold.co/${items[0]?.desktop?.Width}x${
+                          items[0]?.desktop?.Height
+                        }`}
+                      alt={items[0]?.Alt ||
+                        "esse é um banner de uma marca tradicional"}
+                      width={items[0]?.desktop?.Width}
+                      height={items[0]?.desktop?.Height}
+                      fetchPriority="low"
+                      class="object-cover lg:rounded-[40px] rounded-[20px] w-full"
+                    />
+                  </a>
+                  <a href={items[1].Link} class="flex max-w-[500px]">
+                    <Image
+                      src={items[1]?.desktop?.Image
+                        ? items[1]?.desktop?.Image
+                        : `https://placehold.co/${items[1]?.desktop?.Width}x${
+                          items[1]?.desktop?.Height
+                        }`}
+                      alt={items[1]?.Alt ||
+                        "esse é um banner de uma marca tradicional"}
+                      width={items[1]?.desktop?.Width}
+                      height={items[1]?.desktop?.Height}
+                      fetchPriority="low"
+                      class="object-cover lg:rounded-[40px] rounded-[20px] w-full"
+                    />
+                  </a>
                 </div>
                 {bannerFull &&
                   (

@@ -18,15 +18,26 @@ function BuyTogether({ product, buyTogether }: Props) {
 
   const product1 = product;
   const product2 = buyTogether[count.value];
-  const product3 = buyTogether[(count.value + 1) % buyTogether.length]; 
+  const product3 = buyTogether[(count.value + 1) % buyTogether.length];
 
-  const { price: price1, listPrice: listPrice1, seller: seller1 } = useOffer(product1.offers);
-  const { price: price2, listPrice: listPrice2, seller: seller2 } = useOffer(product2.offers);
-  const { price: price3, listPrice: listPrice3, seller: seller3 } = useOffer(product3.offers);
+  const { price: price1, listPrice: listPrice1, seller: seller1 } = useOffer(
+    product1.offers,
+  );
+  const { price: price2, listPrice: listPrice2, seller: seller2 } = useOffer(
+    product2.offers,
+  );
+  const { price: price3, listPrice: listPrice3, seller: seller3 } = useOffer(
+    product3.offers,
+  );
 
   if (!seller1 || !seller2 || !seller3) return <></>;
 
-  const addProduct = (prod: Product, price: number, listPrice: number, seller: string) => ({
+  const addProduct = (
+    prod: Product,
+    price: number,
+    listPrice: number,
+    seller: string,
+  ) => ({
     skuId: prod.productID,
     sellerId: seller,
     discount: listPrice ? listPrice - price : 0,
@@ -45,7 +56,8 @@ function BuyTogether({ product, buyTogether }: Props) {
   // Props for AddToCartButton
   const props = useAddToCart({ items });
 
-  const totalListPrice = (listPrice1 || 0) + (listPrice2 || 0) + (listPrice3 || 0);
+  const totalListPrice = (listPrice1 || 0) + (listPrice2 || 0) +
+    (listPrice3 || 0);
   const totalPrice = (price1 || 0) + (price2 || 0) + (price3 || 0);
 
   return (
@@ -61,14 +73,16 @@ function BuyTogether({ product, buyTogether }: Props) {
             </div>
             <div class="flex items-center">
               <span class="bg-primary h-[0.125rem] w-[1.125rem]"></span>
-              <span class="bg-primary h-[0.125rem] w-[1.125rem] absolute rotate-90"></span>
+              <span class="bg-primary h-[0.125rem] w-[1.125rem] absolute rotate-90">
+              </span>
             </div>
             <div class="flex-1 flex flex-col max-w-[300px] w-full">
               <ProductCard product={product2} class="flex-1" />
             </div>
             <div class="flex items-center">
               <span class="bg-primary h-[0.125rem] w-[1.125rem]"></span>
-              <span class="bg-primary h-[0.125rem] w-[1.125rem] absolute rotate-90"></span>
+              <span class="bg-primary h-[0.125rem] w-[1.125rem] absolute rotate-90">
+              </span>
             </div>
             <div class="flex-1 flex flex-col max-w-[300px] w-full">
               <ProductCard product={product3} class="flex-1" />
@@ -76,7 +90,10 @@ function BuyTogether({ product, buyTogether }: Props) {
           </div>
           <div class="flex flex-col gap-2 py-2 max-w-[300px] w-full">
             <ins class="text-black text-base leading-[1.875rem] py-1 no-underline">
-              Preço total: <span class="font-semibold text-[20px]">{formatPrice(totalPrice, product1.offers!.priceCurrency!)}</span>
+              Preço total:{" "}
+              <span class="font-semibold text-[20px]">
+                {formatPrice(totalPrice, product1.offers!.priceCurrency!)}
+              </span>
             </ins>
             <div class="w-full">
               <AddToCartButton

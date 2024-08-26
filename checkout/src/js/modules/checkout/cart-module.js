@@ -19,8 +19,9 @@ class CartModule {
         .forEach((productElement, index) => {
           const item = _this.products[index];
 
-          const selectWrapper =
-            productElement.querySelector(".p-signment-select");
+          const selectWrapper = productElement.querySelector(
+            ".p-signment-select",
+          );
 
           let html = `
             <select>
@@ -53,7 +54,8 @@ class CartModule {
   }
 
   addSignment({ orderFormId, itemIndex, frequency }) {
-    let url = `/api/checkout/pub/orderForm/${orderFormId}/items/${itemIndex}/attachments/vtex.subscription.assinatura`;
+    let url =
+      `/api/checkout/pub/orderForm/${orderFormId}/items/${itemIndex}/attachments/vtex.subscription.assinatura`;
 
     let payload = {
       content: {
@@ -68,7 +70,8 @@ class CartModule {
       data: JSON.stringify(payload),
     });
 
-    url = `/api/checkout/pub/orderForm/${orderFormId}/attachments/subscriptionData`;
+    url =
+      `/api/checkout/pub/orderForm/${orderFormId}/attachments/subscriptionData`;
 
     payload = {
       subscriptions: [

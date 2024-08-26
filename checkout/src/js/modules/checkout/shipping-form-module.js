@@ -8,7 +8,7 @@ class ShippingFormModule {
     // Garante que seja executado quando o usuário sair e voltar pro formulário
     window.addEventListener(
       "hashchange",
-      () => window.location.hash.toLowerCase() === "#/shipping" && this.init()
+      () => window.location.hash.toLowerCase() === "#/shipping" && this.init(),
     );
   }
 
@@ -25,8 +25,9 @@ class ShippingFormModule {
     document.querySelectorAll(".shp-option-text-package").forEach((elm) => {
       const valueElm = elm.querySelector("span");
       const value = valueElm.textContent.match(/\d+/)[0];
-      valueElm.textContent =
-        Number(value) > 1 ? `${value} dias úteis` : `${value} dia útil`;
+      valueElm.textContent = Number(value) > 1
+        ? `${value} dias úteis`
+        : `${value} dia útil`;
     });
   }
 

@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       boxShadow: {
-        'custom': '24px 51px 113px -17px rgba(0,0,0,0.75)',
+        "custom": "24px 51px 113px -17px rgba(0,0,0,0.75)",
       },
       animation: {
         sliding: "sliding 30s linear infinite",

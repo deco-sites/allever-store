@@ -105,14 +105,13 @@ function ProductCard({
         <a
           href={relativeUrl}
           aria-label="view product"
-          class={"absolute top-4 right-4 z-[9] flex items-center"}
         >
           <Image
             src={front.url!}
             alt={front.alternateName}
             width={WIDTH}
             height={HEIGHT}
-            class="bg-base-100 col-span-full row-span-full w-full opacity-100 lg:group-hover:opacity-0 lg:group-hover:z-10"
+            class="opacity-100 lg:group-hover:opacity-0 lg:group-hover:z-10"
             preload={preload}
             loading={preload ? "eager" : "lazy"}
             decoding="async"
@@ -122,13 +121,13 @@ function ProductCard({
             alt={back?.alternateName ?? front.alternateName}
             width={WIDTH}
             height={HEIGHT}
-            class="bg-base-100 col-span-full row-span-full w-full transition-opacity opacity-0 lg:group-hover:opacity-100 lg:group-hover:z-30 absolute left-0"
+            class="transition-opacity opacity-0 lg:group-hover:opacity-100 lg:group-hover:z-30 absolute left-0"
             sizes="(max-width: 640px) 50vw, 20vw"
             loading="lazy"
             decoding="async"
           />
         </a>
-        <div class="absolute  top-2 lg:top-[10px] left-0 z-10 max-w-[200px] flex flex-wrap gap-[5px]">
+        <div class="absolute top-2 lg:top-[10px] left-0 z-10 max-w-[200px] flex flex-wrap gap-[5px]">
           {/* Discounts */}
           {percent > 1 && inStock
             ? (

@@ -3,14 +3,17 @@
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
-and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
+and this project adheres to
+[Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
-// VTEX Store Theme by Growth Hacking Team 
+// VTEX Store Theme by Growth Hacking Team
 
 ## [Unreleased]
 
 ## [5.1.0] - 2022-06-07
+
 ### Changed
+
 - Fixed height in `list-context.image-list#demo` example.
 - Images used in `slider-layout#demo-images` example.
 - Amount of products displayed as default in `slider-layout#demo-products`.
@@ -19,16 +22,22 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Benefits bar color to improve contrast.
 
 ### Added
+
 - Fold block in home page.
 - Pre-load prop in `list-context.image-list#demo`.
-- `image-rendering: -webkit-optimize-contrast` in vtex.store-components.css file.
-- min-height:450px in `sliderLayoutContainer--carousel` in vtex.slider-layout.css file.
-- min-height in `.layoutContainer--shelf` and `slide--shelf` in vtex.slider-layout.css file.
-- Height in `logo#mobile` and  `logo#desktop`.
+- `image-rendering: -webkit-optimize-contrast` in vtex.store-components.css
+  file.
+- min-height:450px in `sliderLayoutContainer--carousel` in
+  vtex.slider-layout.css file.
+- min-height in `.layoutContainer--shelf` and `slide--shelf` in
+  vtex.slider-layout.css file.
+- Height in `logo#mobile` and `logo#desktop`.
 
 ### Removed
+
 - `__fold__.experimentalLazyAssets` from home page.
-- Margin-bottom and padding-bottom from `flexRow--deals .flexCol` in vtex.flex-layout.css file.
+- Margin-bottom and padding-bottom from `flexRow--deals .flexCol` in
+  vtex.flex-layout.css file.
 - `flex-layout.row#2-desktop` block from header-layout.desktop.
 - `notification.bar#home` from header.
 
@@ -39,200 +48,303 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - `vtex.reviews-and-ratings` peer dependency from `2.x` t0 `3.x`
 
 ## [4.4.2] - 2021-07-02
+
 ### Fixed
+
 - Wrong condition subject being used in `condition-layout` example.
 
 ## [4.4.1] - 2021-06-28 [YANKED]
+
 ### Added
+
 - Example of conditional-layout usage on the product-page
 
 ## [4.4.0] - 2021-06-08
+
 ### Changed
-- `search-fetch-previous` and `search-fetch-more` to use `a` tags to improve SEO performance
+
+- `search-fetch-previous` and `search-fetch-more` to use `a` tags to improve SEO
+  performance
 
 ## [4.3.0] - 2021-01-14
+
 ### Added
+
 - Example of multiple search gallery layouts usage
 
 ## [4.2.1] - 2020-12-14
+
 ### Fixed
-- Unnecessary `max-width` style in the input of `search-bar` block which causes the style to break when the `search-bar` needs to be bigger`.
+
+- Unnecessary `max-width` style in the input of `search-bar` block which causes
+  the style to break when the `search-bar` needs to be bigger`.
 
 ## [4.2.0] - 2020-11-30
+
 ### Added
+
 - Example of [vtex.store-video](https://github.com/vtex-apps/store-video) usage.
 
 ## [4.1.0] - 2020-11-16
+
 ### Changed
+
 - Update `vtex.order-placed@1.x` to `vtex.order-placed@2.x`.
 
 ## [4.0.0] - 2020-10-30
+
 ### Added
-- Example of [vtex.product-specifications](https://github.com/vtex-apps/product-specifications) usage.
+
+- Example of
+  [vtex.product-specifications](https://github.com/vtex-apps/product-specifications)
+  usage.
 
 ### Changed
-- Use new major of [vtex.reviews-and-ratings](https://github.com/vtex-apps/reviews-and-ratings).
+
+- Use new major of
+  [vtex.reviews-and-ratings](https://github.com/vtex-apps/reviews-and-ratings).
 
 ## [3.41.0] - 2020-10-08
+
 ### Added
-- Example of [vtex.product-highlight](https://github.com/vtex-apps/product-highlights) usage.
+
+- Example of
+  [vtex.product-highlight](https://github.com/vtex-apps/product-highlights)
+  usage.
 
 ### Changed
+
 - Change files and folder structure so it's easier to find the blocks.
 
 ### Removed
+
 - Unused blocks.
 
 ## [3.40.0] - 2020-10-07
+
 ### Added
-- "Contact us" page as example of [vtex.store-form](https://github.com/vtex-apps/store-form) usage.
+
+- "Contact us" page as example of
+  [vtex.store-form](https://github.com/vtex-apps/store-form) usage.
 
 ## [3.39.2] - 2020-10-06
+
 ### Fixed
-- `minicart.v2` opening itself on **all** `addToCart` events, including the ones triggered by quantity changes in the checkout cart.
+
+- `minicart.v2` opening itself on **all** `addToCart` events, including the ones
+  triggered by quantity changes in the checkout cart.
 
 ## [3.39.1] - 2020-10-05
+
 ### Fixed
+
 - `icon-cart` being bigger than it should.
 
 ## [3.39.0] - 2020-09-30
+
 ### Added
-- Example of how to make the `minicart.v2` block respond to the `addToCart` pixel event.
+
+- Example of how to make the `minicart.v2` block respond to the `addToCart`
+  pixel event.
 
 ## [3.38.0] - 2020-09-10
+
 ### Added
+
 - `disclosure-layout` example.
 
 ### Removed
+
 - `public` folder.
 
 ## [3.37.2] - 2020-07-30
+
 ### Fixed
+
 - Active **background** `action-secondary` color from `#dbe9fd` to `#d2defc`
 - Active **border** `action-secondary` color from `#dbe9fd` to `#d2defc`
 
 ## [3.37.1] - 2020-07-08
 
 ### Changed
+
 - Change URL of the docs in README
 
 ## [3.37.0] - 2020-05-18
+
 ### Changed
+
 - PreventRouteChange to `false`.
 
 ## [3.36.0] - 2020-05-11
+
 ### Added
+
 - Add input values for recursive assemblies
 
 ## [3.35.0] - 2020-04-13
+
 ### Added
+
 - `aspectRatio` and `maxHeight` on `product-summary-image#shelf`.
 
 ### Fixed
+
 - Some styles on product summary and price components.
 
 ## [3.34.0] - 2020-04-07
+
 ### Added
+
 - `fetch-more` and `fetch-previous` buttons on mobile.
 
 ## [3.33.0] - 2020-04-02
+
 ### Changed
-- Price blocks on `product-summary` and on the PDP to use the new blocks from `vtex.product-price`
+
+- Price blocks on `product-summary` and on the PDP to use the new blocks from
+  `vtex.product-price`
 - Product title style on PDP.
 
 ## [3.32.0] - 2020-03-20
+
 ### Changed
+
 - Use `__fold__.experimentalLazyAssets` on home.
 
 ## [3.31.0] - 2020-03-19
+
 ### Added
+
 - `product-gifts` block to `store.product`.
 
 ## [3.30.1] - 2020-03-06
+
 ### Fixed
+
 - Fix version of the app.
 
 ## [3.29.0] - 2020-03-06
 
 ## [3.28.0] - 2020-03-05
+
 ### Added
+
 - `__fold__` blocks on home.
 - `aspectRatio` prop on `product-images`.
 
 ## [3.27.0] - 2020-03-03
+
 ### Added
+
 - `store.not-found#search` block.
 
 ## [3.26.1] - 2020-02-20
+
 ### Changed
+
 - Limit the width of the search bar input instead of its container.
 
 ### Fixed
+
 - Logo animation when header sticks to the top of the page.
 
 ### Added
-- `prefers-reduced-motion` query to remove animation for users which don't want unnecessary animations.
+
+- `prefers-reduced-motion` query to remove animation for users which don't want
+  unnecessary animations.
 
 ## [3.26.0] - 2020-02-18
+
 ### Changed
+
 - Refactor the `header` with native IO blocks.
 
 ### Added
+
 - Animations to the `header` when it sticks to the top of the page.
 
 ## [3.25.0] - 2020-02-06
+
 ### Changed
-- `vtex.carousel` in favor of using `list-context.image-list` and `slider-layout`.
-- `vtex.shelf` in favor of using `list-context.product-list` and `slider-layout`.
+
+- `vtex.carousel` in favor of using `list-context.image-list` and
+  `slider-layout`.
+- `vtex.shelf` in favor of using `list-context.product-list` and
+  `slider-layout`.
 
 ## [3.24.0] - 2020-02-05
+
 ### Added
+
 - `height` on `product-summary-image`
 
 ## [3.23.2] - 2020-02-03
+
 ### Changed
+
 - Make search use cold prices by default.
 
 ## [3.23.1] - 2020-01-27
+
 ### Fixed
+
 - Use default `minicart.v2` from `vtex.minicart`.
 
 ## [3.23.0] - 2020-01-27
+
 ### Added
+
 - `store.not-found#product` block.
 
 ## [3.22.0] - 2020-01-23
+
 ### Added
+
 - `product-bookmark` blocks.
 
 ## [3.21.2] - 2020-01-22
+
 ### Fixed
+
 - Layout on search pages with few results but a big filter sidebar.
 
 ## [3.21.1] - 2019-12-27
+
 ### Fixed
+
 - Use docs builder.
 
 ## [3.21.0] - 2019-12-20
+
 ### Added
+
 - `showValueNameForImageVariation` to `sku-selector`.
 
 ### Changed
+
 - Remove product-identifier.
 
 ## [3.20.2] - 2019-12-19
+
 ### Fixed
+
 - Menu links and layout
 
 ## [3.20.1] - 2019-12-18
+
 ### Changed
+
 - Use `styles-builder@2.x`.
 
 ## [3.20.0] - 2019-12-17
+
 ### Changed
+
 - Use new flexible `minicart.v2` and `add-to-cart-button`.
 
 ### Added
+
 - Custom CSS styles for `product-identifier`.
 
 ## [3.20.0-beta.0] - 2019-12-11
@@ -240,36 +352,51 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [3.20.0-beta] - 2019-12-06
 
 ## [3.19.2] - 2019-12-16
+
 ### Fixed
+
 - `minItemsPerPage` prop in `shelf#home` block.
 
 ## [3.19.1] - 2019-12-03
 
 ## [3.18.2] - 2019-12-03
+
 ### Fixed
+
 - Add missing dependencies
 
 ## [3.18.1] - 2019-11-11
+
 ### Fixed
+
 - Use the proper API to space SKU Selector
 
 ## [3.18.0] - 2019-11-11
+
 ### Fixed
+
 - Product page spacing issues.
 
 ### Added
+
 - Product description.
 
 ## [3.17.2] - 2019-11-08
+
 ### Added
+
 - Use `skusFilter` `FIRST_AVAILABLE` value.
 
 ## [3.17.1] - 2019-11-06
+
 ### Fixed
+
 - Remove usage of deprecated selectors.
 
 ## [3.17.0] - 2019-11-06
+
 ### Changed
+
 - PreventRouteChange to `true`.
 
 ## [3.16.2] - 2019-10-17
@@ -332,11 +459,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Removed
 
-- `product-add-to-list-button` from `flex-layout.col#product-image` so that it isn't rendered in the products page.
+- `product-add-to-list-button` from `flex-layout.col#product-image` so that it
+  isn't rendered in the products page.
 
 ### Added
 
-- New props (`minItemsPerPage` and `paginationDotsVisibility`) for the Shelf component to `shelf#home`.
+- New props (`minItemsPerPage` and `paginationDotsVisibility`) for the Shelf
+  component to `shelf#home`.
 
 ## [3.9.1] - 2019-08-14
 
@@ -401,7 +530,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-- `product-summary` to `product-summary.shelf` so it's possible to add product review interfaces in the shelf.
+- `product-summary` to `product-summary.shelf` so it's possible to add product
+  review interfaces in the shelf.
 
 ## [3.4.2] - 2019-06-11
 
@@ -427,7 +557,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Changed
 
-- Product details is now broken down into smaller blocks, inserted directly into `store.product`.
+- Product details is now broken down into smaller blocks, inserted directly into
+  `store.product`.
 
 ## [3.2.1] - 2019-05-28
 
@@ -481,7 +612,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
-- Include missing dependencies. Previously, it was working only due to a dependency leak on IO, but the store-theme was breaking since that problem was fixed.
+- Include missing dependencies. Previously, it was working only due to a
+  dependency leak on IO, but the store-theme was breaking since that problem was
+  fixed.
 
 ## [2.2.0] - 2019-02-18
 

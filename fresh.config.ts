@@ -10,7 +10,7 @@ export default defineConfig({
     tailwind,
   }),
   render: (ctx, render) => {
-    ctx.lang = 'pt-BR';
+    ctx.lang = "pt-BR";
     render();
   },
 });

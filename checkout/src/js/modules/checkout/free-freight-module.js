@@ -43,7 +43,7 @@ class FreeFreightModule {
       .forEach((entry) => {
         if (this.orderValue > 0) {
           const innerBar = entry.parentElement.querySelector(
-            ".checkout-free-freight__bar--inner"
+            ".checkout-free-freight__bar--inner",
           );
 
           const minFreeShipping = 200; // Valor mínimo para frete grátis
@@ -53,9 +53,11 @@ class FreeFreightModule {
 
           const remainingValue = minFreeShipping - this.orderValue;
           if (remainingValue > 0) {
-            entry.textContent = `Faltam R$ ${remainingValue
-              .toFixed(2)
-              .replace(".", ",")} para frete grátis!`;
+            entry.textContent = `Faltam R$ ${
+              remainingValue
+                .toFixed(2)
+                .replace(".", ",")
+            } para frete grátis!`;
             entry.classList.remove("congracts");
           } else {
             entry.textContent = "Parabéns! Você ganhou frete grátis!";
@@ -91,7 +93,7 @@ class FreeFreightModule {
     }
 
     waitForElm(
-      ".mini-cart .summary-template-holder .accordion-inner table.table .totalizers-list"
+      ".mini-cart .summary-template-holder .accordion-inner table.table .totalizers-list",
     ).then((elm) => {
       if (elm.querySelector(".checkout-free-freight")) {
         return;

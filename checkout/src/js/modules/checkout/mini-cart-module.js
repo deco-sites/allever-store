@@ -38,7 +38,7 @@ class MiniCartModule {
 
     if (subscription) {
       const subTime = subscription.querySelector(
-        ".item-subscription-time"
+        ".item-subscription-time",
       )?.textContent;
 
       const recorrencia = subscriptions[subTime];
@@ -51,23 +51,23 @@ class MiniCartModule {
 
   adjustCartItemPrice(item) {
     const itemPriceElm = Array.from(
-      item.querySelectorAll(".description > *")
+      item.querySelectorAll(".description > *"),
     ).filter((elm) => {
       return String(elm.getAttribute("data-bind")).includes("priceValue");
     })[0];
 
     const sellingPriceElm = Array.from(
-      item.querySelectorAll(".description > *")
+      item.querySelectorAll(".description > *"),
     ).filter((elm) => {
       return String(elm.getAttribute("data-bind")).includes("sellingPrice");
     })[0];
 
     const itemPrice = parseFloat(
-      itemPriceElm.textContent?.replace("R$ ", "").replace(",", ".")
+      itemPriceElm.textContent?.replace("R$ ", "").replace(",", "."),
     );
 
     const sellingPrice = parseFloat(
-      sellingPriceElm.textContent?.replace("R$ ", "").replace(",", ".")
+      sellingPriceElm.textContent?.replace("R$ ", "").replace(",", "."),
     );
 
     sellingPriceElm.classList.add("price-new");
@@ -87,7 +87,7 @@ class MiniCartModule {
 
   discountCouponForm() {
     const targetArea = document.querySelector(
-      ".mini-cart .summary-template-holder .accordion-inner table.table"
+      ".mini-cart .summary-template-holder .accordion-inner table.table",
     );
 
     const html = `
@@ -129,13 +129,13 @@ class MiniCartModule {
 
   renderCoupon(coupon) {
     const targetArea = document.querySelector(
-      ".checkout-cart-coupon__active-coupon"
+      ".checkout-cart-coupon__active-coupon",
     );
 
     if (!coupon) {
       targetArea.innerHTML = "";
       document.querySelector(
-        ".checkout-cart-coupon__fields--apply"
+        ".checkout-cart-coupon__fields--apply",
       ).disabled = false;
       return;
     }
@@ -146,7 +146,7 @@ class MiniCartModule {
 
     targetArea.innerHTML = html;
     document.querySelector(
-      ".checkout-cart-coupon__fields--apply"
+      ".checkout-cart-coupon__fields--apply",
     ).disabled = true;
 
     document
@@ -182,7 +182,7 @@ class MiniCartModule {
               {
                 style: "currency",
                 currency: "BRL",
-              }
+              },
             );
             const totalNew = totalOld - cashBackValue;
             const totalNewDecimal = totalNew / 100;
@@ -194,12 +194,12 @@ class MiniCartModule {
             $(
               '<tbody class="cashback-value" style="border: none"><tr class=""><td class="info">CashBack</td><td class="space"></td><td class="monetary">' +
                 cashBackValueMoney +
-                '</td><td class="empty"></td></tr></tbody>'
+                '</td><td class="empty"></td></tr></tbody>',
             ).insertBefore(".mini-cart .summary-template-holder tfoot");
 
             setTimeout(function () {
               $(".mini-cart .summary-template-holder tfoot .monetary").html(
-                totalNewMoney
+                totalNewMoney,
               );
             }, 200);
           }

@@ -134,7 +134,7 @@
       "blockClass": "quickview"
     }
   },
-  "product-images#quickview" : {
+  "product-images#quickview": {
     "props": {
       "blockClass": "quickview",
       "showNavigationArrows": true

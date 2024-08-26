@@ -7,7 +7,6 @@ const bestInstallment = (
   acc: UnitPriceSpecification | null,
   curr: UnitPriceSpecification,
 ) => {
-
   if (
     curr.priceComponentType !== "https://schema.org/Installment" ||
     curr.name === "Pix"
@@ -67,7 +66,7 @@ export const useOffer = (aggregateOffer?: AggregateOffer) => {
   const availability = offer?.availability;
   const installment = offer?.priceSpecification.reduce(bestInstallment, null);
 
-  const inventary = offer?.inventoryLevel?.value
+  const inventary = offer?.inventoryLevel?.value;
   const seller = offer?.seller;
   const price = offer?.price;
 

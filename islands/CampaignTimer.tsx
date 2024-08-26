@@ -6,12 +6,11 @@ interface CampaignTimerProps {
   hideLabel?: boolean;
 }
 
-const CampaignTimer = ({ 
-  id, 
-  expiresAt, 
-  hideLabel, 
+const CampaignTimer = ({
+  id,
+  expiresAt,
+  hideLabel,
 }: CampaignTimerProps) => {
-
   const calculateTimeLeft = () => {
     const difference = +new Date(expiresAt) - +new Date();
     return {
@@ -35,7 +34,7 @@ const CampaignTimer = ({
 
     return () => clearInterval(timerId);
   }, []);
-  
+
   // useEffect(() => {
   //   if (timeLeft.Segundos > 0) {
   //     const docRef = document.getElementById(id);

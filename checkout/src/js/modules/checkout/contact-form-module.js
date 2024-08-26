@@ -7,7 +7,7 @@ class ContactFormModule {
     this.rearrangeInputs();
     this.stateSubscription(
       document.querySelector(".box-client-info-pj h5.corporate-title"),
-      document.querySelector(".box-client-info-pj .corporate-info-box")
+      document.querySelector(".box-client-info-pj .corporate-info-box"),
     );
     this.createNewFields();
     this.events();
@@ -15,7 +15,7 @@ class ContactFormModule {
 
   contactFormVisibility() {
     const contactForm = document.querySelector(
-      "#client-profile-data .step.client-profile-data"
+      "#client-profile-data .step.client-profile-data",
     );
 
     window.location.hash.toLowerCase() === "#/email"
@@ -127,8 +127,8 @@ class ContactFormModule {
     const $buttonNextStep = document.querySelector("#go-to-shipping");
 
     $buttonNextStep.addEventListener("click", async () => {
-      const isHealthProfessional =
-        document.querySelector("#chk-health-client")?.checked;
+      const isHealthProfessional = document.querySelector("#chk-health-client")
+        ?.checked;
 
       if (!isHealthProfessional) return;
 
@@ -148,7 +148,7 @@ class ContactFormModule {
   rearrangeInputs() {
     const pfInputContainer = document.querySelector(".box-client-info-pf");
     const pjInputContainer = document.querySelector(
-      ".box-client-info-pj .corporate-info-box"
+      ".box-client-info-pj .corporate-info-box",
     );
 
     groupAndInsert(pfInputContainer, [
@@ -196,7 +196,7 @@ class ContactFormModule {
 
       if (!response.ok) {
         throw new Error(
-          `Erro na requisição: ${response.status} ${response.statusText}`
+          `Erro na requisição: ${response.status} ${response.statusText}`,
         );
       }
 
@@ -238,7 +238,7 @@ class ContactFormModule {
           ],
           value: crm,
         },
-      }
+      },
     ).done((o) => {});
   }
 }

@@ -14,7 +14,7 @@ class ClassWatcher {
     targetNode,
     classToWatch,
     classAddedCallback,
-    classRemovedCallback
+    classRemovedCallback,
   ) {
     this.targetNode = targetNode;
     this.classToWatch = classToWatch;
@@ -46,7 +46,7 @@ class ClassWatcher {
         mutation.attributeName === "class"
       ) {
         let currentClassState = mutation.target.classList.contains(
-          this.classToWatch
+          this.classToWatch,
         );
         if (this.lastClassState !== currentClassState) {
           this.lastClassState = currentClassState;

@@ -95,7 +95,6 @@
     }
   },
 
-
   "disclosure-layout#third": {
     "props": {
       "animated": true
@@ -126,7 +125,6 @@
     }
   },
 
-
   "disclosure-layout#fourth": {
     "props": {
       "animated": true
@@ -156,7 +154,6 @@
       "text": "After logging into your account, you can find this info at the link Orders."
     }
   },
-
 
   "disclosure-state-indicator": {
     "props": {

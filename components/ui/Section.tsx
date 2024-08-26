@@ -20,7 +20,6 @@ function Header({ title, cta }: Props) {
     <div
       class={clx(
         "flex justify-between items-center gap-2",
-        "px-5 sm:px-0",
       )}
     >
       <span class="text-2xl sm:text-3xl font-semibold">{title}</span>

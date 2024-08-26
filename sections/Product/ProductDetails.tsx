@@ -2,8 +2,8 @@ import { ProductDetailsPage } from "apps/commerce/types.ts";
 import ImageGallerySlider from "../../components/product/Gallery.tsx";
 import ProductInfo from "../../components/product/ProductInfo.tsx";
 import { clx } from "../../sdk/clx.ts";
-import Description from '../../components/product/Description.tsx'
-import ProductGrid from '../../components/product/ProductGrid.tsx'
+import Description from "../../components/product/Description.tsx";
+import ProductGrid from "../../components/product/ProductGrid.tsx";
 import BuyTogether from "../../islands/BuyTogether.tsx";
 // import type { LoaderReturnType } from "$live/types.ts";
 
@@ -16,10 +16,12 @@ export interface Props {
   buyTogetherLoader: Product[] | null;
 }
 
-
-
-
-export default function ProductDetails({ page, buyTogether }: { page: ProductDetailsPage; buyTogether: Product[] | null; }) {
+export default function ProductDetails(
+  { page, buyTogether }: {
+    page: ProductDetailsPage;
+    buyTogether: Product[] | null;
+  },
+) {
   const { product } = page;
 
   if (!page) {
@@ -38,7 +40,6 @@ export default function ProductDetails({ page, buyTogether }: { page: ProductDet
   if (page) {
     return (
       <div class=" flex flex-col gap-4 sm:gap-5 w-full py-4 sm:py-5 px-5 sm:px-0">
-
         <div
           class={clx(
             "container grid",

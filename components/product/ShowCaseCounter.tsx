@@ -38,7 +38,10 @@ const ShowCaseCounter = ({
   const id = useId();
 
   return (
-    <div id={id} class={`lg:bg-[#123ADD] px-5 lg:px-0 rounded-[10px] lg:rounded-none`}>
+    <div
+      id={id}
+      class={`lg:bg-[#123ADD] px-5 lg:px-0 rounded-[10px] lg:rounded-none`}
+    >
       <div class="flex flex-col sm:flex-row container  p-5 lg:px-0 lg:py-[100px] justify-between bg-[#123ADD] rounded-[10px] lg:rounded-none">
         <div class="max-w-[301px] lg:max-w-[447px] mx-auto flex flex-col justify-unset lg:justify-center">
           <div>

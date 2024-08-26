@@ -1,1 +1,1 @@
-export { default } from  '../components/minicart/Shipping.tsx'
+export { default } from "../components/minicart/Shipping.tsx";

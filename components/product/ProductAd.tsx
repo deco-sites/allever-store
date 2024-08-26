@@ -91,18 +91,14 @@ export default function ProductAd({
   return (
     <div class="container p-3 lg:py-0 sm:px-0 flex flex-col lg:flex-row">
       <div
-        class={` gap-3 p-3 rounded-xl my-5 min-h-[320px] max-h-[320px] flex items-center mx-auto`}
+        class={`gap-3 rounded-xl flex`}
       >
         <a
           href={url}
           class="block overflow-hidden rounded-xl"
-          style={{
-            width: isMobile ? "250px" : "250px",
-            height: isMobile ? "250px" : "250px",
-          }}
         >
           <Image
-            class={`card object-cover ${animateImage && "hover:scale-110"}`}
+            class={`object-cover ${animateImage && "hover:scale-110"}`}
             src={image}
             alt={name}
             width={250}
