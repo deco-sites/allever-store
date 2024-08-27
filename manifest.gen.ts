@@ -68,7 +68,8 @@ import * as $$$$$$47 from "./sections/Product/Wishlist.tsx";
 import * as $$$$$$48 from "./sections/Session.tsx";
 import * as $$$$$$49 from "./sections/Social/InstagramPosts.tsx";
 import * as $$$$$$50 from "./sections/Social/WhatsApp.tsx";
-import * as $$$$$$51 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$51 from "./sections/Spacer.tsx";
+import * as $$$$$$52 from "./sections/Theme/Theme.tsx";
 
 const manifest = {
   "loaders": {
@@ -131,7 +132,8 @@ const manifest = {
     "site/sections/Session.tsx": $$$$$$48,
     "site/sections/Social/InstagramPosts.tsx": $$$$$$49,
     "site/sections/Social/WhatsApp.tsx": $$$$$$50,
-    "site/sections/Theme/Theme.tsx": $$$$$$51,
+    "site/sections/Spacer.tsx": $$$$$$51,
+    "site/sections/Theme/Theme.tsx": $$$$$$52,
   },
   "actions": {
     "site/actions/minicart/submit.ts": $$$$$$$$$0,

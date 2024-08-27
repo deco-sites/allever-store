@@ -54,7 +54,7 @@ export default function ProductShelf(
         {...viewItemListEvent}
         class="[view-transition-name:loading-fallback-2]"
       >
-        <div class="flex flex-wrap items-center gap-x-10 gap-y-3 px-[18px] lg:px-[25px]">
+        <div class="flex flex-wrap items-center gap-x-10 gap-y-[0.5rem] px-[18px] lg:px-[25px]">
           <Section.Header title={title} cta={cta} />
           {expireAt && (
             <div class="bg-primary px-3 py-2 lg:py-[15px] rounded-[10px]">

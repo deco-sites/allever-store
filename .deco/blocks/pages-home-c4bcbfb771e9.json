@@ -168,6 +168,10 @@
       "preload": true
     },
     {
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "medium"
+    },
+    {
       "__resolveType": "site/sections/Category/CarouselCategory.tsx",
       "title": "Compre Por Categorias",
       "category": [
@@ -353,6 +357,10 @@
       "visibleItems": 8
     },
     {
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "medium"
+    },
+    {
       "__resolveType": "site/sections/Category/CategoryBanner.tsx",
       "banners": [
         {
@@ -364,6 +372,10 @@
           "matcher": "/"
         }
       ]
+    },
+    {
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "medium"
     },
     {
       "__resolveType": "site/sections/Product/ProductShelf.tsx",
@@ -380,6 +392,10 @@
       },
       "hideLabel": true,
       "expireAt": "2024-09-23T19:10:00.000Z"
+    },
+    {
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "medium"
     },
     {
       "__resolveType": "site/sections/Images/SecondVariation.tsx",
@@ -431,6 +447,10 @@
       ]
     },
     {
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "medium"
+    },
+    {
       "__resolveType": "site/sections/Content/ShowCaseCounter.tsx",
       "Label": "algum sub titulo",
       "product": {
@@ -438,6 +458,10 @@
         "slug": "/fone-de-ouvido-estereo--full-sound--tipo-earphone-cor-preta-20344/p?skuId=23891"
       },
       "expireAt": "2024-09-23T20:59:00.000Z"
+    },
+    {
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "medium"
     },
     {
       "__resolveType": "site/sections/Product/ProductShelf.tsx",
@@ -451,6 +475,10 @@
           "query": "tv"
         }
       }
+    },
+    {
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "medium"
     },
     {
       "__resolveType": "site/sections/Images/FirstVariation.tsx",
@@ -525,19 +553,8 @@
       }
     },
     {
-      "__resolveType": "site/sections/Product/ProductShelf.tsx",
-      "title": "Vitrine 1",
-      "cta": "#",
-      "products": {
-        "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
-        "props": {
-          "query": "fone de ouvido",
-          "sort": "price:asc",
-          "count": 12,
-          "fuzzy": "automatic",
-          "term": "tv"
-        }
-      }
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "medium"
     },
     {
       "__resolveType": "site/sections/Product/ProductShelf.tsx",
@@ -553,6 +570,29 @@
           "term": "tv"
         }
       }
+    },
+    {
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "medium"
+    },
+    {
+      "__resolveType": "site/sections/Product/ProductShelf.tsx",
+      "title": "Vitrine 1",
+      "cta": "#",
+      "products": {
+        "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
+        "props": {
+          "query": "fone de ouvido",
+          "sort": "price:asc",
+          "count": 12,
+          "fuzzy": "automatic",
+          "term": "tv"
+        }
+      }
+    },
+    {
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "small"
     },
     {
       "__resolveType": "site/sections/Product/ProductShelf.tsx",
@@ -562,6 +602,10 @@
           "sort": "OrderByPriceDESC"
         }
       }
+    },
+    {
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "medium"
     },
     {
       "__resolveType": "site/sections/Images/ThirdVariation.tsx",
@@ -613,19 +657,8 @@
       ]
     },
     {
-      "__resolveType": "site/sections/Product/ProductShelf.tsx",
-      "title": "Vitrine 1",
-      "cta": "#",
-      "products": {
-        "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
-        "props": {
-          "query": "fone de ouvido",
-          "sort": "price:asc",
-          "count": 12,
-          "fuzzy": "automatic",
-          "term": "tv"
-        }
-      }
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "medium"
     },
     {
       "__resolveType": "site/sections/Product/ProductShelf.tsx",
@@ -641,6 +674,29 @@
           "term": "tv"
         }
       }
+    },
+    {
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "medium"
+    },
+    {
+      "__resolveType": "site/sections/Product/ProductShelf.tsx",
+      "title": "Vitrine 1",
+      "cta": "#",
+      "products": {
+        "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
+        "props": {
+          "query": "fone de ouvido",
+          "sort": "price:asc",
+          "count": 12,
+          "fuzzy": "automatic",
+          "term": "tv"
+        }
+      }
+    },
+    {
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "medium"
     },
     {
       "__resolveType": "site/sections/Images/FourthVariation.tsx",
@@ -648,19 +704,19 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 823,
-            "Height": 398
+            "Width": 950,
+            "Height": 350
           },
           "mobile": {
-            "Width": 309,
-            "Height": 350
+            "Height": 350,
+            "Width": 490
           }
         },
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 411,
-            "Height": 398
+            "Width": 450,
+            "Height": 350
           },
           "mobile": {
             "Width": 309,
@@ -680,6 +736,10 @@
       }
     },
     {
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "medium"
+    },
+    {
       "__resolveType": "site/sections/Product/ProductShelf.tsx",
       "title": "Vitrine 1",
       "cta": "#",
@@ -693,6 +753,10 @@
           "term": "tv"
         }
       }
+    },
+    {
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "medium"
     },
     {
       "__resolveType": "site/sections/Images/FifthVariation.tsx",
@@ -722,6 +786,10 @@
       ]
     },
     {
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "medium"
+    },
+    {
       "__resolveType": "site/sections/Product/ProductShelf.tsx",
       "title": "Vitrine 1",
       "cta": "#",
@@ -737,12 +805,16 @@
       }
     },
     {
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "medium"
+    },
+    {
       "__resolveType": "site/sections/Images/SixthVariation.tsx",
       "items": [
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 556,
+            "Width": 720,
             "Height": 451
           },
           "mobile": {
@@ -753,7 +825,7 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 675,
+            "Width": 720,
             "Height": 213
           },
           "mobile": {
@@ -764,7 +836,7 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 675,
+            "Width": 720,
             "Height": 213
           },
           "mobile": {
@@ -773,6 +845,29 @@
           }
         }
       ]
+    },
+    {
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "medium"
+    },
+    {
+      "__resolveType": "site/sections/Product/ProductShelf.tsx",
+      "title": "Vitrine 1",
+      "cta": "#",
+      "products": {
+        "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
+        "props": {
+          "query": "fone de ouvido",
+          "sort": "price:asc",
+          "count": 12,
+          "fuzzy": "automatic",
+          "term": "tv"
+        }
+      }
+    },
+    {
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "medium"
     },
     {
       "__resolveType": "site/sections/Images/SeventhVariation.tsx",
@@ -833,6 +928,10 @@
           }
         }
       ]
+    },
+    {
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "medium"
     },
     {
       "__resolveType": "site/sections/Category/CarouselCategory.tsx",

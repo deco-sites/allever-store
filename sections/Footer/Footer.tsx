@@ -270,7 +270,7 @@ function Footer({
             class="px-5 sm:px-0 pt-10"
             style={{ backgroundColor: "#FFF" }}
           >
-            <div class="container flex flex-col gap-5 sm:gap-10 py-10">
+            <div class="container flex flex-col gap-5 sm:gap-10 px-5 py-10">
               <div class="flex space-between">
                 <div class="flex flex-col">
                   <img
@@ -433,7 +433,7 @@ function Footer({
             </div>
             <div class="bg-[#e7e5e5]">
               <div class="container flex space-between">
-                <p class="text-[#A8A8A8] text-xs sm:text-sm leading-[25px] py-5 lg:max-w-[1094px]">
+                <p class="text-[#A8A8A8] text-xs sm:text-sm leading-[25px] px-5 py-5 lg:max-w-[1094px]">
                   {copyright}
                 </p>
                 <div class="flex flex-nowrap items-end justify-center gap-5 p-5">

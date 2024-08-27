@@ -6,6 +6,7 @@ interface Props {
 }
 
 const setup = ({ rootId, threshold = 100 }: Props) => {
+  if (!rootId) return;
   const root = document.getElementById(rootId);
 
   if (!root) {
@@ -13,10 +14,15 @@ const setup = ({ rootId, threshold = 100 }: Props) => {
     return;
   }
 
+  
   const parsedUrl = new URL(window.location.href);
   const homePage = parsedUrl.pathname === "/";
-
-  // console.log("homePage", homePage);
+	const scrollY = globalThis.scrollY;
+  if (scrollY > threshold) {
+    root.classList.add("is-scrolled");
+  } else {
+    root.classList.remove("is-scrolled");
+  }
 
   if (homePage) {
     if (root.classList.contains("is-otherpage")) {
@@ -33,6 +39,7 @@ const setup = ({ rootId, threshold = 100 }: Props) => {
   document.addEventListener(
     "scroll",
     () => {
+      console.log("Y:", globalThis.scrollY, "T:", threshold, "Result:", globalThis.scrollY > threshold);
       if (globalThis.scrollY > threshold) {
         root.classList.add("is-scrolled");
       } else {

@@ -13,11 +13,13 @@ const SeventhVariation = ({ title, items }: SeventhVariationProps) => {
   return (
     <>
       {device === "desktop" && (
-        <div class="container">
-          <div class="my-[35px]">
-            {title && <p class="text-2xl sm:text-3xl font-semibold">{title}</p>}
-          </div>
-          <div class="my-6 grid grid-cols-10 justify-center gap-4">
+        <div class="container px-5">
+          {title && 
+            <div class="mb-5">
+              <p class="text-2xl sm:text-3xl font-semibold">{title}</p>
+            </div>
+          }
+          <div class="grid grid-cols-10 justify-center gap-4">
             <div class="col-span-4">
               <a href={items[0].Link} class="flex max-w-[650px] h-full">
                 <Image
@@ -101,10 +103,12 @@ const SeventhVariation = ({ title, items }: SeventhVariationProps) => {
       )}
       {device === "mobile" && (
         <div class="container px-5">
-          <div class="my-[35px]">
-            {title && <p class="text-2xl sm:text-3xl font-semibold">{title}</p>}
-          </div>
-          <div class="my-6 grid grid-cols-1 gap-4 justify-center md:grid-cols-2">
+          {title && 
+            <div class="mb-5">
+              <p class="text-2xl sm:text-3xl font-semibold">{title}</p>
+            </div>
+          }
+          <div class="grid grid-cols-1 gap-2 sm:gap-4 justify-center md:grid-cols-2">
             <div class="col-span-1">
               <a href={items[0].Link} class="flex justify-center  sm:h-[100%]">
                 <Image
@@ -120,7 +124,7 @@ const SeventhVariation = ({ title, items }: SeventhVariationProps) => {
                 />
               </a>
             </div>
-            <div class="col-span-1 grid grid-cols-2 gap-4">
+            <div class="col-span-1 grid grid-cols-2 gap-2 sm:gap-4">
               {items.slice(1, 5).map((item, index) => (
                 <a href={item.Link} class="flex justify-center" key={index}>
                   <Image

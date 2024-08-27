@@ -17,13 +17,13 @@ function ProductSlider({ products, itemListName }: Props) {
     <>
       <div
         id={id}
-        class="grid grid-rows-1"
+        class="grid grid-rows-1 px-0 sm:px-5"
         style={{
           gridTemplateColumns: "min-content 1fr min-content",
         }}
       >
-        <div class="col-start-1 col-span-3 row-start-1 row-span-1">
-          <Slider class="carousel carousel-center sm:carousel-end gap-5 sm:gap-10 w-full">
+        <div class="col-start-1 col-span-3 row-start-1 row-span-1 leading-[1]">
+          <Slider class="carousel carousel-center sm:carousel-end gap-[0.5rem] lg:gap-5 w-full ">
             {products?.map((product, index) => (
               <Slider.Item
                 index={index}

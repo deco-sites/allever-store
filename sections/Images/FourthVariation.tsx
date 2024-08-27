@@ -15,18 +15,18 @@ const FourthVariation = (
   return (
     <>
       {device === "desktop" && (
-        <div class="container">
+        <div class="container px-5">
           {title &&
             (
-              <div class="my-[35px]">
+              <div class="mb-5">
                 <p class="text-2xl sm:text-3xl font-semibold">{title}</p>
               </div>
             )}
           {items &&
             (
-              <div class="my-6 flex flex-col gap-4 justify-between">
-                <div class="flex gap-4 justify-center">
-                  <a href={items[0].Link} class="flex max-w-[900px]">
+              <div class="flex flex-col gap-4 justify-between">
+                <div class="grid grid-cols-12 gap-4">
+                  <a href={items[0].Link} class="col-span-8">
                     <Image
                       src={items[0]?.desktop?.Image
                         ? items[0]?.desktop?.Image
@@ -38,10 +38,10 @@ const FourthVariation = (
                       width={items[0]?.desktop?.Width}
                       height={items[0]?.desktop?.Height}
                       fetchPriority="low"
-                      class="object-cover lg:rounded-[40px] rounded-[20px] w-full"
+                      class="object-cover lg:rounded-[40px] rounded-[20px] w-full h-full"
                     />
                   </a>
-                  <a href={items[1].Link} class="flex max-w-[500px]">
+                  <a href={items[1].Link} class="col-span-4">
                     <Image
                       src={items[1]?.desktop?.Image
                         ? items[1]?.desktop?.Image
@@ -53,7 +53,7 @@ const FourthVariation = (
                       width={items[1]?.desktop?.Width}
                       height={items[1]?.desktop?.Height}
                       fetchPriority="low"
-                      class="object-cover lg:rounded-[40px] rounded-[20px] w-full"
+                      class="object-cover lg:rounded-[40px] rounded-[20px] w-full h-full"
                     />
                   </a>
                 </div>
@@ -80,14 +80,14 @@ const FourthVariation = (
         <>
           {items &&
             (
-              <div class="mt-[10px] overflow-x-hidden">
+              <div class="overflow-x-hidden">
                 <div id={id} class="grid grid-rows-1">
-                  <div class="col-start-1 col-span-3 row-start-1 row-span-1">
-                    <Slider class="carousel carousel-center w-full gap-[0.5rem] px-5 sm:justify-between">
+                  <div class="col-start-1 col-span-3 row-start-1 row-span-1 leading-[1]">
+                    <Slider class="carousel carousel-center w-full gap-[0.5rem] sm:justify-between leading-[1]">
                       {items.map((item, index) => (
                         <Slider.Item
                           index={index}
-                          class="carousel-item justify-center"
+                          class="carousel-item justify-center w-full max-w-[75vw] first:pl-5 last:pr-5" 
                           key={index}
                         >
                           <a href={item.Link} class="flex">
@@ -123,7 +123,7 @@ const FourthVariation = (
             )}
           {bannerFull &&
             (
-              <a href={bannerFull?.Link} class="flex w-full mt-[70px]">
+              <a href={bannerFull?.Link} class="flex w-full mt-2">
                 <Image
                   src={bannerFull?.mobile?.Image
                     ? bannerFull.mobile?.Image

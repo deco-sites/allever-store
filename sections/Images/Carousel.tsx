@@ -112,7 +112,7 @@ function BannerItem(
           height={600}
         />
         <img
-          class="object-cover w-full h-full"
+          class="object-cover w-full h-full max-h-[75vh]"
           loading={lcp ? "eager" : "lazy"}
           src={desktop}
           alt={alt}
@@ -138,7 +138,7 @@ function Carousel({ images = [], preload, interval }: Props) {
         "w-full",
       )}
     >
-      <div class="col-span-full row-span-full">
+      <div class="col-span-full row-span-full leading-[1]">
         <Slider class="carousel carousel-center w-full gap-6">
           {images.map((image, index) => (
             <Slider.Item index={index} class="carousel-item w-full">

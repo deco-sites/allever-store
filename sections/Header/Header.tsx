@@ -1,33 +1,30 @@
-import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
-import Image from "apps/website/components/Image.tsx";
-import { useDevice } from "deco/hooks/useDevice.ts";
-import { useSection } from "deco/hooks/useSection.ts";
-import Alert from "../../components/header/Alert.tsx";
 import Bag from "../../components/header/Bag.tsx";
+import Icon from "../../components/ui/Icon.tsx";
+import Logo from "../../components/header/Logo.tsx";
 import Menu from "../../components/header/Menu.tsx";
+import Image from "apps/website/components/Image.tsx";
+import Alert from "../../components/header/Alert.tsx";
+import Drawer from "../../components/ui/Drawer.tsx";
 import SignIn from "../../components/header/SignIn.tsx";
+import Wishlist from "../../components/header/Wishlist.tsx";
+import MicroHeaderSetup from "../../islands/MicroHeaderSetup.tsx";
+
+import { Head } from "$fresh/runtime.ts";
+import { INavItem } from "../../components/header/NavItem.tsx";
+import { useDevice } from "deco/hooks/useDevice.ts";
+import { useScript } from "apps/utils/useScript.ts";
+import { useSection } from "deco/hooks/useSection.ts";
+
+import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 import Searchbar, {
   type SearchbarProps,
 } from "../../components/search/Searchbar/Form.tsx";
-import Drawer from "../../components/ui/Drawer.tsx";
-import Icon from "../../components/ui/Icon.tsx";
-import MicroHeaderSetup from "../../islands/MicroHeaderSetup.tsx";
-import { INavItem, MenuHeader } from "../../components/header/NavItem.tsx";
 import {
-  HEADER_HEIGHT_DESKTOP,
-  HEADER_HEIGHT_MOBILE,
   NAVBAR_HEIGHT_MOBILE,
   SEARCHBAR_DRAWER_ID,
   SIDEMENU_CONTAINER_ID,
   SIDEMENU_DRAWER_ID,
 } from "../../constants.ts";
-
-import Wishlist from "../../components/header/Wishlist.tsx";
-
-import { useScript } from "apps/utils/useScript.ts";
-import { Head } from "$fresh/runtime.ts";
-import Logo from "../../components/header/Logo.tsx";
-import type { AppContext } from "../../apps/site.ts";
 
 function script() {
   const param = 10;
@@ -86,7 +83,7 @@ const Desktop = (
   { logo, searchbar }: Props,
 ) => (
   <>
-    <div class="flex flex-col gap-4 py-4 container desktop">
+    <div class="flex flex-col gap-4 py-4 px-5 container desktop">
       <div class="flex items-center space-between relative">
         <div>
           <label
@@ -171,7 +168,6 @@ const Mobile = ({ logo, searchbar }: Props) => (
         </Drawer.Aside>
       }
     />
-
     <div
       class="flex flex-col place-items-center w-screen px-5 gap-4 py-5"
       style={{

@@ -115,14 +115,14 @@ function Newsletter({
   return (
     <div class="bg-[#123ADD]">
       <Section.Container>
-        <div class="flex space-between flex-col lg:flex-row items-center px-5 gap-5">
+        <div class="flex space-between flex-col lg:flex-row items-center px-5 py-11 gap-5">
           <Notice {...empty} />
 
           <form
             hx-target="closest section"
             hx-swap="outerHTML"
             hx-post={useComponent(import.meta.url)}
-            class="flex justify-center flex-col  lg:gap-4 w-fit"
+            class="flex justify-center flex-col lg:gap-4 w-full"
           >
             <div class="flex gap-[13px] lg:gap-[10px] flex-col lg:flex-row">
               <input
