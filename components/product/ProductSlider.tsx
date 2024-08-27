@@ -1,9 +1,13 @@
-import { Product } from "apps/commerce/types.ts";
 import { clx } from "../../sdk/clx.ts";
+import { useId } from "../../sdk/useId.ts";
+import { Product } from "apps/commerce/types.ts";
+import { SectionProps } from "deco/mod.ts";
+
 import Icon from "../ui/Icon.tsx";
 import Slider from "../ui/Slider.tsx";
 import ProductCard from "./ProductCard.tsx";
-import { useId } from "../../sdk/useId.ts";
+
+import type { AppContext } from "../../apps/site.ts";
 
 interface Props {
   products: Product[];

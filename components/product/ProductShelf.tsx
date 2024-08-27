@@ -4,10 +4,12 @@ import Section, { Props as SectionHeaderProps } from "../ui/Section.tsx";
 
 import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
+import { SectionProps } from "deco/mod.ts";
 import { useSendEvent } from "../../sdk/useSendEvent.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 
 import type { Product } from "apps/commerce/types.ts";
+import type { AppContext } from "../../apps/site.ts";
 
 export interface Timer {
   /**
@@ -22,8 +24,14 @@ export interface Props extends SectionHeaderProps, Timer {
   products: Product[] | null;
 }
 
+export const loader = async (props: Props, req: Request, ctx: AppContext) => {
+  console.log("CTX", ctx);
+  
+  return { ...props };
+}
+
 export default function ProductShelf(
-  { products, title, cta, expireAt, hideLabel = false }: Props,
+  { products, title, cta, expireAt, hideLabel = false }: SectionProps<typeof loader>,
 ) {
   const id = useId();
 

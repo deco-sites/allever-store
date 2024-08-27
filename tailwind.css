@@ -138,17 +138,17 @@
   }
 }
 
-.is-scrolled {
+.is-scrolled #header {
   top: 0;
   position: fixed;
   background-color: #123ADD;
 }
 
-.is-homepage {
+.is-homepage #header {
   position: fixed;
 }
 
-.is-otherpage {
+.is-otherpage #header {
   background-color: #123ADD;
 }
 

@@ -19,6 +19,7 @@ export type Props = {
    */
   platform: Platform;
   // theme?: Section;
+  newsFlag?: string;
   vtex: Config;
 } & CommerceProps;
 
