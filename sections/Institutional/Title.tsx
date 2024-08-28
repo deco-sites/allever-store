@@ -6,8 +6,8 @@ interface Title {
 
 const Title = ({ title, breadcrumb, hasAllever }: Title) => {
   return (
-    <div class="container px-5 lg:px-0">
-      <div class="pt-[39px] pb-[24px]">
+    <div class="container py-8 px-5">
+      <div class="">
         <p class="text-xs flex gap-1">
           {breadcrumb}
         </p>

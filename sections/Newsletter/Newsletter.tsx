@@ -127,7 +127,7 @@ function Newsletter({
             <div class="flex gap-[13px] lg:gap-[10px] flex-col lg:flex-row">
               <input
                 name="name"
-                class="px-[39px] py-[13px] border border-white rounded-[20px] bg-transparent placeholder-white outline-0 text-white"
+                class="p-4 border border-white rounded-[20px] bg-transparent placeholder-white outline-0 text-white"
                 type="text"
                 placeholder={namePlaceholder}
                 pattern="^[a-zA-ZÀ-ÿ\s'-]{2,}$"
@@ -135,7 +135,7 @@ function Newsletter({
 
               <input
                 name="email"
-                class="px-[39px] py-[13px] border border-white rounded-[20px] bg-transparent placeholder-white outline-0 text-white"
+                class="p-4 border border-white rounded-[20px] bg-transparent placeholder-white outline-0 text-white"
                 type="email"
                 placeholder={emailPlaceholder}
                 pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
@@ -143,7 +143,7 @@ function Newsletter({
               <input
                 id="birthday"
                 name="birthday"
-                class="px-[39px] py-[13px] border border-white rounded-[20px] bg-transparent placeholder-white outline-0 text-white"
+                class="p-4 border border-white rounded-[20px] bg-transparent placeholder-white outline-0 text-white"
                 type="text"
                 pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/(19|20)\d\d$"
                 maxLength={10}
