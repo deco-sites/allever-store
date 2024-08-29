@@ -43,7 +43,7 @@ const Deals = ({ deals, preload }: Props) => {
   const device = useDevice();
 
   return (
-    <div className="py-[45px] lg:container">
+    <div className="lg:container px-0 lg:px-5 my-8">
       {device === "mobile"
         ? (
           <div className="overflow-x-auto no-scrollbar px-5">

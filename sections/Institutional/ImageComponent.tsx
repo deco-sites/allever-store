@@ -6,7 +6,7 @@ import Image from "apps/website/components/Image.tsx";
 const ImageComponent = ({ ...base }: BaseBanner) => {
   const device = useDevice();
   return (
-    <div class="pt-[25px] pb-[50px] px-5 lg:px-0 flex justify-center container">
+    <div class="my-8 px-5 flex justify-center container">
       {device === "desktop" &&
         (
           <Image

@@ -25,22 +25,23 @@ interface Props {
 const Faq = ({ faq }: Props) => {
   return (
     <div>
-      <div className="container px-5 lg:px-0 flex gap-4 flex-col">
+      <div className="container px-5 flex gap-4 flex-col">
         {faq?.map((item, index) => (
-          <div key={index}>
-            <p className="mb-[15px] mt-[30px] font-semibold text-sm">
+          <div key={index} class="">
+            <p className="mb-4 font-bold text-base">
               {item?.title}
             </p>
             <div className="flex flex-col gap-4">
               {item.questions?.map((q, qIndex) => (
                 <div
-                  className="bg-white rounded-[20px] py-[25px] lg:py-[31px] px-5"
+                  class="bg-white rounded-[20px] py-4 px-5"
                   key={qIndex}
                 >
                   <Collapsable
                     title={
                       <div className="flex justify-between text-sm items-center">
                         <div
+                          class="text-base"
                           dangerouslySetInnerHTML={{
                             __html: q.question?.toString() || "",
                           }}
@@ -56,7 +57,7 @@ const Faq = ({ faq }: Props) => {
                     }
                   >
                     <div
-                      className="mt-2"
+                      className="text-sm fluid-text text-[#888] mt-2"
                       dangerouslySetInnerHTML={{
                         __html: q.response?.toString() || "",
                       }}

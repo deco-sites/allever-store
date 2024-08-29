@@ -27,7 +27,7 @@ const About = ({ title, html, socials }: Props) => {
   return (
     <div class="container px-5">
       {title &&
-        <div class="container py-8">
+        <div class="container my-8">
           <h1 class="text-[20px] font-semibold text-black">
             {title} <span class="text-primary">[allever]</span>
           </h1>
@@ -35,7 +35,7 @@ const About = ({ title, html, socials }: Props) => {
       }
       {html && 
         <div
-          class="text-sm mb-8 container"
+          class="fluid-text mb-8 container"
           dangerouslySetInnerHTML={{ __html: html }}
         />
       }
@@ -54,7 +54,7 @@ const About = ({ title, html, socials }: Props) => {
           </div>
         </div>
       )}
-      <p class="text-sm text-[#a8a8a8]">
+      <p class="text-xs sm:text-sm text-[#a8a8a8]">
         Allever Ltda - CNPJ: 43.757.816/0001-77 - Rua Francisco Regin, 339,
         Centro, Cornélio Procópio, PR, CEP - 86300-000 - faleconosco@allever.com
         - (11) 4200-0010
