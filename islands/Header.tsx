@@ -1,30 +1,31 @@
-import Bag from "../../components/header/Bag.tsx";
-import Icon from "../../components/ui/Icon.tsx";
-import Logo from "../../components/header/Logo.tsx";
-import Menu from "../../components/header/Menu.tsx";
+import Bag from "../components/header/Bag.tsx";
+import Icon from "../components/ui/Icon.tsx";
+import Logo from "../components/header/Logo.tsx";
+import Menu from "../components/header/Menu.tsx";
 import Image from "apps/website/components/Image.tsx";
-import Alert from "../../components/header/Alert.tsx";
-import Drawer from "../../components/ui/Drawer.tsx";
-import SignIn from "../../components/header/SignIn.tsx";
-import Wishlist from "../../components/header/Wishlist.tsx";
-import MicroHeaderSetup from "../../islands/MicroHeaderSetup.tsx";
+import Alert from "../components/header/Alert.tsx";
+import Drawer from "../components/ui/Drawer.tsx";
+import SignIn from "../components/header/SignIn.tsx";
+import Wishlist from "../components/header/Wishlist.tsx";
+import MicroHeaderSetup from "./MicroHeaderSetup.tsx";
 
 import { Head } from "$fresh/runtime.ts";
-import { INavItem } from "../../components/header/NavItem.tsx";
+import { INavItem } from "../components/header/NavItem.tsx";
 import { useDevice } from "deco/hooks/useDevice.ts";
 import { useScript } from "apps/utils/useScript.ts";
 import { useSection } from "deco/hooks/useSection.ts";
+import { useState, useEffect, useMemo } from "preact/hooks";
 
 import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 import Searchbar, {
   type SearchbarProps,
-} from "../../components/search/Searchbar/Form.tsx";
+} from "../components/search/Searchbar/Form.tsx";
 import {
   NAVBAR_HEIGHT_MOBILE,
   SEARCHBAR_DRAWER_ID,
   SIDEMENU_CONTAINER_ID,
   SIDEMENU_DRAWER_ID,
-} from "../../constants.ts";
+} from "../constants.ts";
 
 function script() {
   const param = 10;
@@ -169,12 +170,12 @@ const Mobile = ({ logo, searchbar }: Props) => (
       }
     />
     <div
-      class="flex flex-col place-items-center w-screen px-5 gap-2 py-3"
+      class="flex flex-col place-items-center w-screen px-5 gap-4 py-5"
       style={{
         height: NAVBAR_HEIGHT_MOBILE,
       }}
     >
-      <div class="flex items-center justify-between w-full">
+      <div class="flex justify-between w-full">
         <label
           for={SIDEMENU_DRAWER_ID}
           class="btn btn-square btn-sm btn-ghost justify-start"
@@ -184,19 +185,20 @@ const Mobile = ({ logo, searchbar }: Props) => (
           hx-trigger="click once"
           hx-get={useSection({ props: { variant: "menu" } })}
         >
-          <Icon id="menu" size={24} />
+          <Icon id="menu" />
         </label>
 
         {logo && (
           <a
             href="/"
+            class="flex-grow inline-flex items-center justify-center"
             aria-label="Store logo"
           >
             <Image
               src={logo.src}
               alt={logo.alt}
-              width={94}
-              height={21}
+              width={logo.width || 100}
+              height={logo.height || 13}
             />
           </a>
         )}
@@ -236,6 +238,17 @@ function Header({
 }: Props) {
   const device = useDevice();
 
+  const [isHome, setIsHome] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    console.log("Location", globalThis.location.pathname);
+    setIsHome(globalThis.location.pathname === "/");
+    globalThis.addEventListener("scroll", () => {
+      setScrolled(globalThis.scrollY > 50);
+    });
+  }, []);
+
   return (
     <>
       {alerts.length > 0 && <Alert alerts={alerts} />}
@@ -247,7 +260,10 @@ function Header({
       >
         <div
           id="header"
-          class="bg-transparent w-full z-40 group-header ease-in duration-500"
+          class={`
+            ${isHome && "fixed"}
+            bg-primary w-full z-40 group-header ease-in duration-500
+          `}
         >
           {device === "desktop"
             ? <Desktop logo={logo} {...props} />

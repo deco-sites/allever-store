@@ -64,5 +64,12 @@
   },
   "flavor": {
     "framework": "htmx"
-  }
+  },
+  "vtex": {
+    "sp": {},
+    "io": {},
+    "vcs": {},
+    "api": {}
+  },
+  "newsFlag": "40"
 }

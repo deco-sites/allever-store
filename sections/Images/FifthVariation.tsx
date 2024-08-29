@@ -13,10 +13,10 @@ const FifthVariation = ({ slide, title }: FifthVariationProps) => {
   return (
     <>
       {device === "desktop" && (
-        <div class="mt-[10px] overflow-x-hidden container">
+        <div class="overflow-x-hidden container px-5">
           {title &&
             (
-              <div class="my-[35px]">
+              <div>
                 <p class="text-base font-semibold">{title}</p>
               </div>
             )}
@@ -24,7 +24,7 @@ const FifthVariation = ({ slide, title }: FifthVariationProps) => {
             (
               <div id={id} class="grid grid-rows-1">
                 <div class="col-start-1 col-span-3 row-start-1 row-span-1">
-                  <Slider class="carousel carousel-center w-full gap-6">
+                  <Slider class="carousel carousel-center w-full gap-6 leading-[1]">
                     {slide?.map((item, index) => (
                       <Slider.Item
                         index={index}
@@ -65,13 +65,13 @@ const FifthVariation = ({ slide, title }: FifthVariationProps) => {
       )}
       {device === "mobile" && (
         <div>
-          <div id={id} class="grid grid-rows-1 my-[35px]">
+          <div id={id} class="grid grid-rows-1">
             <div class="col-start-1 col-span-3 row-start-1 row-span-1">
-              <Slider class="carousel carousel-center w-full gap-6 pl-[2.25rem] pr-5">
+              <Slider class="carousel carousel-center w-full gap-2 sm:gap-6 leading-[1]">
                 {slide?.map((item, index) => (
                   <Slider.Item
                     index={index}
-                    class="carousel-item justify-center"
+                    class="carousel-item justify-center first:pl-5 last:pr-5 max-w-[75vw] w-full"
                     key={index}
                   >
                     <a href={item.Link} class="flex ">

@@ -20,7 +20,7 @@
     },
     {
       "__resolveType": "site/sections/Institutional/Text.tsx",
-      "html": "<p><strong><span style=\"font-size: 18pt;\" data-mce-style=\"font-size: 18pt;\">Bem-vindo a <span style=\"color: rgb(0, 102, 228);\" data-mce-style=\"color: rgb(0, 102, 228);\">[allever]</span>!</span></strong><br><span style=\"font-size: 18pt;\" data-mce-style=\"font-size: 18pt;\">​</span><br><span style=\"font-size: 12pt;\" data-mce-style=\"font-size: 12pt;\">E com enorme prazer que recebemos você aqui!</span><br><span style=\"font-size: 12pt;\" data-mce-style=\"font-size: 12pt;\">Cique no botão abaixo para realizar seu cadastro no nosso banco de talentos.</span></p>"
+      "html": "<h2><span style=\"font-size: 12pt;\" data-mce-style=\"font-size: 12pt;\"><strong>Bem-vindo a <span style=\"color: rgb(0, 102, 228);\" data-mce-style=\"color: rgb(0, 102, 228);\">[allever]</span>!</strong></span></h2><p><span style=\"font-size: 12pt;\" data-mce-style=\"font-size: 12pt;\">E com enorme prazer que recebemos você aqui!</span></p><p><span style=\"font-size: 12pt;\" data-mce-style=\"font-size: 12pt;\">Cique no botão abaixo para realizar seu cadastro no nosso banco de talentos.</span></p>"
     },
     {
       "__resolveType": "site/sections/Institutional/Button.tsx",

@@ -17,19 +17,19 @@ const FirstVariation = (
   return (
     <>
       {device === "desktop" && (
-        <div class="container">
+        <div class="container px-5">
           {title &&
             (
-              <div class="my-[35px]">
+              <div class="mb-5">
                 <p class="text-2xl sm:text-3xl font-semibold">{title}</p>
               </div>
             )}
           {slide &&
             (
-              <div class="mt-[10px] overflow-x-hidden">
+              <div class="overflow-x-hidden">
                 <div id={id} class="grid grid-rows-1">
                   <div class="col-start-1 col-span-3 row-start-1 row-span-1">
-                    <Slider class="carousel carousel-center w-full gap-6">
+                    <Slider class="carousel carousel-center w-full gap-6 leading-[1]">
                       {slide.map((item, index) => (
                         <Slider.Item
                           index={index}
@@ -69,8 +69,8 @@ const FirstVariation = (
             )}
           {items &&
             (
-              <div class="my-6 flex gap-[24.38px] justify-between">
-                <a href={items[0].Link} class="flex max-w-[450px]">
+              <div class="grid grid-cols-12 gap-4 mt-4">
+                <a href={items[0].Link} class="col-span-4">
                   <Image
                     src={items[0].desktop?.Image
                       ? items[0].desktop?.Image
@@ -85,7 +85,7 @@ const FirstVariation = (
                     class="object-cover rounded-[40px] w-full"
                   />
                 </a>
-                <a href={items.Link} class="flex max-w-[450px]">
+                <a href={items.Link} class="col-span-4">
                   <Image
                     src={items[1].desktop?.Image
                       ? items[1].desktop?.Image
@@ -100,7 +100,7 @@ const FirstVariation = (
                     class="object-cover rounded-[40px] w-full"
                   />
                 </a>
-                <a href={items.Link} class="flex max-w-[450px]">
+                <a href={items.Link} class="col-span-4">
                   <Image
                     src={items[2].desktop?.Image
                       ? items[2].desktop?.Image
@@ -119,7 +119,7 @@ const FirstVariation = (
             )}
           {bannerFull &&
             (
-              <div>
+              <div class="mt-4">
                 <a
                   href={bannerFull.Link}
                   class="flex justify-center w-full"
@@ -143,12 +143,12 @@ const FirstVariation = (
       )}
       {device === "mobile" && (
         <div>
-          <div class="my-[35px]">
-            {title && (
+          {title && (
+            <div class="mb-5">
               <p class="text-base sm:text-3xl font-semibold">{title}</p>
-            )}
-          </div>
-          <div class="my-6">
+            </div>
+          )}
+          <div>
             <a href={items[0].Link} class="flex">
               <Image
                 src={items[0].mobile?.Image
@@ -166,12 +166,12 @@ const FirstVariation = (
               />
             </a>
           </div>
-          <div class="container">
-            <Slider class="carousel carousel-center w-full gap-4 px-5 sm:flex sm:justify-between ">
+          <div class="container leading-[1] my-2">
+            <Slider class="carousel carousel-center w-full gap-4 sm:flex sm:justify-between ">
               {slide?.map((item, index) => (
                 <Slider.Item
                   index={index}
-                  class="carousel-item w-fit justify-start"
+                  class="carousel-item max-w-[75vw] w-full first:pl-5 last:pr-5"
                   key={index}
                 >
                   <a href={item.Link} class="flex">
@@ -192,7 +192,7 @@ const FirstVariation = (
             </Slider>
             <Slider.JS rootId={id} />
           </div>
-          <div class="my-6">
+          <div>
             <a href={bannerFull?.Link} class="flex">
               <Image
                 src={bannerFull?.mobile?.Image

@@ -13,13 +13,15 @@ const SixthVariation = ({ title, items }: SixthVariationProps) => {
   return (
     <>
       {device === "desktop" && (
-        <div class="container">
-          <div class="my-[35px]">
-            {title && <p class="text-2xl sm:text-3xl font-semibold">{title}</p>}
-          </div>
-          <div class="my-6 flex gap-4 justify-between">
+        <div class="container px-5">
+          {title && 
+            <div class="mb-5">
+              <p class="text-2xl sm:text-3xl font-semibold">{title}</p>
+            </div>
+          }
+          <div class="grid grid-cols-2 gap-4">
             <div class="col-span-1">
-              <a href={items[0].Link} class="flex max-w-[650px]">
+              <a href={items[0].Link} class="block">
                 <Image
                   src={items[0].desktop?.Image ||
                     `https://placehold.co/${items[0].desktop?.Width}x${
@@ -29,7 +31,7 @@ const SixthVariation = ({ title, items }: SixthVariationProps) => {
                   width={items[0].desktop?.Width}
                   height={items[0].desktop?.Height}
                   fetchPriority="low"
-                  class="object-cover rounded-[40px] w-full"
+                  class="object-cover rounded-[40px] w-full h-full"
                 />
               </a>
             </div>
@@ -37,7 +39,7 @@ const SixthVariation = ({ title, items }: SixthVariationProps) => {
               {items &&
                 (
                   <>
-                    <a href={items[1].Link} class="flex max-w-[750px]">
+                    <a href={items[1].Link} class="block">
                       <Image
                         src={items[1].desktop?.Image ||
                           `https://placehold.co/${items[1].desktop?.Width}x${
@@ -51,7 +53,7 @@ const SixthVariation = ({ title, items }: SixthVariationProps) => {
                         class="object-cover rounded-[40px] w-full"
                       />
                     </a>
-                    <a href={items[1].Link} class="flex max-w-[750px]">
+                    <a href={items[1].Link} class="block">
                       <Image
                         src={items[1].desktop?.Image ||
                           `https://placehold.co/${items[1].desktop?.Width}x${
@@ -73,10 +75,12 @@ const SixthVariation = ({ title, items }: SixthVariationProps) => {
       )}
       {device === "mobile" && (
         <div class="container px-5">
-          <div class="my-[35px]">
-            {title && <p class="text-2xl font-semibold">{title}</p>}
-          </div>
-          <div class="my-6 grid grid-cols-1 gap-4 justify-center">
+          {title && 
+            <div class="mb-5">
+              <p class="text-2xl font-semibold">{title}</p>
+            </div>
+          }
+          <div class="grid grid-cols-1 gap-2 sm:gap-4 justify-center">
             <div class="col-span-1">
               <a href={items[0].Link} class="flex justify-center sm:w-[100%]">
                 <Image
@@ -92,7 +96,7 @@ const SixthVariation = ({ title, items }: SixthVariationProps) => {
                 />
               </a>
             </div>
-            <div class="col-span-1 grid grid-cols-2 gap-4">
+            <div class="col-span-1 grid grid-cols-2 gap-2 sm:gap-4">
               {items.slice(1, 3).map((item, index) => (
                 <a
                   href={item.Link}

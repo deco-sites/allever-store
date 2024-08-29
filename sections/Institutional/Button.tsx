@@ -6,7 +6,7 @@ interface Props {
 
 const Button = ({ link, label, background }: Props) => {
   return (
-    <div class="container px-5 lg:px-0">
+    <div class="container px-5">
       <a
         href={link}
         class={`bg-${background}  py-[13px] text-white my-[15px]  lg:max-w-[350px] w-full flex justify-center rounded-[30px] `}

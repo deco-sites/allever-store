@@ -42,8 +42,8 @@ const ShowCaseCounter = ({
       id={id}
       class={`lg:bg-[#123ADD] px-5 lg:px-0 rounded-[10px] lg:rounded-none`}
     >
-      <div class="flex flex-col sm:flex-row container  p-5 lg:px-0 lg:py-[100px] justify-between bg-[#123ADD] rounded-[10px] lg:rounded-none">
-        <div class="max-w-[301px] lg:max-w-[447px] mx-auto flex flex-col justify-unset lg:justify-center">
+      <div class="flex items-center justify-center flex-wrap container p-5 gap-x-10 gap-y-3 lg:py-[100px] bg-[#123ADD] rounded-[10px] lg:rounded-none">
+        <div class="flex flex-col justify-unset lg:justify-center">
           <div>
             <div class="flex justify-center items-center">
               <Icon size={32} id={"rain"} />
@@ -63,7 +63,7 @@ const ShowCaseCounter = ({
             hideLabel={hideLabel}
           />
         </div>
-        <div class="bg-white max-w-[602px] w-full rounded-[10px]">
+        <div class="bg-white max-w-[602px] rounded-[10px]">
           <ProductAd product={product} />
         </div>
       </div>

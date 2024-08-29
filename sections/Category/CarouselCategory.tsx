@@ -56,26 +56,26 @@ const CarouselCategory = ({ category, Title, layout }: Props) => {
   return (
     <>
       <div className="container px-5 lg:px-0 overflow-hidden">
-        <h3 className="sm:my-[50px] mt-[35px] mb-5 text-base font-semibold sm:text-2xl">
+        <h3 className="mb-5 text-base font-semibold sm:text-2xl px-0 sm:px-5">
           {Title}
         </h3>
       </div>
-      <div className="container px-0 lg:px-14 mb-[20px] lg:mb-[45px] overflow-hidden relative">
+      <div className="container px-0 lg:px-14 overflow-hidden relative">
         <div id={id} class="overflow-hidden">
           <div class="swiper-wrapper">
             {category.map((item, index) => (
               <div
-                class="swiper-slide max-w-[113px] sm:max-w-[105px] first:ml-5 last:mr-5 sm:first:ml-0 sm:last:mr-0"
+                class="swiper-slide max-w-[113px] sm:max-w-[105px] first:ml-5 last:mr-5 lg:first:ml-0 lg:last:mr-0"
                 key={index}
               >
                 <Card {...item} layout={layout} />
               </div>
             ))}
           </div>
-          <div class="button-prev absolute left-0 top-1/2 -translate-y-1/2 hidden sm:block">
+          <div class="button-prev absolute left-0 top-1/2 -translate-y-1/2 hidden lg:block">
             <Icon id="chevron-right" className="rotate-180" />
           </div>
-          <div class="button-next absolute right-0 top-1/2 -translate-y-1/2 hidden sm:block">
+          <div class="button-next absolute right-0 top-1/2 -translate-y-1/2 hidden lg:block">
             <Icon id="chevron-right" />
           </div>
           <div class="pagination static mt-5 flex sm:hidden justify-center" />

@@ -7,16 +7,20 @@ const SecondVariation = ({ title, items }: SecondVariationProps) => {
   const device = useDevice();
 
   return (
-    <div class="my-4">
+    <div>
       <>
         {device === "desktop" && (
-          <div class="container">
-            <div class="my-[35px]">
+          <div class="container px-5">
+            <div>
               {title && <p class="text-3xl font-semibold">{title}</p>}
             </div>
+<<<<<<< HEAD
             <div class="my-6 flex gap-[34.38px] space-between">
+=======
+            <div class="flex flex-wrap lg:grid grid-cols-12 gap-[0.5rem] lg:gap-4">
+>>>>>>> c9c4e5078ba3c2521425df68997ebeae28ddb0c9
               {items?.map((item, index) => (
-                <a href={item.Link} class={`flex`} key={index}>
+                <a href={item.Link} class={`flex col-span-${12 / items.length}`} key={index}>
                   <Image
                     src={item.desktop?.Image
                       ? item.desktop?.Image
@@ -26,7 +30,7 @@ const SecondVariation = ({ title, items }: SecondVariationProps) => {
                     width={item?.desktop?.Width}
                     height={item?.desktop?.Height}
                     fetchPriority="low"
-                    class="object-cover rounded-[40px]"
+                    class="object-cover rounded-[40px] w-full"
                   />
                 </a>
               ))}
@@ -37,13 +41,13 @@ const SecondVariation = ({ title, items }: SecondVariationProps) => {
           <div class="container px-5">
             {title &&
               (
-                <div class="my-[35px]">
+                <div>
                   <p class="text-base font-semibold">{title}</p>
                 </div>
               )}
             {items &&
               (
-                <div class={`my-6 flex gap-[15px] justify-center flex-wrap`}>
+                <div class={`flex gap-2 justify-center flex-wrap`}>
                   {items.map((item, index) => (
                     <a href={item.Link} class={`flex w-full`} key={index}>
                       <Image

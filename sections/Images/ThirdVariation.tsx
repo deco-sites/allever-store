@@ -11,19 +11,19 @@ const ThirdVariation = ({ items, title }: ThirdVariationProps) => {
   return (
     <>
       {device === "desktop" && (
-        <div class="container">
+        <div class="container px-5">
           {title &&
             (
-              <div class="my-[35px]">
+              <div class="mb-5">
                 <p class="text-2xl sm:text-3xl font-semibold">{title}</p>
               </div>
             )}
           {items &&
             (
-              <div class="my-6 flex  justify-between flex-wrap">
-                <div class="flex gap-[20.38px] flex-col">
-                  <div class="flex gap-[20.38px] justify-between">
-                    <a href={items[0]?.Link} class={`flex max-w-[900px]`}>
+              <div class="flex justify-between flex-wrap">
+                <div class="flex gap-4 flex-col">
+                  <div class="grid grid-cols-12 gap-4">
+                    <a href={items[0]?.Link} class="col-span-8">
                       <Image
                         src={items[0].desktop?.Image
                           ? items[0].desktop?.Image
@@ -38,7 +38,7 @@ const ThirdVariation = ({ items, title }: ThirdVariationProps) => {
                         class="object-cover lg:rounded-[40px] rounded-[20px] w-full"
                       />
                     </a>
-                    <a href={items[1]?.Link} class={`flex max-w-[450px]`}>
+                    <a href={items[1]?.Link} class="col-span-4">
                       <Image
                         src={items[1].desktop?.Image
                           ? items[1].desktop?.Image
@@ -54,8 +54,8 @@ const ThirdVariation = ({ items, title }: ThirdVariationProps) => {
                       />
                     </a>
                   </div>
-                  <div class="flex gap-[20.38px] justify-between">
-                    <a href={items[2]?.Link} class={`flex max-w-[450px]`}>
+                  <div class="grid grid-cols-12 gap-4">
+                    <a href={items[2]?.Link} class="col-span-4">
                       <Image
                         src={items[2].desktop?.Image
                           ? items[2].desktop?.Image
@@ -70,7 +70,7 @@ const ThirdVariation = ({ items, title }: ThirdVariationProps) => {
                         class="object-cover lg:rounded-[40px] rounded-[20px] w-full"
                       />
                     </a>
-                    <a href={items[3]?.Link} class={`flex max-w-[900px]`}>
+                    <a href={items[3]?.Link} class="col-span-8">
                       <Image
                         src={items[3].desktop?.Image
                           ? items[3].desktop?.Image
@@ -102,10 +102,10 @@ const ThirdVariation = ({ items, title }: ThirdVariationProps) => {
           {items &&
             (
               <div class="my-6">
-                <div class="mt-[10px] overflow-x-hidden">
+                <div class="overflow-x-hidden">
                   <div id={id} class="grid grid-rows-1">
                     <div class="col-start-1 col-span-3 row-start-1 row-span-1">
-                      <Slider class="carousel carousel-center w-full gap-6 px-5">
+                      <Slider class="carousel carousel-center w-full gap-[0.5rem] px-5 leading-[1]">
                         {items.map((item, index) => (
                           <Slider.Item
                             index={index}
