@@ -14,7 +14,7 @@ const SecondVariation = ({ title, items }: SecondVariationProps) => {
             <div class="my-[35px]">
               {title && <p class="text-3xl font-semibold">{title}</p>}
             </div>
-            <div class="my-6 flex gap-[34.38px] space-between flex-wrap">
+            <div class="my-6 flex gap-[34.38px] space-between">
               {items?.map((item, index) => (
                 <a href={item.Link} class={`flex`} key={index}>
                   <Image

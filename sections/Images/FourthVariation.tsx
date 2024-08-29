@@ -25,7 +25,7 @@ const FourthVariation = (
           {items &&
             (
               <div class="my-6 flex flex-col gap-4 justify-between">
-                <div class="flex gap-4 justify-center">
+                <div class="flex gap-4 justify-between">
                   <a href={items[0].Link} class="flex max-w-[900px]">
                     <Image
                       src={items[0]?.desktop?.Image

@@ -38,7 +38,7 @@ function ProductInfo({ page }: Props) {
     installments,
   } = useOffer(offers);
 
-  // console.log(inventary)
+  // console.log(inventory)
 
   const hasPromotion = additionalProperty?.some(
     (prop) => prop.value === "Promoção",
@@ -208,12 +208,12 @@ function ProductInfo({ page }: Props) {
               <OutOfStock productID={productID} />
             </div>
           )}
-        {inventary > 0 && inventary <= 9 && (
+        {inventory > 0 && inventory <= 9 && (
           <div>
             <p className="text-[24px] font-normal text-black leading-[28.8px]">
               Restam só{" "}
               <span className="font-bold text-[#123ADD]">
-                {inventary} unidade{inventary > 1 ? "s" : ""}
+                {inventory} unidade{inventory > 1 ? "s" : ""}
               </span>
             </p>
           </div>
