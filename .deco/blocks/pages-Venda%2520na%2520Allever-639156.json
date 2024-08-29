@@ -17,39 +17,49 @@
       "Alt": "Banner de da marca allever"
     },
     {
-      "__resolveType": "site/sections/Institutional/SellerPage.tsx",
-      "cardsRounded": {
-        "text": "texto ",
-        "number": "11"
-      },
-      "cardRounded": {
-        "text": "ssda",
-        "number": "Validar"
-      },
+      "__resolveType": "site/sections/Institutional/FirstSeller.tsx",
       "firstSection": {
-        "title": "<p><span style=\"color: rgb(18, 58, 221); font-size: 12pt;\" data-mce-style=\"color: rgb(18, 58, 221); font-size: 12pt;\"><strong>[Vantagens]</strong></span></p><p><span style=\"font-size: 12pt;\" data-mce-style=\"font-size: 12pt;\">E com enorme prazer que recebemos você aqui!</span></p><p><span style=\"font-size: 12pt;\" data-mce-style=\"font-size: 12pt;\">Cique no botão abaixo para realizar seu cadastro no nosso banco de talentos.</span></p>",
+        "title": "<p><strong>[Vantagens]</strong></p><p>E com enorme prazer que recebemos você aqui!<br>Cique no botão abaixo para realizar seu cadastro no nosso banco de talentos.</p>",
         "cards": [
           {
-            "content": "+26",
-            "label": "<p style=\"text-align: center;\" data-mce-style=\"text-align: center;\"><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\">Atendemos os <strong>26</strong></span><br><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\"><strong> estados brasileiros</strong></span><br> <span style=\"font-size: 10pt;\" data-mce-style=\"font-size: 10pt;\">além do Distrito Federal</span></p>"
+            "content": "+26"
           },
           {
-            "content": "R$",
-            "label": "<p style=\"text-align: center;\" data-mce-style=\"text-align: center;\"><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\">Atendemos os <strong>26</strong></span><br><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\"><strong> estados brasileiros</strong></span><br> <span style=\"font-size: 10pt;\" data-mce-style=\"font-size: 10pt;\">além do Distrito Federal</span></p>"
+            "content": "+26"
           },
           {
-            "content": "+26",
-            "label": "<p style=\"text-align: center;\" data-mce-style=\"text-align: center;\"><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\">Atendemos os <strong>26</strong></span><br><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\"><strong> estados brasileiros</strong></span><br> <span style=\"font-size: 10pt;\" data-mce-style=\"font-size: 10pt;\">além do Distrito Federal</span></p>"
+            "content": "+26"
           }
-        ]
-      },
-      "secondSection": {
-        "html": "<p>Prezado(a) Seller,<span id=\"_mce_caret\" data-mce-bogus=\"1\" data-mce-type=\"format-caret\"></span></p><p>Nosso objetivo é criar uma comunidade de vendedores e compradores onde todos possam se beneficiar de uma experiência de compra e venda confiável, fácil e gratificante.</p><p>Somos uma plataforma online que reúne diversos vendedores de produtos em um só lugar, oferecendo aos compradores uma experiência única e conveniente. Nossa missão é ajudar a expandir seus negócios, conectando você com compradores em potencial em todo o mundo.</p><p>Nosso Marketplace oferece diversas vantagens para os vendedores. Além de uma ampla base de clientes, temos uma equipe dedicada a fornecer suporte e assistência em todas as etapas do processo de venda. Nós também oferecemos um sistema de pagamentos e split, seguro e eficiente, que garante que os vendedores recebam o pagamento de forma automática e segura.</p><p>Com um alcance cada vez maior, nosso Marketplace oferece a você a oportunidade de aumentar sua base de clientes e, consequentemente, suas vendas uma maneira eficaz.</p><p>Além disso, oferecemos um suporte dedicado para ajudá-lo(a) em todos os aspectos do processo de venda, estamos aqui para ajudá-lo(a) em cada etapa.</p><p>Nosso objetivo é oferecer uma plataforma segura, fácil e gratificante para os vendedores, e uma ótima experiência de compra para os consumidores. Gostaríamos muito de tê-lo(a) como parceiro(a) em nossa jornada e esperamos que você se junte a nós.</p><p>Não perca esta oportunidade de fazer parte da nossa comunidade de vendedores de sucesso. Junte-se a nós hoje mesmo e comece a expandir seus negócios.</p><p>Para se cadastrar, basta clicar no botão abaixo.</p><p>Se tiver alguma dúvida, não hesite em entrar em contato conosco. Estamos ansiosos para trabalhar com você!</p><p>Atenciosamente,<br>[allever]</p>",
-        "button": {
-          "link": "/venda",
-          "label": "<p><strong><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\">Venda na <span style=\"color: rgb(18, 58, 221);\" data-mce-style=\"color: rgb(18, 58, 221);\">[allever]</span></span></strong></p>"
+        ],
+        "firstCard": {
+          "content": "01",
+          "label": "<p><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\">Atendemos os <strong>26<br></strong><strong>estados brasileiros<br></strong> além do Distrito Federal</span></p>"
         },
-        "title": "<h2><span style=\"font-size: 12pt;\" data-mce-style=\"font-size: 12pt;\"><strong>Impulsione suas <span style=\"color: rgb(18, 58, 221);\" data-mce-style=\"color: rgb(18, 58, 221);\">[Vendas]</span></strong></span></h2>"
+        "secondCard": {
+          "content": "02",
+          "label": "<p><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\"><strong>Zero investimento*<br></strong> Você só paga comissão sobre </span><br><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\">o que vender</span></p>"
+        },
+        "thirdCard": {
+          "content": "03",
+          "label": "<p><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\"><strong>5% de comissão*<br></strong></span><span style=\"font-size: 14pt;\" data-mce-style=\"font-size: 14pt;\">Nos primeiros 3 meses</span></p>"
+        }
+      }
+    },
+    {
+      "__resolveType": "site/sections/Institutional/TimelineSeller.tsx",
+      "timeline": {
+        "firstLabel": "Faça seu cadastro",
+        "secondLabel": "Assine o contrato",
+        "thirdLabel": "Conecte seus produtos"
+      }
+    },
+    {
+      "__resolveType": "site/sections/Institutional/SecondSeller.tsx",
+      "secondSection": {
+        "title": "<p>Impulsione suas [Vendas]</p>",
+        "button": {
+          "label": "<p>Venda na [allever]</p>"
+        }
       }
     },
     {

@@ -24,15 +24,9 @@ const FourthVariation = (
             )}
           {items &&
             (
-<<<<<<< HEAD
-              <div class="my-6 flex flex-col gap-4 justify-between">
-                <div class="flex gap-4 justify-between">
-                  <a href={items[0].Link} class="flex max-w-[900px]">
-=======
               <div class="flex flex-col gap-4 justify-between">
                 <div class="grid grid-cols-12 gap-4">
                   <a href={items[0].Link} class="col-span-8">
->>>>>>> c9c4e5078ba3c2521425df68997ebeae28ddb0c9
                     <Image
                       src={items[0]?.desktop?.Image
                         ? items[0]?.desktop?.Image
