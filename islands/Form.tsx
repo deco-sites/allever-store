@@ -1,3 +1,4 @@
+import { invoke } from "../runtime.ts";
 import { useState } from "preact/hooks";
 
 const Form = () => {
@@ -20,11 +21,6 @@ const Form = () => {
   });
 
   const [focusedField, setFocusedField] = useState<string | null>(null);
-
-  const validateEmail = (email: string) => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(String(email).toLowerCase());
-  };
 
   const formatCpfCnpj = (value: string) => {
     value = value.replace(/\D/g, "");
@@ -70,25 +66,48 @@ const Form = () => {
     setFocusedField(null);
   };
 
-  const handleSubmit = (e: Event) => {
+  
+  function get<T extends HTMLElement>(s: string): T | never {
+    const el = document.querySelector<T>(s);
+    if (!el) throw new Error(`Element not found: ${s}`);
+    return el;
+  }
+
+  const handleSubmit = async (e: Event) => {
     e.preventDefault();
 
-    // Validate email
-    if (!validateEmail(formData.email)) {
-      showToast("E-mail inválido.", "error");
-      return;
-    }
+		const email = get<HTMLInputElement>('[name=email]').value;
+		const phone = get<HTMLInputElement>('[name=phone]').value;
+		const cpfCnpj = get<HTMLInputElement>('[name=cpfCnpj]').value;
+		const subject = get<HTMLInputElement>('[name=subject]').value;
+		const fullName = get<HTMLInputElement>('[name=fullName]').value;
+		const description = get<HTMLInputElement>('[name=description]').value;
+		const orderNumber = get<HTMLInputElement>('[name=orderNumber]').value;
+		const contactReason = get<HTMLInputElement>('[name=contactReason]').value;
 
-    // Simulate form submission
-    const isSubmissionSuccessful = Math.random() > 0.5; // Simulate success or failure
+    const response = await invoke.vtex.actions.masterdata.createDocument({
+			acronym: 'CT',
+			data: {
+				email,
+        fullName,
+        cpf: cpfCnpj,
+        message: description,
+        orderNumber,
+        phone,
+        reason: contactReason,
+        subject,
+			},
+			isPrivateEntity: true,
+    });
 
-    if (isSubmissionSuccessful) {
-      showToast("Formulário enviado com sucesso!", "success");
-    } else {
-      showToast("Erro ao enviar o formulário. Tente novamente.", "error");
-    }
+    console.log("response", response);
 
-    // Reset form fields after submission
+    // if (true) {
+    //   showToast("Formulário enviado com sucesso!", "success");
+    // } else {
+    //   showToast("Erro ao enviar o formulário. Tente novamente.", "error");
+    // }
+
     setFormData({
       email: "",
       fullName: "",
@@ -121,200 +140,202 @@ const Form = () => {
         </div>
       )}
 
-      <form
-        class="container px-5 py-4 w-full mx-auto my-[30px] bg-white rounded-[10px]"
-        onSubmit={handleSubmit}
-      >
-        <div class="mb-4">
-          <label
-            class={`block text-xs font-bold mb-2 ${
-              focusedField === "email" ? "text-[#123ADD]" : "text-gray-700"
-            }`}
-            htmlFor="email"
-          >
-            E-mail*
-          </label>
-          <input
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="email"
-            type="email"
-            name="email"
-            placeholder="Digite aqui"
-            value={formData.email}
-            onInput={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            required
-          />
-        </div>
-        <div class="mb-4">
-          <label
-            class={`block text-xs font-bold mb-2 ${
-              focusedField === "fullName" ? "text-[#123ADD]" : "text-gray-700"
-            }`}
-            htmlFor="fullName"
-          >
-            Nome completo*
-          </label>
-          <input
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="fullName"
-            type="text"
-            name="fullName"
-            placeholder="Digite aqui"
-            value={formData.fullName}
-            onInput={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            required
-          />
-        </div>
-        <div class="mb-4">
-          <label
-            class={`block text-xs font-bold mb-2 ${
-              focusedField === "cpfCnpj" ? "text-[#123ADD]" : "text-gray-700"
-            }`}
-            htmlFor="cpfCnpj"
-          >
-            CPF/CNPJ*
-          </label>
-          <input
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="cpfCnpj"
-            type="text"
-            name="cpfCnpj"
-            placeholder="Digite aqui"
-            value={formData.cpfCnpj}
-            onInput={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            required
-          />
-        </div>
-        <div class="mb-4">
-          <label
-            class={`block text-xs font-bold mb-2 ${
-              focusedField === "phone" ? "text-[#123ADD]" : "text-gray-700"
-            }`}
-            htmlFor="phone"
-          >
-            Telefone*
-          </label>
-          <input
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="phone"
-            type="tel"
-            name="phone"
-            placeholder="Digite aqui"
-            value={formData.phone}
-            onInput={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            required
-          />
-        </div>
-        <div class="mb-4">
-          <label
-            class={`block text-xs font-bold mb-2 ${
-              focusedField === "orderNumber"
-                ? "text-[#123ADD]"
-                : "text-gray-700"
-            }`}
-            htmlFor="orderNumber"
-          >
-            Número do pedido (opcional)
-          </label>
-          <input
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="orderNumber"
-            type="text"
-            name="orderNumber"
-            placeholder="Digite aqui"
-            value={formData.orderNumber}
-            onInput={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-          />
-        </div>
-        <div class="mb-4">
-          <label
-            class={`block text-xs font-bold mb-2 ${
-              focusedField === "contactReason"
-                ? "text-[#123ADD]"
-                : "text-gray-700"
-            }`}
-            htmlFor="contactReason"
-          >
-            Motivo do seu contato*
-          </label>
-          <input
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="contactReason"
-            type="text"
-            name="contactReason"
-            placeholder="Digite aqui"
-            value={formData.contactReason}
-            onInput={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            required
-          />
-        </div>
-        <div class="mb-4">
-          <label
-            class={`block text-xs font-bold mb-2 ${
-              focusedField === "subject" ? "text-[#123ADD]" : "text-gray-700"
-            }`}
-            htmlFor="subject"
-          >
-            Assunto*
-          </label>
-          <input
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="subject"
-            type="text"
-            name="subject"
-            placeholder="Digite aqui"
-            value={formData.subject}
-            onInput={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            required
-          />
-        </div>
-        <div class="mb-4">
-          <label
-            class={`block text-xs font-bold mb-2 ${
-              focusedField === "description"
-                ? "text-[#123ADD]"
-                : "text-gray-700"
-            }`}
-            htmlFor="description"
-          >
-            Descrição*
-          </label>
-          <textarea
-            class="shadow appearance-none border rounded min-h-[300px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="description"
-            name="description"
-            placeholder="Digite aqui"
-            value={formData.description}
-            onInput={handleChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            required
-          >
-          </textarea>
-        </div>
-        <div class="flex items-center justify-center lg:justify-start">
-          <button
-            class="bg-black text-white font-bold py-3 px-4 rounded rounded-[30px] w-full focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            ENVIAR
-          </button>
-        </div>
-      </form>
+      <div class="container px-5">
+        <form
+          class="p-8 w-full mx-auto my-8 bg-white rounded-[10px]"
+          onSubmit={handleSubmit}
+        >
+          <div class="mb-4">
+            <label
+              class={`block text-xs font-bold mb-2 ${
+                focusedField === "email" ? "text-[#123ADD]" : "text-gray-700"
+              }`}
+              htmlFor="email"
+            >
+              E-mail*
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="email"
+              type="email"
+              name="email"
+              placeholder="Digite aqui"
+              value={formData.email}
+              onInput={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label
+              class={`block text-xs font-bold mb-2 ${
+                focusedField === "fullName" ? "text-[#123ADD]" : "text-gray-700"
+              }`}
+              htmlFor="fullName"
+            >
+              Nome completo*
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="fullName"
+              type="text"
+              name="fullName"
+              placeholder="Digite aqui"
+              value={formData.fullName}
+              onInput={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label
+              class={`block text-xs font-bold mb-2 ${
+                focusedField === "cpfCnpj" ? "text-[#123ADD]" : "text-gray-700"
+              }`}
+              htmlFor="cpfCnpj"
+            >
+              CPF/CNPJ*
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="cpfCnpj"
+              type="text"
+              name="cpfCnpj"
+              placeholder="Digite aqui"
+              value={formData.cpfCnpj}
+              onInput={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label
+              class={`block text-xs font-bold mb-2 ${
+                focusedField === "phone" ? "text-[#123ADD]" : "text-gray-700"
+              }`}
+              htmlFor="phone"
+            >
+              Telefone*
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="phone"
+              type="tel"
+              name="phone"
+              placeholder="Digite aqui"
+              value={formData.phone}
+              onInput={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label
+              class={`block text-xs font-bold mb-2 ${
+                focusedField === "orderNumber"
+                  ? "text-[#123ADD]"
+                  : "text-gray-700"
+              }`}
+              htmlFor="orderNumber"
+            >
+              Número do pedido (opcional)
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="orderNumber"
+              type="text"
+              name="orderNumber"
+              placeholder="Digite aqui"
+              value={formData.orderNumber}
+              onInput={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+            />
+          </div>
+          <div class="mb-4">
+            <label
+              class={`block text-xs font-bold mb-2 ${
+                focusedField === "contactReason"
+                  ? "text-[#123ADD]"
+                  : "text-gray-700"
+              }`}
+              htmlFor="contactReason"
+            >
+              Motivo do seu contato*
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="contactReason"
+              type="text"
+              name="contactReason"
+              placeholder="Digite aqui"
+              value={formData.contactReason}
+              onInput={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label
+              class={`block text-xs font-bold mb-2 ${
+                focusedField === "subject" ? "text-[#123ADD]" : "text-gray-700"
+              }`}
+              htmlFor="subject"
+            >
+              Assunto*
+            </label>
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="subject"
+              type="text"
+              name="subject"
+              placeholder="Digite aqui"
+              value={formData.subject}
+              onInput={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label
+              class={`block text-xs font-bold mb-2 ${
+                focusedField === "description"
+                  ? "text-[#123ADD]"
+                  : "text-gray-700"
+              }`}
+              htmlFor="description"
+            >
+              Descrição*
+            </label>
+            <textarea
+              class="shadow appearance-none border rounded min-h-[300px] w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="description"
+              name="description"
+              placeholder="Digite aqui"
+              value={formData.description}
+              onInput={handleChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              required
+            >
+            </textarea>
+          </div>
+          <div class="flex items-center justify-center lg:justify-start">
+            <button
+              class="bg-black text-white font-bold py-3 px-4 rounded rounded-[30px] w-full focus:outline-none focus:shadow-outline"
+              type="submit"
+            >
+              ENVIAR
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
