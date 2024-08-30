@@ -66,12 +66,12 @@ export const useOffer = (aggregateOffer?: AggregateOffer) => {
   const availability = offer?.availability;
   const installment = offer?.priceSpecification.reduce(bestInstallment, null);
 
-  const inventary = offer?.inventoryLevel?.value;
+  const inventory = offer?.inventoryLevel?.value;
   const seller = offer?.seller;
   const price = offer?.price;
 
   return {
-    inventary,
+    inventory,
     price,
     listPrice: listPrice?.price,
     availability,
