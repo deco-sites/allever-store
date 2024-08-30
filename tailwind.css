@@ -181,6 +181,13 @@ details>summary::marker {
   -webkit-appearance: none;
 }
 
+.fluid-text h1 {
+  margin: 24px 0;
+  font-size: 30px;    
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
 .fluid-text h2 {
   margin: 24px 0;
   font-size: 18px;    
@@ -211,6 +218,13 @@ details>summary::marker {
 }
 
 @media (max-width: 1024px) {
+  .fluid-text h1 {
+    margin: 24px 0;
+    font-size: 20px;    
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
   .fluid-text h2 {
     margin: 24px 0;
     font-size: 16px;    

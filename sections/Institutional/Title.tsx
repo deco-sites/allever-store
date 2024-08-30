@@ -12,7 +12,7 @@ const Title = ({ title, breadcrumb, hasAllever }: Title) => {
           {breadcrumb}
         </p>
       </div>
-      <h1 class="text-xl font-semibold text-black">
+      <h1 class="text-xl lg:text-3xl font-semibold text-black">
         {title} {hasAllever && <span class="text-primary">[allever]</span>}
       </h1>
     </div>
