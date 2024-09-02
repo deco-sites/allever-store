@@ -14,11 +14,12 @@ const SeventhVariation = ({ title, items }: SeventhVariationProps) => {
     <>
       {device === "desktop" && (
         <div class="container px-5">
-          {title && 
-            <div class="mb-5">
-              <p class="text-2xl sm:text-3xl font-semibold">{title}</p>
-            </div>
-          }
+          {title &&
+            (
+              <div class="mb-5">
+                <p class="text-2xl sm:text-3xl font-semibold">{title}</p>
+              </div>
+            )}
           <div class="grid grid-cols-10 justify-center gap-4">
             <div class="col-span-4">
               <a href={items[0].Link} class="flex max-w-[650px] h-full">
@@ -103,11 +104,12 @@ const SeventhVariation = ({ title, items }: SeventhVariationProps) => {
       )}
       {device === "mobile" && (
         <div class="container px-5">
-          {title && 
-            <div class="mb-5">
-              <p class="text-2xl sm:text-3xl font-semibold">{title}</p>
-            </div>
-          }
+          {title &&
+            (
+              <div class="mb-5">
+                <p class="text-2xl sm:text-3xl font-semibold">{title}</p>
+              </div>
+            )}
           <div class="grid grid-cols-1 gap-2 sm:gap-4 justify-center md:grid-cols-2">
             <div class="col-span-1">
               <a href={items[0].Link} class="flex justify-center  sm:h-[100%]">

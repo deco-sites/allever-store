@@ -26,12 +26,14 @@ export interface Props extends SectionHeaderProps, Timer {
 
 export const loader = async (props: Props, req: Request, ctx: AppContext) => {
   console.log("CTX", ctx);
-  
+
   return { ...props };
-}
+};
 
 export default function ProductShelf(
-  { products, title, cta, expireAt, hideLabel = false }: SectionProps<typeof loader>,
+  { products, title, cta, expireAt, hideLabel = false }: SectionProps<
+    typeof loader
+  >,
 ) {
   const id = useId();
 

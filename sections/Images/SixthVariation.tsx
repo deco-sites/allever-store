@@ -14,11 +14,12 @@ const SixthVariation = ({ title, items }: SixthVariationProps) => {
     <>
       {device === "desktop" && (
         <div class="container px-5">
-          {title && 
-            <div class="mb-5">
-              <p class="text-2xl sm:text-3xl font-semibold">{title}</p>
-            </div>
-          }
+          {title &&
+            (
+              <div class="mb-5">
+                <p class="text-2xl sm:text-3xl font-semibold">{title}</p>
+              </div>
+            )}
           <div class="grid grid-cols-2 gap-4">
             <div class="col-span-1">
               <a href={items[0].Link} class="block">
@@ -75,11 +76,12 @@ const SixthVariation = ({ title, items }: SixthVariationProps) => {
       )}
       {device === "mobile" && (
         <div class="container px-5">
-          {title && 
-            <div class="mb-5">
-              <p class="text-2xl font-semibold">{title}</p>
-            </div>
-          }
+          {title &&
+            (
+              <div class="mb-5">
+                <p class="text-2xl font-semibold">{title}</p>
+              </div>
+            )}
           <div class="grid grid-cols-1 gap-2 sm:gap-4 justify-center">
             <div class="col-span-1">
               <a href={items[0].Link} class="flex justify-center sm:w-[100%]">

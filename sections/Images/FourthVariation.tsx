@@ -87,7 +87,7 @@ const FourthVariation = (
                       {items.map((item, index) => (
                         <Slider.Item
                           index={index}
-                          class="carousel-item justify-center w-full max-w-[75vw] first:pl-5 last:pr-5" 
+                          class="carousel-item justify-center w-full max-w-[75vw] first:pl-5 last:pr-5"
                           key={index}
                         >
                           <a href={item.Link} class="flex">

@@ -27,18 +27,20 @@ const About = ({ title, html, socials }: Props) => {
   return (
     <div class="container px-5">
       {title &&
-        <div class="container my-8">
-          <h1 class="text-[20px] font-semibold text-black">
-            {title} <span class="text-primary">[allever]</span>
-          </h1>
-        </div>
-      }
-      {html && 
-        <div
-          class="fluid-text mb-8 container"
-          dangerouslySetInnerHTML={{ __html: html }}
-        />
-      }
+        (
+          <div class="container my-8">
+            <h1 class="text-[20px] font-semibold text-black">
+              {title} <span class="text-primary">[allever]</span>
+            </h1>
+          </div>
+        )}
+      {html &&
+        (
+          <div
+            class="fluid-text mb-8 container"
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
+        )}
       {socials && socials.length > 0 && (
         <div class="mb-4">
           <p class="mb-4">Siga a [allever] nas redes sociais!</p>

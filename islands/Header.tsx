@@ -14,7 +14,7 @@ import { INavItem } from "../components/header/NavItem.tsx";
 import { useDevice } from "deco/hooks/useDevice.ts";
 import { useScript } from "apps/utils/useScript.ts";
 import { useSection } from "deco/hooks/useSection.ts";
-import { useState, useEffect, useMemo } from "preact/hooks";
+import { useEffect, useMemo, useState } from "preact/hooks";
 
 import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 import Searchbar, {

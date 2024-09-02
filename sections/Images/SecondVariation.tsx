@@ -16,7 +16,11 @@ const SecondVariation = ({ title, items }: SecondVariationProps) => {
             </div>
             <div class="flex flex-wrap lg:grid grid-cols-12 gap-[0.5rem] lg:gap-4">
               {items?.map((item, index) => (
-                <a href={item.Link} class={`flex col-span-${12 / items.length}`} key={index}>
+                <a
+                  href={item.Link}
+                  class={`flex col-span-${12 / items.length}`}
+                  key={index}
+                >
                   <Image
                     src={item.desktop?.Image
                       ? item.desktop?.Image

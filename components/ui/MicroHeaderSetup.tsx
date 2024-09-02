@@ -11,9 +11,9 @@ const setup = ({ threshold = 100 }: Props) => {
     console.warn("Unable to find body element");
     return;
   }
-  
+
   const homePage = globalThis.location.pathname === "/";
-	const scrollY = globalThis.scrollY;
+  const scrollY = globalThis.scrollY;
   if (scrollY > threshold) {
     body.classList.add("is-scrolled");
   } else {

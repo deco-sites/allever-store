@@ -66,7 +66,6 @@ const Form = () => {
     setFocusedField(null);
   };
 
-  
   function get<T extends HTMLElement>(s: string): T | never {
     const el = document.querySelector<T>(s);
     if (!el) throw new Error(`Element not found: ${s}`);
@@ -76,19 +75,19 @@ const Form = () => {
   const handleSubmit = async (e: Event) => {
     e.preventDefault();
 
-		const email = get<HTMLInputElement>('[name=email]').value;
-		const phone = get<HTMLInputElement>('[name=phone]').value;
-		const cpfCnpj = get<HTMLInputElement>('[name=cpfCnpj]').value;
-		const subject = get<HTMLInputElement>('[name=subject]').value;
-		const fullName = get<HTMLInputElement>('[name=fullName]').value;
-		const description = get<HTMLInputElement>('[name=description]').value;
-		const orderNumber = get<HTMLInputElement>('[name=orderNumber]').value;
-		const contactReason = get<HTMLInputElement>('[name=contactReason]').value;
+    const email = get<HTMLInputElement>("[name=email]").value;
+    const phone = get<HTMLInputElement>("[name=phone]").value;
+    const cpfCnpj = get<HTMLInputElement>("[name=cpfCnpj]").value;
+    const subject = get<HTMLInputElement>("[name=subject]").value;
+    const fullName = get<HTMLInputElement>("[name=fullName]").value;
+    const description = get<HTMLInputElement>("[name=description]").value;
+    const orderNumber = get<HTMLInputElement>("[name=orderNumber]").value;
+    const contactReason = get<HTMLInputElement>("[name=contactReason]").value;
 
     const response = await invoke.vtex.actions.masterdata.createDocument({
-			acronym: 'CT',
-			data: {
-				email,
+      acronym: "CT",
+      data: {
+        email,
         fullName,
         cpf: cpfCnpj,
         message: description,
@@ -96,8 +95,8 @@ const Form = () => {
         phone,
         reason: contactReason,
         subject,
-			},
-			isPrivateEntity: true,
+      },
+      isPrivateEntity: true,
     });
 
     console.log("response", response);

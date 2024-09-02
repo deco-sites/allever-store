@@ -16,8 +16,8 @@ export interface Props {
   // buyTogetherLoader: Product[] | null;
 }
 
-export default function ProductDetails({ 
-  page
+export default function ProductDetails({
+  page,
 }: Props) {
   if (!page) {
     return (
@@ -34,7 +34,7 @@ export default function ProductDetails({
 
   if (page) {
     const { product } = page;
-    
+
     return (
       <div class=" flex flex-col gap-4 sm:gap-5 w-full py-4 sm:py-5 px-5 sm:px-0">
         <div
