@@ -7,7 +7,7 @@
   "sections": [
     {
       "jsonLD": {
-        "__resolveType": "PLP Loader"
+        "__resolveType": "Preview vtex/loaders/intelligentSearch/productListingPage.ts"
       },
       "__resolveType": "commerce/sections/Seo/SeoPLP.tsx"
     },

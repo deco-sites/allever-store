@@ -13,17 +13,12 @@ export interface Props {
   /** @title Integration */
   page: ProductDetailsPage | null;
 
-  buyTogetherLoader: Product[] | null;
+  // buyTogetherLoader: Product[] | null;
 }
 
-export default function ProductDetails(
-  { page, buyTogether }: {
-    page: ProductDetailsPage;
-    buyTogether: Product[] | null;
-  },
-) {
-  const { product } = page;
-
+export default function ProductDetails({ 
+  page
+}: Props) {
   if (!page) {
     return (
       <div class="w-full flex justify-center items-center py-28">
@@ -38,6 +33,8 @@ export default function ProductDetails(
   }
 
   if (page) {
+    const { product } = page;
+    
     return (
       <div class=" flex flex-col gap-4 sm:gap-5 w-full py-4 sm:py-5 px-5 sm:px-0">
         <div
@@ -58,9 +55,6 @@ export default function ProductDetails(
           {/* Description card */}
           <div class="mt-4 sm:mt-6 border border-x-0 border-y-[#A8A8A8]">
             <Description page={page} />
-          </div>
-          <div>
-            <BuyTogether product={product} buyTogether={buyTogether} />
           </div>
           <div>
             <ProductGrid page={page} />

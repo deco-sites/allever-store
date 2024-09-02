@@ -33,12 +33,11 @@ function ProductInfo({ page }: Props) {
     price = 0,
     listPrice,
     seller = "1",
-    availability,
+    inventory = 0,
     installment,
     installments,
+    availability,
   } = useOffer(offers);
-
-  // console.log(inventory)
 
   const hasPromotion = additionalProperty?.some(
     (prop) => prop.value === "Promoção",
@@ -182,7 +181,7 @@ function ProductInfo({ page }: Props) {
         </div>
 
         <div>
-          <PaymentMethods installment={installment?.price} />
+          <PaymentMethods installment={installment?.price.toString() || ""} />
         </div>
 
         <div class="">
