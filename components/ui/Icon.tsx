@@ -33,6 +33,8 @@ export type AvailableIcons =
   | "credit-card"
   | "delivery-box"
   | "check"
+  | "favorite-pdp"
+  | "ArrowSlide"
   | "rain";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {

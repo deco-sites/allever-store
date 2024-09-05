@@ -8,6 +8,7 @@ import Icon from "../ui/Icon.tsx";
 interface Props {
   variant?: "full" | "icon";
   item: AnalyticsItem;
+  pdp?: boolean;
 }
 
 const onLoad = (id: string, productID: string) =>
@@ -40,7 +41,7 @@ const onClick = (productID: string, productGroupID: string) => {
   }
 };
 
-function WishlistButton({ item, variant = "full" }: Props) {
+function WishlistButton({ item, variant = "full", pdp }: Props) {
   // deno-lint-ignore no-explicit-any
   const productID = (item as any).item_id;
   const productGroupID = item.item_group_id ?? "";
@@ -63,7 +64,21 @@ function WishlistButton({ item, variant = "full" }: Props) {
         aria-label="Add to wishlist"
         hx-on:click={useScript(onClick, productID, productGroupID)}
       >
-        <Icon id="wishlist-icon" class="[.htmx-request_&]:hidden" fill="none" />
+        {pdp
+          ? (
+            <Icon
+              id="favorite-pdp"
+              class="[.htmx-request_&]:hidden"
+              fill="none"
+            />
+          ) : (
+            <Icon
+              id="wishlist-icon"
+              class="[.htmx-request_&]:hidden"
+              fill="none"
+            />
+          )}
+
         <span class="[.htmx-request_&]:inline hidden loading loading-spinner" />
       </button>
       <script

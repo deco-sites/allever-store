@@ -73,6 +73,24 @@
   /* Firefox */
 }
 
+.custom-scrollbar::-webkit-scrollbar {
+  width: 0; /* Oculta a barra de rolagem */
+  height: 0;
+}
+
+.custom-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none;    /* Firefox */
+}
+
+.cursor-grab {
+  cursor: grab;
+}
+
+.cursor-grabbing {
+  cursor: grabbing;
+}
+
 @keyframes scroll {
   0% {
     transform: translateX(0);
@@ -211,7 +229,7 @@ details>summary::marker {
   margin: 8px 0;
 }
 
-.fluid-text p,
+.c p,
 .fluid-text p span {
   margin: 12px 0;
   font-size: 14px !important;
