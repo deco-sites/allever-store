@@ -31,20 +31,20 @@ function PaymentMethods({ installment, installments }: PaymentMethodsProps) {
   const renderContent = () => {
     if (paymentMethod === "pix") {
       return (
-        <div class="px-[25px] flex flex-col gap-[15px]">
-          <p class="text-[30px] text-[#123ADD] font-semibold flex flex-row">
+        <div class="px-4 lg:px-6 flex flex-col gap-4">
+          <p class="text-2xl text-[#123ADD] font-semibold flex items-center">
             {formatPrice(installment)}
-            <span class="text-normal ml-[8px]">no PIX</span>
+            <span class="text-normal ml-2">no PIX</span>
           </p>
-          <p class="text-[#888888] font-semibold text-xs max-w-[334px]">
+          <p class="text-xs text-gray-600 font-semibold max-w-xs">
             Para pagamento via PIX será gerada uma chave e um QR Code ao
             finalizar o processo de compra.
           </p>
-          <p class="text-[10px] text-[#888888] font-semibold max-w-[334px]">
+          <p class="text-xs text-gray-600 font-semibold max-w-xs">
             - O prazo de validade da chave é de X minutos. Em caso de não
             pagamento o pedido será cancelado.
           </p>
-          <p class="text-[10px] text-[#888888] font-semibold max-w-[334px]">
+          <p class="text-xs text-gray-600 font-semibold max-w-xs">
             - O prazo de entrega começa a contar após a confirmação do
             pagamento.
           </p>
@@ -85,14 +85,14 @@ function PaymentMethods({ installment, installments }: PaymentMethodsProps) {
     <div>
       <button
         onClick={() => setIsOpen(true)}
-        class="underline text-[#123ADD] text-base font-normal"
+        class="underline text-[#123ADD] fluid-text"
       >
         Ver formas de pagamento
       </button>
 
       {isOpen && (
-        <div class="fixed inset-0 flex items-center justify-center z-50 px-[30px]">
-          <div class="bg-white p-6 rounded-lg shadow-lg z-50 max-w-[536px] w-full m-auto">
+        <div class="fixed inset-0 flex items-center justify-center z-50 px-4 lg:px-8">
+          <div class="bg-white p-6 rounded-lg shadow-lg z-50 max-w-lg w-full">
             <div class="flex justify-between">
               <h3 class="font-semibold text-base text-black">
                 Métodos de <span class="text-[#123ADD]">[pagamento]</span>
@@ -106,32 +106,32 @@ function PaymentMethods({ installment, installments }: PaymentMethodsProps) {
                 <Icon id="close-black" class="w-full" />
               </button>
             </div>
-            <div class="flex py-[40px] ">
-              <div class="flex flex-col w-full border-r max-w-[159px] space-between gap-[48px]">
-                <div class="items-center flex flex-col">
+            <div class="flex flex-col py-10">
+              <div class="flex flex-row lg:flex-col w-full justify-evenly lg:justify-between gap-12 mb-5">
+                <div class="flex flex-col items-center">
                   <div
-                    class={`border py-[13px] px-[15px] rounded-full ${
-                      paymentMethod === "pix" && "border-[#123ADD]"
-                    } `}
+                    class={`border py-3.5 px-4 rounded-full ${
+                      paymentMethod === "pix" ? "border-[#123ADD]" : ""
+                    }`}
                   >
                     <a
                       onClick={() => setPaymentMethod("pix")}
-                      class={`flex flex-col items-center gap-2 cursor-pointer`}
+                      class="flex flex-col items-center gap-2 cursor-pointer"
                     >
                       <Icon id="pix" width={44} height={47} class="w-full" />
                     </a>
                   </div>
-                  <p class={`font-semibold text-xs mt-[5px]`}>Pix</p>
+                  <p class="font-semibold text-xs mt-1">Pix</p>
                 </div>
-                <div class="items-center flex flex-col">
+                <div class="flex flex-col items-center">
                   <div
-                    class={`border py-[20px] px-[15px] rounded-full ${
-                      paymentMethod === "card" && "border-[#123ADD]"
-                    } `}
+                    class={`border py-5 px-4 rounded-full ${
+                      paymentMethod === "card" ? "border-[#123ADD]" : ""
+                    }`}
                   >
                     <a
                       onClick={() => setPaymentMethod("card")}
-                      class={`flex flex-col items-center gap-2 cursor-pointer`}
+                      class="flex flex-col items-center gap-2 cursor-pointer"
                     >
                       <Icon
                         id="credit-card"
@@ -141,12 +141,12 @@ function PaymentMethods({ installment, installments }: PaymentMethodsProps) {
                       />
                     </a>
                   </div>
-                  <p class={`font-semibold text-xs mt-[5px]`}>Pix</p>
+                  <p class="font-semibold text-xs mt-1">
+                    Cartão de crédito
+                  </p>
                 </div>
               </div>
-              <div class="flex flex-col">
-                {renderContent()}
-              </div>
+              <div class="flex flex-col">{renderContent()}</div>
             </div>
           </div>
           <div

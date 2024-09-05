@@ -26,7 +26,7 @@ const useStyles = (value: string, checked: boolean) => {
   }
 
   return clx(
-    "p-3 rounded-[10px] text-xs font-bold",
+    "p-3 rounded-[10px] text-xs font-bold w-max",
     checked && "bg-[#123ADD] text-white ",
     !checked && "bg-[#D3D3D3] text-black ",
   );
@@ -43,7 +43,7 @@ export const Ring = (
   const styles = clx(useStyles(value, checked), _class);
 
   return (
-    <span style={{ backgroundColor: color }} class={styles}>
+    <span style={{ backgroundColor: color }} class={`${styles} w-full flex`}>
       {color ? null : value}
     </span>
   );
@@ -65,8 +65,8 @@ function VariantSelector({ product }: Props) {
     >
       {Object.keys(possibilities).map((name) => (
         <li class="flex flex-col gap-2">
-          <span class="text-base font-bold mb-5 uppercase">{name}</span>
-          <ul class="flex flex-row gap-2 mb-[10px]">
+          <span class="text-base font-bold mb-0 lg:mb-5 uppercase">{name}</span>
+          <ul class="flex flex-row gap-2 mb-[10px] flex-wrap">
             {Object.entries(possibilities[name])
               .filter(([value]) => value)
               .map(([value, link]) => {
@@ -88,7 +88,7 @@ function VariantSelector({ product }: Props) {
                       />
                       <div
                         class={clx(
-                          "col-start-1 row-start-1 col-span-1 row-span-1",
+                          "col-start-1 row-start-1 col-span-1 row-span-1 ",
                           "[.htmx-request_&]:opacity-0 transition-opacity",
                         )}
                       >

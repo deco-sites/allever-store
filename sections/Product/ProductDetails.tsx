@@ -5,9 +5,12 @@ import { clx } from "../../sdk/clx.ts";
 import Description from "../../components/product/Description.tsx";
 import ProductGrid from "../../components/product/ProductGrid.tsx";
 import BuyTogether from "../../islands/BuyTogether.tsx";
+import Breadcrumb from "../../components/ui/Breadcrumb.tsx";
 // import type { LoaderReturnType } from "$live/types.ts";
 
 import type { Product } from "apps/commerce/types.ts";
+
+import { useDevice } from "deco/hooks/useDevice.ts";
 
 export interface Props {
   /** @title Integration */
@@ -33,25 +36,33 @@ export default function ProductDetails({
   }
 
   if (page) {
-    const { product } = page;
+    const { product, breadcrumbList } = page;
+
+    const device = useDevice();
 
     return (
       <div class=" flex flex-col gap-4 sm:gap-5 w-full py-4 sm:py-5 px-5 sm:px-0">
         <div
           class={clx(
-            "container grid",
+            "container grid lg:px-5",
             "grid-cols-1 gap-2 py-0",
-            "sm:grid-cols-5 sm:gap-6",
+            "sm:grid-cols-6 sm:gap-6",
           )}
         >
-          <div class="sm:col-span-3">
-            <ImageGallerySlider page={page} />
+          {device === "desktop"
+            ? (
+              <div class="sm:col-span-3">
+                <ImageGallerySlider page={page} />
+              </div>
+            )
+            : null}
+          <div>
           </div>
-          <div class="sm:col-span-2">
+          <div class="sm:col-span-3">
             <ProductInfo page={page} />
           </div>
         </div>
-        <div>
+        <div class="flex flex-col gap-4">
           {/* Description card */}
           <div class="mt-4 sm:mt-6 border border-x-0 border-y-[#A8A8A8]">
             <Description page={page} />

@@ -18,7 +18,7 @@ const Description = ({ page }: Props) => {
         class="container"
         title={
           <div class="flex space-between items-center">
-            <p class="text-[24px] pt-[45px] pb-[45px]">Descrição do Produto</p>
+            <p class="text-[24px] py-[22px] lg:py-[45px] ">Descrição do Produto</p>
             <Icon
               class="group-open:rotate-180 transition-all ease-in-out duration-[400ms]"
               size={13}

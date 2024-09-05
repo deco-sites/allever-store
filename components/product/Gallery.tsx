@@ -6,13 +6,15 @@ import Slider from "../ui/Slider.tsx";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 
+import { useDevice } from "deco/hooks/useDevice.ts";
+
 export interface Props {
   /** @title Integration */
   page: ProductDetailsPage | null;
 }
 
-const WIDTH = 820;
-const HEIGHT = 615;
+const WIDTH = 532;
+const HEIGHT = 532;
 const ASPECT_RATIO = `${WIDTH} / ${HEIGHT}`;
 
 /**
@@ -33,9 +35,11 @@ export default function GallerySlider(props: Props) {
     page: { product: { image: images = [] } },
   } = props;
 
+  const device = useDevice();
+
   return (
     <>
-      <div id={id} class="flex flex-col sm:flex-row-reverse gap-5">
+      <div id={id} class="grid sm:grid-rows-2">
         {/* Image Slider */}
         <div class="relative h-min flex-grow">
           <Slider class="carousel carousel-center gap-6 w-full">
@@ -45,7 +49,7 @@ export default function GallerySlider(props: Props) {
                 class="carousel-item w-full"
               >
                 <Image
-                  class="w-full"
+                  class="w-full object-contain lg:object-cover bg-white rounded-[10px] lg:rounded-[20px]"
                   sizes="(max-width: 640px) 100vw, 40vw"
                   style={{ aspectRatio: ASPECT_RATIO }}
                   src={img.url!}
@@ -61,44 +65,33 @@ export default function GallerySlider(props: Props) {
           </Slider>
 
           <Slider.PrevButton
-            class="no-animation absolute left-2 top-1/2 btn btn-circle btn-outline disabled:hidden"
+            class="no-animation absolute left-2 top-1/2 disabled:hidden"
             disabled
           >
-            <Icon id="chevron-right" class="rotate-180" />
+            <Icon id="ArrowSlide" />
           </Slider.PrevButton>
 
           <Slider.NextButton
-            class="no-animation absolute right-2 top-1/2 btn btn-circle btn-outline disabled:hidden"
+            class="no-animation absolute right-2 top-1/2 disabled:hidden"
             disabled={images.length < 2}
           >
-            <Icon id="chevron-right" />
+            <Icon id="ArrowSlide" class="rotate-180" />
           </Slider.NextButton>
-
-          <div class="absolute top-2 right-2 bg-base-100 rounded-full">
-            <label class="btn btn-ghost hidden sm:inline-flex" for={zoomId}>
-              <Icon id="pan_zoom" />
-            </label>
-          </div>
         </div>
 
         {/* Dots */}
         <ul
           class={clx(
-            "carousel carousel-center",
-            "sm:carousel-vertical",
-            "gap-1 px-4",
-            "sm:gap-2 sm:px-0",
+            "sm:h-fit flex overflow-scroll flex-row custom-scrollbar cursor-grab gap-3 lg:gap-2",
           )}
-          style={{ maxHeight: "600px" }}
         >
           {images.map((img, index) => (
             <li class="carousel-item">
-              <Slider.Dot index={index}>
+              <Slider.Dot index={index} class="h-fit w-fit h-full ">
                 <Image
-                  style={{ aspectRatio: "1 / 1" }}
-                  class="group-disabled:border-base-300 border rounded object-cover"
-                  width={60}
-                  height={60}
+                  class="rounded object-contain lg:object-cover lg:max-w-[148px] lg:max-h-[107px] bg-white rounded-[10px] lg:rounded-[20px]"
+                  width={device === "desktop" ? 148 : 60}
+                  height={device === "desktop" ? 107 : 60}
                   src={img.url!}
                   alt={img.alternateName}
                 />
@@ -109,12 +102,6 @@ export default function GallerySlider(props: Props) {
 
         <Slider.JS rootId={id} />
       </div>
-      <ProductImageZoom
-        id={zoomId}
-        images={images}
-        width={700}
-        height={Math.trunc(700 * HEIGHT / WIDTH)}
-      />
     </>
   );
 }
