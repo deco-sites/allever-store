@@ -2,6 +2,7 @@ import { useEffect } from "preact/hooks";
 import { IS_BROWSER } from "$fresh/runtime.ts";
 
 export interface Props {
+  context: "card" | "pdp";
   storeId: string;
   productId: string;
 }
@@ -9,6 +10,7 @@ export interface Props {
 const id = "trustvox-script-stars";
 
 export default function ProductStars({
+  context = "pdp",
   storeId,
   productId,
 }: Props) {
@@ -34,5 +36,5 @@ export default function ProductStars({
     }
   }, []);
 
-  return <div data-trustvox-product-code={productId} />;
+  return <div class={context === "card" ? "mt-2" : ""} data-trustvox-product-code={productId} />;
 }

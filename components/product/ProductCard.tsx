@@ -93,41 +93,12 @@ function ProductCard({
     <div
       {...event}
       class={clx(
-        "card flex flex-col space-between card-compact group text-sm bg-white p-5",
+        "card flex flex-col space-between card-compact group text-sm bg-white p-3 sm:p-5",
         _class,
       )}
     >
-      <figure
-        class="relative overflow-hidden"
-        style={{ aspectRatio: `${WIDTH} / ${HEIGHT}` }}
-      >
-        {/* Product Images */}
-        <a
-          href={relativeUrl}
-          aria-label="view product"
-        >
-          <Image
-            src={front.url!}
-            alt={front.alternateName}
-            width={WIDTH}
-            height={HEIGHT}
-            class="opacity-100 lg:group-hover:opacity-0 lg:group-hover:z-10"
-            preload={preload}
-            loading={preload ? "eager" : "lazy"}
-            decoding="async"
-          />
-          <Image
-            src={back?.url ?? front.url!}
-            alt={back?.alternateName ?? front.alternateName}
-            width={WIDTH}
-            height={HEIGHT}
-            class="transition-opacity opacity-0 lg:group-hover:opacity-100 lg:group-hover:z-30 absolute left-0"
-            sizes="(max-width: 640px) 50vw, 20vw"
-            loading="lazy"
-            decoding="async"
-          />
-        </a>
-        <div class="absolute top-2 lg:top-[10px] left-0 z-10 max-w-[200px] flex flex-wrap gap-[5px]">
+      <div class="flex items-start justify-between">
+        <div class="flex flex-wrap gap-[5px]">
           {/* Discounts */}
           {percent > 1 && inStock
             ? (
@@ -161,34 +132,51 @@ function ProductCard({
             </span>
           )}
         </div>
-        {/* Wishlist button */}
-        <div class="absolute top-0 right-0 w-full flex items-center justify-end z-10">
-          <WishlistButton item={item} variant="icon" />
-        </div>
+        <WishlistButton item={item} variant="icon" />
+      </div>
+      <figure
+        class="relative overflow-hidden rounded-none"
+        style={{ aspectRatio: `${WIDTH} / ${HEIGHT}` }}
+      >
+        {/* Product Images */}
+        <a
+          href={relativeUrl}
+          aria-label="view product"
+        >
+          <Image
+            src={front.url!}
+            alt={front.alternateName}
+            width={WIDTH}
+            height={HEIGHT}
+            preload={preload}
+            loading={preload ? "eager" : "lazy"}
+            decoding="async"
+          />
+        </a>
       </figure>
       <div>
-        <a href={relativeUrl} class="pt-5">
-          {offerLimited && (
-            <p class="px-6 py-[2px] flex items-center justify-center bg-[#f22e2e] text-white font-semibold text-xs mt-[5px]">
-              Oferta por tempo limitado
-            </p>
-          )}
-          {internationalBuy && (
-            <p class="px-6 py-[2px] flex items-center justify-center bg-[#000] text-white font-semibold text-xs mt-[5px]">
-              Compra Internacional
-            </p>
-          )}
-          {seller && inStock
-            ? <p class="my-[5px] text-sm text-[#d3d3d3] capitalize">{seller}</p>
-            : <span class="my-[5px]"></span>}
-          <p class="font-normal text-sm max-h-[63px] overflow-hidden">
+        <a href={relativeUrl} class="flex flex-col gap-2">
+          <div class="flex flex-col gap-1">
+            {offerLimited && (
+              <p class="px-1 sm:px-6 py-1 flex items-center justify-center bg-[#f22e2e] text-white font-semibold text-[10px] sm:text-xs">
+                Oferta por tempo limitado
+              </p>
+            )}
+            {internationalBuy && (
+              <p class="px-1 sm:px-6 py-1 flex items-center justify-center bg-[#000] text-white font-semibold text-[10px] sm:text-xs">
+                Compra Internacional
+              </p>
+            )}
+          </div>
+          {seller && inStock && <p class="text-sm text-[#d3d3d3] capitalize">{seller}</p>}
+          <p class="font-normal text-sm text-ellipsis font-bold line-clamp-2 h-10">
             {title}
           </p>
           {inStock
             ? (
-              <div class="flex gap-2 flex-col pt-2">
+              <div class="flex flex-col">
                 {listPrice && (
-                  <span class="line-through font-normal text-[#a8a8a8] text-sm">
+                  <span class="line-through font-normal text-[#a8a8a8] text-xs leading-[1]">
                     {formatPrice(listPrice, offers?.priceCurrency)}
                   </span>
                 )}
@@ -198,7 +186,7 @@ function ProductCard({
                     no pix
                   </span>
                 </span>
-                <span class="text-[#a8a8a8] text-xs">
+                <span class="text-[#a8a8a8] text-xs leading-[1]">
                   ou {installment?.billingDuration}x de {formatPrice(
                     installment?.billingIncrement,
                     offers!.priceCurrency!,
@@ -207,12 +195,12 @@ function ProductCard({
               </div>
             )
             : (
-              <p class="flex text-center mt-2 justify-center font-semibold">
+              <p class="text-left font-semibold">
                 Produto Indisponível
               </p>
             )}
         </a>
-        <ProductStars storeId="121576" productId={productGroupID ?? ""} />
+        <ProductStars context="card" storeId="121576" productId={productGroupID ?? ""} />
       </div>
       {/* SKU Selector */}
       {

@@ -73,6 +73,8 @@ function PageResult(props: SectionProps<typeof loader>) {
   const prev = pageInfo.currentPage - startingPage;
   const next = pageInfo.currentPage + startingPage;
 
+  console.log("prev", prev, "next", next);
+
   const offset = zeroIndexedOffsetPage * perPage;
 
   const nextPageUrl = useUrlRebased(pageInfo.nextPage, url);
@@ -88,14 +90,16 @@ function PageResult(props: SectionProps<typeof loader>) {
 
   const infinite = layout?.pagination !== "pagination";
 
+  console.log("pageInfo", pageInfo);
+
   return (
     <div class="grid grid-flow-row grid-cols-1 place-items-center mx-auto">
       <div
         data-product-list
         class={clx(
           "grid items-center",
-          "flex gap-[8px]",
-          "sm:grid-cols-4 lg:gap-[40px]",
+          "flex gap-1",
+          "grid-cols-2 sm:grid-cols-4 lg:gap-4",
           "w-full pb-5",
         )}
       >
@@ -111,7 +115,7 @@ function PageResult(props: SectionProps<typeof loader>) {
       </div>
 
       <div class="py-5 sm:pt-10 w-full flex justify-center">
-        <div class="flex justify-center items-center [&_section]:contents w-full lg:hidden">
+        {/* <div class="flex justify-center items-center [&_section]:contents w-full lg:hidden">
           {nextPageUrl
             ? (
               <a
@@ -135,13 +139,8 @@ function PageResult(props: SectionProps<typeof loader>) {
                 ver menos
               </a>
             )}
-        </div>
-        <div
-          class={clx(
-            "join lg:flex gap-[30px] items-center text-base hidden ",
-            infinite && "hidden",
-          )}
-        >
+        </div> */}
+        <div class="join lg:flex gap-[30px] items-center text-base">
           <a
             rel="prev"
             aria-label="previous page link"
@@ -229,8 +228,8 @@ function Result(props: SectionProps<typeof loader>) {
   const controls = useId();
   const device = useDevice();
 
-  const { startingPage = 0, url, partial } = props;
   const page = props.page!;
+  const { startingPage = 0, url, partial } = props;
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
   const perPage = pageInfo?.recordPerPage || products.length;
   const zeroIndexedOffsetPage = pageInfo.currentPage - startingPage;
@@ -256,8 +255,18 @@ function Result(props: SectionProps<typeof loader>) {
     },
   });
 
-  function extractSearchTerms(url) {
-    const match = url.match(/q=([^&]*)/);
+  function extractSearchTerms() {
+    const newURL = new URL(url);
+    const search = newURL.search;
+    const pathname = newURL.pathname;
+
+    const match = search.match(/q=([^&]*)/);
+    
+    if (!match) {
+      const temp = pathname.split("/");
+      return temp[temp.length - 1];
+    }
+
     if (match) {
       return match[1].replace(/\+/g, " ");
     } else {
@@ -266,13 +275,7 @@ function Result(props: SectionProps<typeof loader>) {
     }
   }
 
-  const result = extractSearchTerms(url);
-
-  const results = (
-    <span class="text-sm font-normal">
-      {page.pageInfo.recordPerPage} of {page.pageInfo.records} results
-    </span>
-  );
+  const result = extractSearchTerms();
 
   const sortBy = sortOptions.length > 0 && (
     <Sort sortOptions={sortOptions} url={url} />
@@ -282,12 +285,12 @@ function Result(props: SectionProps<typeof loader>) {
     <>
       {device === "desktop" && (
         <div class="flex justify-between flex-col items-start">
-          <div class="w-full flex flex-col gap-6">
-            <div class="border-b border-gray-300">
-              <div class="flex items-center space-between w-full pt-5 pb-6 container mt-[5px]">
-                <h1 class="lg:text-[32px] uppercase font-semibold flex items-center">
+          <div class="w-full flex flex-col gap-8">
+            <div class="border-b border-gray-300 mb-8">
+              <div class="flex items-center space-between w-full container py-8 px-5">
+                <h1 class="text-xl lg:text-3xl uppercase font-semibold flex items-center">
                   {result}{" "}
-                  <span class="lg:text-[24px] font-normal ml-4">
+                  <span class="text-base lg:text-xl ml-2">
                     [{page.pageInfo.records}]
                   </span>
                 </h1>
@@ -295,9 +298,6 @@ function Result(props: SectionProps<typeof loader>) {
                   {sortBy}
                 </div>
               </div>
-            </div>
-            <div class="container">
-              <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
             </div>
           </div>
         </div>
@@ -330,7 +330,7 @@ function Result(props: SectionProps<typeof loader>) {
                     <Drawer
                       id={controls}
                       aside={
-                        <div class="bg-base-100 flex flex-col h-full divide-y overflow-y-hidden">
+                        <div class="bg-base-100 flex flex-col h-full divide-y overflow-y-hidden min-w-[85vw]">
                           <div class="flex justify-between items-center bg-[#123ADD]">
                             <p class="text-[20px] font-semibold py-[17px] flex items-center text-white px-5">
                               Filtros
@@ -369,10 +369,10 @@ function Result(props: SectionProps<typeof loader>) {
                 </>
               )}
 
-              <div class="grid grid-cols-1 sm:grid-cols-[250px_1fr] gap-6 container">
+              <div class="grid grid-cols-1 sm:grid-cols-[250px_1fr] gap-12 container px-5">
                 {device === "desktop" && (
-                  <aside class="place-self-start flex flex-col max-w-[227px]">
-                    <span class="text-[20px] font-semibold py-[10px] flex items-center border-b border-gray-300 ">
+                  <aside class="place-self-start flex flex-col w-full">
+                    <span class="text-base lg:text-lg font-semibold pb-4 flex items-center border-b border-gray-300">
                       Filtros
                     </span>
 
@@ -380,7 +380,7 @@ function Result(props: SectionProps<typeof loader>) {
                   </aside>
                 )}
 
-                <div class="flex flex-col gap-9">
+                <div class="flex flex-col gap-10">
                   <PageResult {...props} />
                 </div>
               </div>

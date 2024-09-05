@@ -19,6 +19,7 @@ export type AvailableIcons =
   | "error"
   | "trash"
   | "wishlist-icon"
+  | "wishlist-gray-icon"
   | "search-drawer"
   | "close-white"
   | "close-black"

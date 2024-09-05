@@ -90,23 +90,20 @@ function Sort({ sortOptions, url }: Props) {
 
   return (
     <div
-      class={`relative inline-block text-left w-full max-w-fit ${
-        isOpen && "bg-white"
+      class={`relative rounded-[10px] border border-gray-300 shadow-sm inline-block text-left w-full max-w-fit ${
+        isOpen && "bg-white rounded-b-none border-b-0"
       }`}
     >
-      <div>
+      <div class="relative z-[3]">
         <button
           type="button"
-          class={`flex items-center gap-2 w-full rounded-[10px] border border-gray-300 shadow-sm px-4 py-2  bg-transparent text-xs font-bold text-[#123ADD]  focus:outline-none ${
-            isOpen ? "rounded-b-none border-b-0" : ""
-          }`}
+          class="flex items-center gap-2 w-full px-4 py-2 bg-transparent text-xs font-bold text-[#123ADD] focus:outline-none"
           id="menu-button"
           aria-expanded={isOpen}
           aria-haspopup="true"
           onClick={toggleDropdown}
         >
           {selectedLabel}
-
           <Icon
             class={`${
               isOpen && "rotate-180"
@@ -119,7 +116,7 @@ function Sort({ sortOptions, url }: Props) {
 
       {isOpen && (
         <div
-          class="origin-top-right absolute right-0 mt-[1px] w-full rounded-[10px] rounded-t-none shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-20 overflow-hidden"
+          class="origin-top-right absolute right-0 mt-[1px] w-full rounded-[10px] rounded-t-none shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-[2] overflow-hidden border-t-0"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="menu-button"
@@ -129,9 +126,7 @@ function Sort({ sortOptions, url }: Props) {
             {options.map(({ value, label }, index) => (
               <a
                 href={value}
-                class={`block px-[10px] py-2 text-[10px] text-black font-semibold hover:bg-gray-100 border-b border-gray-200  ${
-                  index === options.length - 1 ? "border-b-0" : ""
-                }`}
+                class="block px-[10px] py-2 text-[10px] text-black font-semibold hover:bg-gray-100 border-b border-gray-200 first:border-t-0 last:border-b-0"
                 role="menuitem"
                 tabIndex={-1}
                 key={value}
