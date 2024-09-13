@@ -39,9 +39,6 @@ function PaymentMethods({ offers, installment }: PaymentMethodsProps) {
     return acc;
   }, null);
 
-  console.log("offer", offer);
-  console.log("maxIntallments", maxIntallments);
-
   const pixInstallment = installment && parseFloat(installment);
 
   return (

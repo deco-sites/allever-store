@@ -9,7 +9,7 @@ export interface Props {
 
 const Description = ({ page }: Props) => {
   const { product } = page;
-  const { isVariantOf, additionalProperty } = product;
+  const { isVariantOf } = product;
   const description = product.description || isVariantOf?.description;
 
   return (
@@ -26,29 +26,14 @@ const Description = ({ page }: Props) => {
             />
           </div>
         }
-      >
-        <div
-          class="fluid-text text-sm pb-[40px]"
-          dangerouslySetInnerHTML={{ __html: description }}
-        />
+      > 
+        <div>
+          <div
+            class="fluid-text text-sm pb-[40px]"
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
+        </div>
       </Collapsable>
-
-      {/* Description card */}
-      {
-        /* <div class="mt-4 sm:mt-6" >
-                <span class="text-sm">
-                    {description && (
-                        <details>
-                            <summary class="cursor-pointer">Description</summary>
-                            <div
-                                class="ml-2 mt-2"
-                                dangerouslySetInnerHTML={{ __html: description }}
-                            />
-                        </details>
-                    )}
-                </span>
-            </div > */
-      }
     </>
   );
 };
