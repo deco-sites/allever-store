@@ -56,6 +56,8 @@ function VariantSelector({ product }: Props) {
   const relativeUrl = relative(url);
   const id = useId();
 
+  if (Object.keys(possibilities).length === 0) return null;
+
   return (
     <ul
       class="flex flex-col gap-4"

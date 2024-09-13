@@ -1,4 +1,4 @@
-import { useScript } from "apps/utils/useScript.ts";
+import { useScript } from "deco/hooks/useScript.ts";
 import { AppContext } from "../../apps/site.ts";
 import { MINICART_DRAWER_ID, MINICART_FORM_ID } from "../../constants.ts";
 import { clx } from "../../sdk/clx.ts";
@@ -60,12 +60,12 @@ const onLoad = (formID: string) => {
       }
 
       // Disable addToCart button interactivity
-      document.querySelectorAll("div[data-cart-item]").forEach((container) => {
-        container?.querySelectorAll("button")
-          .forEach((node) => node.disabled = true);
-        container?.querySelectorAll("input")
-          .forEach((node) => node.disabled = true);
-      });
+      // document.querySelectorAll("div[data-cart-item]").forEach((container) => {
+      //   container?.querySelectorAll("button")
+      //     .forEach((node) => node.disabled = true);
+      //   container?.querySelectorAll("input")
+      //     .forEach((node) => node.disabled = true);
+      // });
     },
   );
 };

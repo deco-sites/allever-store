@@ -1,10 +1,8 @@
 import { AnalyticsItem, Product } from "apps/commerce/types.ts";
-import { useScript } from "apps/utils/useScript.ts";
+import { useScript } from "deco/hooks/useScript.ts";
 import { JSX } from "preact";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
-import { usePlatform } from "../../sdk/usePlatform.tsx";
-import QuantitySelector from "../ui/QuantitySelector.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 
 export interface Props extends JSX.HTMLAttributes<HTMLButtonElement> {
@@ -21,112 +19,27 @@ const onClick = () => {
     decodeURIComponent(container.getAttribute("data-cart-item")!),
   );
   window.STOREFRONT.CART.addToCart(item, platformProps);
-};
 
-const onChange = () => {
-  const input = event!.currentTarget as HTMLInputElement;
-  const productID = input!
-    .closest("div[data-cart-item]")!
-    .getAttribute("data-item-id")!;
-  const quantity = Number(input.value);
-
-  if (!input.validity.valid) {
-    return;
-  }
-
-  window.STOREFRONT.CART.setQuantity(productID, quantity);
-};
-
-// Copy cart form values into AddToCartButton
-const onLoad = (id: string) => {
-  window.STOREFRONT.CART.subscribe((sdk) => {
-    const container = document.getElementById(id);
-    const checkbox = container?.querySelector<HTMLInputElement>(
-      'input[type="checkbox"]',
-    );
-    const input = container?.querySelector<HTMLInputElement>(
-      'input[type="number"]',
-    );
-    const itemID = container?.getAttribute("data-item-id")!;
-
-    const quantity = sdk.getQuantity(itemID) || 0;
-
-    if (!input || !checkbox) {
-      return;
-    }
-
-    input.value = quantity.toString();
-    checkbox.checked = quantity > 0;
-
-    // enable interactivity
-    container?.querySelectorAll<HTMLButtonElement>("button").forEach((node) =>
-      node.disabled = false
-    );
-    container?.querySelectorAll<HTMLButtonElement>("input").forEach((node) =>
-      node.disabled = false
-    );
-  });
+  setTimeout(() => {
+    const minicartDrawer = document.querySelector("label[for=minicart-drawer]");
+    // @ts-ignore click is correct
+    if (minicartDrawer) minicartDrawer.click();
+  }, 500);
 };
 
 const useAddToCart = ({ product, seller }: Props) => {
-  const platform = usePlatform();
-  const { additionalProperty = [], isVariantOf, productID } = product;
-  const productGroupID = isVariantOf?.productGroupID;
+  const { productID } = product;
 
-  if (platform === "vtex") {
-    return {
-      allowedOutdatedData: ["paymentData"],
-      orderItems: [{ quantity: 1, seller: seller, id: productID }],
-    };
-  }
-
-  if (platform === "shopify") {
-    return { lines: { merchandiseId: productID } };
-  }
-
-  if (platform === "vnda") {
-    return {
-      quantity: 1,
-      itemId: productID,
-      attributes: Object.fromEntries(
-        additionalProperty.map(({ name, value }) => [name, value]),
-      ),
-    };
-  }
-
-  if (platform === "wake") {
-    return {
-      productVariantId: Number(productID),
-      quantity: 1,
-    };
-  }
-
-  if (platform === "nuvemshop") {
-    return {
-      quantity: 1,
-      itemId: Number(productGroupID),
-      add_to_cart_enhanced: "1",
-      attributes: Object.fromEntries(
-        additionalProperty.map(({ name, value }) => [name, value]),
-      ),
-    };
-  }
-
-  if (platform === "linx") {
-    return {
-      ProductID: productGroupID,
-      SkuID: productID,
-      Quantity: 1,
-    };
-  }
-
-  return null;
+  return {
+    allowedOutdatedData: ["paymentData"],
+    orderItems: [{ quantity: 1, seller: seller, id: productID }],
+  };
 };
 
 function AddToCartButton(props: Props) {
-  const { product, item, class: _class } = props;
-  const platformProps = useAddToCart(props);
   const id = useId();
+  const platformProps = useAddToCart(props);
+  const { product, item, class: _class } = props;
 
   return (
     <div
@@ -137,32 +50,13 @@ function AddToCartButton(props: Props) {
         JSON.stringify({ item, platformProps }),
       )}
     >
-      <input type="checkbox" class="hidden peer" />
-
       <button
-        disabled
-        class={clx("flex-grow peer-checked:hidden", _class?.toString())}
+        class={clx("flex-grow cursor-pointer", _class?.toString())}
         hx-on:click={useScript(onClick)}
       >
         <Icon id="shopping_bag" size={21} />
-
         COMPRAR
       </button>
-
-      {/* Quantity Input */}
-      <div class="flex-grow hidden peer-checked:flex">
-        <QuantitySelector
-          disabled
-          min={0}
-          max={100}
-          hx-on:change={useScript(onChange)}
-        />
-      </div>
-
-      <script
-        type="module"
-        dangerouslySetInnerHTML={{ __html: useScript(onLoad, id) }}
-      />
     </div>
   );
 }

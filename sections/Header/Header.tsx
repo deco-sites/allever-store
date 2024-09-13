@@ -12,7 +12,7 @@ import MicroHeaderSetup from "../../islands/MicroHeaderSetup.tsx";
 import { Head } from "$fresh/runtime.ts";
 import { INavItem } from "../../components/header/NavItem.tsx";
 import { useDevice } from "deco/hooks/useDevice.ts";
-import { useScript } from "apps/utils/useScript.ts";
+import { useScript } from "deco/hooks/useScript.ts";
 import { useSection } from "deco/hooks/useSection.ts";
 
 import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";

@@ -1,6 +1,6 @@
 import { useEffect } from "preact/hooks";
 import { useId } from "../../sdk/useId.ts";
-import { useScript } from "apps/utils/useScript.ts";
+import { useScript } from "deco/hooks/useScript.ts";
 import { ComponentChildren } from "preact";
 
 interface Props {

@@ -49,7 +49,7 @@ export default function Results({ result }: ComponentProps<typeof action>) {
   }
 
   return (
-    <ul class="flex flex-col gap-4 pt-2 ">
+    <ul class="flex flex-col gap-4 pt-4">
       {methods.map((method) => (
         <li class="flex justify-between items-center border-base-200 not-first-child:border-t">
           <div class="text-xs text-[#a8a8a8] font-semibold">

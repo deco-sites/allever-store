@@ -55,7 +55,6 @@ function ProductCard({
   const title = isVariantOf?.name ?? product.name;
   const [front, back] = images ?? [];
 
-  // console.log("offers", offers);
   const { listPrice, price, seller = "1", availability, installment } =
     useOffer(offers);
   const inStock = availability === "https://schema.org/InStock";

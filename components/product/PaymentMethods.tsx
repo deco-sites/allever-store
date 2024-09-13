@@ -1,165 +1,175 @@
-import { useEffect, useState } from "preact/hooks";
 import Icon from "../ui/Icon.tsx";
 import { formatPrice } from "../../sdk/format.ts";
+import { useScript, useScriptAsDataURI } from "deco/hooks/useScript.ts";
+import type { AggregateOffer, UnitPriceSpecification } from "apps/commerce/types.ts";
 
 interface PaymentMethodsProps {
-  installment?: string;
-  installments?: string[];
+  offers?: AggregateOffer;
+  installment: string;
 }
 
-function PaymentMethods({ installment, installments }: PaymentMethodsProps) {
-  const [isOpen, setIsOpen] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState("pix");
+function PaymentMethods({ offers, installment }: PaymentMethodsProps) {
+  const offer =
+    offers?.offers.find((o) =>
+      o.availability === "https://schema.org/InStock"
+    ) || offers?.offers[0];
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" || e.keyCode === 27) {
-        setIsOpen(false);
-        setPaymentMethod("pix");
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener("keydown", handleKeyDown);
-    } else {
-      document.removeEventListener("keydown", handleKeyDown);
+  const maxIntallments = offer?.priceSpecification.reduce((
+    acc: UnitPriceSpecification | null, 
+    curr: UnitPriceSpecification
+  ) => {
+    if (
+      curr.priceComponentType !== "https://schema.org/Installment" ||
+      curr.name === "Pix"
+    ) {
+      return acc;
     }
-
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [isOpen]);
-
-  const renderContent = () => {
-    if (paymentMethod === "pix") {
-      return (
-        <div class="px-4 lg:px-6 flex flex-col gap-4">
-          <p class="text-2xl text-[#123ADD] font-semibold flex items-center">
-            {formatPrice(installment)}
-            <span class="text-normal ml-2">no PIX</span>
-          </p>
-          <p class="text-xs text-gray-600 font-semibold max-w-xs">
-            Para pagamento via PIX será gerada uma chave e um QR Code ao
-            finalizar o processo de compra.
-          </p>
-          <p class="text-xs text-gray-600 font-semibold max-w-xs">
-            - O prazo de validade da chave é de X minutos. Em caso de não
-            pagamento o pedido será cancelado.
-          </p>
-          <p class="text-xs text-gray-600 font-semibold max-w-xs">
-            - O prazo de entrega começa a contar após a confirmação do
-            pagamento.
-          </p>
-        </div>
-      );
-    } else if (paymentMethod === "card") {
-      return (
-        <table class="min-w-full divide-y divide-gray-200">
-          <thead>
-            <tr>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Parcelamento
-              </th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Total
-              </th>
-            </tr>
-          </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
-            {installments?.map((installment, index) => (
-              <tr key={index}>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  {index + 1}x
-                </td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                  R$ {installment}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      );
+  
+    if (!acc) {
+      return curr;
     }
-    return null;
-  };
+  
+    if (
+      acc.billingDuration && curr.billingDuration &&
+      acc.billingDuration < curr.billingDuration
+    ) {
+      return curr;
+    }
+  
+    return acc;
+  }, null);
+
+  console.log("offer", offer);
+  console.log("maxIntallments", maxIntallments);
+
+  const pixInstallment = installment && parseFloat(installment);
 
   return (
-    <div>
+    <>
       <button
-        onClick={() => setIsOpen(true)}
-        class="underline text-[#123ADD] fluid-text"
+        // @ts-ignore showModal exists on DaisyUI
+        hx-on:click={useScript(()=> document.getElementById('payment-methods')?.showModal())}
+        class="underline text-signature-blue text-left"
       >
         Ver formas de pagamento
       </button>
+      <dialog id="payment-methods" class="modal">
+        <div class="modal-box bg-white">
+          <h3 class="font-semibold text-base text-black mb-4">
+            Métodos de <span class="text-signature-blue">[pagamento]</span>
+          </h3>
+          <div className="flex">
+            <div class="flex flex-col gap-8">
+              <button 
+                id="pix" 
+                class="flex flex-col items-center gap-2 text-sm font-semibold text-center text-black max-w-24"
+                hx-on:click={useScript(()=> {
+                  const content = document.querySelector('div#pix');
+                  const otherContent = document.querySelector('div#installments');
 
-      {isOpen && (
-        <div class="fixed inset-0 flex items-center justify-center z-50 px-4 lg:px-8">
-          <div class="bg-white p-6 rounded-lg shadow-lg z-50 max-w-lg w-full">
-            <div class="flex justify-between">
-              <h3 class="font-semibold text-base text-black">
-                Métodos de <span class="text-[#123ADD]">[pagamento]</span>
-              </h3>
-              <button
-                onClick={() => {
-                  setIsOpen(false);
-                  setPaymentMethod("pix");
-                }}
+                  content?.classList.add('flex');
+                  content?.classList.remove('hidden');
+
+                  otherContent?.classList.add('hidden');
+                  otherContent?.classList.remove('flex');
+
+                  const pixButton = document.querySelector('button#pix > div');
+                  const installmentsButton = document.querySelector('button#installments > div');
+
+                  pixButton?.classList.add('border-signature-blue');
+                  pixButton?.classList.remove('border-dark-gray');
+
+                  installmentsButton?.classList.add('border-dark-gray');
+                  installmentsButton?.classList.remove('border-signature-blue');
+                })}
               >
-                <Icon id="close-black" class="w-full" />
+                <div class="w-20 h-20 flex items-center justify-center border-2 border-signature-blue rounded-full">
+                  <Icon id="pix" width={44} height={48} />
+                </div>
+                Pix
+              </button>
+              <button 
+                id="installments" 
+                class="flex flex-col items-center gap-2 text-sm font-semibold text-center text-black max-w-24"
+                hx-on:click={useScript(()=> {
+                  const content = document.querySelector('div#pix');
+                  const otherContent = document.querySelector('div#installments');
+
+                  content?.classList.add('hidden');
+                  content?.classList.remove('flex');
+                  
+                  otherContent?.classList.add('flex');
+                  otherContent?.classList.remove('hidden');
+
+                  const pixButton = document.querySelector('button#pix > div');
+                  const installmentsButton = document.querySelector('button#installments > div');
+
+                  pixButton?.classList.add('border-dark-gray');
+                  pixButton?.classList.remove('border-signature-blue');
+
+                  installmentsButton?.classList.add('border-signature-blue');
+                  installmentsButton?.classList.remove('border-dark-gray');
+                })}
+              >
+                <div class="w-20 h-20 flex items-center justify-center border-2 border-dark-gray rounded-full">
+                  <Icon id="credit-card" width={45} height={35} />
+                </div>
+                Cartão de Crédito
               </button>
             </div>
-            <div class="flex flex-col py-10">
-              <div class="flex flex-row lg:flex-col w-full justify-evenly lg:justify-between gap-12 mb-5">
-                <div class="flex flex-col items-center">
-                  <div
-                    class={`border py-3.5 px-4 rounded-full ${
-                      paymentMethod === "pix" ? "border-[#123ADD]" : ""
-                    }`}
-                  >
-                    <a
-                      onClick={() => setPaymentMethod("pix")}
-                      class="flex flex-col items-center gap-2 cursor-pointer"
-                    >
-                      <Icon id="pix" width={44} height={47} class="w-full" />
-                    </a>
-                  </div>
-                  <p class="font-semibold text-xs mt-1">Pix</p>
-                </div>
-                <div class="flex flex-col items-center">
-                  <div
-                    class={`border py-5 px-4 rounded-full ${
-                      paymentMethod === "card" ? "border-[#123ADD]" : ""
-                    }`}
-                  >
-                    <a
-                      onClick={() => setPaymentMethod("card")}
-                      class="flex flex-col items-center gap-2 cursor-pointer"
-                    >
-                      <Icon
-                        id="credit-card"
-                        width={43}
-                        height={33}
-                        class="w-full"
-                      />
-                    </a>
-                  </div>
-                  <p class="font-semibold text-xs mt-1">
-                    Cartão de crédito
-                  </p>
-                </div>
+            <div class="grow pl-4 lg:pl-6 ml-4 lg:ml-6 border-l border-dark-gray"> 
+              <div id="pix" class="flex flex-col gap-4">
+                <p class="text-2xl text-[#123ADD] font-semibold flex items-center">
+                  {!!pixInstallment && formatPrice(pixInstallment)}
+                  <span class="text-normal ml-2">no PIX</span>
+                </p>
+                <p class="text-xs text-gray-600 font-semibold max-w-xs">
+                  Para pagamento via PIX será gerada uma chave e um QR Code ao
+                  finalizar o processo de compra.
+                </p>
+                <p class="text-xs text-gray-600 font-semibold max-w-xs">
+                  - O prazo de validade da chave é de X minutos. Em caso de não
+                  pagamento o pedido será cancelado.
+                </p>
+                <p class="text-xs text-gray-600 font-semibold max-w-xs">
+                  - O prazo de entrega começa a contar após a confirmação do
+                  pagamento.
+                </p>
               </div>
-              <div class="flex flex-col">{renderContent()}</div>
+              <div id="installments" class="hidden">
+                <table class="table table-xs w-full">
+                  <thead>
+                    <tr>
+                      <th class="text-black font-normal">Parcelamento</th>
+                      <th class="text-black font-normal text-right">Total</th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-white divide-y divide-gray-200">
+                    {offer?.priceSpecification.map((priceSpecification, index) => {
+                      if (maxIntallments?.name === priceSpecification.name) {
+                        const {
+                          billingDuration,
+                          billingIncrement,
+                        } = priceSpecification;
+                        return (
+                          <tr key={index} class="odd:bg-light-gray even:bg-transparent">
+                            <td>{billingDuration}x</td>
+                            <td class="text-right">{formatPrice(billingIncrement)}</td>
+                          </tr>
+                        )
+                      }
+                    })}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-          <div
-            class="fixed inset-0 bg-black opacity-50"
-            onClick={() => {
-              setIsOpen(false);
-              setPaymentMethod("pix");
-            }}
-          >
-          </div>
         </div>
-      )}
-    </div>
+        <form method="dialog" class="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
+    </>
   );
 }
 

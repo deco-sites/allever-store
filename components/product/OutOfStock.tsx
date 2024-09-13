@@ -31,13 +31,15 @@ export default function Notify({ productID }: Props) {
       hx-swap="none"
       hx-post={useComponent<Props>(import.meta.url, { productID })}
     >
-      <span class="text-base">Este produto está indisponivel no momento</span>
-      <span class="text-sm">Avise-me quando estiver disponivel</span>
+      <div class="flex flex-col gap-1 mb-2">
+        <span class="text-lg text-dark-gray font-semibold">Este produto está indisponivel no momento</span>
+        <span class="text-base text-dark-gray font-semibold">Avise-me quando estiver disponivel</span>
+      </div>
 
       <input placeholder="Nome" class="input input-bordered" name="name" />
       <input placeholder="Email" class="input input-bordered" name="email" />
 
-      <button class="btn btn-primary no-animation">
+      <button class="btn btn-primary no-animation bg-black hover:bg-black border-black hover:border-black">
         <span class="[.htmx-request_&]:hidden inline">Enviar</span>
         <span class="[.htmx-request_&]:inline hidden loading loading-spinner loading-xs" />
       </button>

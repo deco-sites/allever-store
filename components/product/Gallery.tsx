@@ -39,9 +39,9 @@ export default function GallerySlider(props: Props) {
 
   return (
     <>
-      <div id={id} class="grid sm:grid-rows-2">
+      <div id={id} class="flex flex-col">
         {/* Image Slider */}
-        <div class="relative h-min flex-grow">
+        <div class="relative w-full">
           <Slider class="carousel carousel-center gap-6 w-full">
             {images.map((img, index) => (
               <Slider.Item
@@ -49,7 +49,7 @@ export default function GallerySlider(props: Props) {
                 class="carousel-item w-full"
               >
                 <Image
-                  class="w-full object-contain lg:object-cover bg-white rounded-[10px] lg:rounded-[20px]"
+                  class="w-full object-contain bg-white rounded-[10px] lg:rounded-[20px]"
                   sizes="(max-width: 640px) 100vw, 40vw"
                   style={{ aspectRatio: ASPECT_RATIO }}
                   src={img.url!}
@@ -80,24 +80,27 @@ export default function GallerySlider(props: Props) {
         </div>
 
         {/* Dots */}
-        <ul
-          class={clx(
-            "sm:h-fit flex overflow-scroll flex-row custom-scrollbar cursor-grab gap-3 lg:gap-2",
-          )}
-        >
-          {images.map((img, index) => (
-            <li class="carousel-item">
-              <Slider.Dot index={index} class="h-fit w-fit h-full ">
-                <Image
-                  class="rounded object-contain lg:object-cover lg:max-w-[148px] lg:max-h-[107px] bg-white rounded-[10px] lg:rounded-[20px]"
-                  width={device === "desktop" ? 148 : 60}
-                  height={device === "desktop" ? 107 : 60}
-                  src={img.url!}
-                  alt={img.alternateName}
-                />
-              </Slider.Dot>
-            </li>
-          ))}
+        <ul class="flex overflow-scroll flex-row custom-scrollbar cursor-grab gap-3 lg:gap-2">
+          {
+            images.length > 1 && (
+              <>
+                {
+                  images.map((img, index) => (
+                    <li class="carousel-item">
+                      <Slider.Dot index={index} class="h-fit w-fit h-full ">
+                        <Image
+                          class="rounded object-contain lg:object-cover lg:max-w-[148px] lg:max-h-[107px] bg-white rounded-[10px] lg:rounded-[20px]"
+                          width={device === "desktop" ? 148 : 60}
+                          height={device === "desktop" ? 107 : 60}
+                          src={img.url!}
+                          alt={img.alternateName}
+                        />
+                      </Slider.Dot>
+                    </li>
+                  )
+                )}
+              </>
+            )}
         </ul>
 
         <Slider.JS rootId={id} />

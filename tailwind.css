@@ -199,6 +199,12 @@ details>summary::marker {
   -webkit-appearance: none;
 }
 
+.fluid-text br {
+  margin: 12px 0 0;
+  display: block;
+  content: "";
+}
+
 .fluid-text h1 {
   margin: 24px 0;
   font-size: 30px;    

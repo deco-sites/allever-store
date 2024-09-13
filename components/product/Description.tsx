@@ -15,10 +15,10 @@ const Description = ({ page }: Props) => {
   return (
     <>
       <Collapsable
-        class="container"
+        class="container px-5"
         title={
           <div class="flex space-between items-center">
-            <p class="text-[24px] py-[22px] lg:py-[45px] ">Descrição do Produto</p>
+            <span class="text-base lg:text-xl py-5 sm:py-12 font-semibold">Descrição do Produto</span>
             <Icon
               class="group-open:rotate-180 transition-all ease-in-out duration-[400ms]"
               size={13}
@@ -28,7 +28,7 @@ const Description = ({ page }: Props) => {
         }
       >
         <div
-          class="pb-[40px]"
+          class="fluid-text text-sm pb-[40px]"
           dangerouslySetInnerHTML={{ __html: description }}
         />
       </Collapsable>

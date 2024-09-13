@@ -10,13 +10,10 @@ export default function Form({ items }: Props) {
   const slot = useId();
 
   return (
-    <div class="flex flex-col gap-2">
-      <div class="flex flex-col">
-        <span class="uppercase text-xs font-semibold">Calcule o frete</span>
-      </div>
-
+    <div>
+      <div class="uppercase text-xs font-semibold mb-2">Calcule o frete</div>
       <form
-        class="flex gap-[11px]"
+        class="flex gap-[11px] mt-2"
         hx-target={`#${slot}`}
         hx-swap="innerHTML"
         hx-sync="this:replace"
@@ -38,18 +35,16 @@ export default function Form({ items }: Props) {
           class="no-animation bg-[#123ADD] text-white text-xs font-semibold rounded-[39px] p-4 max-w-[127px] w-full"
         >
           <span class="[.htmx-request_&]:hidden inline">Calcular</span>
-          <span class="[.htmx-request_&]:inline hidden loading loading-spinner loading-xs" />
+          <span class="hidden [.htmx-request_&]:inline loading loading-spinner loading-xs" />
         </button>
       </form>
       <a
         href="https://buscacepinter.correios.com.br/app/endereco/index.php"
         target="_blank"
-        class="text-xs text-black font-normal underline"
+        class="text-xs text-black font-normal underline mt-3"
       >
         Descobrir meu CEP
       </a>
-
-      {/* Results Slot */}
       <div id={slot} />
     </div>
   );

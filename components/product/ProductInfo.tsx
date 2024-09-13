@@ -11,26 +11,23 @@ import AddToCartButton from "./AddToCartButton.tsx";
 import OutOfStock from "./OutOfStock.tsx";
 import ProductSelector from "./ProductVariantSelector.tsx";
 import Breadcrumb from "../../components/ui/Breadcrumb.tsx";
-import PaymentMethods from "../../islands/PaymentsMethods.tsx";
+import PaymentMethods from "./PaymentMethods.tsx";
 import ProductStars from "../../islands/ProductStars.tsx";
 import GallerySlider from "./Gallery.tsx";
-
-import { useDevice } from "deco/hooks/useDevice.ts";
+import type { Device } from "apps/website/matchers/device.ts";
 
 interface Props {
   page: ProductDetailsPage | null;
+  device: Device;
 }
 
-function ProductInfo({ page }: Props) {
-  const id = useId();
-
+function ProductInfo({ page, device }: Props) {
   if (page === null) {
     throw new Error("Missing Product Details Page Info");
   }
 
   const { breadcrumbList, product } = page;
   const { productID, offers, isVariantOf, additionalProperty } = product;
-  const description = product.description || isVariantOf?.description;
   const title = isVariantOf?.name ?? product.name;
 
   const productGroupID = isVariantOf?.productGroupID ?? "";
@@ -40,7 +37,6 @@ function ProductInfo({ page }: Props) {
     seller = "1",
     inventory = 0,
     installment,
-    installments,
     availability,
   } = useOffer(offers);
 
@@ -82,86 +78,195 @@ function ProductInfo({ page }: Props) {
     },
   });
 
-  const device = useDevice();
-
-  return (
-    <div {...viewItemEvent} class="flex flex-col" id={id}>
-      <>
-        {device === "mobile" ? (
-            <>
-              <div class="py-[10px]">
-                <Breadcrumb
-                  itemListElement={page.breadcrumbList.itemListElement}
-                />
-              </div>
-              <div class="text-base font-semibold mt-[10px] mb-4">
-                {/* Product Name */}
-                <h1 class="mb-0"> 
-                  {title}
-                </h1>
-              </div>
-              <div class={`flex justify-between`}>
-                <p class="text-[#A8A8A8] m-0 text-xs pb-2">
-                  Cod: {productID} | {seller}
+  if (device === "mobile" || device === "tablet") {
+    return (
+      <div class="flex flex-col gap-3 px-5 pt-5">
+        <Breadcrumb
+          itemListElement={page.breadcrumbList.itemListElement}
+        />
+        <h1 class="text-base font-semibold"> 
+          {title}
+        </h1>
+        <div class="flex items-center justify-between">
+          <p class="text-[#A8A8A8] m-0 text-xs">
+            Cod: {productID} | {seller}
+          </p>
+          <WishlistButton item={item} pdp={true} />
+        </div>
+        {hasFlag &&
+          (
+            <div class="flex w-full">
+              {hasPromotion &&
+                (
+                  <p class="text-xs font-semibold text-white uppercase bg-[#F22E2E] text-center text-white px-2 py-1 rounded-[6px] w-full">
+                    Promoção
+                  </p>
+                )}
+            </div>
+          )
+        }
+        <GallerySlider page={page} />
+        <div class="flex justify-between">
+          <div class="w-full max-w-[151px]">
+            {hasNews &&
+              (
+                <p class="text-xs font-semibold text-white uppercase bg-[#FFA318] text-center text-white px-2 py-1 rounded-[6px]">
+                  Novidade
                 </p>
-                <WishlistButton item={item} pdp={true} />
-              </div>
+              )}
+          </div>
+        </div>
+        <div class="flex flex-col gap-3">
+          {availability === "https://schema.org/InStock" ?
+            (
               <>
-                {hasFlag &&
-                  (
-                    <div class="flex gap-[5px] mt-2 mb-4 w-[50%]">
-                      {hasPromotion &&
-                        (
-                          <p class="text-xs font-semibold text-white uppercase bg-[#F22E2E] text-center text-white px-2 py-1 rounded-[6px] w-full">
-                            Promoção
-                          </p>
-                        )}
-                    </div>
-                  )}
-              </>
-              <div>
-                <GallerySlider page={page} />
-              </div>
-              <div class="flex justify-between my-4">
-                <div class="w-full max-w-[151px]">
-                  {hasNews &&
-                    (
-                      <p class="text-xs font-semibold text-white uppercase bg-[#FFA318] text-center text-white px-2 py-1 rounded-[6px]">
-                        Novidade
-                      </p>
-                    )}
-                </div>
-
                 <ProductStars
+                  context="pdp"
                   storeId="121576"
                   productId={productGroupID ?? ""}
                 />
+                <div class="flex flex-col gap-2">
+                  <div class="flex gap-1 items-center">
+                    <span class="line-through text-base font-semibold text-[#A8A8A8] leading-[1]">
+                      {formatPrice(listPrice, offers?.priceCurrency)}
+                    </span>
+                    <span class="text-[20px] font-semibold text-[#000] leading-[1]">
+                      {formatPrice(price, offers?.priceCurrency)}
+                    </span>
+                  </div>
+                  <div class="flex flex-col items-start">
+                    <p class="text-[40px] font-semibold text-[#123ADD] leading-[1]">
+                      {formatPrice(installment?.price)}
+                      <span class="text-[#123ADD] font-normal text-[30px] ml-2 leading-[1]">
+                        no PIX
+                      </span>
+                    </p>
+                  </div>
+                  {percent >= 1 && (
+                    <div class="text-xs font-semibold text-white uppercase bg-[#123ADD] text-center text-white px-2 py-1 rounded-[6px] w-fit">
+                      {percent} % off
+                    </div>
+                  )}
+                  <p class="text-[#000] text-base leading-[1]">
+                    ou {installment?.billingDuration}x de {formatPrice(
+                      installment?.billingIncrement,
+                      offers!.priceCurrency!,
+                    )}
+                  </p>
+                </div>
+                <PaymentMethods
+                  offers={offers}
+                  installment={installment?.price.toString() || ""}
+                />
+                <ProductSelector product={product} />
+                <div class="w-[calc(100%+40px)] -mx-[20px] px-[20px] py-4 border border-y-[#A8A8A8] flex flex-col gap-3">
+                  <>
+                    {inventory > 0 && inventory <= 9 && (
+                      <p className="text-base font-normal text-black">
+                        Restam só{" "}
+                        <span className="font-bold text-[#123ADD]">
+                          {inventory} unidade{inventory > 1 ? "s" : ""}
+                        </span>
+                      </p>
+                    )}
+                  </>
+                  <AddToCartButton
+                    item={item}
+                    seller={seller}
+                    product={product}
+                    class="bg-[#1BAE32] text-[20px] flex justify-center items-center gap-2 py-[10px] rounded-[30px] no-animation text-white font-semibold hover:bg-[#1bae3299] ease-in"
+                    disabled={false}
+                  />
+                  {/* <ProductSubscription product={product} /> */}
+                  <p class="text-xs font-normal text-black">
+                    Vendido e entregue por:{" "}
+                    <span class="font-bold capitalize">{seller}</span>
+                  </p>
+                </div>
+                <div class="w-[calc(100%+40px)] -mx-[20px] px-[20px] pt-1.5 pb-4 border border-b-[#A8A8A8] border-t-0">
+                  <div class="lg:max-w-[338px]">
+                    <ShippingSimulationForm
+                      items={[{
+                        id: Number(product.sku),
+                        quantity: 1,
+                        seller: seller,
+                      }]}
+                    />
+                  </div>
+                </div>
+              </>
+            ) : <OutOfStock productID={productID} />}
+        </div>
+      </div>
+    )
+  }
+
+  if (device === "desktop") {
+    return (
+      <div class="container pt-12 px-5 grid grid-cols-2 gap-8">
+        <div class="col-span-1">
+          <GallerySlider page={page} />
+        </div>
+        <div class="col-span-1">
+          <div class="flex flex-col gap-6">
+            <Breadcrumb
+              itemListElement={page.breadcrumbList.itemListElement}
+            />
+            <div class="flex flex-col gap-3 border border-x-0 border-y-[#A8A8A8] py-6">
+              <div class="flex items-center gap-4">
+                <h1 class="text-xl font-bold uppercase flex-grow">
+                  {title}
+                </h1>
+                <ProductStars
+                  context="pdp"
+                  storeId="121576"
+                  productId={productGroupID ?? ""}
+                />
+                <WishlistButton item={item} pdp={true} />
               </div>
-              <div>
-                {availability === "https://schema.org/InStock" &&
-                  (
-                    <div class="flex gap-3 items-center">
-                      <span class="line-through text-base font-semibold text-[#A8A8A8] leading-[24px]">
+              <p class="text-[#A8A8A8]">
+                Cod: {productID} | {seller}
+              </p>
+            </div>
+            {availability === "https://schema.org/InStock" &&
+              (
+                <>
+                  {hasFlag &&
+                    (
+                      <div class="flex gap-[5px]">
+                        {hasPromotion &&
+                          (
+                            <p class="text-xs font-semibold text-white uppercase bg-[#F22E2E] text-center text-white px-2 py-1 rounded-[6px]">
+                              Promoção
+                            </p>
+                          )}
+                        {hasNews &&
+                          (
+                            <p class="text-xs font-semibold text-white uppercase bg-[#FFA318] text-center text-white px-2 py-1 rounded-[6px]">
+                              Novidade
+                            </p>
+                          )}
+                      </div>
+                    )
+                  }
+                  <div class="flex flex-col gap-2">
+                    <div class="flex gap-2 items-center">
+                      <span class="line-through text-base font-semibold text-[#A8A8A8] leading-[1]">
                         {formatPrice(listPrice, offers?.priceCurrency)}
                       </span>
-                      <span class="text-[20px] font-semibold text-[#000] leading-[24px]">
+                      <span class="text-[20px] font-semibold text-[#000] leading-[1]">
                         {formatPrice(price, offers?.priceCurrency)}
                       </span>
                     </div>
-                  )}
-                {availability === "https://schema.org/InStock" &&
-                  (
-                    <>
-                      <div class="flex flex-col items-start">
-                        <p class="text-[40px] font-semibold text-[#123ADD] leading-[60px]">
-                          {formatPrice(installment?.price)}
-                          <span class="text-[#123ADD] font-normal text-[30px] ml-2 leading-[30px]">
-                            no PIX
-                          </span>
-                        </p>
-                        {/* Price tag */}
-                      </div>
-                      <div
+                    <div class="flex items-center">
+                      <p class="text-[40px] font-semibold text-[#123ADD] leading-[1]">
+                        {formatPrice(installment?.price)}
+                        <span class="text-[#123ADD] font-normal text-[30px] ml-2 leading-[1]">
+                          no PIX
+                        </span>
+                      </p>
+                      {/* Price tag */}
+                      <span
                         class={clx(
                           "text-xs font-semibold text-white uppercase bg-[#123ADD] text-center text-white px-2 py-1 rounded-[6px]",
                           percent < 1 && "opacity-0",
@@ -169,48 +274,23 @@ function ProductInfo({ page }: Props) {
                         )}
                       >
                         {percent} % off
-                      </div>
-                    </>
-                  )}
-                {availability === "https://schema.org/InStock" &&
-                  (
-                    <div class="my-2">
-                      <p class="text-[#000] text-base">
+                      </span>
+                    </div>
+                    <div class="fluid-text">
+                      <p class="text-[#000]">
                         ou {installment?.billingDuration}x de {formatPrice(
                           installment?.billingIncrement,
                           offers!.priceCurrency!,
                         )}
                       </p>
                     </div>
-                  )}
-              </div>
-              {availability === "https://schema.org/InStock" &&
-                (
-                  <div>
-                    <PaymentMethods
-                      installment={installment?.price.toString() || ""}
-                    />
                   </div>
-                )}
-              <div class="my-3">
-                <ProductSelector product={product} />
-              </div>
-
-              {/* Sku Selector */}
-              {inventory > 0 && inventory <= 9 && (
-                <div class="mb-3">
-                  <p className="text-[24px] font-normal text-black leading-[28.8px]">
-                    Restam só{" "}
-                    <span className="font-bold text-[#123ADD]">
-                      {inventory} unidade{inventory > 1 ? "s" : ""}
-                    </span>
-                  </p>
-                </div>
-              )}
-              
-              {availability === "https://schema.org/InStock" &&
-                (
-                  <div class="mb-3">
+                  <PaymentMethods
+                    offers={offers}
+                    installment={installment?.price.toString() || ""}
+                  />
+                  <ProductSelector product={product} />
+                  <div class="flex flex-col gap-3">
                     <AddToCartButton
                       item={item}
                       seller={seller}
@@ -218,220 +298,48 @@ function ProductInfo({ page }: Props) {
                       class="bg-[#1BAE32] text-[20px] flex justify-center items-center gap-2 py-[10px] rounded-[30px] no-animation text-white font-semibold hover:bg-[#1bae3299] ease-in"
                       disabled={false}
                     />
-                  </div>
-                )}
-              {availability != "https://schema.org/InStock" &&
-                (
-                  <div>
-                    <OutOfStock productID={productID} />
-                  </div>
-                )}
-        
-              {availability === "https://schema.org/InStock" &&
-                (
-                  <div class="mb-3">
-                    <p class="text-xs font-normal text-black leading-[14.4px]">
+                    {inventory > 0 && inventory <= 9 && (
+                      <div>
+                        <p className="text-[24px] font-normal text-black leading-[28.8px]">
+                          Restam só{" "}
+                          <span className="font-bold text-[#123ADD]">
+                            {inventory} unidade{inventory > 1 ? "s" : ""}
+                          </span>
+                        </p>
+                      </div>
+                    )}
+                    <p class="text-xs font-normal text-black">
                       Vendido e entregue por:{" "}
                       <span class="font-bold capitalize">{seller}</span>
                     </p>
                   </div>
-                )}
-              {availability == "https://schema.org/InStock" &&
-                (
-                  <div>
-                    {/* Shipping Simulation */}
-                    <div class="lg:max-w-[338px]">
-                      <ShippingSimulationForm
-                        items={[{
-                          id: Number(product.sku),
-                          quantity: 1,
-                          seller: seller,
-                        }]}
-                      />
-                    </div>
+                  <div class="lg:max-w-[338px]">
+                    <ShippingSimulationForm
+                      items={[{
+                        id: Number(product.sku),
+                        quantity: 1,
+                        seller: seller,
+                      }]}
+                    />
                   </div>
-                )}
-            </>
-          ) : null
-            // <>
-            //   <div class="flex flex-col pt-[24px]">
-            //     <div class="mb-[24px]">
-            //       <Breadcrumb
-            //         itemListElement={page.breadcrumbList.itemListElement}
-            //       />
-            //     </div>
-            //     <div class="flex flex-row items-center gap-5">
-            //       <div class="flex flex-col gap-[24px]">
-            //         <div class="fluid-text max-h-[115px] overflow-hidden">
-            //           {/* Product Name */}
-            //           <h1>
-            //             {title}
-            //           </h1>
-            //         </div>
+                </>
+              )
+            }
+          </div>
+          <div class="flex flex-col gap-[14px] py-[14px]">
+            {availability != "https://schema.org/InStock" &&
+              (
+                <div>
+                  <OutOfStock productID={productID} />
+                </div>
+              )}
+          </div>
+        </div>
+      </div>
+    );
+  }
 
-            //         <div class={`${!hasFlag && "mb-6"} fluid-text`}>
-            //           <p class="text-[#A8A8A8]">
-            //             Cod: {productID} | {seller}
-            //           </p>
-            //         </div>
-            //         {availability === "https://schema.org/InStock" &&
-            //           (
-            //             <>
-            //               {hasFlag &&
-            //                 (
-            //                   <div class="flex gap-[5px] mb-6">
-            //                     {hasPromotion &&
-            //                       (
-            //                         <p class="text-xs font-semibold text-white uppercase bg-[#F22E2E] text-center text-white px-2 py-1 rounded-[6px]">
-            //                           Promoção
-            //                         </p>
-            //                       )}
-            //                     {hasNews &&
-            //                       (
-            //                         <p class="text-xs font-semibold text-white uppercase bg-[#FFA318] text-center text-white px-2 py-1 rounded-[6px]">
-            //                           Novidade
-            //                         </p>
-            //                       )}
-            //                   </div>
-            //                 )}
-            //             </>
-            //           )}
-            //       </div>
-            //       <div class="flex space-between w-full lg:max-w-[226px]">
-            //         <div>
-            //           <ProductStars
-            //             storeId="121576"
-            //             productId={productGroupID ?? ""}
-            //           />
-            //         </div>
-
-            //         <div>
-            //           <WishlistButton item={item} pdp={true} />
-            //           {
-            //             /* {availability === "https://schema.org/InStock" && } */
-            //           }
-            //         </div>
-            //       </div>
-            //     </div>
-            //   </div>
-
-            //   <hr />
-            //   <div class="flex flex-col gap-[14px] py-[14px]">
-            //     {availability === "https://schema.org/InStock" &&
-            //       (
-            //         <div class="flex gap-3 items-center">
-            //           <span class="line-through text-base font-semibold text-[#A8A8A8] leading-[24px]">
-            //             {formatPrice(listPrice, offers?.priceCurrency)}
-            //           </span>
-            //           <span class="text-[20px] font-semibold text-[#000] leading-[24px]">
-            //             {formatPrice(price, offers?.priceCurrency)}
-            //           </span>
-            //         </div>
-            //       )}
-            //     {availability === "https://schema.org/InStock" &&
-            //       (
-            //         <div class="flex items-center">
-            //           <p class="text-[40px] font-semibold text-[#123ADD] leading-[60px]">
-            //             {formatPrice(installment?.price)}
-            //             <span class="text-[#123ADD] font-normal text-[30px] ml-2 leading-[30px]">
-            //               no PIX
-            //             </span>
-            //           </p>
-            //           {/* Price tag */}
-            //           <span
-            //             class={clx(
-            //               "text-xs font-semibold text-white uppercase bg-[#123ADD] text-center text-white px-2 py-1 rounded-[6px] ml-4",
-            //               percent < 1 && "opacity-0",
-            //               "w-fit",
-            //             )}
-            //           >
-            //             {percent} % off
-            //           </span>
-            //         </div>
-            //       )}
-            //     {availability === "https://schema.org/InStock" &&
-            //       (
-            //         <div class="fluid-text">
-            //           <p class="text-[#000]">
-            //             ou {installment?.billingDuration}x de {formatPrice(
-            //               installment?.billingIncrement,
-            //               offers!.priceCurrency!,
-            //             )}
-            //           </p>
-            //         </div>
-            //       )}
-            //     {availability === "https://schema.org/InStock" &&
-            //       (
-            //         <div>
-            //           <PaymentMethods
-            //             installment={installment?.price.toString() || ""}
-            //           />
-            //         </div>
-            //       )}
-            //     <div class="">
-            //       <ProductSelector product={product} />
-            //     </div>
-
-            //     {/* Sku Selector */}
-            //     {availability === "https://schema.org/InStock" &&
-            //       (
-            //         <div>
-            //           <AddToCartButton
-            //             item={item}
-            //             seller={seller}
-            //             product={product}
-            //             class="bg-[#1BAE32] text-[20px] flex justify-center items-center gap-2 py-[10px] rounded-[30px] no-animation text-white font-semibold hover:bg-[#1bae3299] ease-in"
-            //             disabled={false}
-            //           />
-            //         </div>
-            //       )}
-            //     {availability != "https://schema.org/InStock" &&
-            //       (
-            //         <div>
-            //           <OutOfStock productID={productID} />
-            //         </div>
-            //       )}
-            //     {inventory > 0 && inventory <= 9 && (
-            //       <div>
-            //         <p className="text-[24px] font-normal text-black leading-[28.8px]">
-            //           Restam só{" "}
-            //           <span className="font-bold text-[#123ADD]">
-            //             {inventory} unidade{inventory > 1 ? "s" : ""}
-            //           </span>
-            //         </p>
-            //       </div>
-            //     )}
-            //     {availability === "https://schema.org/InStock" &&
-            //       (
-            //         <div class="">
-            //           <p class="text-xs font-normal text-black leading-[14.4px]">
-            //             Vendido e entregue por:{" "}
-            //             <span class="font-bold capitalize">{seller}</span>
-            //           </p>
-            //         </div>
-            //       )}
-            //     {availability == "https://schema.org/InStock" &&
-            //       (
-            //         <>
-            //           {/* Shipping Simulation */}
-            //           <div class="lg:max-w-[338px]">
-            //             <ShippingSimulationForm
-            //               items={[{
-            //                 id: Number(product.sku),
-            //                 quantity: 1,
-            //                 seller: seller,
-            //               }]}
-            //             />
-            //           </div>
-            //         </>
-            //       )}
-            //   </div>
-            // </>
-          // )
-          }
-      </>
-    </div>
-  );
+  return null;
 }
 
 export default ProductInfo;
