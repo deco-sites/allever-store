@@ -1,19 +1,16 @@
-import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import Image from "apps/website/components/Image.tsx";
+import ProductStars from "../../islands/ProductStars.tsx";
+import WishlistButton from "../wishlist/WishlistButton.tsx";
+
 import { clx } from "../../sdk/clx.ts";
-import { formatPrice } from "../../sdk/format.ts";
-import type { Product, PropertyValue } from "apps/commerce/types.ts";
+import { useId } from "../../sdk/useId.ts";
 import { relative } from "../../sdk/url.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
+import { formatPrice } from "../../sdk/format.ts";
 import { useSendEvent } from "../../sdk/useSendEvent.ts";
 import { useVariantPossibilities } from "../../sdk/useVariantPossiblities.ts";
-import WishlistButton from "../wishlist/WishlistButton.tsx";
-import AddToCartButton from "./AddToCartButton.tsx";
-import { Ring } from "./ProductVariantSelector.tsx";
-import { useId } from "../../sdk/useId.ts";
-
-import ProductStarCard from "./ProductStarCard.tsx";
-import ProductStars from "../../islands/ProductStars.tsx";
+import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
+import type { Product, PropertyValue } from "apps/commerce/types.ts";
 
 interface Props {
   flags?: [internationalFlag: string, promoFlag: string, newsFlag: string];
@@ -33,7 +30,6 @@ interface Props {
 
 const WIDTH = 270;
 const HEIGHT = 225;
-const ASPECT_RATIO = `${WIDTH} / ${HEIGHT}`;
 
 export const getFlagCluster = (flag: string, additionalProperty?: PropertyValue[]) => {
   return additionalProperty?.find((prop) => {
@@ -51,7 +47,6 @@ function ProductCard({
   index,
   class: _class,
 }: Props) {
-  const id = useId();
   const [
     internationalFlag = "",
     promoFlag = "",
@@ -61,17 +56,13 @@ function ProductCard({
   const { url, image: images, offers, isVariantOf, additionalProperty } =
     product;
 
-  const hasVariant = isVariantOf?.hasVariant ?? [];
   const productGroupID = isVariantOf?.productGroupID ?? "";
   const title = isVariantOf?.name ?? product.name;
-  const [front, back] = images ?? [];
+  const [front] = images ?? [];
 
-  const { listPrice, price, seller = "1", availability, installment } =
+  const { pix, listPrice = 0, price, seller = "1", availability, installment } =
     useOffer(offers);
   const inStock = availability === "https://schema.org/InStock";
-  const possibilities = useVariantPossibilities(hasVariant, product);
-  const firstSkuVariations = Object.entries(possibilities)[0];
-  const variants = Object.entries(firstSkuVariations?.[1] ?? {});
   const relativeUrl = relative(url);
   const percent = listPrice && price
     ? Math.round(((listPrice - price) / listPrice) * 100)
@@ -105,7 +96,6 @@ function ProductCard({
     >
       <div class="flex items-start justify-between">
         <div class="flex flex-wrap gap-[5px]">
-          {/* Discounts */}
           {percent > 1 && inStock
             ? (
               <span
@@ -143,7 +133,6 @@ function ProductCard({
         class="relative overflow-hidden rounded-none"
         style={{ aspectRatio: `${WIDTH} / ${HEIGHT}` }}
       >
-        {/* Product Images */}
         <a
           href={relativeUrl}
           aria-label="view product"
@@ -175,16 +164,21 @@ function ProductCard({
           {inStock
             ? (
               <div class="flex flex-col">
-                {listPrice && (
+                {listPrice > price && 
                   <span class="line-through font-normal text-[#a8a8a8] text-xs leading-[1]">
                     {formatPrice(listPrice, offers?.priceCurrency)}
                   </span>
-                )}
+                }
                 <span class="font-semibold text-[20px] text-[#123ADD]">
-                  {formatPrice(price)}{" "}
-                  <span class="text-[#123ADD] font-normal text-[20px] leading-[30px]">
-                    no pix
-                  </span>
+                  {pix > 0 ?
+                    formatPrice(pix, offers?.priceCurrency) :
+                    formatPrice(price, offers?.priceCurrency)
+                  }{" "}
+                  {pix > 0 && 
+                    <span class="text-[#123ADD] font-normal text-[20px] leading-[30px]">
+                      no pix
+                    </span>
+                  }
                 </span>
                 <span class="text-[#a8a8a8] text-xs leading-[1]">
                   ou {installment?.billingDuration}x de {formatPrice(
@@ -202,56 +196,6 @@ function ProductCard({
         </a>
         <ProductStars context="card" storeId="121576" productId={productGroupID ?? ""} />
       </div>
-      {/* SKU Selector */}
-      {
-        /* {variants.length > 1 && (
-        <ul class="flex items-center justify-start gap-2 pt-4 pb-1 pl-1 overflow-x-auto">
-          {variants.map(([value, link]) => [value, relative(link)] as const)
-            .map(([value, link]) => (
-              <li>
-                <a href={link} class="cursor-pointer">
-                  <input
-                    class="hidden peer"
-                    type="radio"
-                    name={`${id}-${firstSkuVariations[0]}`}
-                    checked={link === relativeUrl}
-                  />
-                  <Ring value={value} checked={link === relativeUrl} />
-                </a>
-              </li>
-            ))}
-        </ul>
-      )} */
-      }
-      {
-        /* {inStock ? (
-        <AddToCartButton
-          product={product}
-          seller={seller}
-          item={item}
-          class={clx(
-            "btn",
-            "btn-outline justify-start border-none !text-sm !font-medium px-0 no-animation w-full",
-            "hover:!bg-transparent",
-            "disabled:!bg-transparent disabled:!opacity-50",
-            "btn-primary hover:!text-primary disabled:!text-primary"
-          )}
-        />
-      ) : (
-        <a
-          href={relativeUrl}
-          class={clx(
-            "btn",
-            "btn-outline justify-start border-none !text-sm !font-medium px-0 no-animation w-full",
-            "hover:!bg-transparent",
-            "disabled:!bg-transparent disabled:!opacity-75",
-            "btn-error hover:!text-error disabled:!text-error"
-          )}
-        >
-          Sold out
-        </a>
-      )} */
-      }
     </div>
   );
 }

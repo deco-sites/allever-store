@@ -65,7 +65,9 @@ export const useOffer = (aggregateOffer?: AggregateOffer) => {
 
   const availability = offer?.availability;
   const installment = offer?.priceSpecification.reduce(bestInstallment, null);
-
+  const pix = offer?.priceSpecification.find((spec: UnitPriceSpecification) => {
+    return spec.name === "Pix";
+  })?.price || 0;
   const inventory = offer?.inventoryLevel?.value;
   const seller = offer?.seller;
   const price = offer?.price;
@@ -76,6 +78,7 @@ export const useOffer = (aggregateOffer?: AggregateOffer) => {
     listPrice: listPrice?.price,
     availability,
     seller,
+    pix,
     installment,
     installments: installment && price
       ? installmentToString(installment, price)

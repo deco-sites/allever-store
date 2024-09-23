@@ -53,8 +53,9 @@ function ProductInfo({
   const title = isVariantOf?.name ?? product.name;
   const productGroupID = isVariantOf?.productGroupID ?? "";
   const {
+    pix = 0,
     price = 0,
-    listPrice,
+    listPrice = 0,
     seller = "1",
     inventory = 0,
     installment,
@@ -145,21 +146,25 @@ function ProductInfo({
                   />
                   <div class="flex flex-col gap-2">
                     <div class="flex gap-1 items-center">
-                      <span class="line-through text-base font-semibold text-[#A8A8A8] leading-[1]">
-                        {formatPrice(listPrice, offers?.priceCurrency)}
-                      </span>
+                      {listPrice > price &&
+                        <span class="line-through text-base font-semibold text-[#A8A8A8] leading-[1]">
+                          {formatPrice(listPrice, offers?.priceCurrency)}
+                        </span>
+                      }
                       <span class="text-[20px] font-semibold text-[#000] leading-[1]">
                         {formatPrice(price, offers?.priceCurrency)}
                       </span>
                     </div>
-                    <div class="flex flex-col items-start">
-                      <p class="text-[40px] font-semibold text-[#123ADD] leading-[1]">
-                        {formatPrice(installment?.price)}
-                        <span class="text-[#123ADD] font-normal text-[30px] ml-2 leading-[1]">
-                          no PIX
-                        </span>
-                      </p>
-                    </div>
+                    {pix > 0 &&
+                      <div class="flex flex-col items-start">
+                        <p class="text-[40px] font-semibold text-[#123ADD] leading-[1]">
+                          {formatPrice(pix)}
+                          <span class="text-[#123ADD] font-normal text-[30px] ml-2 leading-[1]">
+                            no PIX
+                          </span>
+                        </p>
+                      </div>
+                    }
                     {percent >= 1 && (
                       <div class="text-xs font-semibold text-white uppercase bg-[#123ADD] text-center text-white px-2 py-1 rounded-[6px] w-fit">
                         {percent} % off
@@ -227,10 +232,15 @@ function ProductInfo({
             <div class="flex flex-col col-span-2">
               <div class="flex flex-col items-start">
                 <p class="text-lg font-semibold text-[#123ADD]">
-                  {formatPrice(installment?.price)}
-                  <span class="text-[#123ADD] font-normal text-xs ml-1">
-                    no PIX
-                  </span>
+                  {pix > 0 ?
+                    formatPrice(pix, offers?.priceCurrency) :
+                    formatPrice(price, offers?.priceCurrency)
+                  }
+                  {pix > 0 &&
+                    <span class="text-[#123ADD] font-normal text-xs ml-1">
+                      no PIX
+                    </span>
+                  }
                 </p>
               </div>
               <p class="text-[#000] text-xs">
@@ -313,31 +323,34 @@ function ProductInfo({
                     </div>
                     <div class="flex flex-col gap-2">
                       <div class="flex gap-2 items-center">
-                        <span class="line-through text-base font-semibold text-[#A8A8A8] leading-[1]">
-                          {formatPrice(listPrice, offers?.priceCurrency)}
-                        </span>
+                        {listPrice > price &&
+                          <span class="line-through text-base font-semibold text-[#A8A8A8] leading-[1]">
+                            {formatPrice(listPrice, offers?.priceCurrency)}
+                          </span>
+                        }
                         <span class="text-[20px] font-semibold text-[#000] leading-[1]">
                           {formatPrice(price, offers?.priceCurrency)}
                         </span>
                       </div>
-                      <div class="flex items-center">
-                        <p class="text-[40px] font-semibold text-[#123ADD] leading-[1]">
-                          {formatPrice(installment?.price)}
-                          <span class="text-[#123ADD] font-normal text-[30px] ml-2 leading-[1]">
-                            no PIX
+                      {pix > 0 &&
+                        <div class="flex items-center">
+                          <p class="text-[40px] font-semibold text-[#123ADD] leading-[1]">
+                            {formatPrice(installment?.price)}
+                            <span class="text-[#123ADD] font-normal text-[30px] ml-2 leading-[1]">
+                              no PIX
+                            </span>
+                          </p>
+                          <span
+                            class={clx(
+                              "text-xs font-semibold text-white uppercase bg-[#123ADD] text-center text-white px-2 py-1 rounded-[6px]",
+                              percent < 1 && "opacity-0",
+                              "w-fit",
+                            )}
+                          >
+                            {percent} % off
                           </span>
-                        </p>
-                        {/* Price tag */}
-                        <span
-                          class={clx(
-                            "text-xs font-semibold text-white uppercase bg-[#123ADD] text-center text-white px-2 py-1 rounded-[6px]",
-                            percent < 1 && "opacity-0",
-                            "w-fit",
-                          )}
-                        >
-                          {percent} % off
-                        </span>
-                      </div>
+                        </div>
+                      }
                       <div class="fluid-text">
                         <p class="text-[#000]">
                           ou {installment?.billingDuration}x de{" "}
@@ -414,10 +427,15 @@ function ProductInfo({
             <div class="flex flex-col col-span-2">
               <div class="flex flex-col items-start">
                 <p class="text-3xl font-semibold text-[#123ADD]">
-                  {formatPrice(installment?.price)}
-                  <span class="text-[#123ADD] font-normal text-[30px] ml-2">
-                    no PIX
-                  </span>
+                  {pix > 0 ?
+                    formatPrice(pix, offers?.priceCurrency) :
+                    formatPrice(price, offers?.priceCurrency)
+                  }
+                  {pix > 0 &&
+                    <span class="text-[#123ADD] font-normal text-[30px] ml-2">
+                      no PIX
+                    </span>
+                  }
                 </p>
               </div>
               <p class="text-[#000] text-base">
