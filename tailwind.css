@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 @layer base {
-
   /* Allow changing font family via CMS */
   html {
     font-size: 16px;
     font-family: var(--font-family);
+    scroll-behavior: smooth;
   }
 
   /** Remove default styles from input[type=number] */

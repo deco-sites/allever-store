@@ -1,1 +1,1 @@
-export { default } from "../components/product/ProductSubscription.tsx";
+export { default } from "../components/product/Subscription/Form.tsx";

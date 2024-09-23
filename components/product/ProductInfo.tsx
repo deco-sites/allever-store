@@ -15,13 +15,14 @@ import PaymentMethods from "./PaymentMethods.tsx";
 import ProductStars from "../../islands/ProductStars.tsx";
 import GallerySlider from "./Gallery.tsx";
 import type { Device } from "apps/website/matchers/device.ts";
-import { useScript } from "deco/hooks/useScript.ts";
-
+import ProductSubscription from "./Subscription/Form.tsx";
+import { useScript } from "@deco/deco/hooks";
+import { getFlagCluster } from "./ProductCard.tsx";
 interface Props {
   page: ProductDetailsPage | null;
+  flags?: [internationalFlag: string, promoFlag: string, newsFlag: string];
   device: Device;
 }
-
 const onLoad = () => {
   const handleScroll = () => {
     const fixedAddToCart = document.getElementById("fixed-add-to-cart");
@@ -36,18 +37,20 @@ const onLoad = () => {
     }
   };
   addEventListener("scroll", handleScroll);
-}
-
-function ProductInfo({ page, device }: Props) {
+};
+function ProductInfo({
+  page,
+  flags = [],
+  device,
+}: Props) {
   if (page === null) {
     throw new Error("Missing Product Details Page Info");
   }
-
   const id = useId();
+  const [internationalFlag, promoFlag, newsFlag] = flags;
   const { breadcrumbList, product } = page;
   const { productID, offers, isVariantOf, additionalProperty } = product;
   const title = isVariantOf?.name ?? product.name;
-
   const productGroupID = isVariantOf?.productGroupID ?? "";
   const {
     price = 0,
@@ -57,39 +60,27 @@ function ProductInfo({ page, device }: Props) {
     installment,
     availability,
   } = useOffer(offers);
-
-  console.log("additionalProperty", additionalProperty);
-
-  const hasPromotion = additionalProperty?.some(
-    (prop) => prop.value === "Promoção",
+  const hasInternationalFlag = getFlagCluster(
+    internationalFlag,
+    additionalProperty,
   );
-
-  const hasNews = additionalProperty?.some(
-    (prop) => prop.value === "Novidades",
-  );
-
-  const isInternational = additionalProperty?.some(
-    (prop) => prop.value === "Compra internacional",
-  );
-
+  const hasPromoFlag = getFlagCluster(promoFlag, additionalProperty);
+  const hasNewsFlag = getFlagCluster(newsFlag, additionalProperty);
   const percent = listPrice && price
     ? Math.round(((listPrice - price) / listPrice) * 100)
     : 0;
-
   const breadcrumb = {
     ...breadcrumbList,
     itemListElement: breadcrumbList?.itemListElement.slice(0, -1),
     numberOfItems: breadcrumbList.numberOfItems - 1,
   };
-
   const item = mapProductToAnalyticsItem({
     product,
     breadcrumbList: breadcrumb,
     price,
     listPrice,
   });
-  const hasFlag = hasPromotion || hasNews || isInternational;
-
+  // const hasFlag = hasPromotion || hasNews || isInternational;
   const viewItemEvent = useSendEvent({
     on: "view",
     event: {
@@ -101,15 +92,12 @@ function ProductInfo({ page, device }: Props) {
       },
     },
   });
-
   if (device === "mobile" || device === "tablet") {
     return (
       <>
         <div class="flex flex-col gap-3 px-5 pt-5">
-          <Breadcrumb
-            itemListElement={page.breadcrumbList.itemListElement}
-          />
-          <h1 class="text-base font-semibold"> 
+          <Breadcrumb itemListElement={page.breadcrumbList.itemListElement} />
+          <h1 class="text-base font-semibold">
             {title}
           </h1>
           <div class="flex items-center justify-between">
@@ -118,26 +106,27 @@ function ProductInfo({ page, device }: Props) {
             </p>
             <WishlistButton item={item} pdp={true} />
           </div>
-          {hasFlag && (
-            <div class="flex w-full">
-              {hasPromotion && (
-                <p class="text-xs font-semibold text-white uppercase bg-[#F22E2E] text-center text-white px-2 py-1 rounded-[6px] w-full">
-                  Promoção
-                </p>
-              )}
-            </div>
-          )}
-          {isInternational && (
-            <div class="flex w-full">
-              <p class="text-xs font-semibold text-white uppercase bg-black text-center text-white px-2 py-1 rounded-[6px] w-full">
-                Produto internacional
+          {hasPromoFlag &&
+            (
+              <p class="text-xs font-semibold text-white uppercase bg-[#F22E2E] text-center text-white px-2 py-1 rounded-[6px] w-full">
+                Promoção
               </p>
-            </div>
-          )}
+            )}
+          {hasInternationalFlag &&
+            (
+              <div class="flex w-full">
+                <p class="text-xs font-semibold text-white uppercase bg-black text-center text-white px-2 py-1 rounded-[6px] w-full">
+                  Produto internacional <a 
+                    class="underline" 
+                    href="#specifications"
+                  >Saiba mais</a>
+                </p>
+              </div>
+            )}
           <GallerySlider page={page} />
           <div class="flex justify-between">
             <div class="w-full max-w-[151px]">
-              {hasNews &&
+              {hasNewsFlag &&
                 (
                   <p class="text-xs font-semibold text-white uppercase bg-[#FFA318] text-center text-white px-2 py-1 rounded-[6px]">
                     Novidade
@@ -146,8 +135,8 @@ function ProductInfo({ page, device }: Props) {
             </div>
           </div>
           <div class="flex flex-col gap-3">
-            {availability === "https://schema.org/InStock" ?
-              (
+            {availability === "https://schema.org/InStock"
+              ? (
                 <>
                   <ProductStars
                     context="pdp"
@@ -177,7 +166,8 @@ function ProductInfo({ page, device }: Props) {
                       </div>
                     )}
                     <p class="text-[#000] text-base leading-[1]">
-                      ou {installment?.billingDuration}x de {formatPrice(
+                      ou {installment?.billingDuration}x de{" "}
+                      {formatPrice(
                         installment?.billingIncrement,
                         offers!.priceCurrency!,
                       )}
@@ -206,7 +196,11 @@ function ProductInfo({ page, device }: Props) {
                       class="bg-[#1BAE32] text-[20px] flex justify-center items-center gap-2 py-[10px] rounded-[30px] no-animation text-white font-semibold hover:bg-[#1bae3299] ease-in"
                       disabled={false}
                     />
-                    {/* <ProductSubscription product={product} /> */}
+                    <ProductSubscription
+                      product={product}
+                      item={item}
+                      seller={seller}
+                    />
                     <p class="text-xs font-normal text-black">
                       Vendido e entregue por:{" "}
                       <span class="font-bold capitalize">{seller}</span>
@@ -224,7 +218,8 @@ function ProductInfo({ page, device }: Props) {
                     </div>
                   </div>
                 </>
-              ) : <OutOfStock productID={productID} />}
+              )
+              : <OutOfStock productID={productID} />}
           </div>
         </div>
         <div class="fixed bottom-0 left-0 right-0 rounded-t-2xl bg-white shadow-2xl z-10">
@@ -239,7 +234,8 @@ function ProductInfo({ page, device }: Props) {
                 </p>
               </div>
               <p class="text-[#000] text-xs">
-                ou {installment?.billingDuration}x de {formatPrice(
+                ou {installment?.billingDuration}x de{" "}
+                {formatPrice(
                   installment?.billingIncrement,
                   offers!.priceCurrency!,
                 )}
@@ -257,9 +253,8 @@ function ProductInfo({ page, device }: Props) {
           </div>
         </div>
       </>
-    )
+    );
   }
-
   if (device === "desktop") {
     return (
       <>
@@ -291,31 +286,31 @@ function ProductInfo({ page, device }: Props) {
               {availability === "https://schema.org/InStock" &&
                 (
                   <>
-                    {hasFlag &&
-                      (
-                        <div class="flex gap-[5px]">
-                          {hasPromotion &&
-                            (
-                              <p class="text-xs font-semibold text-white uppercase bg-[#F22E2E] text-center text-white px-2 py-1 rounded-[6px]">
-                                Promoção
-                              </p>
-                            )}
-                          {hasNews &&
-                            (
-                              <p class="text-xs font-semibold text-white uppercase bg-[#FFA318] text-center text-white px-2 py-1 rounded-[6px]">
-                                Novidade
-                              </p>
-                            )}
-                          {isInternational && (
-                            <div class="flex w-full">
-                              <p class="text-xs font-semibold text-white uppercase bg-black text-center text-white px-2 py-1 rounded-[6px] w-full">
-                                Produto internacional
-                              </p>
-                            </div>
-                          )}
-                        </div>
-                      )
-                    }
+                    <div class="flex gap-[5px]">
+                      {hasPromoFlag &&
+                        (
+                          <p class="text-xs font-semibold text-white uppercase bg-[#F22E2E] text-center text-white px-2 py-1 rounded-[6px]">
+                            Promoção
+                          </p>
+                        )}
+                      {hasNewsFlag &&
+                        (
+                          <p class="text-xs font-semibold text-white uppercase bg-[#FFA318] text-center text-white px-2 py-1 rounded-[6px]">
+                            Novidade
+                          </p>
+                        )}
+                      {hasInternationalFlag &&
+                        (
+                          <div class="flex w-full">
+                            <p class="text-xs font-semibold text-white uppercase bg-black text-center text-white px-2 py-1 rounded-[6px] w-full">
+                              Produto internacional <a 
+                                class="underline" 
+                                href="#specifications"
+                              >Saiba mais</a>
+                            </p>
+                          </div>
+                        )}
+                    </div>
                     <div class="flex flex-col gap-2">
                       <div class="flex gap-2 items-center">
                         <span class="line-through text-base font-semibold text-[#A8A8A8] leading-[1]">
@@ -345,7 +340,8 @@ function ProductInfo({ page, device }: Props) {
                       </div>
                       <div class="fluid-text">
                         <p class="text-[#000]">
-                          ou {installment?.billingDuration}x de {formatPrice(
+                          ou {installment?.billingDuration}x de{" "}
+                          {formatPrice(
                             installment?.billingIncrement,
                             offers!.priceCurrency!,
                           )}
@@ -364,6 +360,11 @@ function ProductInfo({ page, device }: Props) {
                         product={product}
                         class="bg-[#1BAE32] text-[20px] flex justify-center items-center gap-2 py-[10px] rounded-[30px] no-animation text-white font-semibold hover:bg-[#1bae3299] ease-in"
                         disabled={false}
+                      />
+                      <ProductSubscription
+                        product={product}
+                        item={item}
+                        seller={seller}
                       />
                       {inventory > 0 && inventory <= 9 && (
                         <div>
@@ -390,8 +391,7 @@ function ProductInfo({ page, device }: Props) {
                       />
                     </div>
                   </>
-                )
-              }
+                )}
             </div>
             <div class="flex flex-col gap-[14px] py-[14px]">
               {availability != "https://schema.org/InStock" &&
@@ -403,9 +403,14 @@ function ProductInfo({ page, device }: Props) {
             </div>
           </div>
         </div>
-        <div id="fixed-add-to-cart" class="invisible fixed bottom-0 left-0 right-0 rounded-t-2xl bg-white shadow-2xl z-10">
+        <div
+          id="fixed-add-to-cart"
+          class="invisible fixed bottom-0 left-0 right-0 rounded-t-2xl bg-white shadow-2xl z-10"
+        >
           <div class="container px-5 py-4 grid grid-cols-4 lg:grid-cols-7 gap-12 items-center">
-            <div class="hidden lg:block text-xl font-semibold text-black uppercase col-span-3">{title}</div>
+            <div class="hidden lg:block text-xl font-semibold text-black uppercase col-span-3">
+              {title}
+            </div>
             <div class="flex flex-col col-span-2">
               <div class="flex flex-col items-start">
                 <p class="text-3xl font-semibold text-[#123ADD]">
@@ -416,7 +421,8 @@ function ProductInfo({ page, device }: Props) {
                 </p>
               </div>
               <p class="text-[#000] text-base">
-                ou {installment?.billingDuration}x de {formatPrice(
+                ou {installment?.billingDuration}x de{" "}
+                {formatPrice(
                   installment?.billingIncrement,
                   offers!.priceCurrency!,
                 )}
@@ -440,8 +446,6 @@ function ProductInfo({ page, device }: Props) {
       </>
     );
   }
-
   return null;
 }
-
 export default ProductInfo;

@@ -1,4 +1,5 @@
 import { useId } from "../../sdk/useId.ts";
+import { useScript } from "deco/hooks/useScript.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 
 import Icon from "../../components/ui/Icon.tsx";
@@ -18,6 +19,30 @@ interface Props {
   layout: "Marca" | "Categoria";
   category: Category[];
 }
+
+const onLoad = (id: string) => {
+  const carousel = document.getElementById(id);
+  if (carousel) {
+    // @ts-ignore swiper exists
+    new Swiper(`#${id}`, {
+      spaceBetween: 12,
+      slidesPerView: "auto",
+      breakpoints: {
+        640: {
+          spaceBetween: 30,
+        },
+      },
+      navigation: {
+        nextEl: `#${id} .button-next`,
+        prevEl: `#${id} .button-prev`,
+      },
+      pagination: {
+        el: `#${id} .pagination`,
+        clickable: true,
+      },
+    });
+  }
+};
 
 function Card(
   {
@@ -80,7 +105,13 @@ const CarouselCategory = ({ category, Title, layout }: Props) => {
           </div>
           <div class="pagination static mt-5 flex sm:hidden justify-center" />
         </div>
-        <SwiperJS id={id} type="category-home" />
+        {/* <SwiperJS id={id} type="category-home" /> */}
+        <script
+          type="module"
+          dangerouslySetInnerHTML={{
+            __html: useScript(onLoad, id)
+          }}
+        />
       </div>
     </>
   );

@@ -1,0 +1,1 @@
+export { default } from "reviews-app/mod.ts";

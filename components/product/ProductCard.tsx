@@ -2,7 +2,7 @@ import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalytic
 import Image from "apps/website/components/Image.tsx";
 import { clx } from "../../sdk/clx.ts";
 import { formatPrice } from "../../sdk/format.ts";
-import type { Product } from "apps/commerce/types.ts";
+import type { Product, PropertyValue } from "apps/commerce/types.ts";
 import { relative } from "../../sdk/url.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { useSendEvent } from "../../sdk/useSendEvent.ts";
@@ -16,6 +16,7 @@ import ProductStarCard from "./ProductStarCard.tsx";
 import ProductStars from "../../islands/ProductStars.tsx";
 
 interface Props {
+  flags?: [internationalFlag: string, promoFlag: string, newsFlag: string];
   product: Product;
   /** Preload card image */
   preload?: boolean;
@@ -27,29 +28,40 @@ interface Props {
   index?: number;
 
   class?: string;
-  offerLimited?: boolean;
   productGroupID?: string;
-  internationalBuy?: boolean;
 }
 
 const WIDTH = 270;
 const HEIGHT = 225;
 const ASPECT_RATIO = `${WIDTH} / ${HEIGHT}`;
 
+export const getFlagCluster = (flag: string, additionalProperty?: PropertyValue[]) => {
+  return additionalProperty?.find((prop) => {
+    if (prop.name === "cluster") {
+      return prop.propertyID === flag;
+    }
+  })
+}
+
 function ProductCard({
+  flags,
   product,
   preload,
   itemListName,
   index,
   class: _class,
-  internationalBuy = true,
-  offerLimited = true,
-  // productGroupID,
 }: Props) {
   const id = useId();
+  const [
+    internationalFlag = "",
+    promoFlag = "",
+    newsFlag = "",
+  ] = flags ?? [];
 
   const { url, image: images, offers, isVariantOf, additionalProperty } =
     product;
+
+  console.log("additionalProperty", additionalProperty);
   const hasVariant = isVariantOf?.hasVariant ?? [];
   const productGroupID = isVariantOf?.productGroupID ?? "";
   const title = isVariantOf?.name ?? product.name;
@@ -80,13 +92,9 @@ function ProductCard({
     },
   });
 
-  const hasPromocao = additionalProperty?.some(
-    (prop) => prop.value === "Promoção",
-  );
-
-  const hasNovidade = additionalProperty?.some(
-    (prop) => prop.value === "Novidades",
-  );
+  const hasInternationalFlag = getFlagCluster(internationalFlag, additionalProperty);
+  const hasPromoFlag = getFlagCluster(promoFlag, additionalProperty);
+  const hasNewsFlag = getFlagCluster(newsFlag, additionalProperty);
 
   return (
     <div
@@ -109,9 +117,9 @@ function ProductCard({
                 {percent} % off
               </span>
             )
-            : null}
-          {/* Notify Me */}
-          {hasNovidade && (
+            : null
+          }
+          {hasNewsFlag && (
             <span
               class={clx(
                 "text-xs font-semibold text-white uppercase bg-[#FFA318] text-center text-white px-2 py-1 rounded-[6px]",
@@ -120,8 +128,7 @@ function ProductCard({
               Novidade
             </span>
           )}
-          {/* News */}
-          {hasPromocao && (
+          {hasPromoFlag && (
             <span
               class={clx(
                 "text-xs font-semibold text-white uppercase bg-[#F22E2E] text-center text-white px-2 py-1 rounded-[6px]",
@@ -156,12 +163,7 @@ function ProductCard({
       <div>
         <a href={relativeUrl} class="flex flex-col gap-2">
           <div class="flex flex-col gap-1">
-            {offerLimited && (
-              <p class="px-1 sm:px-6 py-1 flex items-center justify-center bg-[#f22e2e] text-white font-semibold text-[10px] sm:text-xs">
-                Oferta por tempo limitado
-              </p>
-            )}
-            {internationalBuy && (
+            {hasInternationalFlag && (
               <p class="px-1 sm:px-6 py-1 flex items-center justify-center bg-[#000] text-white font-semibold text-[10px] sm:text-xs">
                 Compra Internacional
               </p>
