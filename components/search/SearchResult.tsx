@@ -57,7 +57,6 @@ function PageResult(props: SectionProps<typeof loader>) {
     const zeroIndexedOffsetPage = pageInfo.currentPage - startingPage;
     const prev = pageInfo.currentPage - startingPage;
     const next = pageInfo.currentPage + startingPage;
-    console.log("prev", prev, "next", next);
     const offset = zeroIndexedOffsetPage * perPage;
     const nextPageUrl = useUrlRebased(pageInfo.nextPage, url);
     const prevPageUrl = useUrlRebased(pageInfo.previousPage, url);
@@ -70,7 +69,6 @@ function PageResult(props: SectionProps<typeof loader>) {
         props: { partial: "hideLess" },
     });
     const infinite = layout?.pagination !== "pagination";
-    console.log("pageInfo", pageInfo);
     return (<div class="grid grid-flow-row grid-cols-1 place-items-center mx-auto">
       <div data-product-list class={clx("grid items-center", "flex gap-1", "grid-cols-2 sm:grid-cols-4 lg:gap-4", "w-full pb-5")}>
         {products?.map((product, index) => (<ProductCard key={`product-card-${product.productID}`} flags={[internationalFlag, promoFlag, newsFlag]} product={product} preload={index === 0} index={offset + index} class="h-full min-w-[160px] max-w-[300px]"/>))}

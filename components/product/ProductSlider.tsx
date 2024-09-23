@@ -13,7 +13,6 @@ interface Props {
 
 function ProductSlider({ flags, products, itemListName }: Props) {
     const id = useId();
-    console.log("flags", flags);
     return (
       <>
         <div id={id} class="grid grid-rows-1 px-0 sm:px-5" style={{

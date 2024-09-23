@@ -99,8 +99,6 @@ const Form = () => {
       isPrivateEntity: true,
     });
 
-    console.log("response", response);
-
     // if (true) {
     //   showToast("Formulário enviado com sucesso!", "success");
     // } else {

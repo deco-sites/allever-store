@@ -61,7 +61,6 @@ function ProductCard({
   const { url, image: images, offers, isVariantOf, additionalProperty } =
     product;
 
-  console.log("additionalProperty", additionalProperty);
   const hasVariant = isVariantOf?.hasVariant ?? [];
   const productGroupID = isVariantOf?.productGroupID ?? "";
   const title = isVariantOf?.name ?? product.name;

@@ -14,8 +14,6 @@ export async function action(props: Props, req: Request) {
     seller,  
   } = props;
 
-  console.log("productID", productID, "seller", seller);
-
   const form = await req.formData();
   const selectedOption = `${form.get("subscription-option") ?? ""}`;
   const { addItems, addItemAttachment } = useCart();
