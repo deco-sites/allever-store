@@ -3,7 +3,6 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import * as $_app from "./routes/_app.tsx";
-import * as $BuyTogether from "./islands/BuyTogether.tsx";
 import * as $CampaignTimer from "./islands/CampaignTimer.tsx";
 import * as $ExpandableInput from "./islands/ExpandableInput.tsx";
 import * as $Form from "./islands/Form.tsx";
@@ -24,7 +23,6 @@ const manifest = {
     "./routes/_app.tsx": $_app,
   },
   islands: {
-    "./islands/BuyTogether.tsx": $BuyTogether,
     "./islands/CampaignTimer.tsx": $CampaignTimer,
     "./islands/ExpandableInput.tsx": $ExpandableInput,
     "./islands/Form.tsx": $Form,

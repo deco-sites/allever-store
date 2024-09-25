@@ -25,6 +25,7 @@ interface Props {
   index?: number;
 
   class?: string;
+  hiddenFlags?: boolean;
   productGroupID?: string;
 }
 
@@ -46,6 +47,7 @@ function ProductCard({
   itemListName,
   index,
   class: _class,
+  hiddenFlags = false,
 }: Props) {
   const [
     internationalFlag = "",
@@ -96,7 +98,7 @@ function ProductCard({
     >
       <div class="flex items-start justify-between">
         <div class="flex flex-wrap gap-[5px]">
-          {percent > 1 && inStock
+          {percent > 1 && inStock && !hiddenFlags
             ? (
               <span
                 class={clx(
@@ -108,7 +110,7 @@ function ProductCard({
             )
             : null
           }
-          {hasNewsFlag && (
+          {hasNewsFlag && !hiddenFlags && (
             <span
               class={clx(
                 "text-xs font-semibold text-white uppercase bg-[#FFA318] text-center text-white px-2 py-1 rounded-[6px]",
@@ -117,7 +119,7 @@ function ProductCard({
               Novidade
             </span>
           )}
-          {hasPromoFlag && (
+          {hasPromoFlag && !hiddenFlags && (
             <span
               class={clx(
                 "text-xs font-semibold text-white uppercase bg-[#F22E2E] text-center text-white px-2 py-1 rounded-[6px]",

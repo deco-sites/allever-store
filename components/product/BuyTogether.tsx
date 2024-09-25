@@ -1,113 +1,316 @@
-import type { Product } from "apps/commerce/types.ts";
-import { useOffer } from "../../sdk/useOffer.ts";
-import { useAddToCart } from "../../sdk/UseAddToCart.ts";
 import ProductCard from "./ProductCard.tsx";
-import { useCountBuyTogether } from "../../sdk/useCountBuyTogether.ts";
-import { formatPrice } from "../../sdk/format.ts";
-import AddToCartButton from "./AddToCartButton.tsx";
+import { useOffer } from "../../sdk/useOffer.ts";
+import { useScript } from "@deco/deco/hooks";
+import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
+import type { 
+  Product, 
+  ProductDetailsPage 
+} from "apps/commerce/types.ts";
 
 export interface Props {
-  product: Product;
-  buyTogether: Product[] | null;
+  page: ProductDetailsPage;
+  device: string;
+  productRecommendations: Product[];
 }
 
-function BuyTogether({ product, buyTogether }: Props) {
-  const { count } = useCountBuyTogether();
+const onClick = () => {
+  const container = document.getElementById("buy-together") as HTMLDivElement;
+  if (container) {
+    let newItem = [];
+    let newPlatformProps = {};
+    newPlatformProps.orderItems = [];
+    newPlatformProps.allowedOutdatedData = ["paymentData"];
+    const productCards = container.querySelectorAll("div[data-item-id]");
+    productCards.forEach((card) => {
+      if (card.querySelector("input")?.checked) {
+        const { item, platformProps } = JSON.parse(
+          decodeURIComponent(card.getAttribute("data-cart-item")!),
+        );
+        newItem.push(item);
+        newPlatformProps.orderItems.push(platformProps.orderItems[0]);
+      }
+    });
+    window.STOREFRONT.CART.addToCart(newItem, newPlatformProps);
+    setTimeout(() => {
+      const minicartDrawer = document.querySelector(
+        "label[for=minicart-drawer]",
+      );
+      if (minicartDrawer) {
+        // @ts-ignore click is correct
+        minicartDrawer.click();
+      }
+    }, 500);
+  }
+};
 
-  if (!buyTogether || buyTogether.length < 2) return <></>;
+const onChange = () => {
+  const container = document.getElementById("buy-together") as HTMLDivElement;
+  if (container) {
+    let pix = 0;
+    let price = 0;
+    const productCards = container.querySelectorAll("div[data-item-id]");
+    productCards.forEach((card) => {
+      if (card.querySelector("input")?.checked) {
+        const { item } = JSON.parse(
+          decodeURIComponent(card.getAttribute("data-cart-item")!),
+        );
 
-  const product1 = product;
-  const product2 = buyTogether[count.value];
-  const product3 = buyTogether[(count.value + 1) % buyTogether.length];
+        const pixPrice = parseFloat(
+          card.getAttribute("data-pix") || "0",
+        );
+        
+        pix += pixPrice;
+        price += item.price;
+      }
+    });
+    const pixContainer = document.querySelector("#pix-price");
+    if (pixContainer) {
+      pixContainer.innerHTML = pix.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
+    }
+    const priceContainer = document.querySelector("#total-price");
+    if (priceContainer) {
+      priceContainer.innerHTML = price.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
+    }
+    const addToCartCount = document.querySelector("#add-to-cart-count");
+    if (addToCartCount) {
+      addToCartCount.innerHTML = container.querySelectorAll("div[data-item-id] input:checked").length.toString();
+    }
+  }
+};
 
-  const { price: price1, listPrice: listPrice1, seller: seller1 } = useOffer(
-    product1.offers,
-  );
-  const { price: price2, listPrice: listPrice2, seller: seller2 } = useOffer(
-    product2.offers,
-  );
-  const { price: price3, listPrice: listPrice3, seller: seller3 } = useOffer(
-    product3.offers,
-  );
+const onLoad = () => {
+  const container = document.getElementById("buy-together") as HTMLDivElement;
+  if (container) {
+    let pix = 0;
+    let price = 0;
+    const productCards = container.querySelectorAll("div[data-item-id]");
+    productCards.forEach((card) => {
+      if (card.querySelector("input")?.checked) {
+        const { item } = JSON.parse(
+          decodeURIComponent(card.getAttribute("data-cart-item")!),
+        );
 
-  if (!seller1 || !seller2 || !seller3) return <></>;
+        const pixPrice = parseFloat(
+          card.getAttribute("data-pix") || "0",
+        );
+        
+        pix += pixPrice;
+        price += item.price;
+      }
+    });
+    const pixContainer = document.querySelector("#pix-price");
+    if (pixContainer) {
+      pixContainer.innerHTML = pix.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
+    }
+    const priceContainer = document.querySelector("#total-price");
+    if (priceContainer) {
+      priceContainer.innerHTML = price.toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      });
+    }
+    const addToCartCount = document.querySelector("#add-to-cart-count");
+    if (addToCartCount) {
+      addToCartCount.innerHTML = container.querySelectorAll("div[data-item-id] input:checked").length.toString();
+    }
+  }
+}
 
-  const addProduct = (
-    prod: Product,
-    price: number,
-    listPrice: number,
-    seller: string,
-  ) => ({
-    skuId: prod.productID,
-    sellerId: seller,
-    discount: listPrice ? listPrice - price : 0,
-    price: price ?? 0,
-    productGroupId: prod.isVariantOf?.productGroupID ?? "",
-    name: prod.name ?? "",
-    quantity: 1,
+export default function BuyTogether({
+  page,
+  productRecommendations,
+  device,
+}: Props) {
+  const { breadcrumbList, product } = page;
+  const {offers } = product;
+
+  const breadcrumb = {
+    ...breadcrumbList,
+    itemListElement: breadcrumbList?.itemListElement.slice(0, -1),
+    numberOfItems: breadcrumbList.numberOfItems - 1,
+  };
+
+  const {
+    pix = 0,
+    price = 0,
+    seller = "1",
+    listPrice = 0,
+  } = useOffer(offers);
+
+  const actualItem = mapProductToAnalyticsItem({
+    product,
+    breadcrumbList: breadcrumb,
+    price,
+    listPrice,
   });
 
-  const items = [
-    addProduct(product1, price1, listPrice1, seller1),
-    addProduct(product2, price2, listPrice2, seller2),
-    addProduct(product3, price3, listPrice3, seller3),
-  ];
-
-  // Props for AddToCartButton
-  const props = useAddToCart({ items });
-
-  const totalListPrice = (listPrice1 || 0) + (listPrice2 || 0) +
-    (listPrice3 || 0);
-  const totalPrice = (price1 || 0) + (price2 || 0) + (price3 || 0);
+  const recommendations = productRecommendations.filter((p) => {
+    return product.productID !== p.productID;
+  });
 
   return (
-    <section class="py-6">
-      <div class="container">
-        <h3 class="lg:text-[1.75rem] leading-[2.1875rem] text-black font-semibold tracking-normal mb-6 text-left max-lg:text-2xl max-lg:leading-[1.875rem]">
-          Compre junto
-        </h3>
-        <div class="flex gap-6 items-center">
-          <div class="flex flex-1 gap-10">
-            <div class="flex-1 flex flex-col max-w-[300px] w-full">
-              <ProductCard product={product1} class="flex-1" />
+    <>
+    {recommendations.length > 0 &&
+      (
+        <div
+          id="buy-together"
+          class="container px-5 my-12 flex items-center gap-4 overflow-x-auto"
+        >
+          <div
+            class="relative"
+            data-pix={pix}
+            data-item-id={product.productID}
+            data-cart-item={encodeURIComponent(
+              JSON.stringify({
+                item: actualItem,
+                platformProps: {
+                  allowedOutdatedData: ["paymentData"],
+                  orderItems: [{
+                    quantity: 1,
+                    seller: seller,
+                    id: product.productID,
+                  }],
+                },
+              }),
+            )}
+          >
+            <div class="form-control p-3 lg:p-5 absolute top-0 left-0 z-[1]">
+              <label class="label cursor-pointer p-0">
+                <input
+                  type="checkbox"
+                  class="checkbox checkbox-primary"
+                  checked={true}
+                  hx-on:change={useScript(onChange)}
+                />
+              </label>
             </div>
-            <div class="flex items-center">
-              <span class="bg-primary h-[0.125rem] w-[1.125rem]"></span>
-              <span class="bg-primary h-[0.125rem] w-[1.125rem] absolute rotate-90">
-              </span>
-            </div>
-            <div class="flex-1 flex flex-col max-w-[300px] w-full">
-              <ProductCard product={product2} class="flex-1" />
-            </div>
-            <div class="flex items-center">
-              <span class="bg-primary h-[0.125rem] w-[1.125rem]"></span>
-              <span class="bg-primary h-[0.125rem] w-[1.125rem] absolute rotate-90">
-              </span>
-            </div>
-            <div class="flex-1 flex flex-col max-w-[300px] w-full">
-              <ProductCard product={product3} class="flex-1" />
-            </div>
+            <ProductCard
+              class="w-[216px] sm:w-[300px]"
+              product={product}
+              hiddenFlags={true}
+            />
           </div>
-          <div class="flex flex-col gap-2 py-2 max-w-[300px] w-full">
-            <ins class="text-black text-base leading-[1.875rem] py-1 no-underline">
-              Preço total:{" "}
-              <span class="font-semibold text-[20px]">
-                {formatPrice(totalPrice, product1.offers!.priceCurrency!)}
-              </span>
-            </ins>
-            <div class="w-full">
-              <AddToCartButton
-                product={product1}
-                seller={seller1}
-                item={addProduct(product1, price1, listPrice1, seller1)}
-                class="bg-primary border-transparent rounded font-quicksand text-base font-semibold h-12 leading-5 min-w-[15.5rem] max-w-[17.5rem] transition-all duration-300 w-full hover:bg-[#00224d] flex items-center justify-center text-white"
-              />
+          <span class="text-signature-blue text-3xl font-bold">+</span>
+          {recommendations.splice(0, 2).map(
+            (item: Product, index: number, arr: Product[]) => {
+              const { offers } = item;
+
+              const {
+                pix: itemPix = 0,
+                price: itemPrice = 0,
+                seller: itemSeller = "1",
+                listPrice: itemListPrice = 0,
+              } = useOffer(offers);
+
+              const newItem = mapProductToAnalyticsItem({
+                price: itemPrice,
+                product: item,
+                listPrice: itemListPrice,
+                breadcrumbList: breadcrumb,
+              });
+
+              return (
+                <>
+                  <div
+                    class="relative"
+                    data-pix={itemPix}
+                    data-item-id={item.productID}
+                    data-cart-item={encodeURIComponent(
+                      JSON.stringify({
+                        item: newItem,
+                        platformProps: {
+                          allowedOutdatedData: ["paymentData"],
+                          orderItems: [{
+                            quantity: 1,
+                            seller: itemSeller,
+                            id: item.productID,
+                          }],
+                        },
+                      }),
+                    )}
+                  >
+                    <div class="form-control p-3 lg:p-5 absolute top-0 left-0 z-[1]">
+                      <label class="label cursor-pointer p-0">
+                        <input
+                          type="checkbox"
+                          class="checkbox checkbox-primary"
+                          checked={true}
+                          hx-on:change={useScript(onChange)}
+                        />
+                      </label>
+                    </div>
+                    <ProductCard
+                      class="w-[216px] sm:w-[300px]"
+                      product={item}
+                      hiddenFlags={true}
+                    />
+                  </div>
+                  {(index + 1) < arr.length && (
+                    <span class="text-signature-blue text-3xl font-bold">
+                      +
+                    </span>
+                  )}
+                </>
+              );
+            },
+          )}
+          {device	=== "desktop" &&
+            <div class="flex flex-col gap-4 items-center justify-center pl-6">
+              <div class="text-[#123ADD] font-normal text-[30px]">
+                <span id="pix-price" class="text-[40px] font-semibold text-[#123ADD]">R$ 0</span>{" "}
+                no Pix
+              </div>
+              <div class="text-base">
+                Preço Total:{" "}
+                <span id="total-price" class="text-xl font-semibold">R$ 0</span>
+              </div>
+              <button
+                class="btn btn-primary"
+                hx-on:click={useScript(onClick)}
+              >
+                Adicionar{" "}
+                <span id="add-to-cart-count">2</span>
+                {" "}ao carrinho
+              </button>
             </div>
-          </div>
+          }
         </div>
-      </div>
-    </section>
+      )}
+      {device	=== "mobile" &&
+        <div class="flex flex-col gap-4 items-center justify-center">
+          <div class="text-[#123ADD] font-normal text-[30px]">
+            <span id="pix-price" class="text-[40px] font-semibold text-[#123ADD]">R$ 0</span>{" "}
+            no Pix
+          </div>
+          <div class="text-base">
+            Preço Total:{" "}
+            <span id="total-price" class="text-xl font-semibold">R$ 0</span>
+          </div>
+          <button
+            class="btn btn-primary"
+            hx-on:click={useScript(onClick)}
+          >
+            Adicionar{" "}
+            <span id="add-to-cart-count">2</span>
+            {" "}ao carrinho
+          </button>
+        </div>
+      }
+      <script
+        type="module"
+        dangerouslySetInnerHTML={{
+          __html: useScript(onLoad),
+        }}
+      />
+    </>
   );
 }
-
-export default BuyTogether;
