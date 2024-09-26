@@ -3,88 +3,115 @@ import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import Icon from "./Icon.tsx";
 import { useScript } from "@deco/deco/hooks";
+import ProductRecommendations from "../../islands/ProductRecommendations.tsx";
 export interface Props {
-    open?: boolean;
-    class?: string;
-    children?: ComponentChildren;
-    aside: ComponentChildren;
-    id?: string;
-    buyTogether?: boolean;
+  open?: boolean;
+  class?: string;
+  children?: ComponentChildren;
+  aside: ComponentChildren;
+  id?: string;
+  buyTogether?: boolean;
 }
 const script = (id: string) => {
-    const handler = (e: KeyboardEvent) => {
-        if (e.key !== "Escape" && e.keyCode !== 27) {
-            return;
-        }
-        const input = document.getElementById(id) as HTMLInputElement | null;
-        if (!input) {
-            return;
-        }
-        input.checked = false;
-    };
-    addEventListener("keydown", handler);
+  const handler = (e: KeyboardEvent) => {
+    if (e.key !== "Escape" && e.keyCode !== 27) {
+      return;
+    }
+    const input = document.getElementById(id) as HTMLInputElement | null;
+    if (!input) {
+      return;
+    }
+    input.checked = false;
+  };
+  addEventListener("keydown", handler);
 };
-function Drawer({ children, aside, open, class: _class = "", id = useId(), }: Props) {
-    return (<>
+function Drawer(
+  { children, aside, open, class: _class = "", id = useId() }: Props,
+) {
+  return (
+    <>
       <div class={clx("drawer", _class)}>
-        <input id={id} name={id} checked={open} type="checkbox" class="drawer-toggle" aria-label={open ? "open drawer" : "closed drawer"}/>
+        <input
+          id={id}
+          name={id}
+          checked={open}
+          type="checkbox"
+          class="drawer-toggle"
+          aria-label={open ? "open drawer" : "closed drawer"}
+        />
         <div class="drawer-content">{children}</div>
-        <aside data-aside class={clx("drawer-side h-full z-40 overflow-hidden", "[[data-aside]&_section]:contents")}>
-          <label for={id} class="drawer-overlay"/>
+        <aside
+          data-aside
+          class={clx(
+            "drawer-side h-full z-40 overflow-hidden",
+            "[[data-aside]&_section]:contents",
+          )}
+        >
+          <label for={id} class="drawer-overlay" />
           {aside}
         </aside>
       </div>
-      <script type="module" dangerouslySetInnerHTML={{ __html: useScript(script, id) }}/>
-    </>);
+      <script
+        type="module"
+        dangerouslySetInnerHTML={{ __html: useScript(script, id) }}
+      />
+    </>
+  );
 }
 interface AsideProps {
-    title?: string;
-    drawer: string;
-    children: ComponentChildren;
-    background?: string;
-    color?: string;
-    sizeMenu?: boolean;
-    isMinicart?: boolean;
-    layout: "minicart" | "menu" | "searchBar";
+  title?: string;
+  drawer: string;
+  children: ComponentChildren;
+  background?: string;
+  color?: string;
+  sizeMenu?: boolean;
+  isMinicart?: boolean;
+  layout: "minicart" | "menu" | "searchBar";
 }
-function Aside({ drawer, children, layout, }: AsideProps) {
-    switch (layout) {
-        case "minicart":
-            return (<div class="w-full max-w-[100vw] sm:max-w-[438px] h-screen">
-          {
-                /* <div class="bg-white col-span-2 rounded-l-2xl">
-                <div class="py-5 text-2xl text-center max-w-[211px] mx-auto">
-                  Você também pode <b>[Gostar]</b>
-                </div>
-                <div>
-    
-                </div>
-              </div> */
-                }
+function Aside({ drawer, children, layout }: AsideProps) {
+  switch (layout) {
+    case "minicart":
+      return (
+        <div class="flex items-stretch w-full max-w-[100vw] sm:max-w-[800px] h-screen">
           <div data-aside class={`bg-base-100 h-full divide-y`}>
             {children}
           </div>
-        </div>);
-        case "menu":
-            return (<div data-aside class={`bg-base-100 h-full divide-y w-full max-w-[388px] flex flex-col `}>
-          <div class={`flex justify-between items-center pr-5 max-w-[388px] absolute right-0 top-[20px]`}>
+        </div>
+      );
+    case "menu":
+      return (
+        <div
+          data-aside
+          class={`bg-base-100 h-full divide-y w-full max-w-[388px] flex flex-col `}
+        >
+          <div
+            class={`flex justify-between items-center pr-5 max-w-[388px] absolute right-0 top-[20px]`}
+          >
             <label class="cursor-pointer" for={drawer} aria-label="X">
-              <Icon id="close-black"/>
+              <Icon id="close-black" />
             </label>
           </div>
           {children}
-        </div>);
-        case "searchBar":
-            return (<div data-aside class={`bg-[#F2F2F2] h-full divide-y w-full flex flex-col `}>
-          <div class={`flex justify-between items-center bg-[#123ADD] h-[58px] p-5`}>
+        </div>
+      );
+    case "searchBar":
+      return (
+        <div
+          data-aside
+          class={`bg-[#F2F2F2] h-full divide-y w-full flex flex-col `}
+        >
+          <div
+            class={`flex justify-between items-center bg-[#123ADD] h-[58px] p-5`}
+          >
             <p class="text-base font-semibold text-white">Buscar</p>
             <label for={drawer} aria-label="X">
-              <Icon id="close-white"/>
+              <Icon id="close-white" />
             </label>
           </div>
           {children}
-        </div>);
-    }
+        </div>
+      );
+  }
 }
 Drawer.Aside = Aside;
 export default Drawer;

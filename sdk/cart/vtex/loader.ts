@@ -1,11 +1,12 @@
 import { itemToAnalyticsItem } from "apps/vtex/hooks/useCart.ts";
 import type a from "apps/vtex/loaders/cart.ts";
+import type { Product } from "apps/commerce/types.ts";
 import { AppContext } from "apps/vtex/mod.ts";
 import { Minicart } from "../../../components/minicart/Minicart.tsx";
 
 export type Cart = Awaited<ReturnType<typeof a>>;
 
-export const cartFrom = (form: Cart, url: string): Minicart => {
+export const cartFrom = (form: Cart, url: string, recommendations: Product[]): Minicart => {
   const { items, totalizers } = form ?? { items: [] };
   const total = totalizers?.find((item) => item.id === "Items")?.value || 0;
   const discounts =
@@ -16,6 +17,7 @@ export const cartFrom = (form: Cart, url: string): Minicart => {
 
   return {
     platformCart: form as unknown as Record<string, unknown>,
+    recommendations,
     storefront: {
       items: items.map((item, index) => {
         const detailUrl = new URL(item.detailUrl, url).href;
@@ -45,8 +47,12 @@ async function loader(
   ctx: AppContext,
 ): Promise<Minicart> {
   const response = await ctx.invoke("vtex/loaders/cart.ts");
+  const recommendations = await ctx.invoke("vtex/loaders/intelligentSearch/productList.ts", {
+    collection: "165",
+    count: 5,
+  });
 
-  return cartFrom(response, req.url);
+  return cartFrom(response, req.url, recommendations);
 }
 
 export default loader;
