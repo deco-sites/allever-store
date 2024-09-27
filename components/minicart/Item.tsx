@@ -38,9 +38,9 @@ function CartItem({ item, index, locale, currency }: Props) {
     >
       <Image
         alt={name}
-        src={image.replace("-55-55", "-140-192")}
-        width={140}
-        height={192}
+        src={image.replace("-55-55", "-100-100")}
+        width={100}
+        height={100}
         class="h-full object-contain"
       />
 
@@ -48,7 +48,7 @@ function CartItem({ item, index, locale, currency }: Props) {
       <div class="flex flex-col gap-[10px] ml-[10px]">
         {/* Name and Remove button */}
         <div class="flex justify-between items-center">
-          <legend class="text-xs text-black">{name}</legend>
+          <legend class="block text-xs text-black text-ellipsis font-bold line-clamp-2 h-8">{name}</legend>
           <button
             class={clx(
               isGift && "hidden",
@@ -62,9 +62,11 @@ function CartItem({ item, index, locale, currency }: Props) {
 
         {/* Price Block */}
         <div class="flex flex-col items-start gap-2">
-          <span class="line-through  text-sm text-[#a8a8a8]">
-            {formatPrice(listPrice, currency, locale)}
-          </span>
+          {listPrice > price &&
+            <span class="line-through  text-sm text-[#a8a8a8]">
+              {formatPrice(listPrice, currency, locale)}
+            </span>
+          }
           <span class=" text-sm text-[#123ADD] font-semibold">
             {isGift ? "Grátis" : formatPrice(price, currency, locale)}
           </span>

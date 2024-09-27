@@ -11,6 +11,7 @@ import { useSendEvent } from "../../sdk/useSendEvent.ts";
 import { useVariantPossibilities } from "../../sdk/useVariantPossiblities.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import type { Product, PropertyValue } from "apps/commerce/types.ts";
+import MinicartAdd from "./MinicartAdd.tsx";
 
 interface Props {
   flags?: [internationalFlag: string, promoFlag: string, newsFlag: string];
@@ -27,6 +28,7 @@ interface Props {
   class?: string;
   hiddenFlags?: boolean;
   productGroupID?: string;
+  hiddenAddToCartButton?: boolean;
 }
 
 const WIDTH = 270;
@@ -48,6 +50,7 @@ function ProductCard({
   index,
   class: _class,
   hiddenFlags = false,
+  hiddenAddToCartButton = true,
 }: Props) {
   const [
     internationalFlag = "",
@@ -197,6 +200,14 @@ function ProductCard({
             )}
         </a>
         <ProductStars context="card" storeId="121576" productId={productGroupID ?? ""} />
+        {!hiddenAddToCartButton && inStock &&
+          <MinicartAdd
+            product={product}
+            seller={seller}
+            class="flex items-center justify-center gap-3 mt-2 bg-signature-blue border-0 text-white py-2 text-center font-semibold rounded-full" 
+            item={item}
+          />
+        }
       </div>
     </div>
   );

@@ -25,12 +25,12 @@ const SixthVariation = ({ title, items }: SixthVariationProps) => {
                     <a href={items[1].Link} class="block">
                       <Image src={items[1].desktop?.Image ||
                         `https://placehold.co/${items[1].desktop?.Width}x${items[1].desktop?.Height}`} alt={items[1].Alt ||
-                        "esse é um banner de uma marca tradicional"} width={items[1].desktop?.Width} height={items[1].desktop?.Height} fetchPriority="low" class="object-cover rounded-[40px] w-full"/>
+                        "esse é um banner de uma marca tradicional"} width={items[1].desktop?.Width} height={items[1].desktop?.Height} fetchPriority="low" class="object-cover rounded-[40px] w-full h-full"/>
                     </a>
                     <a href={items[1].Link} class="block">
                       <Image src={items[1].desktop?.Image ||
                         `https://placehold.co/${items[1].desktop?.Width}x${items[1].desktop?.Height}`} alt={items[1].Alt ||
-                        "esse é um banner de uma marca tradicional"} width={items[1].desktop?.Width} height={items[1].desktop?.Height} fetchPriority="low" class="object-cover rounded-[40px] w-full"/>
+                        "esse é um banner de uma marca tradicional"} width={items[1].desktop?.Width} height={items[1].desktop?.Height} fetchPriority="low" class="object-cover rounded-[40px] w-full h-full"/>
                     </a>
                   </>)}
             </div>

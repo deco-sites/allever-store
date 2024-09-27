@@ -26,18 +26,27 @@ export interface SDK {
         getQuantity: (itemId: string) => number | undefined;
         setQuantity: (itemId: string, quantity: number) => boolean;
         addToCart: (item: Item, platformProps: unknown) => boolean;
-        subscribe: (cb: (sdk: SDK["CART"]) => void, opts?: boolean | AddEventListenerOptions) => void;
+        subscribe: (
+            cb: (sdk: SDK["CART"]) => void,
+            opts?: boolean | AddEventListenerOptions,
+        ) => void;
         dispatch: (form: HTMLFormElement) => void;
     };
     USER: {
         getUser: () => Person | null;
-        subscribe: (cb: (sdk: SDK["USER"]) => void, opts?: boolean | AddEventListenerOptions) => void;
+        subscribe: (
+            cb: (sdk: SDK["USER"]) => void,
+            opts?: boolean | AddEventListenerOptions,
+        ) => void;
         dispatch: (person: Person) => void;
     };
     WISHLIST: {
         toggle: (productID: string, productGroupID: string) => boolean;
         inWishlist: (productID: string) => boolean;
-        subscribe: (cb: (sdk: SDK["WISHLIST"]) => void, opts?: boolean | AddEventListenerOptions) => void;
+        subscribe: (
+            cb: (sdk: SDK["WISHLIST"]) => void,
+            opts?: boolean | AddEventListenerOptions,
+        ) => void;
         dispatch: (form: HTMLFormElement) => void;
     };
 }
@@ -45,15 +54,29 @@ const sdk = () => {
     const target = new EventTarget();
     const createCartSDK = (): SDK["CART"] => {
         let form: HTMLFormElement | null = null;
-        const getCart = (): Cart => form && JSON.parse(decodeURIComponent(form.querySelector<HTMLInputElement>('input[name="storefront-cart"]')?.value || "[]"));
+        const getCart = (): Cart =>
+            form &&
+            JSON.parse(
+                decodeURIComponent(
+                    form.querySelector<HTMLInputElement>(
+                        'input[name="storefront-cart"]',
+                    )?.value || "[]",
+                ),
+            );
         const sdk: SDK["CART"] = {
             getCart,
-            getQuantity: (itemId) => form?.querySelector<HTMLInputElement>(`[data-item-id="${itemId}"] input[type="number"]`)?.valueAsNumber,
+            getQuantity: (itemId) =>
+                form?.querySelector<HTMLInputElement>(
+                    `[data-item-id="${itemId}"] input[type="number"]`,
+                )?.valueAsNumber,
             setQuantity: (itemId, quantity) => {
-                const input = form?.querySelector<HTMLInputElement>(`[data-item-id="${itemId}"] input[type="number"]`);
-                const item = getCart()?.items.find((item) => 
-                // deno-lint-ignore no-explicit-any
-                (item as any).item_id === itemId);
+                const input = form?.querySelector<HTMLInputElement>(
+                    `[data-item-id="${itemId}"] input[type="number"]`,
+                );
+                const item = getCart()?.items.find((item) =>
+                    // deno-lint-ignore no-explicit-any
+                    (item as any).item_id === itemId
+                );
                 if (!input || !item) {
                     return false;
                 }
@@ -70,8 +93,12 @@ const sdk = () => {
                 return true;
             },
             addToCart: (item, platformProps) => {
-                const input = form?.querySelector<HTMLInputElement>('input[name="add-to-cart"]');
-                const button = form?.querySelector<HTMLButtonElement>(`button[name="action"][value="add-to-cart"]`);
+                const input = form?.querySelector<HTMLInputElement>(
+                    'input[name="add-to-cart"]',
+                );
+                const button = form?.querySelector<HTMLButtonElement>(
+                    `button[name="action"][value="add-to-cart"]`,
+                );
                 if (!input || !button) {
                     return false;
                 }
@@ -123,25 +150,39 @@ const sdk = () => {
                     }
                 })
                 : null;
-            document.body.addEventListener("htmx:load", (e) => (e as unknown as {
-                detail: {
-                    elt: HTMLElement;
-                };
-            })
-                .detail.elt.querySelectorAll("[data-event]").forEach((node) => {
-                const maybeTrigger = node.getAttribute("data-event-trigger");
-                const on = maybeTrigger === "click" ? "click" : "view";
-                if (on === "click") {
-                    node.addEventListener("click", handleClick, {
-                        passive: true,
-                    });
-                    return;
-                }
-                if (on === "view") {
-                    handleView?.observe(node);
-                    return;
-                }
-            }));
+            document.body.addEventListener(
+                "htmx:load",
+                (e) =>
+                    (e as unknown as {
+                        detail: {
+                            elt: HTMLElement;
+                        };
+                    })
+                        .detail.elt.querySelectorAll("[data-event]").forEach(
+                            (node) => {
+                                const maybeTrigger = node.getAttribute(
+                                    "data-event-trigger",
+                                );
+                                const on = maybeTrigger === "click"
+                                    ? "click"
+                                    : "view";
+                                if (on === "click") {
+                                    node.addEventListener(
+                                        "click",
+                                        handleClick,
+                                        {
+                                            passive: true,
+                                        },
+                                    );
+                                    return;
+                                }
+                                if (on === "view") {
+                                    handleView?.observe(node);
+                                    return;
+                                }
+                            },
+                        ),
+            );
         });
     };
     const createUserSDK = () => {
@@ -168,8 +209,12 @@ const sdk = () => {
                     console.error("Missing wishlist Provider");
                     return false;
                 }
-                form.querySelector<HTMLInputElement>('input[name="product-id"]')!.value = productID;
-                form.querySelector<HTMLInputElement>('input[name="product-group-id"]')!.value = productGroupID;
+                form.querySelector<HTMLInputElement>(
+                    'input[name="product-id"]',
+                )!.value = productID;
+                form.querySelector<HTMLInputElement>(
+                    'input[name="product-group-id"]',
+                )!.value = productGroupID;
                 form.querySelector<HTMLButtonElement>("button")?.click();
                 return true;
             },
@@ -180,7 +225,9 @@ const sdk = () => {
             },
             dispatch: (f: HTMLFormElement) => {
                 form = f;
-                const script = f.querySelector<HTMLScriptElement>('script[type="application/json"]');
+                const script = f.querySelector<HTMLScriptElement>(
+                    'script[type="application/json"]',
+                );
                 const wishlist: Wishlist | null = script
                     ? JSON.parse(script.innerText)
                     : null;
@@ -197,7 +244,11 @@ const sdk = () => {
         WISHLIST: createWishlistSDK(),
     };
 };
-export const action = async (_props: unknown, _req: Request, ctx: AppContext) => {
+export const action = async (
+    _props: unknown,
+    _req: Request,
+    ctx: AppContext,
+) => {
     const [minicart, wishlist, user] = await Promise.all([
         ctx.invoke("site/loaders/minicart.ts"),
         ctx.invoke("site/loaders/wishlist.ts"),
@@ -221,24 +272,46 @@ interface Props {
     user?: Person | null;
     mode?: "eager" | "lazy";
 }
-export default function Session({ minicart, wishlist, user, mode = "lazy" }: Props) {
+export default function Session(
+    { minicart, wishlist, user, mode = "lazy" }: Props,
+) {
     if (mode === "lazy") {
-        return (<>
-        <Head>
-          <script type="module" dangerouslySetInnerHTML={{ __html: useScript(sdk) }}/>
-        </Head>
-        <div hx-trigger="load" hx-post={useComponent(import.meta.url)}/>
-      </>);
+        return (
+            <>
+                <Head>
+                    <script
+                        type="module"
+                        dangerouslySetInnerHTML={{ __html: useScript(sdk) }}
+                    />
+                </Head>
+                <div
+                    hx-trigger="load"
+                    hx-post={useComponent(import.meta.url)}
+                />
+            </>
+        );
     }
-    return (<>
-      {/* Minicart Drawer */}
-      <Drawer id={MINICART_DRAWER_ID} class="drawer-end z-50" aside={<Drawer.Aside layout="minicart" drawer={MINICART_DRAWER_ID} background="bg-[#123ADD]" color="text-white" isMinicart={true}>
-            <div class="h-full flex flex-col bg-base-100 items-center justify-center overflow-auto">
-              <CartProvider cart={minicart!}/>
-            </div>
-          </Drawer.Aside>}/>
+    return (
+        <>
+            {/* Minicart Drawer */}
+            <Drawer
+                id={MINICART_DRAWER_ID}
+                class="top-0 drawer-end z-50"
+                aside={
+                    <Drawer.Aside
+                        layout="minicart"
+                        drawer={MINICART_DRAWER_ID}
+                        background="bg-[#123ADD]"
+                        color="text-white"
+                        isMinicart={true}
+                    >
+                        <CartProvider cart={minicart!} />
+                    </Drawer.Aside>
+                }
+            />
 
-      <WishlistProvider wishlist={wishlist ?? null}/>
-      <UserProvider user={user ?? null}/>
-    </>);
+            <WishlistProvider wishlist={wishlist ?? null} />
+            <UserProvider user={user ?? null} />
+        </>
+    );
 }

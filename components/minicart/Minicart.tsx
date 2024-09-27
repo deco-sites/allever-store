@@ -9,9 +9,9 @@ import Icon from "../ui/Icon.tsx";
 import MinicartTotalInstallments from "../../islands/MinicartTotalInstallments.tsx";
 import { Product } from "apps/commerce/types.ts";
 import { useScript } from "@deco/deco/hooks";
-import type { SectionProps } from "@deco/deco";
 import ProductCard from "../product/ProductCard.tsx";
 export interface Minicart {
+  isMobile: boolean,
   /** Cart from the ecommerce platform */
   platformCart: Record<string, unknown>;
   recommendations: Product[];
@@ -48,19 +48,14 @@ const onLoad = (formID: string) => {
     }).observe(form);
   }
   // Disable form interactivity while cart is being submitted
-  document.body.addEventListener("htmx:before-send", // deno-lint-ignore no-explicit-any
-  ({ detail: { elt } }: any) => {
-    if (elt !== form) {
-      return;
-    }
-    // Disable addToCart button interactivity
-    // document.querySelectorAll("div[data-cart-item]").forEach((container) => {
-    //   container?.querySelectorAll("button")
-    //     .forEach((node) => node.disabled = true);
-    //   container?.querySelectorAll("input")
-    //     .forEach((node) => node.disabled = true);
-    // });
-  });
+  document.body.addEventListener(
+    "htmx:before-send", // deno-lint-ignore no-explicit-any
+    ({ detail: { elt } }: any) => {
+      if (elt !== form) {
+        return;
+      }
+    },
+  );
 };
 const sendBeginCheckoutEvent = () => {
   window.DECO.events.dispatch({
@@ -95,16 +90,40 @@ export function ErrorFallback() {
     </div>
   );
 }
-export const loader = async (props: {
-  cart: Minicart;
-}, _req: Request, _ctx: AppContext) => {
-  console.log("loader aqui");
-  return props;
-}
 export let itemCount = 0;
+function ProductRecommendations({ 
+  isMobile,
+  recommendations 
+} : { 
+  isMobile: boolean,
+  recommendations: Product[] 
+}) {
+  const _class = isMobile ? "shrink-0 w-[250px]" : "";
+  
+  return (
+    <div class="w-full lg:w-[400px] lg:h-full border border-y-0 border-l-0 border-r-middle-gray">
+      <div class="px-5 py-5 lg:py-8 border border-x-0 border-t-0 border-b-middle-gray">
+        <span class="block text-left lg:text-center lg:max-w-[210px] text-lg lg:text-2xl lg:mx-auto">
+          Você também pode <b class="text-signature-blue">[Gostar]</b>
+        </span>
+      </div>
+      <div class="flex flex-row max-lg:overflow-x-auto lg:flex-col gap-4 lg:overflow-y-auto lg:max-h-[calc(100vh-129px)] px-5 lg:px-12 py-5">
+        {recommendations.map((item: Product, index: number) => (
+          <ProductCard
+            key={index}
+            class={_class}
+            product={item}
+            hiddenAddToCartButton={false}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
 export default function Cart(
   {
     cart: {
+      isMobile,
       platformCart,
       recommendations,
       storefront: {
@@ -121,201 +140,180 @@ export default function Cart(
         checkoutHref,
       },
     },
-  }: SectionProps<typeof loader>,
+  }: {
+    cart: Minicart;
+  },
 ) {
   const count = items.length;
   itemCount = count;
-  console.log("recommendations", recommendations);
   return (
     <>
-      <div class="grid grid-cols-2">
-        <div class="bg-white col-span-1 rounded-l-2xl">
-          <div class="py-5 text-2xl text-center">
-            Você também pode <b>[Gostar]</b>
-          </div>
-          <div class="flex flex-col gap-4">
-            {recommendations.length > 0 && (
-              <>
-                {recommendations.map((item: Product, index: number) => (
-                  <ProductCard
-                    key={index}
-                    product={item}
-                  />
-                ))}
-              </>
-            )}
-          </div>
-        </div>
-        <div>
-          <form
-            class="contents col-span-1"
-            id={MINICART_FORM_ID}
-            hx-sync="this:replace"
-            hx-trigger="submit, change delay:300ms"
-            hx-target="this"
-            hx-indicator="this"
-            hx-disabled-elt="this"
-            hx-post={useComponent(import.meta.url)}
-            hx-swap="outerHTML"
-          >
-            {/* Button to submit the form */}
-            <button hidden autofocus />
+      {isMobile === false && recommendations.length > 0 && (
+        <ProductRecommendations
+          isMobile={isMobile}
+          recommendations={recommendations}
+        />
+      )}
+      <form
+        class="block w-full lg:w-[400px] h-full max-h-[85vh] lg:max-h-screen"
+        id={MINICART_FORM_ID}
+        hx-sync="this:replace"
+        hx-trigger="submit, change delay:300ms"
+        hx-target="this"
+        hx-indicator="this"
+        hx-disabled-elt="this"
+        hx-post={useComponent(import.meta.url)}
+        hx-swap="outerHTML"
+      >
+        {/* Button to submit the form */}
+        <button hidden autofocus />
 
-            {/* Add to cart controllers */}
-            <input name="add-to-cart" type="hidden" />
-            <button hidden name="action" value="add-to-cart" />
+        {/* Add to cart controllers */}
+        <input name="add-to-cart" type="hidden" />
+        <button hidden name="action" value="add-to-cart" />
 
-            {/* This contains the STOREFRONT cart. */}
-            <input
-              type="hidden"
-              name="storefront-cart"
-              value={encodeURIComponent(
-                JSON.stringify({ coupon, currency, value: total, items }),
+        {/* This contains the STOREFRONT cart. */}
+        <input
+          type="hidden"
+          name="storefront-cart"
+          value={encodeURIComponent(
+            JSON.stringify({ coupon, currency, value: total, items }),
+          )}
+        />
+
+        {/* This contains the platformCart cart from the commerce platform. Integrations usually use this value, like GTM, pixels etc */}
+        <input
+          type="hidden"
+          name="platform-cart"
+          value={encodeURIComponent(JSON.stringify(platformCart))}
+        />
+
+        <div
+          class={clx(
+            "flex flex-col max-h-screen items-center overflow-hidden w-full h-full",
+            "[.htmx-request_&]:pointer-events-none [.htmx-request_&]:opacity-60 [.htmx-request_&]:cursor-wait transition-opacity duration-300",
+          )}
+        >
+          {/* Cart header */}
+          <div class="bg-[#123ADD] flex justify-between text-white w-full gap-[5px] py-[13px] px-[35px] h-[58px] items-center">
+            <div class="flex gap-[5px]">
+              <p class="font-semibold text-base">Meu carrinho</p>
+              {count === 0 ? null : (
+                <p>
+                  [{count} {items.length === 0
+                    ? ""
+                    : items.length === 1
+                    ? "Produto"
+                    : "Produtos"}]
+                </p>
               )}
-            />
-
-            {/* This contains the platformCart cart from the commerce platform. Integrations usually use this value, like GTM, pixels etc */}
-            <input
-              type="hidden"
-              name="platform-cart"
-              value={encodeURIComponent(JSON.stringify(platformCart))}
-            />
-
-            <div
-              class={clx(
-                "flex flex-col flex-grow items-center overflow-hidden w-full",
-                "[.htmx-request_&]:pointer-events-none [.htmx-request_&]:opacity-60 [.htmx-request_&]:cursor-wait transition-opacity duration-300",
-              )}
-            >
-              {/* Cart header */}
-              <div class="bg-[#123ADD] flex justify-between text-white w-full gap-[5px] py-[13px] px-[35px] h-[58px] items-center">
-                <div class="flex gap-[5px]">
-                  <p class="font-semibold text-base">Meu carrinho</p>
-                  {count === 0 ? null : (
-                    <p>
-                      [{count} {items.length === 0
-                        ? ""
-                        : items.length === 1
-                        ? "Produto"
-                        : "Produtos"}]
-                    </p>
-                  )}
+            </div>
+            <div>
+              <label class="cursor-pointer" for={MINICART_DRAWER_ID}>
+                <Icon id="close-white" size={16} />
+              </label>
+            </div>
+          </div>
+          {count === 0
+            ? (
+              <div class="flex flex-col m-auto gap-3 pt-14">
+                <div class="flex justify-center">
+                  <Icon id="bag-blue" />
                 </div>
                 <div>
-                  <label class="cursor-pointer" for={MINICART_DRAWER_ID}>
-                    <Icon id="close-white" />
-                  </label>
+                  <p class="font-semibold text-base text-center">
+                    Seu carrinho está vazio!
+                  </p>
+                  <p class="text-sm max-w-[184px] m-auto flex text-center leading-[21px]">
+                    Você ainda não possuí itens no seu carrinho.
+                  </p>
                 </div>
+                <label
+                  for={MINICART_DRAWER_ID}
+                  class="bg-[#1BAE32] py-[15px] w-full rounded-full text-white px-6 text-sm cursor-pointer"
+                >
+                  Clique aqui e <b>veja os produtos</b> {">"}
+                </label>
               </div>
-              {count === 0
-                ? (
-                  <div class="flex flex-col m-auto gap-5">
-                    <div class="flex justify-center">
-                      <Icon id="bag-blue" />
+            )
+            : (
+              <>
+                <ul
+                  role="list"
+                  class="p-5 overflow-y-auto flex flex-col gap-2 w-full overflow-y-auto flex-grow"
+                >
+                  {items.map((item, index) => (
+                    <li>
+                      <CartItem
+                        item={item}
+                        index={index}
+                        locale={locale}
+                        currency={currency}
+                      />
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Cart Footer */}
+                <footer class="w-full bg-white">
+                  {/* Subtotal */}
+                  <div class="flex flex-col">
+                    {discounts > 0 && (
+                      <div class="flex justify-between items-center px-4">
+                        <span class="text-sm">Descontos</span>
+                        <span class="text-sm">
+                          {formatPrice(discounts, currency, locale)}
+                        </span>
+                      </div>
+                    )}
+
+                    {enableCoupon && <Coupon coupon={coupon} />}
+                  </div>
+
+                  {/* Total */}
+                  <div class=" flex flex-col justify-end items-end gap-2 mx-4 pb-1">
+                    <div class="flex justify-between items-center w-full">
+                      <span class="text-base">Total</span>
+                      <output
+                        form={MINICART_FORM_ID}
+                        class="font-semibold text-xl"
+                      >
+                        {formatPrice(total, currency, locale)}
+                      </output>
                     </div>
-                    <span class="font-semibold text-base text-center">
-                      Seu carrinho está vazio!
-                    </span>
-                    <p class="text-sm max-w-[184px] m-auto flex text-center leading-[21px]">
-                      Você ainda não possuí itens no seu carrinho.
-                    </p>
+                  </div>
+                  {/* <MinicartTotalInstallments items={items} /> */}
+                  <hr class="max-w-[90%] m-auto" />
+                  <div class="p-4">
+                    <a
+                      class="bg-[#1BAE32] w-full no-animation flex items-center justify-center py-[10px] w-full rounded-full"
+                      href={checkoutHref}
+                      hx-on:click={useScript(sendBeginCheckoutEvent)}
+                    >
+                      <span class="[.htmx-request_&]:hidden text-white text-xl font-semibold">
+                        Finalizar Compra
+                      </span>
+
+                      <span class="[.htmx-request_&]:inline hidden loading loading-spinner" />
+                    </a>
                     <label
                       for={MINICART_DRAWER_ID}
-                      class="bg-[#1BAE32] py-[15px] w-full rounded-full text-white px-4 cursor-pointer"
+                      class="flex w-full justify-center mt-5 text-[#123ADD] text-base"
                     >
-                      Clique aqui e <b>veja os produtos</b> {">"}
+                      OU CONTINUAR COMPRANDO
                     </label>
                   </div>
-                )
-                : (
-                  <>
-                    <ul
-                      role="list"
-                      class="mt-[10px] px-2 flex-grow overflow-y-auto flex flex-col gap-6 w-full max-h-[calc(100vh-58px-304px)]"
-                    >
-                      {items.map((item, index) => (
-                        <li>
-                          <CartItem
-                            item={item}
-                            index={index}
-                            locale={locale}
-                            currency={currency}
-                          />
-                        </li>
-                      ))}
-                    </ul>
-
-                    {/* Cart Footer */}
-                    <footer class="w-full bg-white">
-                      {/* Subtotal */}
-                      <div class="flex flex-col">
-                        {discounts > 0 && (
-                          <div class="flex justify-between items-center px-4">
-                            <span class="text-sm">Descontos</span>
-                            <span class="text-sm">
-                              {formatPrice(discounts, currency, locale)}
-                            </span>
-                          </div>
-                        )}
-                        {shipping !== null && (
-                          <div class="flex justify-between items-center pb-[10px] pt-5 px-4">
-                            <span class="text-[#A8A8A8] text-base flex gap-5">
-                              <Icon id="delivery-box" />
-                              Frete
-                            </span>
-
-                            <span class="text-[#A8A8A8] text-base">
-                              {/* @ts-ignore shipping is valid */}
-                              {shipping === 0
-                                ? "Grátis"
-                                : formatPrice(shipping, currency, locale)}
-                            </span>
-                          </div>
-                        )}
-
-                        {enableCoupon && <Coupon coupon={coupon} />}
-                      </div>
-
-                      {/* Total */}
-                      <div class=" flex flex-col justify-end items-end gap-2 mx-4 pb-1">
-                        <div class="flex justify-between items-center w-full">
-                          <span class="text-base">Total</span>
-                          <output
-                            form={MINICART_FORM_ID}
-                            class="font-semibold text-xl"
-                          >
-                            {formatPrice(total, currency, locale)}
-                          </output>
-                        </div>
-                      </div>
-                      <MinicartTotalInstallments items={items} />
-                      <hr class="max-w-[90%] m-auto" />
-                      <div class="p-4">
-                        <a
-                          class="bg-[#1BAE32] w-full no-animation flex items-center justify-center py-[10px] w-full rounded-full"
-                          href={checkoutHref}
-                          hx-on:click={useScript(sendBeginCheckoutEvent)}
-                        >
-                          <span class="[.htmx-request_&]:hidden text-white text-xl font-semibold">
-                            Finalizar Compra
-                          </span>
-
-                          <span class="[.htmx-request_&]:inline hidden loading loading-spinner" />
-                        </a>
-                        <label
-                          for={MINICART_DRAWER_ID}
-                          class="flex w-full justify-center mt-5 text-[#123ADD] text-base"
-                        >
-                          OU CONTINUAR COMPRANDO
-                        </label>
-                      </div>
-                    </footer>
-                  </>
-                )}
-            </div>
-          </form>
+                </footer>
+              </>
+            )}
         </div>
-      </div>
+      </form>
+      {isMobile && recommendations.length > 0 && (
+        <ProductRecommendations
+          isMobile={isMobile}
+          recommendations={recommendations}
+        />
+      )}
       <script
         type="module"
         dangerouslySetInnerHTML={{

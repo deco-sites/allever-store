@@ -72,10 +72,8 @@ function Aside({ drawer, children, layout }: AsideProps) {
   switch (layout) {
     case "minicart":
       return (
-        <div class="flex items-stretch w-full max-w-[100vw] sm:max-w-[800px] h-screen">
-          <div data-aside class={`bg-base-100 h-full divide-y`}>
-            {children}
-          </div>
+        <div class="flex flex-col lg:flex-row lg:items-stretch w-full max-w-[100vw] sm:max-w-[400px] lg:max-w-[800px] overflow-y-auto lg:overflow-y-hidden h-screen bg-base-100 sm:rounded-l-3xl">
+          {children}
         </div>
       );
     case "menu":

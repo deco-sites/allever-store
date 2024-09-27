@@ -10,19 +10,27 @@ import { rgb24 } from "std/fmt/colors.ts";
 import manifest, { type Manifest } from "../manifest.gen.ts";
 import type { Config } from "apps/vtex/loaders/config.ts";
 import { type App as A, type AppContext as AC } from "@deco/deco";
-// interface Timer {
-//     timerId: string;
-//     /**
-//      * @title Data Final
-//      * @format datetime
-//      */
-//     expireAt: string;
-//     hideLabel: boolean;
-// }
 export type Props = {
+    /**
+     * @title Flags de Novidades
+     * @description Insira o número da coleção:
+     */
     newsFlag?: string;
+    /**
+     * @title Flags de Promoções
+     * @description Insira o número da coleção:
+     */
     promoFlag?: string;
+    /**
+     * @title Flags de Produtos Internacionais
+     * @description Insira o número da coleção:
+     */
     internationalFlag?: string;
+    /**
+     * @title Sugestões do Minicart
+     * @description Insira o número da coleção:
+     */
+    minicartSuggestion?: string;
     /**
      * @title Active Commerce Platform
      * @description Choose the active ecommerce platform

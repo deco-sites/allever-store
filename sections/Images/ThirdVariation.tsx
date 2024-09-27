@@ -27,7 +27,7 @@ const ThirdVariation = ({ items, title }: ThirdVariationProps) => {
                       <Image src={items[1].desktop?.Image
                         ? items[1].desktop?.Image
                         : `https://placehold.co/${items[1].desktop?.Width}x${items[1].desktop?.Height}`} alt={items[1].Alt ||
-                        "esse é um banner de uma marca tradicional"} width={items[1].desktop?.Width} height={items[1].desktop?.Height} fetchPriority="low" class="object-cover lg:rounded-[40px] rounded-[20px] w-full"/>
+                        "esse é um banner de uma marca tradicional"} width={items[1].desktop?.Width} height={items[1].desktop?.Height} fetchPriority="low" class="object-cover lg:rounded-[40px] rounded-[20px] w-full h-full"/>
                     </a>
                   </div>
                   <div class="grid grid-cols-12 gap-4">
@@ -35,7 +35,7 @@ const ThirdVariation = ({ items, title }: ThirdVariationProps) => {
                       <Image src={items[2].desktop?.Image
                         ? items[2].desktop?.Image
                         : `https://placehold.co/${items[2].desktop?.Width}x${items[2].desktop?.Height}`} alt={items[2].Alt ||
-                        "esse é um banner de uma marca tradicional"} width={items[2].desktop?.Width} height={items[2].desktop?.Height} fetchPriority="low" class="object-cover lg:rounded-[40px] rounded-[20px] w-full"/>
+                        "esse é um banner de uma marca tradicional"} width={items[2].desktop?.Width} height={items[2].desktop?.Height} fetchPriority="low" class="object-cover lg:rounded-[40px] rounded-[20px] w-full h-full"/>
                     </a>
                     <a href={items[3]?.Link} class="col-span-8">
                       <Image src={items[3].desktop?.Image

@@ -153,10 +153,6 @@
       ]
     },
     {
-      "__resolveType": "site/sections/Spacer.tsx",
-      "size": "medium"
-    },
-    {
       "__resolveType": "site/sections/Images/Carousel.tsx",
       "images": [
         {
@@ -359,6 +355,10 @@
       "Title": "Compre Por Categorias",
       "layout": "Categoria",
       "visibleItems": 8
+    },
+    {
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "medium"
     },
     {
       "__resolveType": "site/sections/Category/CategoryBanner.tsx",
@@ -1031,6 +1031,10 @@
       "Rounded": true,
       "maxItems": 7,
       "visibleItems": 7
+    },
+    {
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "medium"
     },
     {
       "__resolveType": "Deals"

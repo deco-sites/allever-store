@@ -163,7 +163,7 @@ export default function BuyTogether({
       (
         <div
           id="buy-together"
-          class="container px-5 my-12 flex items-center gap-4 overflow-x-auto"
+          class="container px-5 mb-6 mt-12 lg:my-12 flex items-center gap-4 overflow-x-auto"
         >
           <div
             class="relative"
@@ -286,7 +286,7 @@ export default function BuyTogether({
         </div>
       )}
       {device	=== "mobile" &&
-        <div class="flex flex-col gap-4 items-center justify-center">
+        <div class="flex flex-col gap-4 items-center justify-center pb-12 border-b-middle-gray">
           <div class="text-[#123ADD] font-normal text-[30px]">
             <span id="pix-price" class="text-[40px] font-semibold text-[#123ADD]">R$ 0</span>{" "}
             no Pix
