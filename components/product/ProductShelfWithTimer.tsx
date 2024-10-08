@@ -14,7 +14,6 @@ export interface Timer {
    * @format datetime
    */
   expireAt?: string;
-  hideLabel?: boolean;
 }
 export interface Props extends SectionHeaderProps, Timer {
   products: Product[] | null;
@@ -23,7 +22,7 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
   return { ...props };
 };
 export default function ProductShelf(
-  { products, title, cta, expireAt, hideLabel = false }: SectionProps<
+  { products, title, cta, expireAt }: SectionProps<
     typeof loader
   >,
 ) {
@@ -58,7 +57,6 @@ export default function ProductShelf(
           {expireAt && (
             <div class="bg-primary px-3 py-2 lg:py-[15px] rounded-[10px]">
               <CampaignTimer
-                hideLabel={hideLabel}
                 expiresAt={expireAt}
                 id={id}
               />

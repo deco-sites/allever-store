@@ -37,37 +37,32 @@ const onLoad = (
 const CampaignTimer = ({
   id,
   expiresAt,
-  hideLabel,
 }: CampaignTimerProps) => {
   return (
     <>
-      <div class="flex gap-5 justify-center text-white text-center items-center my-4 lg:mb-0">
+      <div class="flex gap-5 justify-center text-white text-center items-center">
         <div>
           <p id="days" class="text-xl lg:text-4xl font-bold flex gap-3">
             <span id="value" />
             <span>:</span>
           </p>
-          {hideLabel ? <p class="text-xs lg:text-sm">Dias</p> : null}
         </div>
         <div>
           <p id="hours" class="text-xl lg:text-4xl font-bold flex gap-3">
             <span id="value" />
             <span>:</span>
           </p>
-          {hideLabel ? <p class="text-xs lg:text-sm">Horas</p> : null}
         </div>
         <div>
           <p id="minutes" class="text-xl lg:text-4xl font-bold flex gap-3">
             <span id="value" />
             <span>:</span>
           </p>
-          {hideLabel ? <p class="text-xs lg:text-sm">Min</p> : null}
         </div>
         <div>
           <p id="seconds" class="text-xl lg:text-4xl font-bold flex gap-3">
             <span id="value" />
           </p>
-          {hideLabel ? <p class="text-xs lg:text-sm">Seg</p> : null}
         </div>
       </div>
       <script

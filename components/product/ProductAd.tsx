@@ -2,7 +2,7 @@ import { useOffer } from "../../sdk/useOffer.ts";
 import { formatPrice } from "../../sdk/format.ts";
 import Image from "apps/website/components/Image.tsx";
 import type { AppContext } from "../../apps/site.ts";
-import type { Product, ProductDetailsPage } from "apps/commerce/types.ts";
+import type { ProductDetailsPage } from "apps/commerce/types.ts";
 import { type SectionProps } from "@deco/deco";
 export interface Like {
   product: number;
@@ -10,34 +10,8 @@ export interface Like {
 }
 export interface Props {
   product: ProductDetailsPage | null;
-  /**
-   * @title Destaque
-   */
-  highlight?: boolean;
-  /**
-   * @title Descrição do Anúncio
-   * @format textarea
-   */
-  adDescription?: string;
-  /**
-   * @hide
-   */
-  likes: Like | null;
-  vertical?: boolean;
-  /**
-   * @title Carregamento lento de imagem?
-   * @default true
-   */
-  lazyLoad?: boolean;
-  animateImage?: boolean;
-  relatedProduct?: Product[] | null;
-  showRelatedProduct?: boolean;
-  /**
-   * @hide
-   */
-  isMobile: boolean;
 }
-export const loader = async (props: Props, req: Request, ctx: AppContext) => {
+export const loader = (props: Props, _req: Request, ctx: AppContext) => {
   const { product } = props;
   if (!product) {
     return props;
@@ -45,19 +19,10 @@ export const loader = async (props: Props, req: Request, ctx: AppContext) => {
   if (!product?.product) {
     return props;
   }
-  const { product: { productID } } = product;
   return { ...props, isMobile: ctx.device !== "desktop" };
 };
 export default function ProductAd({
   product,
-  highlight = false,
-  adDescription = "",
-  vertical = false,
-  lazyLoad = true,
-  animateImage = true,
-  relatedProduct = [],
-  showRelatedProduct = false,
-  isMobile,
 }: SectionProps<typeof loader>) {
   if (!product) {
     return null;
@@ -69,25 +34,24 @@ export default function ProductAd({
     pix,
     listPrice,
   } = useOffer(product?.product?.offers);
-  const currentProduct = showRelatedProduct
-    // @ts-expect-error relatedProduct is an array
-    ? relatedProduct.length > 0 ? relatedProduct[0] : product.product
-    : product.product;
+  const {
+    product: currentProduct
+  } = product;
   const { url, brand, name = "", image: images = [], offers } = currentProduct;
-  const image = images[0]?.url ?? "";
+  const image = images && images[0]?.url;
   return (
     <div class="container p-3 lg:py-0 sm:px-0 flex flex-col lg:flex-row">
       <div class={`gap-3 rounded-xl flex`}>
         <a href={url} class="block overflow-hidden rounded-xl">
           <Image
-            class={`object-cover ${animateImage && "hover:scale-110"}`}
-            src={image}
+            class="object-cover"
+            src={image || ""}
             alt={name}
             width={250}
             height={250}
-            preload={!lazyLoad}
-            loading={lazyLoad ? "lazy" : "eager"}
-            fetchPriority={lazyLoad ? "low" : "high"}
+            preload={true}
+            loading="lazy"
+            fetchPriority="low"
             style={{ transition: "all .3s ease" }}
           />
         </a>

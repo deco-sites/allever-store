@@ -19,10 +19,6 @@ interface Props {
    * @format datetime
    */
   expireAt?: string;
-  /**
-   * @ignore
-   */
-  hideLabel?: boolean;
   product: ProductDetailsPage | null;
 }
 
@@ -31,7 +27,6 @@ const ShowCaseCounter = ({
     "<p class='flex gap-[5px]'><span class='font-bold'>[Oferta]</span> <span class='font-semibold'> Relâmpago</span></p> ",
   Label = "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum",
   expireAt,
-  hideLabel = false,
   product,
 }: Props) => {
   const id = useId();
@@ -67,14 +62,13 @@ const ShowCaseCounter = ({
               >
               </h3>
             </div>
-            <p class="text-white mt-[10px] text-center break-all text-sm lg:text-[20px]">
+            <p class="text-white mt-[10px] text-center break-all text-sm lg:text-[20px] mb-4">
               {Label}
             </p>
           </div>
           <CampaignTimer
             id={id}
             expiresAt={expireAt}
-            hideLabel={hideLabel}
           />
         </div>
         <div class="bg-white max-w-[602px] rounded-[10px]">
