@@ -6,12 +6,34 @@ import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import { relative } from "../../sdk/url.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
+import { useScript } from "@deco/deco/hooks";
 import { formatPrice } from "../../sdk/format.ts";
 import { useSendEvent } from "../../sdk/useSendEvent.ts";
 import { useVariantPossibilities } from "../../sdk/useVariantPossiblities.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import type { Product, PropertyValue } from "apps/commerce/types.ts";
 import MinicartAdd from "./MinicartAdd.tsx";
+import { load } from "jsr:@deno/graph@^0.73.1/loader";
+
+const onLoadTrustvox = () => {
+  // @ts-ignore _trustvox_shelf_rate exists
+  globalThis.window._trustvox_shelf_rate = [["_storeId", 121576]];
+
+  const productStars = document.getElementById("trustvox-script-stars");
+
+  if (productStars === null) {
+    const script = document.createElement("script");
+
+    script.id = "trustvox-script-stars";
+    script.async = true;
+    script.type = "text/javascript";
+    script.src = "//rate.trustvox.com.br/widget.js";
+
+    document.head.append(script);
+  } else {
+    productStars.remove();
+  }
+}
 
 interface Props {
   flags?: [internationalFlag: string, promoFlag: string, newsFlag: string];
@@ -199,7 +221,15 @@ function ProductCard({
               </p>
             )}
         </a>
-        <ProductStars context="card" storeId="121576" productId={productGroupID ?? ""} />
+        <div 
+          data-trustvox-product-code={productGroupID}
+        />
+        <script
+          type="module"
+          dangerouslySetInnerHTML={{
+            __html: useScript(onLoadTrustvox)
+          }}
+        />
         {!hiddenAddToCartButton && inStock &&
           <MinicartAdd
             product={product}

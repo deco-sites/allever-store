@@ -7,10 +7,7 @@ const bestInstallment = (
   acc: UnitPriceSpecification | null,
   curr: UnitPriceSpecification,
 ) => {
-  if (
-    curr.priceComponentType !== "https://schema.org/Installment" ||
-    curr.name === "Pix"
-  ) {
+  if (curr.priceComponentType !== "https://schema.org/Installment") {
     return acc;
   }
 

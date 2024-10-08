@@ -51,7 +51,10 @@ export default function ProductAd({ product, highlight = false, adDescription = 
         return null;
     if (!product?.product)
         return null;
-    const { price } = useOffer(product?.product?.offers);
+    const { 
+      pix, 
+      listPrice 
+    } = useOffer(product?.product?.offers);
     const currentProduct = showRelatedProduct
         // @ts-expect-error relatedProduct is an array
         ? relatedProduct.length > 0 ? relatedProduct[0] : product.product
@@ -72,13 +75,11 @@ export default function ProductAd({ product, highlight = false, adDescription = 
           {name}
         </p>
         <div class="flex items-start lg:items-center mt-[5px] flex-col lg:flex-row lg:gap-[6px]">
-          {offers?.lowPrice === price
-            ? (<p class="text-sm leading-[21px] text-[#989898] line-through">
-                {formatPrice(offers?.lowPrice)}
-              </p>)
-            : null}
+          <p class="text-sm leading-[21px] text-[#989898] line-through">
+            {formatPrice(listPrice, offers?.priceCurrency)}
+          </p>
           <p class="font-semibold sm:text-right text-xl lg:text-[20px] text-[#0066E4]">
-            {formatPrice(price)}
+            {formatPrice(pix, offers?.priceCurrency)}
           </p>
         </div>
       </div>

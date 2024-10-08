@@ -285,7 +285,7 @@ export default function BuyTogether({
           }
         </div>
       )}
-      {device	=== "mobile" &&
+      {device	=== "mobile" && recommendations.length > 0 &&
         <div class="flex flex-col gap-4 items-center justify-center pb-12 border-b-middle-gray">
           <div class="text-[#123ADD] font-normal text-[30px]">
             <span id="pix-price" class="text-[40px] font-semibold text-[#123ADD]">R$ 0</span>{" "}

@@ -3,7 +3,6 @@ import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import Icon from "./Icon.tsx";
 import { useScript } from "@deco/deco/hooks";
-import ProductRecommendations from "../../islands/ProductRecommendations.tsx";
 export interface Props {
   open?: boolean;
   class?: string;

@@ -1,4 +1,4 @@
-import { ProductDetailsPage } from "apps/commerce/types.ts";
+import { ProductDetailsPage, Offer } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { clx } from "../../sdk/clx.ts";
 import { formatPrice } from "../../sdk/format.ts";
@@ -81,7 +81,6 @@ function ProductInfo({
     price,
     listPrice,
   });
-  // const hasFlag = hasPromotion || hasNews || isInternational;
   const viewItemEvent = useSendEvent({
     on: "view",
     event: {
@@ -93,6 +92,12 @@ function ProductInfo({
       },
     },
   });
+
+  const newOffers = offers?.offers.filter((offer) => {
+    return offer.inventoryLevel.value && offer.inventoryLevel.value > 0 && offer.seller !== seller;
+  }) || [];
+  console.log("newOffers", newOffers.length);
+
   if (device === "mobile" || device === "tablet") {
     return (
       <>
@@ -198,7 +203,7 @@ function ProductInfo({
                       item={item}
                       seller={seller}
                       product={product}
-                      class="bg-[#1BAE32] text-[20px] flex justify-center items-center gap-2 py-[10px] rounded-[30px] no-animation text-white font-semibold hover:bg-[#1bae3299] ease-in"
+                      class="uppercase bg-[#1BAE32] text-[20px] flex justify-center items-center gap-2 py-[10px] rounded-[30px] no-animation text-white font-semibold hover:bg-[#1bae3299] ease-in"
                       disabled={false}
                     />
                     <ProductSubscription
@@ -211,6 +216,26 @@ function ProductInfo({
                       <span class="font-bold capitalize">{seller}</span>
                     </p>
                   </div>
+                  {newOffers.length > 0 &&
+                    <div class="w-[calc(100%+40px)] -mx-[20px] border-b border-b-dark-gray pb-5 pt-2">
+                      <span class="block font-semibold text-black mb-5 px-[20px]">Veja outros vendedores</span>
+                      {newOffers.map((offer) => (
+                        <div class="flex items-end justify-between border-t border-t-dark-gray py-5 px-[20px] last:pb-0">
+                          <div class="flex flex-col gap-3">
+                            <span>{offer.sellerName}</span>
+                            <span class="font-semibold">{formatPrice(offer.price, offer?.priceCurrency)}</span>
+                          </div>
+                          <AddToCartButton
+                            item={item}
+                            seller={offer.seller || ""}
+                            product={product}
+                            hiddenIcon={true}
+                            class="bg-signature-blue text-sm py-3 px-8 rounded-full no-animation text-white font-semibold hover:bg-[#1bae3299] ease-in"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  }
                   <div class="w-[calc(100%+40px)] -mx-[20px] px-[20px] pt-1.5 pb-4 border border-b-[#A8A8A8] border-t-0">
                     <div class="lg:max-w-[338px]">
                       <ShippingSimulationForm
@@ -256,7 +281,7 @@ function ProductInfo({
                 item={item}
                 seller={seller}
                 product={product}
-                class="bg-[#1BAE32] text-base flex justify-center items-center gap-2 py-3 rounded-full no-animation text-white font-semibold hover:bg-[#1bae3299]"
+                class="uppercase bg-[#1BAE32] text-base flex justify-center items-center gap-2 py-3 rounded-full no-animation text-white font-semibold hover:bg-[#1bae3299]"
                 disabled={false}
               />
             </div>
@@ -332,10 +357,10 @@ function ProductInfo({
                           {formatPrice(price, offers?.priceCurrency)}
                         </span>
                       </div>
-                      {pix > 0 &&
+                      {pix > 0 && price > pix &&
                         <div class="flex items-center">
                           <p class="text-[40px] font-semibold text-[#123ADD] leading-[1]">
-                            {formatPrice(installment?.price)}
+                            {formatPrice(pix, offers?.priceCurrency)}
                             <span class="text-[#123ADD] font-normal text-[30px] ml-2 leading-[1]">
                               no PIX
                             </span>
@@ -371,7 +396,7 @@ function ProductInfo({
                         item={item}
                         seller={seller}
                         product={product}
-                        class="bg-[#1BAE32] text-[20px] flex justify-center items-center gap-2 py-[10px] rounded-[30px] no-animation text-white font-semibold hover:bg-[#1bae3299] ease-in"
+                        class="uppercase bg-[#1BAE32] text-[20px] flex justify-center items-center gap-2 py-[10px] rounded-[30px] no-animation text-white font-semibold hover:bg-[#1bae3299] ease-in"
                         disabled={false}
                       />
                       <ProductSubscription
@@ -394,6 +419,26 @@ function ProductInfo({
                         <span class="font-bold capitalize">{seller}</span>
                       </p>
                     </div>
+                    {newOffers.length > 0 &&
+                      <div class="border border-y-dark-gray border-x-0 py-5">
+                        <span class="block font-semibold text-black mb-5">Veja outros vendedores</span>
+                        {newOffers.map((offer) => (
+                          <div class="flex items-end justify-between border-t border-t-dark-gray py-5 last:pb-0">
+                            <div class="flex flex-col gap-3">
+                              <span>{offer.sellerName}</span>
+                              <span class="font-semibold">{formatPrice(offer.price, offer?.priceCurrency)}</span>
+                            </div>
+                            <AddToCartButton
+                              item={item}
+                              seller={offer.seller || ""}
+                              product={product}
+                              hiddenIcon={true}
+                              class="bg-signature-blue text-sm py-3 px-8 rounded-full no-animation text-white font-semibold hover:bg-[#1bae3299] ease-in"
+                            />
+                          </div>
+                        ))}
+                      </div>
+                    }
                     <div class="lg:max-w-[338px]">
                       <ShippingSimulationForm
                         items={[{
@@ -451,7 +496,7 @@ function ProductInfo({
                 item={item}
                 seller={seller}
                 product={product}
-                class="bg-[#1BAE32] text-[20px] flex justify-center items-center gap-2 py-[10px] rounded-[30px] no-animation text-white font-semibold hover:bg-[#1bae3299] ease-in"
+                class="uppercase bg-[#1BAE32] text-[20px] flex justify-center items-center gap-2 py-[10px] rounded-[30px] no-animation text-white font-semibold hover:bg-[#1bae3299] ease-in"
                 disabled={false}
               />
             </div>

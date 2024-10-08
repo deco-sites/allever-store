@@ -3,12 +3,10 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import * as $_app from "./routes/_app.tsx";
-import * as $CampaignTimer from "./islands/CampaignTimer.tsx";
 import * as $ExpandableInput from "./islands/ExpandableInput.tsx";
 import * as $Form from "./islands/Form.tsx";
 import * as $MicroHeaderSetup from "./islands/MicroHeaderSetup.tsx";
 import * as $MinicartTotalInstallments from "./islands/MinicartTotalInstallments.tsx";
-import * as $ProductRecommendations from "./islands/ProductRecommendations.tsx";
 import * as $ProductStars from "./islands/ProductStars.tsx";
 import * as $ProductSubscription from "./islands/ProductSubscription.tsx";
 import * as $Product_TrustVox from "./islands/Product/TrustVox.tsx";
@@ -24,12 +22,10 @@ const manifest = {
     "./routes/_app.tsx": $_app,
   },
   islands: {
-    "./islands/CampaignTimer.tsx": $CampaignTimer,
     "./islands/ExpandableInput.tsx": $ExpandableInput,
     "./islands/Form.tsx": $Form,
     "./islands/MicroHeaderSetup.tsx": $MicroHeaderSetup,
     "./islands/MinicartTotalInstallments.tsx": $MinicartTotalInstallments,
-    "./islands/ProductRecommendations.tsx": $ProductRecommendations,
     "./islands/ProductStars.tsx": $ProductStars,
     "./islands/ProductSubscription.tsx": $ProductSubscription,
     "./islands/Product/TrustVox.tsx": $Product_TrustVox,

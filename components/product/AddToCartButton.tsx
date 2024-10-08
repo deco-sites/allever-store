@@ -5,6 +5,7 @@ import { useId } from "../../sdk/useId.ts";
 import Icon from "../../components/ui/Icon.tsx";
 import { useScript } from "@deco/deco/hooks";
 export interface Props extends JSX.HTMLAttributes<HTMLButtonElement> {
+    hiddenIcon?: boolean;
     product: Product;
     seller: string;
     item: AnalyticsItem;
@@ -32,11 +33,11 @@ const useAddToCart = ({ product, seller }: Props) => {
 function AddToCartButton(props: Props) {
     const id = useId();
     const platformProps = useAddToCart(props);
-    const { product, item, class: _class } = props;
+    const { product, item, class: _class, hiddenIcon = false } = props;
     return (<div id={id} class="flex" data-item-id={product.productID} data-cart-item={encodeURIComponent(JSON.stringify({ item, platformProps }))}>
       <button class={clx("flex-grow cursor-pointer", _class?.toString())} hx-on:click={useScript(onClick)}>
-        <Icon id="shopping_bag" size={21}/>
-        COMPRAR
+        {!hiddenIcon && <Icon id="shopping_bag" size={21}/>}
+        Comprar
       </button>
     </div>);
 }

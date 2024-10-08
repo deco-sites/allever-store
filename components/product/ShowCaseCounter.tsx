@@ -1,9 +1,8 @@
 import Icon from "../ui/Icon.tsx";
 import ProductAd from "../product/ProductAd.tsx";
-import CampaignTimer from "../../islands/CampaignTimer.tsx";
+import CampaignTimer from "../ui/CampaingTimer.tsx";
 
 import { useId } from "../../sdk/useId.ts";
-import { useState } from "preact/hooks";
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 
 interface Props {
@@ -37,11 +36,23 @@ const ShowCaseCounter = ({
 }: Props) => {
   const id = useId();
 
+  if (!expireAt) {
+    return null;
+  }
+
+  const difference = +new Date(expireAt) - +new Date();
+
+  const days = Math.max(Math.floor(difference / (1000 * 60 * 60 * 24)), 0);
+  const hours = Math.max(Math.floor((difference / (1000 * 60 * 60)) % 24), 0);
+  const minutes = Math.max(Math.floor((difference / 1000 / 60) % 60), 0);
+  const seconds = Math.max(Math.floor((difference / 1000) % 60), 0);
+
+  if (seconds === 0 && minutes === 0 && hours === 0 && days === 0) {
+    return null;
+  }
+
   return (
-    <div
-      id={id}
-      class={`lg:bg-[#123ADD] px-5 lg:px-0 rounded-[10px] lg:rounded-none`}
-    >
+    <div id={id} class={`lg:bg-[#123ADD] px-5 lg:px-0 rounded-[10px] lg:rounded-none`}>
       <div class="flex items-center justify-center flex-wrap container p-5 gap-x-10 gap-y-3 lg:py-[100px] bg-[#123ADD] rounded-[10px] lg:rounded-none">
         <div class="flex flex-col justify-unset lg:justify-center">
           <div>

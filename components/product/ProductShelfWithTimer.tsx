@@ -1,5 +1,5 @@
 import ProductSlider from "./ProductSlider.tsx";
-import CampaignTimer from "../../islands/CampaignTimer.tsx";
+import CampaignTimer from "../ui/CampaingTimer.tsx";
 import Section, { Props as SectionHeaderProps } from "../ui/Section.tsx";
 import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";

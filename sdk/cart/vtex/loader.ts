@@ -51,7 +51,6 @@ async function loader(
     device,
     minicartSuggestion = ""
   } = ctx;
-  console.log("minicartSuggestion", minicartSuggestion);
   const isMobile = device !== "desktop";
   const response = await ctx.invoke("vtex/loaders/cart.ts");
   if (minicartSuggestion !== "") {
