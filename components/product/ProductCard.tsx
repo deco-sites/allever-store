@@ -227,12 +227,6 @@ function ProductCard({
         <div
           data-trustvox-product-code={productGroupID}
         />
-        <script
-          type="module"
-          dangerouslySetInnerHTML={{
-            __html: useScript(onLoadTrustvox),
-          }}
-        />
         {!hiddenAddToCartButton && inStock &&
           (
             <MinicartAdd

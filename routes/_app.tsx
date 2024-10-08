@@ -64,7 +64,7 @@ export default defineApp(async (_req, ctx) => {
         dangerouslySetInnerHTML={{ __html: useScript(serviceWorkerScript) }}
       />
       
-      <script defer src={useScriptAsDataURI(setupTrustvoxRateConfig, "121576")} />
+      <script src={useScript(setupTrustvoxRateConfig, "121576")} />
       <script defer type="text/javascript" src="https://rate.trustvox.com.br/widget.js" />
     </>
   );
