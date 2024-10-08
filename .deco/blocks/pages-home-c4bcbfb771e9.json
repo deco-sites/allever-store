@@ -378,6 +378,29 @@
       "size": "medium"
     },
     {
+      "__resolveType": "website/sections/Rendering/Lazy.tsx",
+      "section": {
+        "__resolveType": "site/sections/Product/ProductShelfWithTimer.tsx",
+        "title": "Teste do Timer",
+        "cta": "Confira",
+        "expireAt": "2024-10-10T19:59:00.000Z",
+        "hideLabel": true,
+        "products": {
+          "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
+          "props": {
+            "sort": "price:desc",
+            "collection": "149",
+            "count": 10,
+            "hideUnavailableItems": true
+          }
+        }
+      }
+    },
+    {
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "medium"
+    },
+    {
       "__resolveType": "site/sections/Images/SecondVariation.tsx",
       "items": [
         {
@@ -538,18 +561,18 @@
     },
     {
       "__resolveType": "site/sections/Product/ProductShelf.tsx",
-      "title": "Vitrine 1",
-      "cta": "#",
       "products": {
         "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
         "props": {
-          "query": "fone de ouvido",
           "sort": "price:asc",
+          "query": "fone de ouvido",
           "count": 12,
           "fuzzy": "automatic",
           "term": "tv"
         }
-      }
+      },
+      "title": "Vitrine 1",
+      "cta": "#"
     },
     {
       "__resolveType": "site/sections/Product/ProductShelf.tsx",
