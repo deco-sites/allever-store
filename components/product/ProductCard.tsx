@@ -1,19 +1,15 @@
 import Image from "apps/website/components/Image.tsx";
-import ProductStars from "../../islands/ProductStars.tsx";
 import WishlistButton from "../wishlist/WishlistButton.tsx";
 
 import { clx } from "../../sdk/clx.ts";
-import { useId } from "../../sdk/useId.ts";
 import { relative } from "../../sdk/url.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { useScript } from "@deco/deco/hooks";
 import { formatPrice } from "../../sdk/format.ts";
 import { useSendEvent } from "../../sdk/useSendEvent.ts";
-import { useVariantPossibilities } from "../../sdk/useVariantPossiblities.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import type { Product, PropertyValue } from "apps/commerce/types.ts";
 import MinicartAdd from "./MinicartAdd.tsx";
-import { load } from "jsr:@deno/graph@^0.73.1/loader";
 
 const onLoadTrustvox = () => {
   // @ts-ignore _trustvox_shelf_rate exists

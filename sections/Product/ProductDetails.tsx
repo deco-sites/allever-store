@@ -4,10 +4,11 @@ import BuyTogether from "../../components/product/BuyTogether.tsx";
 import ProductInfo from "../../components/product/ProductInfo.tsx";
 import Description from "../../components/product/Description.tsx";
 import ProductGrid from "../../components/product/ProductGrid.tsx";
-import { useScript } from "@deco/deco/hooks";
 import type { SectionProps } from "@deco/deco";
 import type { AppContext } from "../../apps/site.ts";
+import { useScriptAsDataURI } from "@deco/deco/hooks";
 import type { Product, ProductDetailsPage } from "apps/commerce/types.ts";
+import { Head } from "$fresh/runtime.ts";
 export interface Props {
   /** @title Integration */
   page: ProductDetailsPage | null;
@@ -17,6 +18,7 @@ export interface Props {
   productRecommendations: Product[];
 }
 const onLoad = (productId: string, productName: string, image: string) => {
+  console.log("teste aqui");
   // @ts-ignore _trustvox exists
   globalThis._trustvox = [
     ["_storeId", "121576"],
@@ -24,12 +26,6 @@ const onLoad = (productId: string, productName: string, image: string) => {
     ["_productName", productName],
     ["_productPhotos", [image]],
   ];
-  const script = document.createElement("script");
-  script.id = "_trustvox_widget_script";
-  script.async = true;
-  script.type = "text/javascript";
-  script.src = "//static.trustvox.com.br/sincero/sincero.js";
-  document.head.append(script);
   // @ts-ignore _trustvox_shelf_rate exists
   const _trustvox_shelf_rate = globalThis._trustvox_shelf_rate || [];
   _trustvox_shelf_rate.push(["_storeId", "121576"]);
@@ -151,10 +147,15 @@ export default function ProductDetails({
           <div id="_trustvox_widget" />
         </div>
         <script
-          type="module"
+          type="text/javascript"
           dangerouslySetInnerHTML={{
-            __html: useScript(onLoad, productId, productName, image),
+            __html: useScriptAsDataURI(onLoad, productId, productName, image),
           }}
+        />
+        <script 
+          type="text/javascript" 
+          defer 
+          src="https://static.trustvox.com.br/sincero/sincero.js"
         />
       </>
     );

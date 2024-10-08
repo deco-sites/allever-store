@@ -4,7 +4,7 @@ import type {
   AggregateOffer,
   UnitPriceSpecification,
 } from "apps/commerce/types.ts";
-import { useScript, useScriptAsDataURI } from "@deco/deco/hooks";
+import { useScript } from "@deco/deco/hooks";
 interface PaymentMethodsProps {
   offers?: AggregateOffer;
   installment: string;

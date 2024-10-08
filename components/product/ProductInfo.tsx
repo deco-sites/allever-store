@@ -97,7 +97,6 @@ function ProductInfo({
     return offer.inventoryLevel.value && offer.inventoryLevel.value > 0 &&
       offer.seller !== seller;
   }) || [];
-  console.log("newOffers", newOffers.length);
 
   if (device === "mobile" || device === "tablet") {
     return (

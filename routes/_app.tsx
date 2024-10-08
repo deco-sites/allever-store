@@ -1,11 +1,25 @@
 import { asset, Head } from "$fresh/runtime.ts";
 import { defineApp } from "$fresh/server.ts";
-import { useScript } from "@deco/deco/hooks";
+import { useScript, useScriptAsDataURI } from "@deco/deco/hooks";
 import { Context } from "@deco/deco";
+declare global {
+  interface Window {
+    _trustvox_shelf_rate: Array<[
+      string,
+      string | number | Array<string | undefined> | undefined,
+    ]>;
+  }
+}
 const serviceWorkerScript = () =>
   addEventListener("load", () =>
     navigator && navigator.serviceWorker &&
     navigator.serviceWorker.register("/sw.js"));
+function setupTrustvoxRateConfig(storeId: string) {
+  globalThis.window._trustvox_shelf_rate = [];
+  globalThis.window._trustvox_shelf_rate.push(["_storeId", storeId]);
+  globalThis.window._trustvox_shelf_rate.push(["_productContainer", "body"]);
+  globalThis.window._trustvox_shelf_rate.push(["_watchSubtree", "true"]);
+}
 export default defineApp(async (_req, ctx) => {
   const revision = await Context.active().release?.revision();
   return (
@@ -49,6 +63,9 @@ export default defineApp(async (_req, ctx) => {
         type="module"
         dangerouslySetInnerHTML={{ __html: useScript(serviceWorkerScript) }}
       />
+      
+      <script defer src={useScriptAsDataURI(setupTrustvoxRateConfig, "121576")} />
+      <script defer type="text/javascript" src="https://rate.trustvox.com.br/widget.js" />
     </>
   );
 });
