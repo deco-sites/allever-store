@@ -19,13 +19,13 @@ function Breadcrumb({ itemListElement = [] }: Props) {
               <li>
                 <a href={relative(item)}>{name}</a>
               </li>
-            )
+            );
           }
           return (
             <li class="before:content-['/'] flex items-center gap-1">
               <a href={relative(item)}>{name}</a>
             </li>
-          )
+          );
         })}
     </ul>
   );

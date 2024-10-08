@@ -6,7 +6,12 @@ import type { AppContext } from "../../../apps/site.ts";
 
 export type Cart = Awaited<ReturnType<typeof a>>;
 
-export const cartFrom = (form: Cart, url: string, isMobile: boolean, recommendations?: Product[]): Minicart => {
+export const cartFrom = (
+  form: Cart,
+  url: string,
+  isMobile: boolean,
+  recommendations?: Product[],
+): Minicart => {
   const { items, totalizers } = form ?? { items: [] };
   const total = totalizers?.find((item) => item.id === "Items")?.value || 0;
   const discounts =
@@ -49,15 +54,18 @@ async function loader(
 ): Promise<Minicart> {
   const {
     device,
-    minicartSuggestion = ""
+    minicartSuggestion = "",
   } = ctx;
   const isMobile = device !== "desktop";
   const response = await ctx.invoke("vtex/loaders/cart.ts");
   if (minicartSuggestion !== "") {
-    const recommendations = await ctx.invoke("vtex/loaders/intelligentSearch/productList.ts", {
-      collection: minicartSuggestion,
-      count: 5,
-    });
+    const recommendations = await ctx.invoke(
+      "vtex/loaders/intelligentSearch/productList.ts",
+      {
+        collection: minicartSuggestion,
+        count: 5,
+      },
+    );
 
     return cartFrom(response, req.url, isMobile, recommendations);
   }

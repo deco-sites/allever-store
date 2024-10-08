@@ -9,9 +9,9 @@ export interface Props {
 }
 
 export async function action(props: Props, req: Request) {
-  const { 
+  const {
     productID,
-    seller,  
+    seller,
   } = props;
 
   const form = await req.formData();
@@ -30,11 +30,11 @@ export async function action(props: Props, req: Request) {
     const SUBSCRIPTION_KEY = "vtex.subscription.allever";
     const SUBSCRIPTION_PLAN = selectedOption;
     const currentDay = Math.min(new Date().getDate(), 28);
-    
+
     const SUBSCRIPTION_VALUE = {
-      'vtex.subscription.key.frequency': SUBSCRIPTION_PLAN,
-      'vtex.subscription.key.purchaseday': `${currentDay}`,
-    }
+      "vtex.subscription.key.frequency": SUBSCRIPTION_PLAN,
+      "vtex.subscription.key.purchaseday": `${currentDay}`,
+    };
 
     await addItemAttachment({
       index: 0,

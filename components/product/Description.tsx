@@ -18,7 +18,9 @@ const Description = ({ page }: Props) => {
         class="container px-5"
         title={
           <div class="flex space-between items-center">
-            <span class="text-base lg:text-xl py-5 sm:py-12 font-semibold">Descrição do Produto</span>
+            <span class="text-base lg:text-xl py-5 sm:py-12 font-semibold">
+              Descrição do Produto
+            </span>
             <Icon
               class="group-open:rotate-180 transition-all ease-in-out duration-[400ms]"
               size={13}
@@ -26,7 +28,7 @@ const Description = ({ page }: Props) => {
             />
           </div>
         }
-      > 
+      >
         <div>
           <div
             class="fluid-text text-sm pb-[40px]"

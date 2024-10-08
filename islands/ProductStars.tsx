@@ -36,5 +36,10 @@ export default function ProductStars({
     }
   }, []);
 
-  return <div class={context === "card" ? "mt-2" : ""} data-trustvox-product-code={productId} />;
+  return (
+    <div
+      class={context === "card" ? "mt-2" : ""}
+      data-trustvox-product-code={productId}
+    />
+  );
 }

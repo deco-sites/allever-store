@@ -32,8 +32,12 @@ export default function Notify({ productID }: Props) {
       hx-post={useComponent<Props>(import.meta.url, { productID })}
     >
       <div class="flex flex-col gap-1 mb-2">
-        <span class="text-lg text-dark-gray font-semibold">Este produto está indisponivel no momento</span>
-        <span class="text-base text-dark-gray font-semibold">Avise-me quando estiver disponivel</span>
+        <span class="text-lg text-dark-gray font-semibold">
+          Este produto está indisponivel no momento
+        </span>
+        <span class="text-base text-dark-gray font-semibold">
+          Avise-me quando estiver disponivel
+        </span>
       </div>
 
       <input placeholder="Nome" class="input input-bordered" name="name" />

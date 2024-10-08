@@ -10,72 +10,101 @@ import { useSendEvent } from "../../sdk/useSendEvent.ts";
 import Breadcrumb from "../ui/Breadcrumb.tsx";
 import Drawer from "../ui/Drawer.tsx";
 import Sort from "../../islands/Sort.tsx";
-import { useScript, useSection, useDevice } from "@deco/deco/hooks";
+import { useDevice, useScript, useSection } from "@deco/deco/hooks";
 import { type SectionProps } from "@deco/deco";
 import type { AppContext } from "../../apps/site.ts";
 export interface Layout {
-    /**
-     * @title Pagination
-     * @description Format of the pagination
-     */
-    pagination?: "show-more" | "pagination";
+  /**
+   * @title Pagination
+   * @description Format of the pagination
+   */
+  pagination?: "show-more" | "pagination";
 }
 export interface Props {
-    /** @title Integration */
-    page: ProductListingPage | null;
-    layout?: Layout;
-    /** @description 0 for ?page=0 as your first page */
-    startingPage?: 0 | 1;
-    /** @hidden */
-    partial?: "hideMore" | "hideLess";
+  /** @title Integration */
+  page: ProductListingPage | null;
+  layout?: Layout;
+  /** @description 0 for ?page=0 as your first page */
+  startingPage?: 0 | 1;
+  /** @hidden */
+  partial?: "hideMore" | "hideLess";
 }
 function NotFound() {
-    return (<>
+  return (
+    <>
       <div class="w-full flex justify-center items-center py-10">
         <span>Not Found!</span>
       </div>
-    </>);
+    </>
+  );
 }
 const useUrlRebased = (overrides: string | undefined, base: string) => {
-    let url: string | undefined = undefined;
-    if (overrides) {
-        const temp = new URL(overrides, base);
-        const final = new URL(base);
-        final.pathname = temp.pathname;
-        for (const [key, value] of temp.searchParams.entries()) {
-            final.searchParams.set(key, value);
-        }
-        url = final.href;
+  let url: string | undefined = undefined;
+  if (overrides) {
+    const temp = new URL(overrides, base);
+    const final = new URL(base);
+    final.pathname = temp.pathname;
+    for (const [key, value] of temp.searchParams.entries()) {
+      final.searchParams.set(key, value);
     }
-    return url;
+    url = final.href;
+  }
+  return url;
 };
 function PageResult(props: SectionProps<typeof loader>) {
-    const { layout, startingPage = 0, url, partial, internationalFlag, promoFlag, newsFlag } = props;
-    const page = props.page!;
-    const { products, pageInfo } = page;
-    const perPage = pageInfo?.recordPerPage || products.length;
-    const zeroIndexedOffsetPage = pageInfo.currentPage - startingPage;
-    const prev = pageInfo.currentPage - startingPage;
-    const next = pageInfo.currentPage + startingPage;
-    const offset = zeroIndexedOffsetPage * perPage;
-    const nextPageUrl = useUrlRebased(pageInfo.nextPage, url);
-    const prevPageUrl = useUrlRebased(pageInfo.previousPage, url);
-    const partialPrev = useSection({
-        href: prevPageUrl,
-        props: { partial: "hideMore" },
-    });
-    const partialNext = useSection({
-        href: nextPageUrl,
-        props: { partial: "hideLess" },
-    });
-    const infinite = layout?.pagination !== "pagination";
-    return (<div class="grid grid-flow-row grid-cols-1 place-items-center mx-auto">
-      <div data-product-list class={clx("grid items-center", "flex gap-1", "grid-cols-2 sm:grid-cols-4 lg:gap-4", "w-full pb-5")}>
-        {products?.map((product, index) => (<ProductCard key={`product-card-${product.productID}`} flags={[internationalFlag, promoFlag, newsFlag]} product={product} preload={index === 0} index={offset + index} class="h-full min-w-[160px] max-w-[300px]"/>))}
+  const {
+    layout,
+    startingPage = 0,
+    url,
+    partial,
+    internationalFlag,
+    promoFlag,
+    newsFlag,
+  } = props;
+  const page = props.page!;
+  const { products, pageInfo } = page;
+  const perPage = pageInfo?.recordPerPage || products.length;
+  const zeroIndexedOffsetPage = pageInfo.currentPage - startingPage;
+  const prev = pageInfo.currentPage - startingPage;
+  const next = pageInfo.currentPage + startingPage;
+  const offset = zeroIndexedOffsetPage * perPage;
+  const nextPageUrl = useUrlRebased(pageInfo.nextPage, url);
+  const prevPageUrl = useUrlRebased(pageInfo.previousPage, url);
+  const partialPrev = useSection({
+    href: prevPageUrl,
+    props: { partial: "hideMore" },
+  });
+  const partialNext = useSection({
+    href: nextPageUrl,
+    props: { partial: "hideLess" },
+  });
+  const infinite = layout?.pagination !== "pagination";
+  return (
+    <div class="grid grid-flow-row grid-cols-1 place-items-center mx-auto">
+      <div
+        data-product-list
+        class={clx(
+          "grid items-center",
+          "flex gap-1",
+          "grid-cols-2 sm:grid-cols-4 lg:gap-4",
+          "w-full pb-5",
+        )}
+      >
+        {products?.map((product, index) => (
+          <ProductCard
+            key={`product-card-${product.productID}`}
+            flags={[internationalFlag, promoFlag, newsFlag]}
+            product={product}
+            preload={index === 0}
+            index={offset + index}
+            class="h-full min-w-[160px] max-w-[300px]"
+          />
+        ))}
       </div>
 
       <div class="py-5 sm:pt-10 w-full flex justify-center">
-        {/* <div class="flex justify-center items-center [&_section]:contents w-full lg:hidden">
+        {
+          /* <div class="flex justify-center items-center [&_section]:contents w-full lg:hidden">
           {nextPageUrl
             ? (
               <a
@@ -99,99 +128,137 @@ function PageResult(props: SectionProps<typeof loader>) {
                 ver menos
               </a>
             )}
-        </div> */}
+        </div> */
+        }
         <div class="join lg:flex gap-[30px] items-center text-base">
-          <a rel="prev" aria-label="previous page link" href={prevPageUrl ?? "#"} disabled={!prevPageUrl} class="">
-            <Icon id="arrow-right" class="rotate-90" size={13}/>
+          <a
+            rel="prev"
+            aria-label="previous page link"
+            href={prevPageUrl ?? "#"}
+            disabled={!prevPageUrl}
+            class=""
+          >
+            <Icon id="arrow-right" class="rotate-90" size={13} />
           </a>
-          {prev === 0 ? null : (<a rel="prev" aria-label="previous page link" href={prevPageUrl ?? "#"} disabled={!prevPageUrl} class="">
+          {prev === 0 ? null : (
+            <a
+              rel="prev"
+              aria-label="previous page link"
+              href={prevPageUrl ?? "#"}
+              disabled={!prevPageUrl}
+              class=""
+            >
               {prev}
-            </a>)}
+            </a>
+          )}
 
           <span class="py-2 px-3 border border-[#123ADD]">
             {zeroIndexedOffsetPage + 1}
           </span>
           {nextPageUrl
-            ? (<a rel="next" aria-label="next page link" href={nextPageUrl ?? "#"} disabled={!nextPageUrl} class="">
+            ? (
+              <a
+                rel="next"
+                aria-label="next page link"
+                href={nextPageUrl ?? "#"}
+                disabled={!nextPageUrl}
+                class=""
+              >
                 {next}
-              </a>)
+              </a>
+            )
             : null}
 
-          <a rel="next" aria-label="next page link" href={nextPageUrl ?? "#"} disabled={!nextPageUrl} class="">
-            <Icon id="arrow-right" class="-rotate-90" size={13}/>
+          <a
+            rel="next"
+            aria-label="next page link"
+            href={nextPageUrl ?? "#"}
+            disabled={!nextPageUrl}
+            class=""
+          >
+            <Icon id="arrow-right" class="-rotate-90" size={13} />
           </a>
         </div>
       </div>
-    </div>);
+    </div>
+  );
 }
 const setPageQuerystring = (page: string, id: string) => {
-    const element = document.getElementById(id)?.querySelector("[data-product-list]");
-    if (!element) {
-        return;
+  const element = document.getElementById(id)?.querySelector(
+    "[data-product-list]",
+  );
+  if (!element) {
+    return;
+  }
+  new IntersectionObserver((entries) => {
+    const url = new URL(location.href);
+    const prevPage = url.searchParams.get("page");
+    for (let it = 0; it < entries.length; it++) {
+      if (entries[it].isIntersecting) {
+        url.searchParams.set("page", page);
+      } else if (
+        typeof history.state?.prevPage === "string" &&
+        history.state?.prevPage !== page
+      ) {
+        url.searchParams.set("page", history.state.prevPage);
+      }
     }
-    new IntersectionObserver((entries) => {
-        const url = new URL(location.href);
-        const prevPage = url.searchParams.get("page");
-        for (let it = 0; it < entries.length; it++) {
-            if (entries[it].isIntersecting) {
-                url.searchParams.set("page", page);
-            }
-            else if (typeof history.state?.prevPage === "string" &&
-                history.state?.prevPage !== page) {
-                url.searchParams.set("page", history.state.prevPage);
-            }
-        }
-        history.replaceState({ prevPage }, "", url.href);
-    }).observe(element);
+    history.replaceState({ prevPage }, "", url.href);
+  }).observe(element);
 };
 function Result(props: SectionProps<typeof loader>) {
-    const container = useId();
-    const controls = useId();
-    const device = useDevice();
-    const page = props.page!;
-    const { startingPage = 0, url, partial } = props;
-    const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
-    const perPage = pageInfo?.recordPerPage || products.length;
-    const zeroIndexedOffsetPage = pageInfo.currentPage - startingPage;
-    const offset = zeroIndexedOffsetPage * perPage;
-    const viewItemListEvent = useSendEvent({
-        on: "view",
-        event: {
-            name: "view_item_list",
-            params: {
-                // TODO: get category name from search or cms setting
-                item_list_name: breadcrumb.itemListElement?.at(-1)?.name,
-                item_list_id: breadcrumb.itemListElement?.at(-1)?.item,
-                items: page.products?.map((product, index) => mapProductToAnalyticsItem({
-                    ...(useOffer(product.offers)),
-                    index: offset + index,
-                    product,
-                    breadcrumbList: page.breadcrumb,
-                })),
-            },
-        },
-    });
-    function extractSearchTerms() {
-        const newURL = new URL(url);
-        const search = newURL.search;
-        const pathname = newURL.pathname;
-        const match = search.match(/q=([^&]*)/);
-        if (!match) {
-            const temp = pathname.split("/");
-            return temp[temp.length - 1];
-        }
-        if (match) {
-            return match[1].replace(/\+/g, " ");
-        }
-        else {
-            const pathMatch = url.match(/\/s\/([^?]*)/);
-            return pathMatch ? pathMatch[1].replace(/\+/g, " ") : "";
-        }
+  const container = useId();
+  const controls = useId();
+  const device = useDevice();
+  const page = props.page!;
+  const { startingPage = 0, url, partial } = props;
+  const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
+  const perPage = pageInfo?.recordPerPage || products.length;
+  const zeroIndexedOffsetPage = pageInfo.currentPage - startingPage;
+  const offset = zeroIndexedOffsetPage * perPage;
+  const viewItemListEvent = useSendEvent({
+    on: "view",
+    event: {
+      name: "view_item_list",
+      params: {
+        // TODO: get category name from search or cms setting
+        item_list_name: breadcrumb.itemListElement?.at(-1)?.name,
+        item_list_id: breadcrumb.itemListElement?.at(-1)?.item,
+        items: page.products?.map((product, index) =>
+          mapProductToAnalyticsItem({
+            ...(useOffer(product.offers)),
+            index: offset + index,
+            product,
+            breadcrumbList: page.breadcrumb,
+          })
+        ),
+      },
+    },
+  });
+  function extractSearchTerms() {
+    const newURL = new URL(url);
+    const search = newURL.search;
+    const pathname = newURL.pathname;
+    const match = search.match(/q=([^&]*)/);
+    if (!match) {
+      const temp = pathname.split("/");
+      return temp[temp.length - 1];
     }
-    const result = extractSearchTerms();
-    const sortBy = sortOptions.length > 0 && (<Sort sortOptions={sortOptions} url={url}/>);
-    return (<>
-      {device === "desktop" && (<div class="flex justify-between flex-col items-start">
+    if (match) {
+      return match[1].replace(/\+/g, " ");
+    } else {
+      const pathMatch = url.match(/\/s\/([^?]*)/);
+      return pathMatch ? pathMatch[1].replace(/\+/g, " ") : "";
+    }
+  }
+  const result = extractSearchTerms();
+  const sortBy = sortOptions.length > 0 && (
+    <Sort sortOptions={sortOptions} url={url} />
+  );
+  return (
+    <>
+      {device === "desktop" && (
+        <div class="flex justify-between flex-col items-start">
           <div class="w-full flex flex-col gap-8">
             <div class="border-b border-gray-300 mb-8">
               <div class="flex items-center space-between w-full container py-8 px-5">
@@ -207,12 +274,15 @@ function Result(props: SectionProps<typeof loader>) {
               </div>
             </div>
           </div>
-        </div>)}
+        </div>
+      )}
       <div id={container} {...viewItemListEvent} class="w-full">
         {partial
-            ? <PageResult {...props}/>
-            : (<div class="flex flex-col gap-4 sm:gap-5 w-full">
-              {device === "mobile" && (<>
+          ? <PageResult {...props} />
+          : (
+            <div class="flex flex-col gap-4 sm:gap-5 w-full">
+              {device === "mobile" && (
+                <>
                   <div class="w-full flex flex-col gap-6">
                     <div class="border-b border-gray-300">
                       <div class="flex items-center space-between w-full pt-5 pb-6 container mt-[5px]">
@@ -225,28 +295,42 @@ function Result(props: SectionProps<typeof loader>) {
                       </div>
                     </div>
                     <div class="container px-5">
-                      <Breadcrumb itemListElement={breadcrumb?.itemListElement}/>
+                      <Breadcrumb
+                        itemListElement={breadcrumb?.itemListElement}
+                      />
                     </div>
                   </div>
                   <div class="px-5">
-                    <Drawer id={controls} aside={<div class="bg-base-100 flex flex-col h-full divide-y overflow-y-hidden min-w-[85vw]">
+                    <Drawer
+                      id={controls}
+                      aside={
+                        <div class="bg-base-100 flex flex-col h-full divide-y overflow-y-hidden min-w-[85vw]">
                           <div class="flex justify-between items-center bg-[#123ADD]">
                             <p class="text-[20px] font-semibold py-[17px] flex items-center text-white px-5">
                               Filtros
                             </p>
                             <label class="btn btn-ghost" for={controls}>
-                              <Icon id="close-white"/>
+                              <Icon id="close-white" />
                             </label>
                           </div>
                           <div class="flex-grow overflow-auto">
-                            <Filters filters={filters}/>
+                            <Filters filters={filters} />
                           </div>
-                        </div>}>
+                        </div>
+                      }
+                    >
                       <div class="flex justify-between items-end">
-                        <label class="flex items-center gap-[43px] rounded-[10px] border border-gray-300 shadow-sm px-4 py-2 bg-transparent text-xs font-bold  focus:outline-none" for={controls}>
+                        <label
+                          class="flex items-center gap-[43px] rounded-[10px] border border-gray-300 shadow-sm px-4 py-2 bg-transparent text-xs font-bold  focus:outline-none"
+                          for={controls}
+                        >
                           Filtrar
 
-                          <Icon class={` transition-all ease-in-out duration-[400ms]`} id={"arrowRight"} size={13}/>
+                          <Icon
+                            class={` transition-all ease-in-out duration-[400ms]`}
+                            id={"arrowRight"}
+                            size={13}
+                          />
                         </label>
 
                         <div class="flex flex-col">
@@ -256,34 +340,46 @@ function Result(props: SectionProps<typeof loader>) {
                       </div>
                     </Drawer>
                   </div>
-                </>)}
+                </>
+              )}
 
               <div class="grid grid-cols-1 sm:grid-cols-[250px_1fr] gap-12 container px-5">
-                {device === "desktop" && (<aside class="place-self-start flex flex-col w-full">
+                {device === "desktop" && (
+                  <aside class="place-self-start flex flex-col w-full">
                     <span class="text-base lg:text-lg font-semibold pb-4 flex items-center border-b border-gray-300">
                       Filtros
                     </span>
 
-                    <Filters filters={filters}/>
-                  </aside>)}
+                    <Filters filters={filters} />
+                  </aside>
+                )}
 
                 <div class="flex flex-col gap-10">
-                  <PageResult {...props}/>
+                  <PageResult {...props} />
                 </div>
               </div>
-            </div>)}
+            </div>
+          )}
       </div>
 
-      <script type="module" dangerouslySetInnerHTML={{
-            __html: useScript(setPageQuerystring, `${pageInfo.currentPage}`, container),
-        }}/>
-    </>);
+      <script
+        type="module"
+        dangerouslySetInnerHTML={{
+          __html: useScript(
+            setPageQuerystring,
+            `${pageInfo.currentPage}`,
+            container,
+          ),
+        }}
+      />
+    </>
+  );
 }
 function SearchResult({ page, ...props }: SectionProps<typeof loader>) {
-    if (!page) {
-        return <NotFound />;
-    }
-    return <Result {...props} page={page}/>;
+  if (!page) {
+    return <NotFound />;
+  }
+  return <Result {...props} page={page} />;
 }
 export const loader = (props: Props, req: Request, ctx: AppContext) => {
   const {
@@ -292,12 +388,12 @@ export const loader = (props: Props, req: Request, ctx: AppContext) => {
     newsFlag = "",
   } = ctx;
 
-    return {
-      ...props,
-      url: req.url,
-      internationalFlag,
-      promoFlag,
-      newsFlag,
-    };
+  return {
+    ...props,
+    url: req.url,
+    internationalFlag,
+    promoFlag,
+    newsFlag,
+  };
 };
 export default SearchResult;

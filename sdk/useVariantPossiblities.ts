@@ -4,7 +4,14 @@ export type Possibilities = Record<string, Record<string, string | undefined>>;
 
 const hash = ({ name, value }: PropertyValue) => `${name}::${value}`;
 
-const omit = new Set(["category", "cluster", "RefId", "descriptionHtml", "vtex.subscription.allever", "assurant.insurance"]);
+const omit = new Set([
+  "category",
+  "cluster",
+  "RefId",
+  "descriptionHtml",
+  "vtex.subscription.allever",
+  "assurant.insurance",
+]);
 
 export const useVariantPossibilities = (
   variants: ProductLeaf[],

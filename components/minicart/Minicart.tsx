@@ -11,7 +11,7 @@ import { Product } from "apps/commerce/types.ts";
 import { useScript } from "@deco/deco/hooks";
 import ProductCard from "../product/ProductCard.tsx";
 export interface Minicart {
-  isMobile: boolean,
+  isMobile: boolean;
   /** Cart from the ecommerce platform */
   platformCart: Record<string, unknown>;
   recommendations: Product[];
@@ -91,15 +91,15 @@ export function ErrorFallback() {
   );
 }
 export let itemCount = 0;
-function ProductRecommendations({ 
+function ProductRecommendations({
   isMobile,
-  recommendations 
-} : { 
-  isMobile: boolean,
-  recommendations: Product[] 
+  recommendations,
+}: {
+  isMobile: boolean;
+  recommendations: Product[];
 }) {
   const _class = isMobile ? "shrink-0 w-[250px]" : "";
-  
+
   return (
     <div class="w-full lg:w-[400px] lg:h-full border border-y-0 border-l-0 border-r-middle-gray">
       <div class="px-5 py-5 lg:py-8 border border-x-0 border-t-0 border-b-middle-gray">
@@ -118,7 +118,7 @@ function ProductRecommendations({
         ))}
       </div>
     </div>
-  )
+  );
 }
 export default function Cart(
   {

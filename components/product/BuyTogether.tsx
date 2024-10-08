@@ -2,10 +2,7 @@ import ProductCard from "./ProductCard.tsx";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { useScript } from "@deco/deco/hooks";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
-import type { 
-  Product, 
-  ProductDetailsPage 
-} from "apps/commerce/types.ts";
+import type { Product, ProductDetailsPage } from "apps/commerce/types.ts";
 
 export interface Props {
   page: ProductDetailsPage;
@@ -58,7 +55,7 @@ const onChange = () => {
         const pixPrice = parseFloat(
           card.getAttribute("data-pix") || "0",
         );
-        
+
         pix += pixPrice;
         price += item.price;
       }
@@ -79,7 +76,9 @@ const onChange = () => {
     }
     const addToCartCount = document.querySelector("#add-to-cart-count");
     if (addToCartCount) {
-      addToCartCount.innerHTML = container.querySelectorAll("div[data-item-id] input:checked").length.toString();
+      addToCartCount.innerHTML = container.querySelectorAll(
+        "div[data-item-id] input:checked",
+      ).length.toString();
     }
   }
 };
@@ -99,7 +98,7 @@ const onLoad = () => {
         const pixPrice = parseFloat(
           card.getAttribute("data-pix") || "0",
         );
-        
+
         pix += pixPrice;
         price += item.price;
       }
@@ -120,10 +119,12 @@ const onLoad = () => {
     }
     const addToCartCount = document.querySelector("#add-to-cart-count");
     if (addToCartCount) {
-      addToCartCount.innerHTML = container.querySelectorAll("div[data-item-id] input:checked").length.toString();
+      addToCartCount.innerHTML = container.querySelectorAll(
+        "div[data-item-id] input:checked",
+      ).length.toString();
     }
   }
-}
+};
 
 export default function BuyTogether({
   page,
@@ -131,7 +132,7 @@ export default function BuyTogether({
   device,
 }: Props) {
   const { breadcrumbList, product } = page;
-  const {offers } = product;
+  const { offers } = product;
 
   const breadcrumb = {
     ...breadcrumbList,
@@ -159,152 +160,162 @@ export default function BuyTogether({
 
   return (
     <>
-    {recommendations.length > 0 &&
-      (
-        <div
-          id="buy-together"
-          class="container px-5 mb-6 mt-12 lg:my-12 flex items-center gap-4 overflow-x-auto"
-        >
+      {recommendations.length > 0 &&
+        (
           <div
-            class="relative"
-            data-pix={pix}
-            data-item-id={product.productID}
-            data-cart-item={encodeURIComponent(
-              JSON.stringify({
-                item: actualItem,
-                platformProps: {
-                  allowedOutdatedData: ["paymentData"],
-                  orderItems: [{
-                    quantity: 1,
-                    seller: seller,
-                    id: product.productID,
-                  }],
-                },
-              }),
-            )}
+            id="buy-together"
+            class="container px-5 mb-6 mt-12 lg:my-12 flex items-center gap-4 overflow-x-auto"
           >
-            <div class="form-control p-3 lg:p-5 absolute top-0 left-0 z-[1]">
-              <label class="label cursor-pointer p-0">
-                <input
-                  type="checkbox"
-                  class="checkbox checkbox-primary"
-                  checked={true}
-                  hx-on:change={useScript(onChange)}
-                />
-              </label>
+            <div
+              class="relative"
+              data-pix={pix}
+              data-item-id={product.productID}
+              data-cart-item={encodeURIComponent(
+                JSON.stringify({
+                  item: actualItem,
+                  platformProps: {
+                    allowedOutdatedData: ["paymentData"],
+                    orderItems: [{
+                      quantity: 1,
+                      seller: seller,
+                      id: product.productID,
+                    }],
+                  },
+                }),
+              )}
+            >
+              <div class="form-control p-3 lg:p-5 absolute top-0 left-0 z-[1]">
+                <label class="label cursor-pointer p-0">
+                  <input
+                    type="checkbox"
+                    class="checkbox checkbox-primary"
+                    checked={true}
+                    hx-on:change={useScript(onChange)}
+                  />
+                </label>
+              </div>
+              <ProductCard
+                class="w-[216px] sm:w-[300px]"
+                product={product}
+                hiddenFlags={true}
+              />
             </div>
-            <ProductCard
-              class="w-[216px] sm:w-[300px]"
-              product={product}
-              hiddenFlags={true}
-            />
-          </div>
-          <span class="text-signature-blue text-3xl font-bold">+</span>
-          {recommendations.splice(0, 2).map(
-            (item: Product, index: number, arr: Product[]) => {
-              const { offers } = item;
+            <span class="text-signature-blue text-3xl font-bold">+</span>
+            {recommendations.splice(0, 2).map(
+              (item: Product, index: number, arr: Product[]) => {
+                const { offers } = item;
 
-              const {
-                pix: itemPix = 0,
-                price: itemPrice = 0,
-                seller: itemSeller = "1",
-                listPrice: itemListPrice = 0,
-              } = useOffer(offers);
+                const {
+                  pix: itemPix = 0,
+                  price: itemPrice = 0,
+                  seller: itemSeller = "1",
+                  listPrice: itemListPrice = 0,
+                } = useOffer(offers);
 
-              const newItem = mapProductToAnalyticsItem({
-                price: itemPrice,
-                product: item,
-                listPrice: itemListPrice,
-                breadcrumbList: breadcrumb,
-              });
+                const newItem = mapProductToAnalyticsItem({
+                  price: itemPrice,
+                  product: item,
+                  listPrice: itemListPrice,
+                  breadcrumbList: breadcrumb,
+                });
 
-              return (
-                <>
-                  <div
-                    class="relative"
-                    data-pix={itemPix}
-                    data-item-id={item.productID}
-                    data-cart-item={encodeURIComponent(
-                      JSON.stringify({
-                        item: newItem,
-                        platformProps: {
-                          allowedOutdatedData: ["paymentData"],
-                          orderItems: [{
-                            quantity: 1,
-                            seller: itemSeller,
-                            id: item.productID,
-                          }],
-                        },
-                      }),
-                    )}
-                  >
-                    <div class="form-control p-3 lg:p-5 absolute top-0 left-0 z-[1]">
-                      <label class="label cursor-pointer p-0">
-                        <input
-                          type="checkbox"
-                          class="checkbox checkbox-primary"
-                          checked={true}
-                          hx-on:change={useScript(onChange)}
-                        />
-                      </label>
+                return (
+                  <>
+                    <div
+                      class="relative"
+                      data-pix={itemPix}
+                      data-item-id={item.productID}
+                      data-cart-item={encodeURIComponent(
+                        JSON.stringify({
+                          item: newItem,
+                          platformProps: {
+                            allowedOutdatedData: ["paymentData"],
+                            orderItems: [{
+                              quantity: 1,
+                              seller: itemSeller,
+                              id: item.productID,
+                            }],
+                          },
+                        }),
+                      )}
+                    >
+                      <div class="form-control p-3 lg:p-5 absolute top-0 left-0 z-[1]">
+                        <label class="label cursor-pointer p-0">
+                          <input
+                            type="checkbox"
+                            class="checkbox checkbox-primary"
+                            checked={true}
+                            hx-on:change={useScript(onChange)}
+                          />
+                        </label>
+                      </div>
+                      <ProductCard
+                        class="w-[216px] sm:w-[300px]"
+                        product={item}
+                        hiddenFlags={true}
+                      />
                     </div>
-                    <ProductCard
-                      class="w-[216px] sm:w-[300px]"
-                      product={item}
-                      hiddenFlags={true}
-                    />
+                    {(index + 1) < arr.length && (
+                      <span class="text-signature-blue text-3xl font-bold">
+                        +
+                      </span>
+                    )}
+                  </>
+                );
+              },
+            )}
+            {device === "desktop" &&
+              (
+                <div class="flex flex-col gap-4 items-center justify-center pl-6">
+                  <div class="text-[#123ADD] font-normal text-[30px]">
+                    <span
+                      id="pix-price"
+                      class="text-[40px] font-semibold text-[#123ADD]"
+                    >
+                      R$ 0
+                    </span>{" "}
+                    no Pix
                   </div>
-                  {(index + 1) < arr.length && (
-                    <span class="text-signature-blue text-3xl font-bold">
-                      +
+                  <div class="text-base">
+                    Preço Total:{" "}
+                    <span id="total-price" class="text-xl font-semibold">
+                      R$ 0
                     </span>
-                  )}
-                </>
-              );
-            },
-          )}
-          {device	=== "desktop" &&
-            <div class="flex flex-col gap-4 items-center justify-center pl-6">
-              <div class="text-[#123ADD] font-normal text-[30px]">
-                <span id="pix-price" class="text-[40px] font-semibold text-[#123ADD]">R$ 0</span>{" "}
-                no Pix
-              </div>
-              <div class="text-base">
-                Preço Total:{" "}
-                <span id="total-price" class="text-xl font-semibold">R$ 0</span>
-              </div>
-              <button
-                class="btn btn-primary"
-                hx-on:click={useScript(onClick)}
+                  </div>
+                  <button
+                    class="btn btn-primary"
+                    hx-on:click={useScript(onClick)}
+                  >
+                    Adicionar <span id="add-to-cart-count">2</span> ao carrinho
+                  </button>
+                </div>
+              )}
+          </div>
+        )}
+      {device === "mobile" && recommendations.length > 0 &&
+        (
+          <div class="flex flex-col gap-4 items-center justify-center pb-12 border-b-middle-gray">
+            <div class="text-[#123ADD] font-normal text-[30px]">
+              <span
+                id="pix-price"
+                class="text-[40px] font-semibold text-[#123ADD]"
               >
-                Adicionar{" "}
-                <span id="add-to-cart-count">2</span>
-                {" "}ao carrinho
-              </button>
+                R$ 0
+              </span>{" "}
+              no Pix
             </div>
-          }
-        </div>
-      )}
-      {device	=== "mobile" && recommendations.length > 0 &&
-        <div class="flex flex-col gap-4 items-center justify-center pb-12 border-b-middle-gray">
-          <div class="text-[#123ADD] font-normal text-[30px]">
-            <span id="pix-price" class="text-[40px] font-semibold text-[#123ADD]">R$ 0</span>{" "}
-            no Pix
+            <div class="text-base">
+              Preço Total:{" "}
+              <span id="total-price" class="text-xl font-semibold">R$ 0</span>
+            </div>
+            <button
+              class="btn btn-primary"
+              hx-on:click={useScript(onClick)}
+            >
+              Adicionar <span id="add-to-cart-count">2</span> ao carrinho
+            </button>
           </div>
-          <div class="text-base">
-            Preço Total:{" "}
-            <span id="total-price" class="text-xl font-semibold">R$ 0</span>
-          </div>
-          <button
-            class="btn btn-primary"
-            hx-on:click={useScript(onClick)}
-          >
-            Adicionar{" "}
-            <span id="add-to-cart-count">2</span>
-            {" "}ao carrinho
-          </button>
-        </div>
-      }
+        )}
       <script
         type="module"
         dangerouslySetInnerHTML={{

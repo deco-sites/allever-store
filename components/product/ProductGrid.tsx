@@ -15,18 +15,19 @@ const ProductGrid = ({ page }: Props) => {
       {image.length > 1 && (
         <div className="container px-5 py-5 sm:py-12">
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-1 sm:gap-4">
-            {image && image.map((img, index) => (
-              <li key={index} className="w-full">
-                <Image
-                  class="object-contain object-center bg-white rounded-[10px] lg:rounded-[20px]"
-                  style={{ aspectRatio: "1/1" }}
-                  src={img.url!}
-                  alt={img.alternateName}
-                  width={700}
-                  height={700}
-                />
-              </li>
-            ))}
+            {image &&
+              image.map((img, index) => (
+                <li key={index} className="w-full">
+                  <Image
+                    class="object-contain object-center bg-white rounded-[10px] lg:rounded-[20px]"
+                    style={{ aspectRatio: "1/1" }}
+                    src={img.url!}
+                    alt={img.alternateName}
+                    width={700}
+                    height={700}
+                  />
+                </li>
+              ))}
           </ul>
         </div>
       )}

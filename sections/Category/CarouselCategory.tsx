@@ -109,7 +109,7 @@ const CarouselCategory = ({ category, Title, layout }: Props) => {
         <script
           type="module"
           dangerouslySetInnerHTML={{
-            __html: useScript(onLoad, id)
+            __html: useScript(onLoad, id),
           }}
         />
       </div>

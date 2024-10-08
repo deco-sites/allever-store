@@ -1,4 +1,4 @@
-import { ProductDetailsPage, Offer } from "apps/commerce/types.ts";
+import { Offer, ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { clx } from "../../sdk/clx.ts";
 import { formatPrice } from "../../sdk/format.ts";
@@ -94,7 +94,8 @@ function ProductInfo({
   });
 
   const newOffers = offers?.offers.filter((offer) => {
-    return offer.inventoryLevel.value && offer.inventoryLevel.value > 0 && offer.seller !== seller;
+    return offer.inventoryLevel.value && offer.inventoryLevel.value > 0 &&
+      offer.seller !== seller;
   }) || [];
   console.log("newOffers", newOffers.length);
 
@@ -122,10 +123,13 @@ function ProductInfo({
             (
               <div class="flex w-full">
                 <p class="text-xs font-semibold text-white uppercase bg-black text-center text-white px-2 py-1 rounded-[6px] w-full">
-                  Produto internacional <a 
-                    class="underline" 
+                  Produto internacional{" "}
+                  <a
+                    class="underline"
                     href="#specifications"
-                  >Saiba mais</a>
+                  >
+                    Saiba mais
+                  </a>
                 </p>
               </div>
             )}
@@ -152,32 +156,33 @@ function ProductInfo({
                   <div class="flex flex-col gap-2">
                     <div class="flex gap-1 items-center">
                       {listPrice > price &&
-                        <span class="line-through text-base font-semibold text-[#A8A8A8] leading-[1]">
-                          {formatPrice(listPrice, offers?.priceCurrency)}
-                        </span>
-                      }
+                        (
+                          <span class="line-through text-base font-semibold text-[#A8A8A8] leading-[1]">
+                            {formatPrice(listPrice, offers?.priceCurrency)}
+                          </span>
+                        )}
                       <span class="text-[20px] font-semibold text-[#000] leading-[1]">
                         {formatPrice(price, offers?.priceCurrency)}
                       </span>
                     </div>
                     {pix > 0 &&
-                      <div class="flex flex-col items-start">
-                        <p class="text-[40px] font-semibold text-[#123ADD] leading-[1]">
-                          {formatPrice(pix)}
-                          <span class="text-[#123ADD] font-normal text-[30px] ml-2 leading-[1]">
-                            no PIX
-                          </span>
-                        </p>
-                      </div>
-                    }
+                      (
+                        <div class="flex flex-col items-start">
+                          <p class="text-[40px] font-semibold text-[#123ADD] leading-[1]">
+                            {formatPrice(pix)}
+                            <span class="text-[#123ADD] font-normal text-[30px] ml-2 leading-[1]">
+                              no PIX
+                            </span>
+                          </p>
+                        </div>
+                      )}
                     {percent >= 1 && (
                       <div class="text-xs font-semibold text-white uppercase bg-[#123ADD] text-center text-white px-2 py-1 rounded-[6px] w-fit">
                         {percent} % off
                       </div>
                     )}
                     <p class="text-[#000] text-base leading-[1]">
-                      ou {installment?.billingDuration}x de{" "}
-                      {formatPrice(
+                      ou {installment?.billingDuration}x de {formatPrice(
                         installment?.billingIncrement,
                         offers!.priceCurrency!,
                       )}
@@ -217,25 +222,30 @@ function ProductInfo({
                     </p>
                   </div>
                   {newOffers.length > 0 &&
-                    <div class="w-[calc(100%+40px)] -mx-[20px] border-b border-b-dark-gray pb-5 pt-2">
-                      <span class="block font-semibold text-black mb-5 px-[20px]">Veja outros vendedores</span>
-                      {newOffers.map((offer) => (
-                        <div class="flex items-end justify-between border-t border-t-dark-gray py-5 px-[20px] last:pb-0">
-                          <div class="flex flex-col gap-3">
-                            <span>{offer.sellerName}</span>
-                            <span class="font-semibold">{formatPrice(offer.price, offer?.priceCurrency)}</span>
+                    (
+                      <div class="w-[calc(100%+40px)] -mx-[20px] border-b border-b-dark-gray pb-5 pt-2">
+                        <span class="block font-semibold text-black mb-5 px-[20px]">
+                          Veja outros vendedores
+                        </span>
+                        {newOffers.map((offer) => (
+                          <div class="flex items-end justify-between border-t border-t-dark-gray py-5 px-[20px] last:pb-0">
+                            <div class="flex flex-col gap-3">
+                              <span>{offer.sellerName}</span>
+                              <span class="font-semibold">
+                                {formatPrice(offer.price, offer?.priceCurrency)}
+                              </span>
+                            </div>
+                            <AddToCartButton
+                              item={item}
+                              seller={offer.seller || ""}
+                              product={product}
+                              hiddenIcon={true}
+                              class="bg-signature-blue text-sm py-3 px-8 rounded-full no-animation text-white font-semibold hover:bg-[#1bae3299] ease-in"
+                            />
                           </div>
-                          <AddToCartButton
-                            item={item}
-                            seller={offer.seller || ""}
-                            product={product}
-                            hiddenIcon={true}
-                            class="bg-signature-blue text-sm py-3 px-8 rounded-full no-animation text-white font-semibold hover:bg-[#1bae3299] ease-in"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  }
+                        ))}
+                      </div>
+                    )}
                   <div class="w-[calc(100%+40px)] -mx-[20px] px-[20px] pt-1.5 pb-4 border border-b-[#A8A8A8] border-t-0">
                     <div class="lg:max-w-[338px]">
                       <ShippingSimulationForm
@@ -257,20 +267,19 @@ function ProductInfo({
             <div class="flex flex-col col-span-2">
               <div class="flex flex-col items-start">
                 <p class="text-lg font-semibold text-[#123ADD]">
-                  {pix > 0 ?
-                    formatPrice(pix, offers?.priceCurrency) :
-                    formatPrice(price, offers?.priceCurrency)
-                  }
+                  {pix > 0
+                    ? formatPrice(pix, offers?.priceCurrency)
+                    : formatPrice(price, offers?.priceCurrency)}
                   {pix > 0 &&
-                    <span class="text-[#123ADD] font-normal text-xs ml-1">
-                      no PIX
-                    </span>
-                  }
+                    (
+                      <span class="text-[#123ADD] font-normal text-xs ml-1">
+                        no PIX
+                      </span>
+                    )}
                 </p>
               </div>
               <p class="text-[#000] text-xs">
-                ou {installment?.billingDuration}x de{" "}
-                {formatPrice(
+                ou {installment?.billingDuration}x de {formatPrice(
                   installment?.billingIncrement,
                   offers!.priceCurrency!,
                 )}
@@ -338,10 +347,13 @@ function ProductInfo({
                         (
                           <div class="flex w-full">
                             <p class="text-xs font-semibold text-white uppercase bg-black text-center text-white px-2 py-1 rounded-[6px] w-full">
-                              Produto internacional <a 
-                                class="underline" 
+                              Produto internacional{" "}
+                              <a
+                                class="underline"
                                 href="#specifications"
-                              >Saiba mais</a>
+                              >
+                                Saiba mais
+                              </a>
                             </p>
                           </div>
                         )}
@@ -349,37 +361,38 @@ function ProductInfo({
                     <div class="flex flex-col gap-2">
                       <div class="flex gap-2 items-center">
                         {listPrice > price &&
-                          <span class="line-through text-base font-semibold text-[#A8A8A8] leading-[1]">
-                            {formatPrice(listPrice, offers?.priceCurrency)}
-                          </span>
-                        }
+                          (
+                            <span class="line-through text-base font-semibold text-[#A8A8A8] leading-[1]">
+                              {formatPrice(listPrice, offers?.priceCurrency)}
+                            </span>
+                          )}
                         <span class="text-[20px] font-semibold text-[#000] leading-[1]">
                           {formatPrice(price, offers?.priceCurrency)}
                         </span>
                       </div>
                       {pix > 0 && price > pix &&
-                        <div class="flex items-center">
-                          <p class="text-[40px] font-semibold text-[#123ADD] leading-[1]">
-                            {formatPrice(pix, offers?.priceCurrency)}
-                            <span class="text-[#123ADD] font-normal text-[30px] ml-2 leading-[1]">
-                              no PIX
+                        (
+                          <div class="flex items-center">
+                            <p class="text-[40px] font-semibold text-[#123ADD] leading-[1]">
+                              {formatPrice(pix, offers?.priceCurrency)}
+                              <span class="text-[#123ADD] font-normal text-[30px] ml-2 leading-[1]">
+                                no PIX
+                              </span>
+                            </p>
+                            <span
+                              class={clx(
+                                "text-xs font-semibold text-white uppercase bg-[#123ADD] text-center text-white px-2 py-1 rounded-[6px]",
+                                percent < 1 && "opacity-0",
+                                "w-fit",
+                              )}
+                            >
+                              {percent} % off
                             </span>
-                          </p>
-                          <span
-                            class={clx(
-                              "text-xs font-semibold text-white uppercase bg-[#123ADD] text-center text-white px-2 py-1 rounded-[6px]",
-                              percent < 1 && "opacity-0",
-                              "w-fit",
-                            )}
-                          >
-                            {percent} % off
-                          </span>
-                        </div>
-                      }
+                          </div>
+                        )}
                       <div class="fluid-text">
                         <p class="text-[#000]">
-                          ou {installment?.billingDuration}x de{" "}
-                          {formatPrice(
+                          ou {installment?.billingDuration}x de {formatPrice(
                             installment?.billingIncrement,
                             offers!.priceCurrency!,
                           )}
@@ -420,25 +433,33 @@ function ProductInfo({
                       </p>
                     </div>
                     {newOffers.length > 0 &&
-                      <div class="border border-y-dark-gray border-x-0 py-5">
-                        <span class="block font-semibold text-black mb-5">Veja outros vendedores</span>
-                        {newOffers.map((offer) => (
-                          <div class="flex items-end justify-between border-t border-t-dark-gray py-5 last:pb-0">
-                            <div class="flex flex-col gap-3">
-                              <span>{offer.sellerName}</span>
-                              <span class="font-semibold">{formatPrice(offer.price, offer?.priceCurrency)}</span>
+                      (
+                        <div class="border border-y-dark-gray border-x-0 py-5">
+                          <span class="block font-semibold text-black mb-5">
+                            Veja outros vendedores
+                          </span>
+                          {newOffers.map((offer) => (
+                            <div class="flex items-end justify-between border-t border-t-dark-gray py-5 last:pb-0">
+                              <div class="flex flex-col gap-3">
+                                <span>{offer.sellerName}</span>
+                                <span class="font-semibold">
+                                  {formatPrice(
+                                    offer.price,
+                                    offer?.priceCurrency,
+                                  )}
+                                </span>
+                              </div>
+                              <AddToCartButton
+                                item={item}
+                                seller={offer.seller || ""}
+                                product={product}
+                                hiddenIcon={true}
+                                class="bg-signature-blue text-sm py-3 px-8 rounded-full no-animation text-white font-semibold hover:bg-[#1bae3299] ease-in"
+                              />
                             </div>
-                            <AddToCartButton
-                              item={item}
-                              seller={offer.seller || ""}
-                              product={product}
-                              hiddenIcon={true}
-                              class="bg-signature-blue text-sm py-3 px-8 rounded-full no-animation text-white font-semibold hover:bg-[#1bae3299] ease-in"
-                            />
-                          </div>
-                        ))}
-                      </div>
-                    }
+                          ))}
+                        </div>
+                      )}
                     <div class="lg:max-w-[338px]">
                       <ShippingSimulationForm
                         items={[{
@@ -472,20 +493,19 @@ function ProductInfo({
             <div class="flex flex-col col-span-2">
               <div class="flex flex-col items-start">
                 <p class="text-3xl font-semibold text-[#123ADD]">
-                  {pix > 0 ?
-                    formatPrice(pix, offers?.priceCurrency) :
-                    formatPrice(price, offers?.priceCurrency)
-                  }
+                  {pix > 0
+                    ? formatPrice(pix, offers?.priceCurrency)
+                    : formatPrice(price, offers?.priceCurrency)}
                   {pix > 0 &&
-                    <span class="text-[#123ADD] font-normal text-[30px] ml-2">
-                      no PIX
-                    </span>
-                  }
+                    (
+                      <span class="text-[#123ADD] font-normal text-[30px] ml-2">
+                        no PIX
+                      </span>
+                    )}
                 </p>
               </div>
               <p class="text-[#000] text-base">
-                ou {installment?.billingDuration}x de{" "}
-                {formatPrice(
+                ou {installment?.billingDuration}x de {formatPrice(
                   installment?.billingIncrement,
                   offers!.priceCurrency!,
                 )}

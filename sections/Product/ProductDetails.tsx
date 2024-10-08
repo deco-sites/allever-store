@@ -90,8 +90,7 @@ export default function ProductDetails({
   }
   if (page) {
     const { product } = page;
-    const { productID: productId, image: images, isVariantOf } =
-      product;
+    const { productID: productId, image: images, isVariantOf } = product;
     const productName = (isVariantOf?.name ?? product.name) || "";
     const [front] = images ?? [];
     const image = front?.url || "";

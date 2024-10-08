@@ -33,7 +33,7 @@ const onLoadTrustvox = () => {
   } else {
     productStars.remove();
   }
-}
+};
 
 interface Props {
   flags?: [internationalFlag: string, promoFlag: string, newsFlag: string];
@@ -56,13 +56,16 @@ interface Props {
 const WIDTH = 270;
 const HEIGHT = 225;
 
-export const getFlagCluster = (flag: string, additionalProperty?: PropertyValue[]) => {
+export const getFlagCluster = (
+  flag: string,
+  additionalProperty?: PropertyValue[],
+) => {
   return additionalProperty?.find((prop) => {
     if (prop.name === "cluster") {
       return prop.propertyID === flag;
     }
-  })
-}
+  });
+};
 
 function ProductCard({
   flags,
@@ -109,7 +112,10 @@ function ProductCard({
     },
   });
 
-  const hasInternationalFlag = getFlagCluster(internationalFlag, additionalProperty);
+  const hasInternationalFlag = getFlagCluster(
+    internationalFlag,
+    additionalProperty,
+  );
   const hasPromoFlag = getFlagCluster(promoFlag, additionalProperty);
   const hasNewsFlag = getFlagCluster(newsFlag, additionalProperty);
 
@@ -133,8 +139,7 @@ function ProductCard({
                 {percent} % off
               </span>
             )
-            : null
-          }
+            : null}
           {hasNewsFlag && !hiddenFlags && (
             <span
               class={clx(
@@ -184,28 +189,30 @@ function ProductCard({
               </p>
             )}
           </div>
-          {seller && inStock && <p class="text-sm text-[#d3d3d3] capitalize">{seller}</p>}
+          {seller && inStock && (
+            <p class="text-sm text-[#d3d3d3] capitalize">{seller}</p>
+          )}
           <p class="font-normal text-sm text-ellipsis font-bold line-clamp-2 h-10">
             {title}
           </p>
           {inStock
             ? (
               <div class="flex flex-col">
-                {listPrice > price && 
-                  <span class="line-through font-normal text-[#a8a8a8] text-xs leading-[1]">
-                    {formatPrice(listPrice, offers?.priceCurrency)}
-                  </span>
-                }
-                <span class="font-semibold text-[20px] text-[#123ADD]">
-                  {pix > 0 ?
-                    formatPrice(pix, offers?.priceCurrency) :
-                    formatPrice(price, offers?.priceCurrency)
-                  }{" "}
-                  {pix > 0 && 
-                    <span class="text-[#123ADD] font-normal text-[20px] leading-[30px]">
-                      no pix
+                {listPrice > price &&
+                  (
+                    <span class="line-through font-normal text-[#a8a8a8] text-xs leading-[1]">
+                      {formatPrice(listPrice, offers?.priceCurrency)}
                     </span>
-                  }
+                  )}
+                <span class="font-semibold text-[20px] text-[#123ADD]">
+                  {pix > 0
+                    ? formatPrice(pix, offers?.priceCurrency)
+                    : formatPrice(price, offers?.priceCurrency)} {pix > 0 &&
+                    (
+                      <span class="text-[#123ADD] font-normal text-[20px] leading-[30px]">
+                        no pix
+                      </span>
+                    )}
                 </span>
                 <span class="text-[#a8a8a8] text-xs leading-[1]">
                   ou {installment?.billingDuration}x de {formatPrice(
@@ -221,23 +228,24 @@ function ProductCard({
               </p>
             )}
         </a>
-        <div 
+        <div
           data-trustvox-product-code={productGroupID}
         />
         <script
           type="module"
           dangerouslySetInnerHTML={{
-            __html: useScript(onLoadTrustvox)
+            __html: useScript(onLoadTrustvox),
           }}
         />
         {!hiddenAddToCartButton && inStock &&
-          <MinicartAdd
-            product={product}
-            seller={seller}
-            class="flex items-center justify-center gap-3 mt-2 bg-signature-blue border-0 text-white py-2 text-center font-semibold rounded-full" 
-            item={item}
-          />
-        }
+          (
+            <MinicartAdd
+              product={product}
+              seller={seller}
+              class="flex items-center justify-center gap-3 mt-2 bg-signature-blue border-0 text-white py-2 text-center font-semibold rounded-full"
+              item={item}
+            />
+          )}
       </div>
     </div>
   );

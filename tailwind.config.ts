@@ -17,7 +17,7 @@ export default {
         "dark-gray": "#A8A8A8",
         "light-gray": "#F2F2F2",
         "middle-gray": "#D3D3D3",
-        "signature-blue": "#123ADD"
+        "signature-blue": "#123ADD",
       },
       boxShadow: {
         "custom": "24px 51px 113px -17px rgba(0,0,0,0.75)",

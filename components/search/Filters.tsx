@@ -23,7 +23,11 @@ function ValueItem(
 ) {
   return (
     <li class="flex items-center gap-2 relative">
-      <a href={url} rel="nofollow" class="absolute top-0 left-0 w-full h-full z-[1]" />
+      <a
+        href={url}
+        rel="nofollow"
+        class="absolute top-0 left-0 w-full h-full z-[1]"
+      />
       <input type="checkbox" checked={selected} class="checkbox checkbox-sm" />
       <span class="text-xs font-semibold">{label}</span>
     </li>
@@ -65,7 +69,7 @@ function Filters({ filters }: Props) {
         .filter(isToggle)
         .map((filter) => {
           let label = filter.label;
-          if (label === "sellerName") label = "Vendedores"; 
+          if (label === "sellerName") label = "Vendedores";
           return (
             <li class="flex flex-col gap-4 border-b border-gray-300">
               <Collapsable
@@ -86,7 +90,7 @@ function Filters({ filters }: Props) {
                 <FilterValues {...filter} />
               </Collapsable>
             </li>
-          )
+          );
         })}
     </ul>
   );
