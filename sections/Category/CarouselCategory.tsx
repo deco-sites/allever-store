@@ -4,7 +4,6 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 
 import Icon from "../../components/ui/Icon.tsx";
 import Image from "apps/website/components/Image.tsx";
-import SwiperJS from "../../islands/SwiperJS.tsx";
 
 interface Category {
   Images?: ImageWidget;
@@ -24,7 +23,7 @@ const onLoad = (id: string) => {
   const carousel = document.getElementById(id);
   if (carousel) {
     // @ts-ignore swiper exists
-    new Swiper(`#${id}`, {
+    new Swiper(`#${id} #content > div`, {
       spaceBetween: 12,
       slidesPerView: "auto",
       breakpoints: {
@@ -41,6 +40,9 @@ const onLoad = (id: string) => {
         clickable: true,
       },
     });
+
+    document.querySelector(`#${id} #content`)?.classList.remove("hidden");
+    document.querySelector(`#${id} #fakeLoading`)?.classList.add("hidden");
   }
 };
 
@@ -79,14 +81,31 @@ const CarouselCategory = ({ category, Title, layout }: Props) => {
   const id = useId();
 
   return (
-    <>
+    <div id={id}>
       <div className="container px-5 lg:px-0 overflow-hidden">
         <h3 className="mb-5 text-base font-semibold sm:text-2xl px-0 sm:px-5">
           {Title}
         </h3>
       </div>
-      <div className="container px-0 lg:px-14 overflow-hidden relative">
-        <div id={id} class="overflow-hidden">
+      <div id="fakeLoading" class="container px-5 flex gap-5 overflow-x-hidden">
+        {new Array(15).fill("").map((_, index) => (
+          <div key={index}>
+            <div 
+              class={layout === "Marca"
+                ? "rounded-full skeleton"
+                : "rounded-[11px] mb-[9.75px] skeleton"
+              }
+              style={{
+                width: "113px",
+                height: "105px",
+              }}
+            />
+            {layout !== "Marca" && <div class="skeleton h-6 w-full rounded-[11px]" />}
+          </div>
+        ))}
+      </div>
+      <div id="content" class="hidden container px-0 lg:px-14 overflow-hidden relative">
+        <div class="overflow-hidden">
           <div class="swiper-wrapper">
             {category.map((item, index) => (
               <div
@@ -105,7 +124,6 @@ const CarouselCategory = ({ category, Title, layout }: Props) => {
           </div>
           <div class="pagination static mt-5 flex sm:hidden justify-center" />
         </div>
-        {/* <SwiperJS id={id} type="category-home" /> */}
         <script
           type="module"
           dangerouslySetInnerHTML={{
@@ -113,7 +131,7 @@ const CarouselCategory = ({ category, Title, layout }: Props) => {
           }}
         />
       </div>
-    </>
+    </div>
   );
 };
 

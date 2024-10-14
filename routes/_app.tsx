@@ -1,6 +1,6 @@
 import { asset, Head } from "$fresh/runtime.ts";
 import { defineApp } from "$fresh/server.ts";
-import { useScript, useScriptAsDataURI } from "@deco/deco/hooks";
+import { useScript } from "@deco/deco/hooks";
 import { Context } from "@deco/deco";
 declare global {
   interface Window {
@@ -15,10 +15,10 @@ const serviceWorkerScript = () =>
     navigator && navigator.serviceWorker &&
     navigator.serviceWorker.register("/sw.js"));
 function setupTrustvoxRateConfig(storeId: string) {
-  globalThis.window._trustvox_shelf_rate = [];
-  globalThis.window._trustvox_shelf_rate.push(["_storeId", storeId]);
-  globalThis.window._trustvox_shelf_rate.push(["_productContainer", "body"]);
-  globalThis.window._trustvox_shelf_rate.push(["_watchSubtree", "true"]);
+  window._trustvox_shelf_rate = [];
+  window._trustvox_shelf_rate.push(["_storeId", storeId]);
+  window._trustvox_shelf_rate.push(["_productContainer", "body"]);
+  window._trustvox_shelf_rate.push(["_watchSubtree", "true"]);
 }
 export default defineApp(async (_req, ctx) => {
   const revision = await Context.active().release?.revision();
@@ -54,6 +54,11 @@ export default defineApp(async (_req, ctx) => {
 
         {/* Web Manifest */}
         <link rel="manifest" href={asset("/site.webmanifest")} />
+      
+        <script type="text/javascript" dangerouslySetInnerHTML={{
+          __html: useScript(setupTrustvoxRateConfig, "121576")
+        }} />
+        <script defer type="text/javascript" src="https://rate.trustvox.com.br/widget.js" />
       </Head>
 
       {/* Rest of Preact tree */}
@@ -63,9 +68,6 @@ export default defineApp(async (_req, ctx) => {
         type="module"
         dangerouslySetInnerHTML={{ __html: useScript(serviceWorkerScript) }}
       />
-      
-      <script src={useScript(setupTrustvoxRateConfig, "121576")} />
-      <script defer type="text/javascript" src="https://rate.trustvox.com.br/widget.js" />
     </>
   );
 });

@@ -18,14 +18,24 @@ export interface Timer {
 export interface Props extends SectionHeaderProps, Timer {
   products: Product[] | null;
 }
-export const loader = async (props: Props, req: Request, ctx: AppContext) => {
-  return { ...props };
+export const loader = (props: Props, _req: Request, ctx: AppContext) => {
+  const {
+    newsFlag = "",
+    promoFlag = "",
+    internationalFlag = "",
+  } = ctx;
+
+  return { ...props, internationalFlag, promoFlag, newsFlag };
 };
-export default function ProductShelf(
-  { products, title, cta, expireAt }: SectionProps<
-    typeof loader
-  >,
-) {
+export default function ProductShelf({ 
+  internationalFlag,
+  promoFlag,
+  newsFlag,
+  products, 
+  title, 
+  cta, 
+  expireAt 
+}: SectionProps<typeof loader>) {
   const id = useId();
   if (!products || products.length === 0) {
     return null;
@@ -63,7 +73,11 @@ export default function ProductShelf(
             </div>
           )}
         </div>
-        <ProductSlider products={products} itemListName={title} />
+        <ProductSlider 
+          flags={[internationalFlag, promoFlag, newsFlag]}
+          products={products} 
+          itemListName={title} 
+        />
       </Section.Container>
     </div>
   );

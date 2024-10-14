@@ -1,11 +1,20 @@
 import { AnalyticsItem } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import { clx } from "../../sdk/clx.ts";
+import { usePeriod } from "../../sdk/usePeriod.ts";
 import { formatPrice } from "../../sdk/format.ts";
 import Icon from "../ui/Icon.tsx";
 import QuantitySelector from "../ui/QuantitySelector.tsx";
 import { useScript } from "@deco/deco/hooks";
+type AttachmentContent = {
+  [key: string]: string;
+}
+interface Attachment {
+  name: string;
+  content: AttachmentContent;
+}
 export type Item = AnalyticsItem & {
+  attachments: Attachment[];
   listPrice: number;
   image: string;
 };
@@ -25,10 +34,11 @@ const removeItemHandler = () => {
   }
 };
 function CartItem({ item, index, locale, currency }: Props) {
-  const { image, listPrice, price = Infinity, quantity } = item;
+  const { image, listPrice, price = Infinity, quantity, attachments } = item;
   const isGift = price < 0.01;
   // deno-lint-ignore no-explicit-any
   const name = (item as any).item_name;
+
   return (
     <fieldset
       // deno-lint-ignore no-explicit-any
@@ -48,9 +58,21 @@ function CartItem({ item, index, locale, currency }: Props) {
       <div class="flex flex-col gap-[10px] ml-[10px]">
         {/* Name and Remove button */}
         <div class="flex justify-between items-center">
-          <legend class="block text-xs text-black text-ellipsis font-bold line-clamp-2 h-8">
-            {name}
-          </legend>
+          <div>
+            <legend class="block text-xs text-black text-ellipsis font-bold line-clamp-2 max-h-8">
+              {name}
+            </legend>
+            {attachments.map((attachment) => {
+              if (attachment.name.indexOf("subscription") !== -1) {
+                return (
+                <div class="text-xs text-black bg-light-gray py-1/2 px-1 rounded mt-1">
+                    <b>Assinatura:</b>{" "}
+                    <span>{usePeriod(attachment.content["vtex.subscription.key.frequency"])}</span>
+                  </div>
+                )
+              }
+            })}
+          </div>
           <button
             class={clx(
               isGift && "hidden",

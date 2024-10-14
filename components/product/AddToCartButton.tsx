@@ -20,8 +20,8 @@ const onClick = () => {
   window.STOREFRONT.CART.addToCart(item, platformProps);
   setTimeout(() => {
     const minicartDrawer = document.querySelector("label[for=minicart-drawer]");
-    // @ts-ignore click is correct
     if (minicartDrawer) {
+      // @ts-ignore click is correct
       minicartDrawer.click();
     }
   }, 500);

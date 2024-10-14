@@ -24,3 +24,11 @@
 select[id*="vtexpsubscriptionpassinatura-vtexpsubscriptionpkeypfrequency"] option[value="2 week"] {
   display: none;
 }
+
+.header--default {
+  display: none;
+}
+
+#new-header {
+  display: block !important;
+}

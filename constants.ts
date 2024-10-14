@@ -16,3 +16,9 @@ export const HEADER_HEIGHT_MOBILE = "168px";
 export const NAVBAR_HEIGHT_MOBILE = "";
 export const HEADER_HEIGHT_DESKTOP = "176px";
 export const NAVBAR_HEIGHT_DESKTOP = "44px";
+
+export const PERIODICITY = {
+    month: "A cada 1 mês",
+    months: "A cada __count__ meses",
+    year: "A cada 1 ano",
+};

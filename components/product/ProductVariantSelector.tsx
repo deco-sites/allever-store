@@ -58,7 +58,7 @@ function VariantSelector({ product }: Props) {
     >
       {Object.keys(possibilities).map((name) => (
         <li class="flex flex-col gap-2">
-          <span class="text-base font-bold mb-0 lg:mb-5 uppercase">{name}</span>
+          <span class="text-base font-bold uppercase">{name}</span>
           <ul class="flex flex-row gap-2 mb-[10px] flex-wrap">
             {Object.entries(possibilities[name])
               .filter(([value]) => value)

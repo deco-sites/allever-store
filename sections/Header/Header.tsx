@@ -56,6 +56,11 @@ const onLoad = () => {
       body.classList.remove("is-scrolled");
     }
   }, 100);
+
+  const header = document.getElementById("header");
+  if (header) {
+    header.classList.remove("hidden");
+  }
 };
 
 export interface Logo {
@@ -243,7 +248,7 @@ function Header({
       >
         <div
           id="header"
-          class="bg-transparent w-full z-40 group-header ease-in duration-500"
+          class="hidden bg-transparent w-full z-40 group-header ease-in duration-500"
         >
           {device === "desktop"
             ? <Desktop logo={logo} {...props} />

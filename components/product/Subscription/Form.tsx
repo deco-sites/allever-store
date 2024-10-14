@@ -1,13 +1,42 @@
 import { useId } from "../../../sdk/useId.ts";
 import { useOffer } from "../../../sdk/useOffer.ts";
+import { useScript } from "@deco/deco/hooks";
+import { usePeriod } from "../../../sdk/usePeriod.ts";
 import { useComponent } from "../../../sections/Component.tsx";
 import type { AnalyticsItem, Product } from "apps/commerce/types.ts";
-import { useScript } from "@deco/deco/hooks";
+import Icon from "../../ui/Icon.tsx";
 export interface Props {
   item: AnalyticsItem;
   seller: string;
   product: Product;
 }
+const onLoad = () => {
+  const form = document.querySelector("#modal_subscription");
+  const inputs = form?.querySelectorAll("fieldset input") as NodeListOf<
+    HTMLInputElement
+  >;
+  const verifyActiveRadio = (e: Event) => {
+    inputs.forEach((i) =>
+      i.parentElement?.parentElement?.classList.remove("border-signature-blue")
+    );
+    const target = e.currentTarget;
+    if (target) {
+      (target as Element).parentElement?.parentElement?.classList.add(
+        "border-signature-blue",
+      );
+    }
+  };
+  if (inputs) {
+    inputs.forEach((input) => {
+      if (input.checked) {
+        input.parentElement?.parentElement?.classList.add(
+          "border-signature-blue",
+        );
+      }
+      input.onchange = verifyActiveRadio;
+    });
+  }
+};
 export default function ProductSubscription({ product }: Props) {
   const slot = useId();
   if (!product) {
@@ -15,9 +44,9 @@ export default function ProductSubscription({ product }: Props) {
   }
   const { offers, productID, additionalProperty } = product;
   const { seller = "1" } = useOffer(offers) || {};
-  const hasProductSubscription = additionalProperty?.find((prop) =>
+  const hasProductSubscription = additionalProperty?.find((prop) => (
     prop.name === "vtex.subscription.allever"
-  );
+  ));
   if (!hasProductSubscription) {
     return null;
   }
@@ -34,26 +63,45 @@ export default function ProductSubscription({ product }: Props) {
         Faça sua assinatura
       </button>
       <dialog id="product_subscription" class="modal">
-        <div class="modal-box">
+        <div
+          id="modal_subscription"
+          class="modal-box lg:w-[800px] lg:max-w-[unset]"
+        >
           <form method="dialog">
             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
               ✕
             </button>
           </form>
-          <h2>
-            ASSINE E COMPRE COM ATÉ <b>[10% OFF]</b>
+          <h2 class="text-black font-semibold uppercase text-lg mb-3">
+            ASSINE E COMPRE COM ATÉ <b class="text-signature-blue">[10% OFF]</b>
           </h2>
-          <div>
+          <div class="mb-5 text-sm text-black font-semibold">
             <h3>Por que assinar?</h3>
-            <div>10% OFF no site em todas as compras com assinatura</div>
-            <div>
+            <div class="flex items-center gap-3 border-b border-middle-gray py-3">
+              <Icon
+                id="check-circle"
+                class="text-signature-blue"
+              />
+              10% OFF no site em todas as compras com assinatura
+            </div>
+            <div class="flex items-center gap-3 border-b border-middle-gray py-3">
+              <Icon
+                id="check-circle"
+                class="text-signature-blue"
+              />
               Edite os produtos e as datas, pause ou cancele a qualquer momento!
             </div>
-            <div>Sem taxas de Adesão, Mensalidade ou Cancelamento</div>
+            <div class="flex items-center gap-3 border-b border-middle-gray py-3">
+              <Icon
+                id="check-circle"
+                class="text-signature-blue"
+              />
+              Sem taxas de Adesão, Mensalidade ou Cancelamento
+            </div>
           </div>
           <form
             id="subscription-form"
-            class="flex flex-col gap-y-6 p-3 sm:p-6 overflow-y-auto h-full"
+            class="flex flex-col gap-y-6 overflow-y-auto h-full"
             hx-swap="innerHTML"
             hx-sync="this:replace"
             hx-post={useComponent(import.meta.resolve("./Result.tsx"), {
@@ -64,32 +112,46 @@ export default function ProductSubscription({ product }: Props) {
           >
             <div>
               <fieldset>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-1">
                   {value.DomainValues?.split(",").map((
                     domainValue: string,
                     index: number,
                   ) => (
-                    <label className="label cursor-pointer">
-                      <span className="label-text">{domainValue.trim()}</span>
-                      <input
-                        type="radio"
-                        name="subscription-option"
-                        class="radio checked:bg-blue-500"
-                        value={domainValue.trim()}
-                        defaultChecked={index === 0}
-                      />
-                    </label>
+                    <div class="border-2 border-middle-gray rounded">
+                      <label className="label cursor-pointer justify-start lg:justify-center gap-2 px-2">
+                        <input
+                          type="radio"
+                          name="subscription-option"
+                          class="radio checked:bg-signature-blue"
+                          value={domainValue}
+                          defaultChecked={index === 0}
+                        />
+                        <span className="label-text text-sm">
+                          {usePeriod(domainValue)}
+                        </span>
+                      </label>
+                    </div>
                   ))}
                 </div>
               </fieldset>
-              <button type="submit" class="btn btn-primary">
-                <span class="[.htmx-request_&]:hidden inline text-white">
-                  Assinar
+              <button
+                type="submit"
+                class="btn btn-primary mt-5 w-full"
+              >
+                <span class="[.htmx-request_&]:hidden inline text-white uppercase">
+                  Comprar com assinatura
                 </span>
                 <span class="[.htmx-request_&]:inline hidden loading loading-spinner" />
               </button>
             </div>
           </form>
+          <script
+            type="text/javascript"
+            defer
+            dangerouslySetInnerHTML={{
+              __html: useScript(onLoad),
+            }}
+          />
           <div id={slot} />
         </div>
         <form method="dialog" class="modal-backdrop">

@@ -67,7 +67,7 @@ export default function GallerySlider(props: Props) {
         </div>
 
         {/* Dots */}
-        <ul class="flex overflow-scroll flex-row custom-scrollbar cursor-grab gap-3 lg:gap-2">
+        <ul class="grid grid-cols-5 gap-3 lg:gap-2">
           {images.length > 1 && (
             <>
               {images.map((img, index) => (

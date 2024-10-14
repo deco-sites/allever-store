@@ -23,18 +23,4 @@
   "[typescript]": {
     "editor.defaultFormatter": "denoland.vscode-deno"
   },
-  "[xml]": {
-    "editor.defaultFormatter": "redhat.vscode-xml"
-  },
-  "[tailwindcss]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "cSpell.words": [
-    "abaixaram",
-    "alternativo",
-    "marca",
-    "preço",
-    "Produtos",
-    "tradicional"
-  ]
 }

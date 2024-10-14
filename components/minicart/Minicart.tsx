@@ -6,7 +6,6 @@ import { useComponent } from "../../sections/Component.tsx";
 import Coupon from "./Coupon.tsx";
 import CartItem, { Item } from "./Item.tsx";
 import Icon from "../ui/Icon.tsx";
-import MinicartTotalInstallments from "../../islands/MinicartTotalInstallments.tsx";
 import { Product } from "apps/commerce/types.ts";
 import { useScript } from "@deco/deco/hooks";
 import ProductCard from "../product/ProductCard.tsx";
@@ -216,7 +215,7 @@ export default function Cart(
           </div>
           {count === 0
             ? (
-              <div class="flex flex-col m-auto gap-3 pt-14">
+              <div class="flex flex-col m-auto gap-3 py-14">
                 <div class="flex justify-center">
                   <Icon id="bag-blue" />
                 </div>

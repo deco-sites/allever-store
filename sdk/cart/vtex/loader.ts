@@ -32,6 +32,7 @@ export const cartFrom = (
           ...itemToAnalyticsItem({ ...item, detailUrl, coupon }, index),
           image: item.imageUrl,
           listPrice: item.listPrice / 100,
+          attachments: item.attachments ?? [],
         };
       }),
 

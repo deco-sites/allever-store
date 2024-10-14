@@ -12,7 +12,6 @@ import OutOfStock from "./OutOfStock.tsx";
 import ProductSelector from "./ProductVariantSelector.tsx";
 import Breadcrumb from "../../components/ui/Breadcrumb.tsx";
 import PaymentMethods from "./PaymentMethods.tsx";
-import ProductStars from "../../islands/ProductStars.tsx";
 import GallerySlider from "./Gallery.tsx";
 import type { Device } from "apps/website/matchers/device.ts";
 import ProductSubscription from "./Subscription/Form.tsx";
@@ -147,11 +146,11 @@ function ProductInfo({
             {availability === "https://schema.org/InStock"
               ? (
                 <>
-                  <ProductStars
+                  {/* <ProductStars
                     context="pdp"
                     storeId="121576"
                     productId={productGroupID ?? ""}
-                  />
+                  /> */}
                   <div class="flex flex-col gap-2">
                     <div class="flex gap-1 items-center">
                       {listPrice > price &&
@@ -176,7 +175,7 @@ function ProductInfo({
                         </div>
                       )}
                     {percent >= 1 && (
-                      <div class="text-xs font-semibold text-white uppercase bg-[#123ADD] text-center text-white px-2 py-1 rounded-[6px] w-fit">
+                      <div class="ml-3 text-xs font-semibold text-white uppercase bg-[#123ADD] text-center text-white px-2 py-1 rounded-[6px] w-fit">
                         {percent} % off
                       </div>
                     )}
@@ -211,7 +210,7 @@ function ProductInfo({
                       disabled={false}
                     />
                     <ProductSubscription
-                      product={product}
+                      page={page}
                       item={item}
                       seller={seller}
                     />
@@ -315,11 +314,11 @@ function ProductInfo({
                   <h1 class="text-xl font-bold uppercase flex-grow">
                     {title}
                   </h1>
-                  <ProductStars
+                  {/* <ProductStars
                     context="pdp"
                     storeId="121576"
                     productId={productGroupID ?? ""}
-                  />
+                  /> */}
                   <WishlistButton item={item} pdp={true} />
                 </div>
                 <p class="text-[#A8A8A8]">

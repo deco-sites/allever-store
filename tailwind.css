@@ -109,14 +109,18 @@
 }
 
 @media (min-width: 1024px) {
+  .search-bar-wrapper {
+    transition: max-width 250ms linear;
+  }
+
   .search-bar-wrapper .suggestions-wrapper {
     top: 19px;
-    width: calc(100% - 1px);
+    left: -1px;
+    width: 100%;
     display: block;
     z-index: 1;
     opacity: 0;
     visibility: hidden;
-    transition: visibility 250ms linear, opacity 100ms linear 250ms;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
   }
@@ -133,19 +137,20 @@
 
   .search-bar-wrapper form {
     width: 100%;
-    display: flex;
-    max-width: 270px;
-    transition: max-width 250ms linear;
-    justify-content: flex-end;
+    /* display: flex; */
+    /* max-width: 300px; */
+    /* transition: max-width 250ms linear; */
+    /* justify-content: flex-end; */
   }
 
   .search-bar-wrapper form > input {
-    width: 50vw;
-    max-width: 100%;
+    /* width: 50vw;
+    max-width: 100%; */
+    width: 100%;
   }
 
   .search-bar-wrapper:hover form {
-    max-width: 100%;
+    /* max-width: 100%; */
   }
 
   .main-logo {

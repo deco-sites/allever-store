@@ -47,84 +47,86 @@ export default function Searchbar(
 ) {
   const slot = useId();
   return (
-    <div
-      class={`search-bar-wrapper w-full relative lg:hover:w-[50vw] ${
-        searchBarDrawer ? "gap-[unset]" : ""
-      }`}
-    >
-      <div class="search-bar-container flex items-center justify-end gap-2">
-        <button
-          type="submit"
-          form={SEARCHBAR_INPUT_FORM_ID}
-          class="bg-transparent border-none hidden md:block w-6 p-0"
-          aria-label="Search"
-          tabIndex={-1}
-        >
-          <span class="loading loading-spinner loading-xs hidden [.htmx-request_&]:inline" />
-          {searchBarDrawer
-            ? (
-              <Icon
-                id="search-drawer"
-                class="inline [.htmx-request_&]:hidden"
-              />
-            )
-            : <Icon id="search" class="inline [.htmx-request_&]:hidden" />}
-        </button>
-        <form
-          id={SEARCHBAR_INPUT_FORM_ID}
-          action={ACTION}
-          class={`join flex gap-[20px] ${
-            searchBarDrawer ? "my-5 w-full px-5" : ""
-          }`}
-        >
-          <button
+    <div class="search-bar-container w-full lg:w-[300px] lg:hover:w-[50vw] flex justify-end">
+      <div
+        class={`search-bar-wrapper w-full relative max-w-[300px] lg:hover:max-w-[50vw] ${
+          searchBarDrawer ? "gap-[unset]" : ""
+        }`}
+      >
+        <div class="search-bar-container flex items-center justify-end gap-2">
+          {/* <button
             type="submit"
             form={SEARCHBAR_INPUT_FORM_ID}
-            class="bg-transparent border-none md:hidden"
+            class="bg-transparent border-none hidden md:block w-6 p-0"
             aria-label="Search"
             tabIndex={-1}
           >
+            <span class="loading loading-spinner loading-xs hidden [.htmx-request_&]:inline" />
             {searchBarDrawer
-              ? <Icon id="search-drawer" class="inline" />
-              : <Icon id="search" class="inline" />}
-          </button>
-          <input
-            type="text"
-            name={NAME}
-            class={`rounded-[30px] outline-none py-[8.5px] px-5 placeholder-[#D3D3D3] w-full lg:w-auto`}
-            placeholder={placeholder}
-            autocomplete="off"
-            autoComplete="off"
-            data-hx-target={`#${slot}`}
-            data-hx-post={loader &&
-              useComponent<SuggestionProps>(Suggestions, {
-                loader: asResolved(loader),
-              })}
-            data-hx-trigger={`input changed delay:100ms, ${NAME}`}
-            data-hx-indicator={`#${SEARCHBAR_INPUT_FORM_ID}`}
-            data-hx-swap="innerHTML"
-            data-hx-focus={`border-black`}
-          />
-        </form>
+              ? (
+                <Icon
+                  id="search-drawer"
+                  class="inline [.htmx-request_&]:hidden"
+                />
+              )
+              : <Icon id="search" class="inline [.htmx-request_&]:hidden" />}
+          </button> */}
+          <form
+            id={SEARCHBAR_INPUT_FORM_ID}
+            action={ACTION}
+            class={`join flex gap-[20px] ${
+              searchBarDrawer ? "my-5 w-full px-5" : ""
+            }`}
+          >
+            <button
+              type="submit"
+              form={SEARCHBAR_INPUT_FORM_ID}
+              class="bg-transparent border-none md:hidden"
+              aria-label="Search"
+              tabIndex={-1}
+            >
+              {searchBarDrawer
+                ? <Icon id="search-drawer" class="inline" />
+                : <Icon id="search" class="inline" />}
+            </button>
+            <input
+              type="text"
+              name={NAME}
+              class={`rounded-[30px] outline-none py-[8.5px] px-5 placeholder-[#D3D3D3] w-full lg:w-auto`}
+              placeholder={placeholder}
+              autocomplete="off"
+              autoComplete="off"
+              data-hx-target={`#${slot}`}
+              data-hx-post={loader &&
+                useComponent<SuggestionProps>(Suggestions, {
+                  loader: asResolved(loader),
+                })}
+              data-hx-trigger={`input changed delay:100ms, ${NAME}`}
+              data-hx-indicator={`#${SEARCHBAR_INPUT_FORM_ID}`}
+              data-hx-swap="innerHTML"
+              data-hx-focus={`border-black`}
+            />
+          </form>
+        </div>
+
+        {/* Suggestions slot */}
+        <div
+          class="suggestions-wrapper lg:absolute right-0 lg:bg-white px-5 pt-0 lg:py-8 lg:-ml-[1px]"
+          id={slot}
+        />
+
+        <script
+          type="module"
+          dangerouslySetInnerHTML={{
+            __html: useScript(
+              script,
+              SEARCHBAR_INPUT_FORM_ID,
+              NAME,
+              SEARCHBAR_POPUP_ID,
+            ),
+          }}
+        />
       </div>
-
-      {/* Suggestions slot */}
-      <div
-        class="suggestions-wrapper lg:absolute right-0 lg:bg-white px-5 pt-0 lg:py-8"
-        id={slot}
-      />
-
-      <script
-        type="module"
-        dangerouslySetInnerHTML={{
-          __html: useScript(
-            script,
-            SEARCHBAR_INPUT_FORM_ID,
-            NAME,
-            SEARCHBAR_POPUP_ID,
-          ),
-        }}
-      />
     </div>
   );
 }
