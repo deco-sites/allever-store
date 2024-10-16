@@ -9,6 +9,7 @@ import Icon from "../ui/Icon.tsx";
 import { Product } from "apps/commerce/types.ts";
 import { useScript } from "@deco/deco/hooks";
 import ProductCard from "../product/ProductCard.tsx";
+import { BestInstallmentOption } from "../../sdk/cart/vtex/loader.ts";
 export interface Minicart {
   isMobile: boolean;
   /** Cart from the ecommerce platform */
@@ -23,6 +24,7 @@ export interface Minicart {
     coupon?: string;
     locale: string;
     currency: string;
+    bestInstallment: BestInstallmentOption | null,
     shipping: number | null;
     enableCoupon?: boolean;
     freeShippingTarget: number;
@@ -71,21 +73,21 @@ export function ErrorFallback() {
     <div class="flex flex-col flex-grow justify-center items-center overflow-hidden w-full gap-2">
       <div class="flex flex-col gap-1 p-6 justify-center items-center">
         <span class="font-semibold">
-          Error while updating cart
+          Ocorreu um erro ao atualizar o carrinho
         </span>
         <span class="text-sm text-center">
-          Click in the button below to retry or refresh the page
+          Por favor, recarregue a página
         </span>
       </div>
 
-      <button
+      {/* <button
         class="btn btn-primary"
         hx-patch={useComponent(import.meta.url)}
         hx-swap="outerHTML"
         hx-target="closest div"
       >
         Retry
-      </button>
+      </button> */}
     </div>
   );
 }
@@ -128,14 +130,13 @@ export default function Cart(
       storefront: {
         items,
         total,
-        subtotal,
         coupon,
         discounts,
+        bestInstallment,
         locale,
         shipping,
         currency,
         enableCoupon = true,
-        freeShippingTarget,
         checkoutHref,
       },
     },
@@ -143,18 +144,14 @@ export default function Cart(
     cart: Minicart;
   },
 ) {
+  console.log("coupon", coupon);
   const count = items.length;
   itemCount = count;
   return (
     <>
-      {isMobile === false && recommendations.length > 0 && (
-        <ProductRecommendations
-          isMobile={isMobile}
-          recommendations={recommendations}
-        />
-      )}
       <form
-        class="block w-full lg:w-[400px] h-full max-h-[85vh] lg:max-h-screen"
+        // class="block w-full lg:w-[400px] h-full max-h-[85vh] lg:max-h-screen"
+        class="block w-full"
         id={MINICART_FORM_ID}
         hx-sync="this:replace"
         hx-trigger="submit, change delay:300ms"
@@ -169,7 +166,11 @@ export default function Cart(
 
         {/* Add to cart controllers */}
         <input name="add-to-cart" type="hidden" />
-        <button hidden name="action" value="add-to-cart" />
+        <button id="teste" hidden name="action" value="add-to-cart" />
+
+        {/* Reload cart controller */}
+        <input name="reload-cart" type="hidden" />
+        <button id="teste-sub" hidden name="action" value="reload-cart" />
 
         {/* This contains the STOREFRONT cart. */}
         <input
@@ -257,20 +258,34 @@ export default function Cart(
                 <footer class="w-full bg-white">
                   {/* Subtotal */}
                   <div class="flex flex-col">
+                    {shipping && (
+                      <div class="flex justify-between px-4 pt-5">
+                        <div class="flex gap-5 text-base text-dark-gray flex gap-5">
+                          <Icon id="delivery-box" />
+                          Frete
+                        </div>
+                        <span>
+                          {
+                            shipping === 0 ?
+                              <span class="font-semibold text-lime-600">Frete Grátis</span>
+                              : formatPrice(shipping, currency, locale)
+                          }
+                        </span>
+                      </div>
+                    )}
+                    {enableCoupon && <Coupon coupon={coupon} />}
+                  </div>
+
+                  {/* Total */}
+                  <div class="flex flex-col gap-2 mx-4 pb-3">
                     {discounts > 0 && (
-                      <div class="flex justify-between items-center px-4">
+                      <div class="flex justify-between items-center w-full">
                         <span class="text-sm">Descontos</span>
                         <span class="text-sm">
                           {formatPrice(discounts, currency, locale)}
                         </span>
                       </div>
                     )}
-
-                    {enableCoupon && <Coupon coupon={coupon} />}
-                  </div>
-
-                  {/* Total */}
-                  <div class=" flex flex-col justify-end items-end gap-2 mx-4 pb-1">
                     <div class="flex justify-between items-center w-full">
                       <span class="text-base">Total</span>
                       <output
@@ -280,8 +295,12 @@ export default function Cart(
                         {formatPrice(total, currency, locale)}
                       </output>
                     </div>
+                    {bestInstallment && (
+                      <div class="text-right text-sm text-dark-gray">
+                        ou até {bestInstallment.count}x de {formatPrice(bestInstallment.value / 100)}
+                      </div>
+                    )}
                   </div>
-                  {/* <MinicartTotalInstallments items={items} /> */}
                   <hr class="max-w-[90%] m-auto" />
                   <div class="p-4">
                     <a
@@ -297,7 +316,7 @@ export default function Cart(
                     </a>
                     <label
                       for={MINICART_DRAWER_ID}
-                      class="flex w-full justify-center mt-5 text-[#123ADD] text-base"
+                      class="flex w-full justify-center mt-4 text-[#123ADD] text-base"
                     >
                       OU CONTINUAR COMPRANDO
                     </label>
@@ -307,12 +326,6 @@ export default function Cart(
             )}
         </div>
       </form>
-      {isMobile && recommendations.length > 0 && (
-        <ProductRecommendations
-          isMobile={isMobile}
-          recommendations={recommendations}
-        />
-      )}
       <script
         type="module"
         dangerouslySetInnerHTML={{

@@ -146,16 +146,14 @@ function ProductInfo({
             {availability === "https://schema.org/InStock"
               ? (
                 <>
-                  {/* <ProductStars
-                    context="pdp"
-                    storeId="121576"
-                    productId={productGroupID ?? ""}
-                  /> */}
+                  <div
+                    data-trustvox-product-code={productGroupID}
+                  />
                   <div class="flex flex-col gap-2">
                     <div class="flex gap-1 items-center">
                       {listPrice > price &&
                         (
-                          <span class="line-through text-base font-semibold text-[#A8A8A8] leading-[1]">
+                          <span class="line-through text-base text-[#A8A8A8] leading-[1]">
                             {formatPrice(listPrice, offers?.priceCurrency)}
                           </span>
                         )}
@@ -175,7 +173,7 @@ function ProductInfo({
                         </div>
                       )}
                     {percent >= 1 && (
-                      <div class="ml-3 text-xs font-semibold text-white uppercase bg-[#123ADD] text-center text-white px-2 py-1 rounded-[6px] w-fit">
+                      <div class="text-xs font-semibold text-white uppercase bg-[#123ADD] text-center text-white px-2 py-1 rounded-[6px] w-fit">
                         {percent} % off
                       </div>
                     )}
@@ -311,14 +309,12 @@ function ProductInfo({
               />
               <div class="flex flex-col gap-3 border border-x-0 border-y-[#A8A8A8] py-6">
                 <div class="flex items-center gap-4">
-                  <h1 class="text-xl font-bold uppercase flex-grow">
+                  <h1 class="text-xl font-bold flex-grow">
                     {title}
                   </h1>
-                  {/* <ProductStars
-                    context="pdp"
-                    storeId="121576"
-                    productId={productGroupID ?? ""}
-                  /> */}
+                  <div
+                    data-trustvox-product-code={productGroupID}
+                  />
                   <WishlistButton item={item} pdp={true} />
                 </div>
                 <p class="text-[#A8A8A8]">
@@ -360,7 +356,7 @@ function ProductInfo({
                       <div class="flex gap-2 items-center">
                         {listPrice > price &&
                           (
-                            <span class="line-through text-base font-semibold text-[#A8A8A8] leading-[1]">
+                            <span class="line-through text-base text-[#A8A8A8] leading-[1]">
                               {formatPrice(listPrice, offers?.priceCurrency)}
                             </span>
                           )}
@@ -377,15 +373,11 @@ function ProductInfo({
                                 no PIX
                               </span>
                             </p>
-                            <span
-                              class={clx(
-                                "text-xs font-semibold text-white uppercase bg-[#123ADD] text-center text-white px-2 py-1 rounded-[6px]",
-                                percent < 1 && "opacity-0",
-                                "w-fit",
-                              )}
-                            >
-                              {percent} % off
-                            </span>
+                            {percent >= 1 && (
+                              <span class="ml-3 text-xs font-semibold text-white uppercase bg-[#123ADD] text-center text-white px-2 py-1 rounded-[6px] w-fit">
+                                {percent} % off
+                              </span>
+                            )}
                           </div>
                         )}
                       <div class="fluid-text">
@@ -417,7 +409,7 @@ function ProductInfo({
                       />
                       {inventory > 0 && inventory <= 9 && (
                         <div>
-                          <p className="text-[24px] font-normal text-black leading-[28.8px]">
+                          <p className="text-xl text-black">
                             Restam só{" "}
                             <span className="font-bold text-[#123ADD]">
                               {inventory} unidade{inventory > 1 ? "s" : ""}
@@ -485,18 +477,18 @@ function ProductInfo({
           class="invisible fixed bottom-0 left-0 right-0 rounded-t-2xl bg-white shadow-2xl z-10"
         >
           <div class="container px-5 py-4 grid grid-cols-4 lg:grid-cols-7 gap-12 items-center">
-            <div class="hidden lg:block text-xl font-semibold text-black uppercase col-span-3">
+            <div class="hidden lg:block text-xl font-semibold text-black col-span-3">
               {title}
             </div>
             <div class="flex flex-col col-span-2">
               <div class="flex flex-col items-start">
-                <p class="text-3xl font-semibold text-[#123ADD]">
+                <p class="text-2xl font-semibold text-[#123ADD]">
                   {pix > 0
                     ? formatPrice(pix, offers?.priceCurrency)
                     : formatPrice(price, offers?.priceCurrency)}
                   {pix > 0 &&
                     (
-                      <span class="text-[#123ADD] font-normal text-[30px] ml-2">
+                      <span class="text-[#123ADD] font-normal text-xl ml-2">
                         no PIX
                       </span>
                     )}

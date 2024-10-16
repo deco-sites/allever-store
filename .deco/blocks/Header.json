@@ -1,10 +1,52 @@
 {
   "__resolveType": "site/sections/Header/Header.tsx",
-  "navItems": {
-    "__resolveType": "navbar"
-  },
+  "navItems": [
+    {
+      "children": [],
+      "name": "Casa",
+      "url": "/casa"
+    },
+    {
+      "children": [],
+      "name": "TVs",
+      "url": "/tv-audio-e-cinema-em-casa/tvs"
+    },
+    {
+      "children": [
+        {
+          "children": [],
+          "url": "/tv-audio-e-cinema-em-casa/audio/caixas-de-som",
+          "name": "Caixas de som"
+        },
+        {
+          "children": [],
+          "url": "/tv-audio-e-cinema-em-casa/audio/som-portatil",
+          "name": "Som portátil"
+        },
+        {
+          "children": [],
+          "url": "/tv-audio-e-cinema-em-casa/audio/fone-de-ouvido",
+          "name": "Fone de ouvido"
+        },
+        {
+          "children": [],
+          "url": "/tv-audio-e-cinema-em-casa/audio/soundbar",
+          "name": "Soundbar"
+        }
+      ],
+      "name": "Áudio",
+      "url": "/tv-audio-e-cinema-em-casa/audio",
+      "ishighlighted": true
+    },
+    {
+      "children": [],
+      "name": "Promoções",
+      "url": "#",
+      "ishighlighted": true
+    }
+  ],
   "searchbar": {
-    "placeholder": "What are you looking for?",
+    "placeholder": "O que deseja?",
     "loader": {
       "__resolveType": "resolved",
       "data": {
@@ -19,7 +61,7 @@
   "variant": "initial",
   "logo": {
     "src": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11097/3e00d53d-696d-4266-972b-c5c50c5ac2f3",
-    "alt": "Deco Storefront",
+    "alt": "Allever",
     "width": 94,
     "height": 20.26
   }

@@ -1,11 +1,11 @@
 import { type AppContext } from "../../apps/site.ts";
 import { type Minicart } from "../../components/minicart/Minicart.tsx";
-import { usePlatform } from "../../sdk/usePlatform.tsx";
 
 import linx from "../../sdk/cart/linx/submit.ts";
 import vnda from "../../sdk/cart/vnda/submit.ts";
 import wake from "../../sdk/cart/wake/submit.ts";
 import vtex from "../../sdk/cart/vtex/submit.ts";
+import vtexLoader from "../../sdk/cart/vtex/loader.ts";
 import shopify from "../../sdk/cart/shopify/submit.ts";
 import nuvemshop from "../../sdk/cart/nuvemshop/submit.ts";
 
@@ -30,6 +30,7 @@ export interface CartSubmitActions<AC = unknown> {
   addToCart?: (props: CartForm, req: Request, ctx: AC) => Promise<Minicart>;
   setQuantity?: (props: CartForm, req: Request, ctx: AC) => Promise<Minicart>;
   setCoupon?: (props: CartForm, req: Request, ctx: AC) => Promise<Minicart>;
+  reloadCart?: (props: CartForm, req: Request, ctx: AC) => Promise<Minicart>;
 }
 
 const safeParse = (payload: string | null) => {
@@ -73,21 +74,30 @@ async function action(
   req: Request,
   ctx: AppContext,
 ): Promise<Minicart> {
-  const { setQuantity, setCoupon, addToCart } = actions[usePlatform()];
+  const { setQuantity, setCoupon, addToCart } = actions["vtex"];
 
   const form = cartFrom(await req.formData());
 
-  const handler = form.action === "set-coupon"
-    ? setCoupon
-    : form.action === "add-to-cart"
-    ? addToCart
-    : setQuantity;
-
-  if (!handler) {
-    throw new Error(`Unsupported action on platform ${usePlatform()}`);
+  let handler = null;
+  if (form.action === "add-to-cart") {
+    handler = addToCart
+  } else if (form.action === "reload-cart") {
+    handler = vtexLoader;
+  } else if (form.action === "set-coupon") {
+    console.log("form", form);
+    handler = setCoupon;
+  } else {
+    handler = setQuantity;
   }
 
-  return await handler(form, req, ctx);
+  if (!handler) {
+    throw new Error(`Unsupported action on platform ${"vtex"}`);
+  }
+
+  const result = await handler(form, req, ctx);
+  console.log("result", result?.paymentData?.marketingData);
+
+  return result;
 }
 
 export default action;

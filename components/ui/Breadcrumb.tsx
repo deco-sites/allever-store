@@ -13,7 +13,6 @@ function Breadcrumb({ itemListElement = [] }: Props) {
       {items
         .filter(({ name, item }) => name && item)
         .map(({ name, item }, index) => {
-          if ((index + 1) === items.length) return null;
           if (index === 0) {
             return (
               <li>

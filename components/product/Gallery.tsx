@@ -30,7 +30,6 @@ export default function GallerySlider(props: Props) {
   return (
     <>
       <div id={id} class="flex flex-col">
-        {/* Image Slider */}
         <div class="relative w-full">
           <Slider class="carousel carousel-center gap-6 w-full">
             {images.map((img, index) => (
@@ -43,7 +42,6 @@ export default function GallerySlider(props: Props) {
                   alt={img.alternateName}
                   width={WIDTH}
                   height={HEIGHT}
-                  // Preload LCP image for better web vitals
                   preload={index === 0}
                   loading={index === 0 ? "eager" : "lazy"}
                 />
@@ -64,9 +62,14 @@ export default function GallerySlider(props: Props) {
           >
             <Icon id="ArrowSlide" class="rotate-180" />
           </Slider.NextButton>
+          
+          <div class="absolute top-2 right-2 bg-base-100 rounded-full">
+            <label class="btn btn-ghost hidden sm:inline-flex" for={zoomId}>
+              <Icon id="pan_zoom" />
+            </label>
+          </div>
         </div>
 
-        {/* Dots */}
         <ul class="grid grid-cols-5 gap-3 lg:gap-2">
           {images.length > 1 && (
             <>
@@ -92,6 +95,13 @@ export default function GallerySlider(props: Props) {
 
         <Slider.JS rootId={id} />
       </div>
+
+      {images && (
+        <ProductImageZoom
+          id={zoomId}
+          images={images}
+        />
+      )}
     </>
   );
 }

@@ -17,7 +17,11 @@
     {
       "__resolveType": "site/sections/Product/SearchResult.tsx",
       "page": {
-        "__resolveType": "PLP Loader"
+        "__resolveType": "vtex/loaders/intelligentSearch/productListingPage.ts",
+        "sort": "orders:desc",
+        "fuzzy": "automatic",
+        "selectedFacets": [],
+        "count": 12
       },
       "layout": {
         "columns": {
@@ -30,7 +34,16 @@
       "startingPage": 1
     },
     {
-      "__resolveType": "site/sections/Newsletter/Newsletter.tsx"
+      "__resolveType": "website/sections/Rendering/Lazy.tsx",
+      "section": {
+        "__resolveType": "Deals"
+      }
+    },
+    {
+      "__resolveType": "website/sections/Rendering/Lazy.tsx",
+      "section": {
+        "__resolveType": "Newsletter"
+      }
     },
     {
       "__resolveType": "Footer Component"

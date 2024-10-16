@@ -7,19 +7,17 @@ import { useId } from "../../sdk/useId.ts";
 
 export interface Props {
   id?: string;
-  width: number;
-  height: number;
   images: ImageObject[];
 }
 
-function ProductImageZoom({ images, width, height, id = useId() }: Props) {
+function ProductImageZoom({ images, id = useId() }: Props) {
   const container = `${id}-container`;
 
   return (
     <Modal id={id}>
       <div
         id={container}
-        class="modal-box w-11/12 max-w-7xl grid grid-cols-[48px_1fr_48px] grid-rows-1 place-items-center"
+        class="modal-box w-11/12 max-w-7xl h-full max-h-11/12 grid grid-cols-[48px_1fr_48px] grid-rows-1 place-items-center"
       >
         <Slider class="carousel col-span-full col-start-1 row-start-1 row-span-full h-full w-full">
           {images.map((image, index) => (
@@ -28,11 +26,8 @@ function ProductImageZoom({ images, width, height, id = useId() }: Props) {
               class="carousel-item w-full h-full justify-center items-center"
             >
               <Image
-                style={{ aspectRatio: `${width} / ${height}` }}
                 src={image.url!}
                 alt={image.alternateName}
-                width={width}
-                height={height}
                 class="h-full w-auto"
               />
             </Slider.Item>

@@ -10,7 +10,7 @@ import { useSendEvent } from "../../sdk/useSendEvent.ts";
 import Breadcrumb from "../ui/Breadcrumb.tsx";
 import Drawer from "../ui/Drawer.tsx";
 import Sort from "../../islands/Sort.tsx";
-import { useDevice, useScript, useSection } from "@deco/deco/hooks";
+import { useDevice, useScript } from "@deco/deco/hooks";
 import { type SectionProps } from "@deco/deco";
 import type { AppContext } from "../../apps/site.ts";
 export interface Layout {
@@ -56,7 +56,6 @@ function PageResult(props: SectionProps<typeof loader>) {
     layout,
     startingPage = 0,
     url,
-    partial,
     internationalFlag,
     promoFlag,
     newsFlag,
@@ -70,15 +69,6 @@ function PageResult(props: SectionProps<typeof loader>) {
   const offset = zeroIndexedOffsetPage * perPage;
   const nextPageUrl = useUrlRebased(pageInfo.nextPage, url);
   const prevPageUrl = useUrlRebased(pageInfo.previousPage, url);
-  const partialPrev = useSection({
-    href: prevPageUrl,
-    props: { partial: "hideMore" },
-  });
-  const partialNext = useSection({
-    href: nextPageUrl,
-    props: { partial: "hideLess" },
-  });
-  const infinite = layout?.pagination !== "pagination";
   return (
     <div class="grid grid-flow-row grid-cols-1 place-items-center mx-auto">
       <div
@@ -103,33 +93,6 @@ function PageResult(props: SectionProps<typeof loader>) {
       </div>
 
       <div class="py-5 sm:pt-10 w-full flex justify-center">
-        {
-          /* <div class="flex justify-center items-center [&_section]:contents w-full lg:hidden">
-          {nextPageUrl
-            ? (
-              <a
-                rel="next"
-                aria-label="next page link"
-                href={nextPageUrl ?? "#"}
-                disabled={!nextPageUrl}
-                class="bg-[#123ADD] text-white font-semibold rounded-[20px] text-base py-[13px] w-full items-center uppercase text-center"
-              >
-                ver mais
-              </a>
-            )
-            : (
-              <a
-                rel="prev"
-                aria-label="previous page link"
-                href={prevPageUrl ?? "#"}
-                disabled={!prevPageUrl}
-                class="bg-[#123ADD] text-white font-semibold rounded-[20px] text-base py-[13px] w-full items-center uppercase text-center"
-              >
-                ver menos
-              </a>
-            )}
-        </div> */
-        }
         <div class="join lg:flex gap-[30px] items-center text-base">
           <a
             rel="prev"
@@ -334,7 +297,6 @@ function Result(props: SectionProps<typeof loader>) {
                         </label>
 
                         <div class="flex flex-col">
-                          {/* {results} */}
                           {sortBy}
                         </div>
                       </div>
@@ -343,6 +305,13 @@ function Result(props: SectionProps<typeof loader>) {
                 </>
               )}
 
+              {device === "desktop" && (
+                <div class="container px-5">
+                  <Breadcrumb
+                    itemListElement={breadcrumb?.itemListElement}
+                  />
+                </div>
+              )}
               <div class="grid grid-cols-1 sm:grid-cols-[250px_1fr] gap-12 container px-5">
                 {device === "desktop" && (
                   <aside class="place-self-start flex flex-col w-full">

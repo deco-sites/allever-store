@@ -1,6 +1,6 @@
 {
   "__resolveType": "vtex/loaders/intelligentSearch/productListingPage.ts",
-  "sort": "price:desc",
+  "sort": "orders:desc",
   "fuzzy": "automatic",
   "selectedFacets": [],
   "count": 12

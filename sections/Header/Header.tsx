@@ -85,12 +85,6 @@ export interface SectionProps {
   logo: Logo;
   /** @hide true */
   variant?: "initial" | "menu";
-  /**
-   *  @title Ativar sticky?
-   *  @description: Se ativo, o background do header fica azul sempre que a página é rolada. No entanto, se a página estiver no topo,
-   *  o background fica transparente.
-   */
-  isSticky?: boolean;
 }
 type Props = Omit<SectionProps, "alert" | "variant">;
 const Desktop = ({ logo, searchbar }: Props) => (

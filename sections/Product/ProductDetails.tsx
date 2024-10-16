@@ -17,7 +17,6 @@ export interface Props {
   productRecommendations: Product[];
 }
 const onLoad = (productId: string, productName: string, image: string) => {
-  console.log("onLoad");
   // @ts-ignore _trustvox exists
   globalThis._trustvox = [
     ["_storeId", "121576"],
@@ -46,7 +45,8 @@ export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
   if (page) {
     const { product } = page;
 
-    const productRecommendations = await ctx.invoke.vtex.loaders.legacy
+    // deno-lint-ignore no-explicit-any
+    const productRecommendations = await (ctx as any).invoke.vtex.loaders.legacy
       .relatedProductsLoader({
         crossSelling: "whosawalsosaw",
         id: product.inProductGroupWithID,
@@ -91,7 +91,8 @@ export default function ProductDetails({
   }
   if (page) {
     const { product } = page;
-    const { productID: productId, image: images, isVariantOf } = product;
+    const { productID: productId, image: images, isVariantOf, additionalProperty: productProperties } = product;
+    const itsForAdults = productProperties?.find((p) => p.value === "Maior de 18") || null;
     const productName = (isVariantOf?.name ?? product.name) || "";
     const [front] = images ?? [];
     const image = front?.url || "";
@@ -99,6 +100,42 @@ export default function ProductDetails({
     const { additionalProperty = [] } = isVariantOf ?? {};
     return (
       <>
+        {itsForAdults !== null && (
+          <>
+            <dialog id="itsForAdults" class="modal">
+              <div class="modal-box flex flex-col gap-3 items-center">
+                <Icon id="18" size={47} />
+                <p class="text-center text-sm">Olá! Precisamos confirmar a sua idade para continuar acessando a página!</p>
+                <h3 class="text-lg font-bold text-center">Você tem mais de 18 anos?</h3>
+                <div class="modal-action flex gap-3 justify-center !m-0">
+                  <a class="btn m-0" href="/">Não</a>
+                  <form method="dialog">
+                    <button 
+                      class="btn btn-primary"
+                      hx-on:click={useScript(() => {
+                        if (!localStorage.getItem("showAdultModal")) {
+                          localStorage.setItem("showAdultModal", "no");
+                        }
+                      })}  
+                    >Sim</button>
+                  </form>
+                </div>
+                <p class="text-center text-xs text-dark-gray m-0">Continuando você estará aceitando as políticas de <b>Privacidade e termos de uso</b> e <b>políticas de cookies</b></p>
+              </div>
+            </dialog>
+            <script
+              type="text/javascript"
+              dangerouslySetInnerHTML={{
+                __html: useScript(() => {
+                  if (!localStorage.getItem("showAdultModal")) {
+                    // @ts-ignore showModal exists on daisyUi
+                    itsForAdults.showModal();
+                  }
+                })
+              }}
+            />
+          </>
+        )}
         <ProductInfo
           flags={[internationalFlag, promoFlag, newsFlag]}
           page={page}
@@ -148,7 +185,7 @@ export default function ProductDetails({
           </div>
         )}
         <ProductGrid page={page} />
-        <div className="container px-5">
+        <div className="container px-5 pb-5">
           <div id="_trustvox_widget" />
         </div>
         <script

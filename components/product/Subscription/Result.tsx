@@ -43,9 +43,6 @@ export async function action(props: Props, req: Request, ctx: AppContext) {
       noSplitItem: true,
     });
 
-    const vtex = await ctx.invoke("site/loaders/minicart.ts");
-    console.log("vtex:", vtex);
-
     return {
       result: "OK",
     };
@@ -64,6 +61,10 @@ export default function Result(_props: ComponentProps<typeof action>) {
       dangerouslySetInnerHTML={{
         __html: useScript(() => {
           setTimeout(() => {
+            const button = document?.querySelector<HTMLButtonElement>(
+              `#minicart-form #teste-sub`,
+            );
+            button?.click();
             // @ts-ignore showModal exists on DaisyUI
             document.querySelector("#modal_subscription > form > button")?.click();
             // @ts-ignore click is correct

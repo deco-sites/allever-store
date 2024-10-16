@@ -255,7 +255,7 @@ function Footer(
       {device === "desktop" &&
         (
           <footer
-            class="px-5 sm:px-0 pt-10"
+            class="px-5 sm:px-0 pt-10 pb-14"
             style={{ backgroundColor: "#FFF" }}
           >
             <div class="container flex flex-col gap-5 sm:gap-10 px-5 py-10">
@@ -435,7 +435,7 @@ function Footer(
         )}
       {device === "mobile" &&
         (
-          <div class="container px-5">
+          <div class="container px-5 pb-14">
             <div class="flex flex-col py-[35px] mt-5">
               <p class="text-base">{label}</p>
               <ul class="flex mt-5 gap-[10px]">

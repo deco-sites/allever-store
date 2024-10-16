@@ -86,7 +86,7 @@ function ProductCard({
   const title = isVariantOf?.name ?? product.name;
   const [front] = images ?? [];
 
-  const { pix, listPrice = 0, price, seller = "1", availability, installment } =
+  const { pix, listPrice = 0, price = 0, seller = "1", availability, installment } =
     useOffer(offers);
   const inStock = availability === "https://schema.org/InStock";
   const relativeUrl = relative(url);
@@ -196,21 +196,21 @@ function ProductCard({
               <div class="flex flex-col">
                 {listPrice > price &&
                   (
-                    <span class="line-through font-normal text-[#a8a8a8] text-xs leading-[1]">
+                    <span class="line-through font-normal text-dark-gray text-xs">
                       {formatPrice(listPrice, offers?.priceCurrency)}
                     </span>
                   )}
-                <span class="font-semibold text-[20px] text-[#123ADD]">
+                <span class="font-semibold text-xl text-signature-blue">
                   {pix > 0
                     ? formatPrice(pix, offers?.priceCurrency)
                     : formatPrice(price, offers?.priceCurrency)} {pix > 0 &&
                     (
-                      <span class="text-[#123ADD] font-normal text-[20px] leading-[30px]">
+                      <span class="text-signature-blue font-normal text-base">
                         no pix
                       </span>
                     )}
                 </span>
-                <span class="text-[#a8a8a8] text-xs leading-[1]">
+                <span class="text-dark-gray text-xs">
                   ou {installment?.billingDuration}x de {formatPrice(
                     installment?.billingIncrement,
                     offers!.priceCurrency!,
@@ -225,6 +225,7 @@ function ProductCard({
             )}
         </a>
         <div
+          class="mt-2"
           data-trustvox-product-code={productGroupID}
         />
         {!hiddenAddToCartButton && inStock &&

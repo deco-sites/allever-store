@@ -49,7 +49,7 @@ export default function Searchbar(
   return (
     <div class="search-bar-container w-full lg:w-[300px] lg:hover:w-[50vw] flex justify-end">
       <div
-        class={`search-bar-wrapper w-full relative max-w-[300px] lg:hover:max-w-[50vw] ${
+        class={`search-bar-wrapper w-full relative lg:max-w-[300px] lg:hover:max-w-[50vw] ${
           searchBarDrawer ? "gap-[unset]" : ""
         }`}
       >
@@ -74,14 +74,14 @@ export default function Searchbar(
           <form
             id={SEARCHBAR_INPUT_FORM_ID}
             action={ACTION}
-            class={`join flex gap-[20px] ${
+            class={`join flex gap-[20px] lg:gap-0 ${
               searchBarDrawer ? "my-5 w-full px-5" : ""
             }`}
           >
             <button
               type="submit"
               form={SEARCHBAR_INPUT_FORM_ID}
-              class="bg-transparent border-none md:hidden"
+              class="bg-transparent border-none lg:absolute lg:-left-10 lg:top-1/2 lg:-translate-y-1/2"
               aria-label="Search"
               tabIndex={-1}
             >
@@ -111,7 +111,7 @@ export default function Searchbar(
 
         {/* Suggestions slot */}
         <div
-          class="suggestions-wrapper lg:absolute right-0 lg:bg-white px-5 pt-0 lg:py-8 lg:-ml-[1px]"
+          class="suggestions-wrapper lg:absolute right-0 lg:bg-white px-5 pt-0 lg:py-8"
           id={slot}
         />
 

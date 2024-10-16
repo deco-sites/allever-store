@@ -27,15 +27,14 @@ export default function Form({ items }: Props) {
           class="input input-bordered w-48 rounded-[10px] bg-white text-xs w-full max-w-[212px] placeholder:text-black text-black"
           placeholder="Informe o CEP"
           name="postalCode"
-          maxLength={8}
-          size={8}
+          maxLength={9}
         />
         <button
           type="submit"
           class="no-animation bg-[#123ADD] text-white text-xs font-semibold rounded-[39px] p-4 max-w-[127px] w-full"
         >
           <span class="[.htmx-request_&]:hidden inline">Calcular</span>
-          <span class="hidden [.htmx-request_&]:inline loading loading-spinner loading-xs" />
+          <span class="hidden [.htmx-request_&]:inline-block loading loading-spinner loading-xs" />
         </button>
       </form>
       <a

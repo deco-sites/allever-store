@@ -164,7 +164,7 @@ export default function BuyTogether({
         (
           <div
             id="buy-together"
-            class="container px-5 mb-6 mt-12 lg:my-12 flex items-center gap-4 overflow-x-auto"
+            class="container px-5 mb-3 mt-12 lg:my-12 flex items-center gap-4 overflow-x-auto"
           >
             <div
               class="relative"
@@ -283,7 +283,7 @@ export default function BuyTogether({
                     </span>
                   </div>
                   <button
-                    class="btn btn-primary"
+                    class="btn btn-primary gap-1"
                     hx-on:click={useScript(onClick)}
                   >
                     Adicionar <span id="add-to-cart-count">2</span> ao carrinho
@@ -294,7 +294,7 @@ export default function BuyTogether({
         )}
       {device === "mobile" && recommendations.length > 0 &&
         (
-          <div class="flex flex-col gap-4 items-center justify-center pb-12 border-b-middle-gray">
+          <div class="flex flex-col gap-4 items-center justify-center pb-6 pt-3 border-b-middle-gray">
             <div class="text-[#123ADD] font-normal text-[30px]">
               <span
                 id="pix-price"
@@ -309,7 +309,7 @@ export default function BuyTogether({
               <span id="total-price" class="text-xl font-semibold">R$ 0</span>
             </div>
             <button
-              class="btn btn-primary"
+              class="btn btn-primary gap-1"
               hx-on:click={useScript(onClick)}
             >
               Adicionar <span id="add-to-cart-count">2</span> ao carrinho

@@ -284,3 +284,7 @@ details>summary::marker {
     font-size: 12px !important;
   }
 }
+
+.ts-shelf-right.ts-shelf-rate-count.ts-shelf-rate-disabled {
+  display: none !important;
+}

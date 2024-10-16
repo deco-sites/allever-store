@@ -80,7 +80,7 @@ function ProductSuggestionsCard({
                 )}
                 <span class="font-semibold text-[20px] text-[#123ADD]">
                   {formatPrice(installment?.price)}{" "}
-                  <span class="text-[#123ADD] font-normal text-[20px] leading-[30px]">
+                  <span class="text-signature-blue font-normal text-base">
                     no pix
                   </span>
                 </span>
