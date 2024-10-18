@@ -208,7 +208,7 @@ function ProductInfo({
                       disabled={false}
                     />
                     <ProductSubscription
-                      page={page}
+                      product={product}
                       item={item}
                       seller={seller}
                     />

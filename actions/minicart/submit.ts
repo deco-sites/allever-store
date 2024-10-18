@@ -76,6 +76,12 @@ async function action(
 ): Promise<Minicart> {
   const { setQuantity, setCoupon, addToCart } = actions["vtex"];
 
+  
+  const { 
+    device,
+    minicartSuggestion = "" 
+  } = ctx;
+
   const form = cartFrom(await req.formData());
 
   let handler = null;
@@ -84,18 +90,32 @@ async function action(
   } else if (form.action === "reload-cart") {
     handler = vtexLoader;
   } else if (form.action === "set-coupon") {
-    console.log("form", form);
     handler = setCoupon;
   } else {
     handler = setQuantity;
   }
 
   if (!handler) {
-    throw new Error(`Unsupported action on platform ${"vtex"}`);
+    throw new Error("Unsupported action on platform vtex");
   }
 
   const result = await handler(form, req, ctx);
-  console.log("result", result?.paymentData?.marketingData);
+
+  if (minicartSuggestion !== "") {
+    // deno-lint-ignore no-explicit-any
+    const recommendations = await (ctx as any).invoke(
+      "vtex/loaders/intelligentSearch/productList.ts",
+      {
+        collection: minicartSuggestion,
+        count: 5,
+      },
+    );
+
+    result.recommendations = recommendations || [];
+  }
+
+  const isMobile = device !== "desktop";
+  result.isMobile = isMobile;
 
   return result;
 }

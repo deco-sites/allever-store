@@ -17,8 +17,6 @@ const onClick = () => {
   const { item, platformProps } = JSON.parse(
     decodeURIComponent(container.getAttribute("data-cart-item")!),
   );
-  console.log("ITEM", item);
-  console.log("platformProps", platformProps);
   window.STOREFRONT.CART.addToCart(item, platformProps);
   setTimeout(() => {
     const minicartDrawer = document.querySelector("label[for=minicart-drawer]");

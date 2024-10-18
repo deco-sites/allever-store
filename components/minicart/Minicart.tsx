@@ -144,19 +144,24 @@ export default function Cart(
     cart: Minicart;
   },
 ) {
-  console.log("coupon", coupon);
   const count = items.length;
   itemCount = count;
   return (
-    <>
+    <div id="minicart" class="flex flex-col lg:flex-row lg:items-stretch">
+      {isMobile === false && recommendations.length > 0 && (
+        <ProductRecommendations
+          isMobile={isMobile}
+          recommendations={recommendations}
+        />
+      )}
       <form
-        // class="block w-full lg:w-[400px] h-full max-h-[85vh] lg:max-h-screen"
-        class="block w-full"
+        class="block"
         id={MINICART_FORM_ID}
         hx-sync="this:replace"
         hx-trigger="submit, change delay:300ms"
-        hx-target="this"
+        hx-target="#minicart"
         hx-indicator="this"
+        hx-include="#minicart"
         hx-disabled-elt="this"
         hx-post={useComponent(import.meta.url)}
         hx-swap="outerHTML"
@@ -190,7 +195,7 @@ export default function Cart(
 
         <div
           class={clx(
-            "flex flex-col max-h-screen items-center overflow-hidden w-full h-full",
+            "flex flex-col items-center overflow-hidden w-full lg:w-[400px] h-full max-h-[85vh] lg:max-h-screen",
             "[.htmx-request_&]:pointer-events-none [.htmx-request_&]:opacity-60 [.htmx-request_&]:cursor-wait transition-opacity duration-300",
           )}
         >
@@ -326,12 +331,18 @@ export default function Cart(
             )}
         </div>
       </form>
+      {isMobile && recommendations.length > 0 && (
+        <ProductRecommendations
+          isMobile={isMobile}
+          recommendations={recommendations}
+        />
+      )}
       <script
         type="module"
         dangerouslySetInnerHTML={{
           __html: useScript(onLoad, MINICART_FORM_ID),
         }}
       />
-    </>
+    </div>
   );
 }

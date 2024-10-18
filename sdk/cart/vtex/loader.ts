@@ -106,9 +106,11 @@ async function loader(
     minicartSuggestion = "",
   } = ctx;
   const isMobile = device !== "desktop";
-  const response = await ctx.invoke("vtex/loaders/cart.ts");
+  // deno-lint-ignore no-explicit-any
+  const response = await (ctx as any).invoke("vtex/loaders/cart.ts");
   if (minicartSuggestion !== "") {
-    const recommendations = await ctx.invoke(
+    // deno-lint-ignore no-explicit-any
+    const recommendations = await (ctx as any).invoke(
       "vtex/loaders/intelligentSearch/productList.ts",
       {
         collection: minicartSuggestion,

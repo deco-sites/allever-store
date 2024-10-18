@@ -1,5 +1,6 @@
 import Icon from "../ui/Icon.tsx";
 import Collapsable from "./../ui/Collapsable.tsx";
+import { useScript } from "@deco/deco/hooks";
 
 /** @titleBy name */
 export interface Children {
@@ -69,33 +70,57 @@ function MenuItem({ item }: { item: INavItem }) {
 
 function Menu({ navItems }: Props) {
   return (
-    <div class="bg-white min-h-screen">
-      <div class="text-signature-blue font-semibold px-4">
-        <a
-          href="/login"
-          class="h-[61px] flex items-center font-semibold text-sm border-b border-b-middle-gray"
-        >
-          <Icon class="mr-[10px]" id="account_blue" />
-          Entre ou cadastre-se
-        </a>
-        <a
-          href="/atendimento"
-          class="h-[61px] flex items-center font-semibold text-sm border-b border-b-middle-gray"
-        >
-          <Icon class="mr-[10px]" id="sac" />
-          Atendimento
-        </a>
+    <>
+      <div class="bg-white min-h-screen">
+        <div class="text-signature-blue font-semibold px-4">
+          <a
+            id="loginButton"
+            class="h-[61px] flex items-center font-semibold text-sm border-b border-b-middle-gray"
+          >
+            <Icon class="mr-[10px]" id="account_blue" />
+            <span />
+          </a>
+          <a
+            href="/atendimento"
+            class="h-[61px] flex items-center font-semibold text-sm border-b border-b-middle-gray"
+          >
+            <Icon class="mr-[10px]" id="sac" />
+            Atendimento
+          </a>
+        </div>
+        <div class="flex flex-col">
+          <ul class="px-4 flex-grow flex flex-col divide-y divide-[#D3D3D3]">
+            {navItems.map((item) => (
+              <li>
+                <MenuItem item={item} />
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-      <div class="flex flex-col">
-        <ul class="px-4 flex-grow flex flex-col divide-y divide-[#D3D3D3]">
-          {navItems.map((item) => (
-            <li>
-              <MenuItem item={item} />
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
+      <script
+        type="text/javascript"
+        defer
+        dangerouslySetInnerHTML={{
+          __html: useScript(() => {
+            window.STOREFRONT.USER.subscribe((sdk) => {
+              const user = sdk.getUser();
+              const loginButton = document.querySelector("#loginButton");
+              const loginButtonContent = loginButton?.querySelector("span");
+              if (user?.email && loginButton && loginButtonContent) {
+                loginButtonContent.innerHTML = `Acesse sua conta`;
+                // @ts-ignore .
+                loginButton.href = "/account"; 
+              } else if (loginButton && loginButtonContent ) {
+                loginButtonContent.innerHTML = `Entre ou cadastre-se`;
+                // @ts-ignore .
+                loginButton.href = "/login";
+              }
+            });
+          })
+        }}
+      />
+    </>
   );
 }
 
