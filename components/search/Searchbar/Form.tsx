@@ -95,7 +95,6 @@ export default function Searchbar(
               class={`rounded-[30px] outline-none py-[8.5px] px-5 placeholder-[#D3D3D3] w-full lg:w-auto`}
               placeholder={placeholder}
               autocomplete="off"
-              autoComplete="off"
               data-hx-target={`#${slot}`}
               data-hx-post={loader &&
                 useComponent<SuggestionProps>(Suggestions, {

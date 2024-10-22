@@ -131,9 +131,10 @@
       "href": "https://x.com/allever_store"
     },
     {
-      "alt": "Youtube",
-      "href": "#",
-      "image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11097/52c637fd-3a8c-4e9f-bff0-1c60c9cf12f5"
+      "alt": "linkedin",
+      "href": "https://www.linkedin.com/company/allever/",
+      "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/allever-store/8d8afe41-92e0-4f58-9476-b62b4e564e66/XMLID_801_.svg",
+      "title": "Linkedin"
     },
     {
       "alt": "facebook",

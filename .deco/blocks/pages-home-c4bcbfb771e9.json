@@ -241,7 +241,7 @@
         "__resolveType": "site/sections/Product/ProductShelfWithTimer.tsx",
         "title": "Teste do Timer",
         "cta": "Confira",
-        "expireAt": "2024-10-10T19:59:00.000Z",
+        "expireAt": "2024-11-01T02:59:00.000Z",
         "hideLabel": true,
         "products": {
           "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
@@ -316,9 +316,13 @@
       "Label": "algum sub titulo",
       "product": {
         "__resolveType": "vtex/loaders/intelligentSearch/productDetailsPage.ts",
-        "slug": "/fone-de-ouvido-estereo--full-sound--tipo-earphone-cor-preta-20344/p?skuId=23891"
+        "slug": {
+          "__resolveType": "website/functions/requestToParam.ts",
+          "param": "/tomada-antena-tv-coaxial-orion-–-schneider-14172/p"
+        },
+        "similars": false
       },
-      "expireAt": "2024-10-10T20:59:00.000Z"
+      "expireAt": "2024-11-01T02:59:00.000Z"
     },
     {
       "__resolveType": "site/sections/Spacer.tsx",
@@ -431,15 +435,6 @@
       },
       "title": "Vitrine 1",
       "cta": "#"
-    },
-    {
-      "__resolveType": "site/sections/Product/ProductShelf.tsx",
-      "products": {
-        "__resolveType": "vtex/loaders/legacy/productList.ts",
-        "props": {
-          "sort": "OrderByPriceDESC"
-        }
-      }
     },
     {
       "__resolveType": "site/sections/Spacer.tsx",

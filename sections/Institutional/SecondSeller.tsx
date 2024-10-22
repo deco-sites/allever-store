@@ -26,7 +26,7 @@ const SecondSeller = (props: Props) => {
             __html: props?.button?.label || "",
           }}
           href={props?.button?.link}
-          class="bg-black text-white fluid-text font-bold py-0 px-5 mb-8 inline-block w-full rounded-full text-center"
+          class="bg-black text-white text-sm lg:text-base font-bold py-3 lg:py-4 px-5 mb-8 inline-block w-full rounded-full text-center"
         />
       </section>
 

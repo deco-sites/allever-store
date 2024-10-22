@@ -62,7 +62,6 @@ export default function ProductShelf({
     <div id={id}>
       <Section.Container
         {...viewItemListEvent}
-        class="[view-transition-name:loading-fallback-2]"
       >
         <div class="flex flex-wrap items-center gap-x-10 gap-y-[0.5rem] px-[18px] lg:px-[25px]">
           <Section.Header title={title} cta={cta} />

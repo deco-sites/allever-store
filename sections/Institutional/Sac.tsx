@@ -23,7 +23,7 @@ const Card = ({ label, link }: CardProps) => {
 
 const CardList = ({ cards }: Props) => {
   return (
-    <div class="container flex gap-6 flex-col px-5 lg:px-[0px]">
+    <div class="container flex gap-6 flex-col px-5">
       {cards?.map((card, index) => <Card key={index} {...card} />)}
     </div>
   );

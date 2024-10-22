@@ -39,6 +39,13 @@
       ]
     },
     {
+      "__resolveType": "website/sections/Rendering/Lazy.tsx",
+      "section": {
+        "__resolveType": "site/sections/Spacer.tsx",
+        "size": "medium"
+      }
+    },
+    {
       "__resolveType": "site/sections/Institutional/Faq.tsx",
       "faq": [
         {

@@ -75,7 +75,7 @@ function PageResult(props: SectionProps<typeof loader>) {
         data-product-list
         class={clx(
           "grid items-center",
-          "flex gap-1",
+          "flex gap-2",
           "grid-cols-2 sm:grid-cols-4 lg:gap-4",
           "w-full pb-5",
         )}

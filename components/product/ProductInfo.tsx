@@ -157,27 +157,33 @@ function ProductInfo({
                             {formatPrice(listPrice, offers?.priceCurrency)}
                           </span>
                         )}
-                      <span class="text-[20px] font-semibold text-[#000] leading-[1]">
+                      <span class="text-[20px] font-semibold text-black leading-[1]">
                         {formatPrice(price, offers?.priceCurrency)}
                       </span>
                     </div>
-                    {pix > 0 &&
+                    {price > pix && pix > 0 &&
                       (
                         <div class="flex flex-col items-start">
-                          <p class="text-[40px] font-semibold text-[#123ADD] leading-[1]">
+                          <p class="text-[40px] font-semibold text-signature-blue leading-[1]">
                             {formatPrice(pix)}
-                            <span class="text-[#123ADD] font-normal text-[30px] ml-2 leading-[1]">
+                            <span class="text-signature-blue font-normal text-[30px] ml-2 leading-[1]">
                               no PIX
                             </span>
                           </p>
                         </div>
                       )}
                     {percent >= 1 && (
-                      <div class="text-xs font-semibold text-white uppercase bg-[#123ADD] text-center text-white px-2 py-1 rounded-[6px] w-fit">
+                      <div class="text-xs font-semibold text-white uppercase bg-signature-blue text-center text-white px-2 py-1 rounded-[6px] w-fit">
                         {percent} % off
                       </div>
                     )}
-                    <p class="text-[#000] text-base leading-[1]">
+                    <p
+                      class={`${
+                        price === pix
+                          ? "font-semibold text-signature-blue text-xl"
+                          : "text-black text-base"
+                      } leading-[1]`}
+                    >
                       ou {installment?.billingDuration}x de {formatPrice(
                         installment?.billingIncrement,
                         offers!.priceCurrency!,
@@ -194,7 +200,7 @@ function ProductInfo({
                       {inventory > 0 && inventory <= 9 && (
                         <p className="text-base font-normal text-black">
                           Restam só{" "}
-                          <span className="font-bold text-[#123ADD]">
+                          <span className="font-bold text-signature-blue">
                             {inventory} unidade{inventory > 1 ? "s" : ""}
                           </span>
                         </p>
@@ -259,22 +265,31 @@ function ProductInfo({
           </div>
         </div>
         <div class="fixed bottom-0 left-0 right-0 rounded-t-2xl bg-white shadow-2xl z-10">
-          <div class="container px-5 py-4 grid grid-cols-5 gap-4 items-center">
-            <div class="flex flex-col col-span-2">
+          <div class="container px-5 py-4 grid grid-cols-6 gap-4 items-center">
+            <div class="flex flex-col col-span-3">
               <div class="flex flex-col items-start">
-                <p class="text-lg font-semibold text-[#123ADD]">
-                  {pix > 0
-                    ? formatPrice(pix, offers?.priceCurrency)
-                    : formatPrice(price, offers?.priceCurrency)}
-                  {pix > 0 &&
-                    (
-                      <span class="text-[#123ADD] font-normal text-xs ml-1">
+                {
+                  pix > 0 && price > pix ? (
+                    <p class="text-lg font-semibold text-signature-blue">
+                      {formatPrice(pix, offers?.priceCurrency)}
+                      <span class="text-signature-blue font-normal text-xl ml-2">
                         no PIX
                       </span>
-                    )}
-                </p>
+                    </p>
+                  ) : (
+                    <p class="text-lg font-semibold text-black">
+                      {formatPrice(price, offers?.priceCurrency)}
+                    </p>
+                  )
+                }
               </div>
-              <p class="text-[#000] text-xs">
+              <p
+                class={`${
+                  price === pix
+                    ? "font-semibold text-signature-blue text-lg max-[390px]:text-base"
+                    : "text-black text-xs"
+                } leading-[1]`}
+              >
                 ou {installment?.billingDuration}x de {formatPrice(
                   installment?.billingIncrement,
                   offers!.priceCurrency!,
@@ -360,28 +375,34 @@ function ProductInfo({
                               {formatPrice(listPrice, offers?.priceCurrency)}
                             </span>
                           )}
-                        <span class="text-[20px] font-semibold text-[#000] leading-[1]">
+                        <span class="text-[20px] font-semibold text-black leading-[1]">
                           {formatPrice(price, offers?.priceCurrency)}
                         </span>
                       </div>
                       {pix > 0 && price > pix &&
                         (
                           <div class="flex items-center">
-                            <p class="text-[40px] font-semibold text-[#123ADD] leading-[1]">
+                            <p class="text-[40px] font-semibold text-signature-blue leading-[1]">
                               {formatPrice(pix, offers?.priceCurrency)}
-                              <span class="text-[#123ADD] font-normal text-[30px] ml-2 leading-[1]">
+                              <span class="text-signature-blue font-normal text-[30px] ml-2 leading-[1]">
                                 no PIX
                               </span>
                             </p>
                             {percent >= 1 && (
-                              <span class="ml-3 text-xs font-semibold text-white uppercase bg-[#123ADD] text-center text-white px-2 py-1 rounded-[6px] w-fit">
+                              <span class="ml-3 text-xs font-semibold text-white uppercase bg-signature-blue text-center text-white px-2 py-1 rounded-[6px] w-fit">
                                 {percent} % off
                               </span>
                             )}
                           </div>
                         )}
                       <div class="fluid-text">
-                        <p class="text-[#000]">
+                        <p
+                          class={`${
+                            price === pix
+                              ? "font-semibold text-signature-blue text-xl"
+                              : "text-black text-base"
+                          }`}
+                        >
                           ou {installment?.billingDuration}x de {formatPrice(
                             installment?.billingIncrement,
                             offers!.priceCurrency!,
@@ -411,7 +432,7 @@ function ProductInfo({
                         <div>
                           <p className="text-xl text-black">
                             Restam só{" "}
-                            <span className="font-bold text-[#123ADD]">
+                            <span className="font-bold text-signature-blue">
                               {inventory} unidade{inventory > 1 ? "s" : ""}
                             </span>
                           </p>
@@ -482,19 +503,28 @@ function ProductInfo({
             </div>
             <div class="flex flex-col col-span-2">
               <div class="flex flex-col items-start">
-                <p class="text-2xl font-semibold text-[#123ADD]">
-                  {pix > 0
-                    ? formatPrice(pix, offers?.priceCurrency)
-                    : formatPrice(price, offers?.priceCurrency)}
-                  {pix > 0 &&
-                    (
-                      <span class="text-[#123ADD] font-normal text-xl ml-2">
+                {
+                  pix > 0 && price > pix ? (
+                    <p class="text-2xl font-semibold text-signature-blue">
+                      {formatPrice(pix, offers?.priceCurrency)}
+                      <span class="text-signature-blue font-normal text-xl ml-2">
                         no PIX
                       </span>
-                    )}
-                </p>
+                    </p>
+                  ) : (
+                    <p class="text-xl font-semibold text-black">
+                      {formatPrice(price, offers?.priceCurrency)}
+                    </p>
+                  )
+                }
               </div>
-              <p class="text-[#000] text-base">
+              <p
+                class={`${
+                  price === pix
+                    ? "font-semibold text-signature-blue text-xl"
+                    : "text-black text-base"
+                } leading-[1]`}
+              >
                 ou {installment?.billingDuration}x de {formatPrice(
                   installment?.billingIncrement,
                   offers!.priceCurrency!,

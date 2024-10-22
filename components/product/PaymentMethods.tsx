@@ -39,8 +39,8 @@ function PaymentMethods({ offers, installment }: PaymentMethodsProps) {
   return (
     <>
       <button
-        // @ts-ignore showModal exists on DaisyUI
         hx-on:click={useScript(() =>
+          // @ts-ignore showModal exists on DaisyUI
           document.getElementById("payment-methods")?.showModal()
         )}
         class="underline text-signature-blue text-left"
@@ -49,6 +49,9 @@ function PaymentMethods({ offers, installment }: PaymentMethodsProps) {
       </button>
       <dialog id="payment-methods" class="modal">
         <div class="modal-box bg-white">
+          <form method="dialog">
+            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+          </form>
           <h3 class="font-semibold text-base text-black mb-4">
             Métodos de <span class="text-signature-blue">[pagamento]</span>
           </h3>
@@ -111,9 +114,9 @@ function PaymentMethods({ offers, installment }: PaymentMethodsProps) {
             </div>
             <div class="grow pl-4 lg:pl-6 ml-4 lg:ml-6 border-l border-dark-gray">
               <div id="pix" class="flex flex-col gap-4">
-                <p class="text-2xl text-[#123ADD] font-semibold flex items-center">
+                <p class="text-2xl text-[#123ADD] font-semibold flex flex-wrap items-center gap-x-2">
                   {!!pixInstallment && formatPrice(pixInstallment)}
-                  <span class="text-normal ml-2">no PIX</span>
+                  <span class="text-normal">no PIX</span>
                 </p>
                 <p class="text-xs text-gray-600 font-semibold max-w-xs">
                   Para pagamento via PIX será gerada uma chave e um QR Code ao

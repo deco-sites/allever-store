@@ -19,7 +19,9 @@ import {
   SIDEMENU_DRAWER_ID,
 } from "../../constants.ts";
 import { useDevice, useScript, useSection } from "@deco/deco/hooks";
-
+export function LoadingFallback() {
+  return <div class="skeleton rounded-none h-[130px] lg:h-[109px]" />;
+}
 const onLoad = () => {
   const body = document.querySelector("body");
 
@@ -220,7 +222,6 @@ const Mobile = ({ logo, searchbar }: Props) => (
 );
 function Header({
   alerts = [],
-  isSticky,
   logo = {
     src:
       "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11097/3e00d53d-696d-4266-972b-c5c50c5ac2f3",

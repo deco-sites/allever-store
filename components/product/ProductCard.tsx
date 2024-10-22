@@ -119,7 +119,7 @@ function ProductCard({
     <div
       {...event}
       class={clx(
-        "card flex flex-col space-between card-compact group text-sm bg-white p-3 sm:p-5",
+        "card flex flex-col justify-start card-compact group text-sm bg-white p-3 sm:p-5",
         _class,
       )}
     >

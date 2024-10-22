@@ -18,11 +18,11 @@ const onLoad = (
     const hours = Math.max(Math.floor((difference / (1000 * 60 * 60)) % 24), 0);
     const minutes = Math.max(Math.floor((difference / 1000 / 60) % 60), 0);
     const seconds = Math.max(Math.floor((difference / 1000) % 60), 0);
-    if (seconds > 0 || minutes > 0 || hours > 0 || days > 0) {
-      container.classList.remove("hidden");
-    } else {
-      container.classList.add("hidden");
-    }
+    // if (seconds > 0 || minutes > 0 || hours > 0 || days > 0) {
+    //   container.classList.remove("hidden");
+    // } else {
+    //   container.classList.add("hidden");
+    // }
     container.querySelector("#days #value")!.innerHTML = formatTime(days);
     container.querySelector("#hours #value")!.innerHTML = formatTime(hours);
     container.querySelector("#minutes #value")!.innerHTML = formatTime(minutes);
@@ -42,7 +42,7 @@ const CampaignTimer = ({
 }: CampaignTimerProps) => {
   return (
     <>
-      <div class="flex hidden gap-5 justify-center text-white text-center items-center">
+      <div class="flex gap-5 justify-center text-white text-center items-center">
         <div>
           <p id="days" class="text-xl lg:text-4xl font-bold flex gap-3">
             <span id="value" />

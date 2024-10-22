@@ -169,18 +169,16 @@ export default function ProductDetails({
                 </div>
               }
             >
-              <table class="table mb-5">
-                <tbody>
-                  {isVariantOf?.additionalProperty.map((property) => (
-                    <tr class="text-sm sm:text-base max-sm:flex flex-col table-row even:bg-middle-gray odd:bg-transparent">
-                      <td class="font-semibold sm:after:content-[':'] max-sm:pb-0">
-                        {property.name}
-                      </td>
-                      <td class="max-sm:pt-0">{property.value}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              <div class="mb-5 w-full">
+                {isVariantOf?.additionalProperty.map((property) => (
+                  <div class="px-3 py-2 w-full text-sm sm:text-base odd:bg-middle-gray">
+                    <span class="font-semibold after:content-[':'] max-sm:pb-0 mr-2">
+                      {property.name}
+                    </span>
+                    {property.value}
+                  </div>
+                ))}
+              </div>
             </Collapsable>
           </div>
         )}
