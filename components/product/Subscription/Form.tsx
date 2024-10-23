@@ -45,12 +45,14 @@ export default function ProductSubscription({ product }: Props) {
   const { offers, productID, additionalProperty } = product;
   const { seller = "1" } = useOffer(offers) || {};
   const hasProductSubscription = additionalProperty?.find((prop) => (
-    prop.name === "vtex.subscription.allever"
+    prop.name?.indexOf("subscription") !== -1
   ));
   if (!hasProductSubscription) {
     return null;
   }
+  console.log("hasProductSubscription", hasProductSubscription);
   const value = JSON.parse(hasProductSubscription.value || "[]")[0];
+  const sname = hasProductSubscription.name;
   return (
     <>
       <button
@@ -107,6 +109,7 @@ export default function ProductSubscription({ product }: Props) {
             hx-post={useComponent(import.meta.resolve("./Result.tsx"), {
               productID,
               seller,
+              sname,
             })}
             hx-target={`#${slot}`}
           >

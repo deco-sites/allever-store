@@ -272,7 +272,7 @@ function ProductInfo({
                   pix > 0 && price > pix ? (
                     <p class="text-lg font-semibold text-signature-blue">
                       {formatPrice(pix, offers?.priceCurrency)}
-                      <span class="text-signature-blue font-normal text-xl ml-2">
+                      <span class="text-signature-blue font-normal text-xs ml-2">
                         no PIX
                       </span>
                     </p>

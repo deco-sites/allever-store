@@ -3,9 +3,9 @@ import Image from "apps/website/components/Image.tsx";
 import ProductImageZoom from "./ProductImageZoom.tsx";
 import Icon from "../ui/Icon.tsx";
 import Slider from "../ui/Slider.tsx";
-import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 import { useDevice } from "@deco/deco/hooks";
+import { useScript } from "deco/hooks/useScript.ts";
 export interface Props {
   /** @title Integration */
   page: ProductDetailsPage | null;
@@ -27,6 +27,7 @@ export default function GallerySlider(props: Props) {
   }
   const { page: { product: { image: images = [] } } } = props;
   const device = useDevice();
+  if (!images) return null;
   return (
     <>
       <div id={id} class="flex flex-col">
@@ -63,11 +64,17 @@ export default function GallerySlider(props: Props) {
             <Icon id="ArrowSlide" class="rotate-180" />
           </Slider.NextButton>
           
-          <div class="absolute top-2 right-2 bg-base-100 rounded-full">
-            <label class="btn btn-ghost hidden sm:inline-flex" for={zoomId}>
+          <button 
+            class="btn btn-ghost inline-flex absolute top-2 right-2 bg-base-100 rounded-full" 
+            hx-on:click={useScript((id) => {
+              // @ts-ignore .
+              document.getElementById(id)?.showModal();
+            }, zoomId)}
+          >
+            <label for={zoomId}>
               <Icon id="pan_zoom" />
             </label>
-          </div>
+          </button>
         </div>
 
         <ul class="grid grid-cols-5 gap-3 lg:gap-2">
@@ -95,7 +102,7 @@ export default function GallerySlider(props: Props) {
 
         <Slider.JS rootId={id} />
       </div>
-
+      
       {images && (
         <ProductImageZoom
           id={zoomId}

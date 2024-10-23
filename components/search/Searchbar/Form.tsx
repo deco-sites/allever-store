@@ -8,7 +8,6 @@ import { useId } from "../../../sdk/useId.ts";
 import { useComponent } from "../../../sections/Component.tsx";
 import Icon from "../../ui/Icon.tsx";
 import { Props as SuggestionProps } from "./Suggestions.tsx";
-import ExpandableInput from "../../../islands/ExpandableInput.tsx";
 import { useScript } from "@deco/deco/hooks";
 import { asResolved } from "@deco/deco";
 export const ACTION = "/s";

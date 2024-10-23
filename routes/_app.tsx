@@ -59,6 +59,9 @@ export default defineApp(async (_req, ctx) => {
           __html: useScript(setupTrustvoxRateConfig, "121576")
         }} />
         <script defer type="text/javascript" src="https://rate.trustvox.com.br/widget.js" />
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.css" />
+        <script src="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.umd.js" />
       </Head>
 
       {/* Rest of Preact tree */}

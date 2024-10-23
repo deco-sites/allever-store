@@ -5,8 +5,8 @@ import PoweredByVtex from "./PoweredByVtex.tsx";
 import PoweredByWave from "./PoweredByWave.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import Collapsable from "../../components/ui/Collapsable.tsx";
-import RaVerifiedSeal from "../../islands/Seals/RaVerifiedSeal.tsx";
 import { useDevice } from "@deco/deco/hooks";
+import { useScript } from "deco/hooks/useScript.ts";
 /** @titleBy title */
 interface Item {
   /**
@@ -191,7 +191,28 @@ function CertifiedComponent({ title, certifieds }: CertifiedProps) {
             </div>
           ))}
         </div>
-        <RaVerifiedSeal />
+        <div id="ra-verified-seal" class="pb-4" />
+        <script
+          type="text/javascript"
+          defer
+          dangerouslySetInnerHTML={{
+            __html: useScript(() => {
+              const script = document.createElement("script");
+              script.type = "text/javascript";
+              script.id = "ra-embed-verified-seal";
+              script.src = "https://s3.amazonaws.com/raichu-beta/ra-verified/bundle.js";
+              script.async = true;
+              script.setAttribute("data-id", "SU42UkdsUjZ1emVXSjhnLTphbGxldmVy");
+              script.setAttribute("data-target", "ra-verified-seal");
+              script.setAttribute("data-model", "2");
+              document.body.appendChild(script);
+          
+              return () => {
+                document.body.removeChild(script);
+              };
+            })
+          }}
+        />
       </div>
     </div>
   );

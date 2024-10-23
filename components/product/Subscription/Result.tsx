@@ -5,6 +5,7 @@ import type { ComponentProps } from "../../../sections/Component.tsx";
 export interface Props {
   productID: string;
   seller: string;
+  sname: string;
 }
 
 interface Attachment {
@@ -43,6 +44,7 @@ export async function action(props: Props, req: Request, ctx: AppContext) {
   const {
     productID,
     seller,
+    sname,
   } = props;
 
   const form = await req.formData();
@@ -60,7 +62,7 @@ export async function action(props: Props, req: Request, ctx: AppContext) {
       orderItems 
     });
 
-    const SUBSCRIPTION_KEY = "vtex.subscription.allever";
+    const SUBSCRIPTION_KEY = sname;
     const SUBSCRIPTION_PLAN = selectedOption;
 
     const SUBSCRIPTION_VALUE = {

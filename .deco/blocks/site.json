@@ -51,7 +51,11 @@
     "directives": []
   },
   "commerce": {
-    "platform": "other"
+    "platform": "vtex",
+    "defaultSegment": {
+      "channelPrivacy": "public"
+    },
+    "salesChannel": "1"
   },
   "platform": "vtex",
   "__resolveType": "site/apps/site.ts",

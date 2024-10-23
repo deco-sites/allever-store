@@ -235,12 +235,7 @@ function Header({
   return (
     <>
       {alerts.length > 0 && <Alert alerts={alerts} />}
-      <header
-        hx-trigger="resize from:window, visibilitychange[document.visibilityState === 'visible'] from:document"
-        hx-get={useSection()}
-        hx-target="closest section"
-        hx-swap="outerHTML"
-      >
+      <header>
         <div
           id="header"
           class="hidden bg-transparent w-full z-40 group-header ease-in duration-500"

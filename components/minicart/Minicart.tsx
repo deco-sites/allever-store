@@ -287,7 +287,7 @@ export default function Cart(
                       <div class="flex justify-between items-center w-full">
                         <span class="text-sm">Descontos</span>
                         <span class="text-sm">
-                          {formatPrice(discounts, currency, locale)}
+                          {formatPrice(-discounts, currency, locale)}
                         </span>
                       </div>
                     )}

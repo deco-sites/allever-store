@@ -3,13 +3,7 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import * as $_app from "./routes/_app.tsx";
-import * as $ExpandableInput from "./islands/ExpandableInput.tsx";
-import * as $MinicartTotalInstallments from "./islands/MinicartTotalInstallments.tsx";
-import * as $Product_TrustVox from "./islands/Product/TrustVox.tsx";
-import * as $Seals_RaVerifiedSeal from "./islands/Seals/RaVerifiedSeal.tsx";
-import * as $Shipping from "./islands/Shipping.tsx";
 import * as $Sort from "./islands/Sort.tsx";
-import * as $SwiperJS from "./islands/SwiperJS.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -17,13 +11,7 @@ const manifest = {
     "./routes/_app.tsx": $_app,
   },
   islands: {
-    "./islands/ExpandableInput.tsx": $ExpandableInput,
-    "./islands/MinicartTotalInstallments.tsx": $MinicartTotalInstallments,
-    "./islands/Product/TrustVox.tsx": $Product_TrustVox,
-    "./islands/Seals/RaVerifiedSeal.tsx": $Seals_RaVerifiedSeal,
-    "./islands/Shipping.tsx": $Shipping,
     "./islands/Sort.tsx": $Sort,
-    "./islands/SwiperJS.tsx": $SwiperJS,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

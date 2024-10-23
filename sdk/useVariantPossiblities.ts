@@ -10,6 +10,9 @@ const omit = new Set([
   "RefId",
   "descriptionHtml",
   "vtex.subscription.allever",
+  "vtex.subscription.coffe-station",
+  "vtex.subscription.all",
+  "vtex.subscription.eletrotrafo-10-off-assinatura",
   "assurant.insurance",
 ]);
 
