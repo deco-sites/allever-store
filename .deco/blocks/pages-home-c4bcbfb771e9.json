@@ -30,23 +30,6 @@
       "size": "medium"
     },
     {
-      "__resolveType": "site/sections/Category/CategoryBanner.tsx",
-      "banners": [
-        {
-          "image": {
-            "desktop": "https://placehold.co/1440x285",
-            "mobile": "https://placehold.co/390x504",
-            "alt": "banner 100% de marca x"
-          },
-          "matcher": "/"
-        }
-      ]
-    },
-    {
-      "__resolveType": "site/sections/Spacer.tsx",
-      "size": "medium"
-    },
-    {
       "__resolveType": "site/sections/Category/CarouselCategory.tsx",
       "title": "Compre Por Categorias",
       "category": [
@@ -230,6 +213,23 @@
       "Title": "Compre Por Categorias",
       "layout": "Categoria",
       "visibleItems": 8
+    },
+    {
+      "__resolveType": "site/sections/Spacer.tsx",
+      "size": "medium"
+    },
+    {
+      "__resolveType": "site/sections/Category/CategoryBanner.tsx",
+      "banners": [
+        {
+          "image": {
+            "desktop": "https://placehold.co/1440x285",
+            "mobile": "https://placehold.co/390x504",
+            "alt": "banner 100% de marca x"
+          },
+          "matcher": "/"
+        }
+      ]
     },
     {
       "__resolveType": "site/sections/Spacer.tsx",
