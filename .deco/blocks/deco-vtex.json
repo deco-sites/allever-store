@@ -4,7 +4,7 @@
     "channelPrivacy": "public"
   },
   "platform": "vtex",
-  "publicUrl": "secure.allever.com.br",
+  "publicUrl": "secure.allever.com",
   "account": "allever",
   "appKey": {
     "__resolveType": "website/loaders/secret.ts",
