@@ -115,6 +115,7 @@ async function loader(
       {
         collection: minicartSuggestion,
         count: 5,
+        sort: "orders:desc",
       },
     );
 

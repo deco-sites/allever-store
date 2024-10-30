@@ -75,7 +75,6 @@ export default function Site(state: Props): A<Manifest, Props, [
   ReturnType<typeof commerce>,
 ]> {
   _platform = state.platform || state.commerce?.platform || "custom";
-  // Prevent console.logging twice
   if (firstRun) {
     firstRun = false;
     console.info(

@@ -48,7 +48,7 @@ function ProductInfo({
   const id = useId();
   const [internationalFlag, promoFlag, newsFlag] = flags;
   const { breadcrumbList, product } = page;
-  const { productID, offers, isVariantOf, additionalProperty } = product;
+  const { productID, offers, isVariantOf, brand, additionalProperty } = product;
   const title = isVariantOf?.name ?? product.name;
   const productGroupID = isVariantOf?.productGroupID ?? "";
   const {
@@ -107,7 +107,7 @@ function ProductInfo({
           </h1>
           <div class="flex items-center justify-between">
             <p class="text-[#A8A8A8] m-0 text-xs">
-              Cod: {productID} | {seller}
+              Cod: {productID} | {brand?.name}
             </p>
             <WishlistButton item={item} pdp={true} />
           </div>
@@ -333,7 +333,7 @@ function ProductInfo({
                   <WishlistButton item={item} pdp={true} />
                 </div>
                 <p class="text-[#A8A8A8]">
-                  Cod: {productID} | {seller}
+                  Cod: {productID} | {brand?.name}
                 </p>
               </div>
               {availability === "https://schema.org/InStock" &&

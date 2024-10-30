@@ -52,8 +52,8 @@ function Card(
     Label = "banner de categoria",
     Link,
     layout,
-    width = 113,
-    height = 105,
+    width = 160,
+    height = 160,
   }: Category & Pick<Props, "layout">,
 ) {
   return (
@@ -64,8 +64,8 @@ function Card(
           : "rounded-[11px] mb-[9.75px]"}
         src={Images ? Images : `https://placehold.co/${width}x${height}`}
         alt={Label}
-        width={width ? height : 113}
-        height={height ? height : 105}
+        width={width ? height : 160}
+        height={height ? height : 160}
         loading="lazy"
       />
       {layout === "Categoria" && (
@@ -96,8 +96,8 @@ const CarouselCategory = ({ category, Title, layout }: Props) => {
                 : "rounded-[11px] mb-[9.75px] skeleton"
               }
               style={{
-                width: "113px",
-                height: "105px",
+                width: "160px",
+                height: "160px",
               }}
             />
             {layout !== "Marca" && <div class="skeleton h-6 w-full rounded-[11px]" />}
@@ -109,7 +109,7 @@ const CarouselCategory = ({ category, Title, layout }: Props) => {
           <div class="swiper-wrapper">
             {category.map((item, index) => (
               <div
-                class="swiper-slide max-w-[113px] sm:max-w-[105px] first:ml-5 last:mr-5 lg:first:ml-0 lg:last:mr-0"
+                class="swiper-slide max-w-[160px] sm:max-w-[160px] first:ml-5 last:mr-5 lg:first:ml-0 lg:last:mr-0"
                 key={index}
               >
                 <Card {...item} layout={layout} />

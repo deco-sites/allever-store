@@ -79,7 +79,7 @@ function ProductCard({
     newsFlag = "",
   ] = flags ?? [];
 
-  const { url, image: images, offers, isVariantOf, additionalProperty } =
+  const { url, image: images, offers, isVariantOf, brand, additionalProperty } =
     product;
 
   const productGroupID = isVariantOf?.productGroupID ?? "";
@@ -128,11 +128,9 @@ function ProductCard({
           {percent > 1 && inStock && !hiddenFlags
             ? (
               <span
-                class={clx(
-                  "text-xs font-semibold text-white uppercase bg-[#123ADD] text-center text-white px-2 py-1 rounded-[6px]",
-                )}
+                class="text-xs font-semibold text-white uppercase bg-[#123ADD] text-center text-white px-2 py-1 rounded-[6px]"
               >
-                {percent} % off
+                {percent}% off
               </span>
             )
             : null}
@@ -185,8 +183,8 @@ function ProductCard({
               </p>
             )}
           </div>
-          {seller && inStock && (
-            <p class="text-sm text-[#d3d3d3] capitalize">{seller}</p>
+          {brand?.name && inStock && (
+            <p class="text-sm text-[#d3d3d3] capitalize">{brand?.name}</p>
           )}
           <p class="font-normal text-sm text-ellipsis font-bold line-clamp-2 h-10">
             {title}

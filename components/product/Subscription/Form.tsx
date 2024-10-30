@@ -50,7 +50,6 @@ export default function ProductSubscription({ product }: Props) {
   if (!hasProductSubscription) {
     return null;
   }
-  console.log("hasProductSubscription", hasProductSubscription);
   const value = JSON.parse(hasProductSubscription.value || "[]")[0];
   const sname = hasProductSubscription.name;
   return (

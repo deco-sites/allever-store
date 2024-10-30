@@ -41,9 +41,6 @@ async function generateIconsFile() {
     existingContent += `\n${availableIconsString}`;
 
     await Deno.writeTextFile(outputFilePath, existingContent, { create: true });
-    // console.log('adminIcons.ts updated successfully with new icons.');
-  } else {
-    // console.log('No new icons to add.');
   }
 }
 

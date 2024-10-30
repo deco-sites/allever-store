@@ -11,16 +11,12 @@ const bestInstallment = (
     return acc;
   }
 
+  if (curr.name === "Pix") {
+    return acc;
+  }
+
   if (!acc) {
     return curr;
-  }
-
-  if (acc.price > curr.price) {
-    return curr;
-  }
-
-  if (acc.price < curr.price) {
-    return acc;
   }
 
   if (

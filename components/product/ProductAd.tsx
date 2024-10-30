@@ -33,11 +33,16 @@ export default function ProductAd({
   const {
     pix,
     listPrice,
+    installment
   } = useOffer(product?.product?.offers);
   const {
     product: currentProduct
   } = product;
-  const { url, brand, name = "", image: images = [], offers } = currentProduct;
+  const {
+    isVariantOf
+  } = currentProduct;
+  const { url, brand, image: images = [], offers } = currentProduct;
+  const title = isVariantOf?.name ?? currentProduct.name;
   const image = images && images[0]?.url;
   return (
     <div class="container p-3 lg:py-0 sm:px-0 flex flex-col lg:flex-row">
@@ -46,7 +51,7 @@ export default function ProductAd({
           <Image
             class="object-cover"
             src={image || ""}
-            alt={name}
+            alt={title}
             width={250}
             height={250}
             preload={true}
@@ -56,20 +61,26 @@ export default function ProductAd({
           />
         </a>
       </div>
-      <div class={`flex flex-col items-start justify-center p-3`}>
-        <p class="mb-[5px] text-[#D3D3D3] text-sm leading-[21px] uppercase">
+      <div class="flex flex-col items-start justify-center p-3 lg:px-8 lg:py-3">
+        <p class="mb-2 text-middle-gray text-sm uppercase">
           {brand?.name}
         </p>
         <p class="text-base leading-6 font-normal text-black max-w-[252px]">
-          {name}
+          {title}
         </p>
-        <div class="flex items-start lg:items-center mt-[5px] flex-col lg:flex-row lg:gap-[6px]">
-          <p class="text-sm leading-[21px] text-[#989898] line-through">
+        <div class="flex items-start lg:items-center mt-2 flex-col lg:flex-row lg:gap-1.5">
+          <p class="text-sm text-dark-gray line-through">
             {formatPrice(listPrice, offers?.priceCurrency)}
           </p>
-          <p class="font-semibold sm:text-right text-xl lg:text-[20px] text-[#0066E4]">
+          <p class="font-semibold sm:text-right text-xl lg:text-xl text-signature-blue">
             {formatPrice(pix, offers?.priceCurrency)}
           </p>
+        </div>
+        <div class="text-dark-gray text-sm">
+          ou {installment?.billingDuration}x de {formatPrice(
+            installment?.billingIncrement,
+            offers!.priceCurrency!,
+          )}
         </div>
       </div>
     </div>

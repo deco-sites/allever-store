@@ -181,7 +181,7 @@ const Mobile = ({ logo, searchbar }: Props) => (
         height: NAVBAR_HEIGHT_MOBILE,
       }}
     >
-      <div class="flex items-center justify-between w-full">
+      <div class="flex items-center justify-between w-full relative">
         <label
           for={SIDEMENU_DRAWER_ID}
           class="btn btn-square btn-sm btn-ghost justify-start"
@@ -195,7 +195,7 @@ const Mobile = ({ logo, searchbar }: Props) => (
         </label>
 
         {logo && (
-          <a href="/" aria-label="Store logo">
+          <a href="/" aria-label="Store logo" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
             <Image src={logo.src} alt={logo.alt} width={94} height={21} />
           </a>
         )}

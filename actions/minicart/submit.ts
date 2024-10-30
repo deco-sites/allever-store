@@ -108,6 +108,7 @@ async function action(
       {
         collection: minicartSuggestion,
         count: 5,
+        sort: "orders:desc",
       },
     );
 
