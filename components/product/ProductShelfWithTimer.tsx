@@ -36,7 +36,6 @@ export default function ProductShelf({
   expireAt,
   displayOfferTag = false
 }: SectionProps<typeof loader>) {
-  console.log("expireAt", expireAt);
   const id = useId();
   if (!products || products.length === 0) {
     return null;
