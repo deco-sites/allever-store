@@ -35,6 +35,20 @@
   }
 }
 
+@layer utilities {
+  .is-scrolled #header {
+    @apply top-0 fixed bg-primary;
+  }
+
+  .is-homepage #header {
+    @apply fixed;
+  }
+
+  .is-otherpage #header {
+    @apply bg-primary;
+  }
+}
+
 .group:disabled .group-disabled\:animate-progress {
   animation: progress-frame ease normal
 }
@@ -54,10 +68,6 @@
 
 .drawer {
   width: unset !important;
-}
-
-.scrolling {
-  background-color: #123ADD !important;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -159,20 +169,6 @@
     position: absolute;
     transform: translate(-50%, -50%);
   }
-}
-
-.is-scrolled #header {
-  top: 0;
-  position: fixed;
-  background-color: #123ADD;
-}
-
-.is-homepage #header {
-  position: fixed;
-}
-
-.is-otherpage #header {
-  background-color: #123ADD;
 }
 
 /* Fix Safari issue related to <summary> / <details> arrow */

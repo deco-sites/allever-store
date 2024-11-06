@@ -64,7 +64,7 @@ export default function ProductShelf({
         {...viewItemListEvent}
       >
         <div class="flex flex-wrap items-center gap-x-10 gap-y-[0.5rem] px-[18px] lg:px-[25px]">
-          <Section.Header title={title} cta={cta} />
+          <Section.Header title={title} />
         </div>
         <ProductSlider
           flags={[internationalFlag, promoFlag, newsFlag]}

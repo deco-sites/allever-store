@@ -6,17 +6,14 @@ import Icon from "../../components/ui/Icon.tsx";
 import Image from "apps/website/components/Image.tsx";
 
 interface Category {
-  Images?: ImageWidget;
-  Label?: string;
-  Link?: string;
-  width?: number;
-  height?: number;
+  image?: ImageWidget;
+  label?: string;
+  link?: string;
 }
 
 interface Props {
-  Title?: string;
-  layout: "Marca" | "Categoria";
-  category: Category[];
+  title?: string;
+  categories?: Category[];
 }
 
 const onLoad = (id: string) => {
@@ -48,71 +45,61 @@ const onLoad = (id: string) => {
 
 function Card(
   {
-    Images,
-    Label = "banner de categoria",
-    Link,
-    layout,
-    width = 160,
-    height = 160,
-  }: Category & Pick<Props, "layout">,
+    image,
+    label = "Categoria",
+    link,
+  }: Category,
 ) {
   return (
-    <a className="flex flex-col group" href={Link}>
+    <a className="flex flex-col group" href={link}>
       <Image
-        className={layout === "Marca"
-          ? "rounded-full"
-          : "rounded-[11px] mb-[9.75px]"}
-        src={Images ? Images : `https://placehold.co/${width}x${height}`}
-        alt={Label}
-        width={width ? height : 160}
-        height={height ? height : 160}
+        className="rounded-xl mb-2"
+        src={image ?? "https://placehold.co/114x106"}
+        alt={label}
+        width={114}
+        height={106}
         loading="lazy"
       />
-      {layout === "Categoria" && (
-        <p className="text-base text-center group-hover:text-[#123ADD] ease-in duration-300">
-          {Label}
-        </p>
-      )}
+      <p className="text-base text-center group-hover:text-primary ease-in duration-300">
+        {label}
+      </p>
     </a>
   );
 }
 
-const CarouselCategory = ({ category, Title, layout }: Props) => {
+const CarouselCategory = ({ categories, title }: Props) => {
   const id = useId();
 
   return (
     <div id={id}>
       <div className="container px-5 lg:px-0 overflow-hidden">
         <h3 className="mb-5 text-base font-semibold sm:text-2xl px-0 sm:px-5">
-          {Title}
+          {title}
         </h3>
       </div>
       <div id="fakeLoading" class="container px-5 flex gap-5 overflow-x-hidden">
         {new Array(15).fill("").map((_, index) => (
           <div key={index}>
             <div 
-              class={layout === "Marca"
-                ? "rounded-full skeleton"
-                : "rounded-[11px] mb-[9.75px] skeleton"
-              }
+              class="rounded-xl mb-2 skeleton"
               style={{
-                width: "160px",
-                height: "160px",
+                width: "114px",
+                height: "106px",
               }}
             />
-            {layout !== "Marca" && <div class="skeleton h-6 w-full rounded-[11px]" />}
+            <div class="skeleton h-6 w-full rounded-xl" />
           </div>
         ))}
       </div>
-      <div id="content" class="hidden container px-0 lg:px-14 overflow-hidden relative">
+      <div id="content" class="hidden container px-0 lg:px-10 overflow-hidden relative">
         <div class="overflow-hidden">
           <div class="swiper-wrapper">
-            {category.map((item, index) => (
+            {categories?.map((item, index) => (
               <div
-                class="swiper-slide max-w-[160px] sm:max-w-[160px] first:ml-5 last:mr-5 lg:first:ml-0 lg:last:mr-0"
+                class="swiper-slide max-w-[114px] first:ml-5 last:mr-5 lg:first:ml-0 lg:last:mr-0 cursor-pointer"
                 key={index}
               >
-                <Card {...item} layout={layout} />
+                <Card {...item} />
               </div>
             ))}
           </div>

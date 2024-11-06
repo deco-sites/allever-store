@@ -17,12 +17,12 @@ const onLoad = () => {
   >;
   const verifyActiveRadio = (e: Event) => {
     inputs.forEach((i) =>
-      i.parentElement?.parentElement?.classList.remove("border-signature-blue")
+      i.parentElement?.parentElement?.classList.remove("border-primary")
     );
     const target = e.currentTarget;
     if (target) {
       (target as Element).parentElement?.parentElement?.classList.add(
-        "border-signature-blue",
+        "border-primary",
       );
     }
   };
@@ -30,7 +30,7 @@ const onLoad = () => {
     inputs.forEach((input) => {
       if (input.checked) {
         input.parentElement?.parentElement?.classList.add(
-          "border-signature-blue",
+          "border-primary",
         );
       }
       input.onchange = verifyActiveRadio;
@@ -74,28 +74,28 @@ export default function ProductSubscription({ product }: Props) {
             </button>
           </form>
           <h2 class="text-black font-semibold uppercase text-lg mb-3">
-            ASSINE E COMPRE COM ATÉ <b class="text-signature-blue">[10% OFF]</b>
+            ASSINE E COMPRE COM ATÉ <b class="text-primary">[10% OFF]</b>
           </h2>
           <div class="mb-5 text-sm text-black font-semibold">
             <h3>Por que assinar?</h3>
             <div class="flex items-center gap-3 border-b border-middle-gray py-3">
               <Icon
                 id="check-circle"
-                class="text-signature-blue"
+                class="text-primary"
               />
               10% OFF no site em todas as compras com assinatura
             </div>
             <div class="flex items-center gap-3 border-b border-middle-gray py-3">
               <Icon
                 id="check-circle"
-                class="text-signature-blue"
+                class="text-primary"
               />
               Edite os produtos e as datas, pause ou cancele a qualquer momento!
             </div>
             <div class="flex items-center gap-3 border-b border-middle-gray py-3">
               <Icon
                 id="check-circle"
-                class="text-signature-blue"
+                class="text-primary"
               />
               Sem taxas de Adesão, Mensalidade ou Cancelamento
             </div>
@@ -124,7 +124,7 @@ export default function ProductSubscription({ product }: Props) {
                         <input
                           type="radio"
                           name="subscription-option"
-                          class="radio checked:bg-signature-blue"
+                          class="radio checked:bg-primary"
                           value={domainValue}
                           defaultChecked={index === 0}
                         />

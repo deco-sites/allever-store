@@ -65,7 +65,7 @@ function ProductSuggestionsCard({
       <div class="col-span-2">
         <a href={relativeUrl} class="pt-5">
           {seller && inStock
-            ? <p class="my-[5px] text-sm text-[#d3d3d3] capitalize">{seller}</p>
+            ? <p class="my-[5px] text-sm text-middle-gray capitalize">{seller}</p>
             : <span class="my-[5px]"></span>}
           <p class="font-normal text-sm max-h-[63px] overflow-hidden">
             {title}
@@ -74,17 +74,17 @@ function ProductSuggestionsCard({
             ? (
               <div class="flex gap-2 flex-col pt-2">
                 {listPrice && (
-                  <span class="line-through font-normal text-[#a8a8a8] text-sm">
+                  <span class="line-through font-normal text-dark-gray text-sm">
                     {formatPrice(listPrice, offers?.priceCurrency)}
                   </span>
                 )}
-                <span class="font-semibold text-[20px] text-[#123ADD]">
+                <span class="font-semibold text-[20px] text-primary">
                   {formatPrice(installment?.price)}{" "}
-                  <span class="text-signature-blue font-normal text-base">
+                  <span class="text-primary font-normal text-base">
                     no pix
                   </span>
                 </span>
-                <span class="text-[#a8a8a8] text-xs">
+                <span class="text-dark-gray text-xs">
                   ou {installment?.billingDuration}x de {formatPrice(
                     installment?.billingIncrement,
                     offers!.priceCurrency!,

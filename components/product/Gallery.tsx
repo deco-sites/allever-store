@@ -25,8 +25,9 @@ export default function GallerySlider(props: Props) {
   if (!props.page) {
     throw new Error("Missing Product Details Page Info");
   }
-  const { page: { product: { image: images = [] } } } = props;
+  const { page: { product: { image } } } = props;
   const device = useDevice();
+  const images = image?.filter((img) => img.name !== "measurementtable") || [];
   if (!images) return null;
   return (
     <>

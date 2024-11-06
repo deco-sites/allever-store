@@ -95,10 +95,10 @@ function Aside({ drawer, children, layout }: AsideProps) {
       return (
         <div
           data-aside
-          class={`bg-[#F2F2F2] h-full divide-y w-full flex flex-col `}
+          class="bg-light-gray h-full divide-y w-full flex flex-col"
         >
           <div
-            class={`flex justify-between items-center bg-[#123ADD] h-[58px] p-5`}
+            class={`flex justify-between items-center bg-primary h-[58px] p-5`}
           >
             <p class="text-base font-semibold text-white">Buscar</p>
             <label for={drawer} aria-label="X">

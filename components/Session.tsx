@@ -299,7 +299,7 @@ export default function Session(
           <Drawer.Aside
             layout="minicart"
             drawer={MINICART_DRAWER_ID}
-            background="bg-[#123ADD]"
+            background="bg-primary"
             color="text-white"
             isMinicart={true}
           >

@@ -17,7 +17,7 @@ function Shipping({ shippingValue }: Props) {
 
   return (
     <div class="flex flex-col items-start px-4 mt-2">
-      <span class="text-base text-[#A8A8A8]">
+      <span class="text-base text-dark-gray">
         {postalCode || "Não definido"}
       </span>
     </div>

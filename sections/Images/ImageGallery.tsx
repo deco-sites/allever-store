@@ -57,7 +57,6 @@ function Banner({ mobile, desktop, alt, href }: Banner) {
 
 export default function Gallery({
   title,
-  cta,
   banners = [
     {
       mobile:
@@ -95,7 +94,7 @@ export default function Gallery({
 }: Props) {
   return (
     <Section.Container>
-      <Section.Header title={title} cta={cta} />
+      <Section.Header title={title} />
 
       <ul class="grid gap-2 sm:gap-4 grid-cols-1 sm:grid-cols-2 px-5 sm:px-0">
         {banners.map((item) => (

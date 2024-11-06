@@ -162,12 +162,12 @@ const FirstVariation = (
               />
             </a>
           </div>
-          <div class="container leading-[1] my-2">
+          <div class="container leading-[1] my-4">
             <Slider class="carousel carousel-center w-full gap-4 sm:flex sm:justify-between ">
               {slide?.map((item, index) => (
                 <Slider.Item
                   index={index}
-                  class="carousel-item max-w-[75vw] w-full first:pl-5 last:pr-5"
+                  class="carousel-item first:pl-5 last:pr-5"
                   key={index}
                 >
                   <a href={item.Link} class="flex">

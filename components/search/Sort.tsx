@@ -97,7 +97,7 @@ function Sort({ sortOptions, url }: Props) {
       <div class="relative z-[3]">
         <button
           type="button"
-          class="flex items-center gap-2 w-full px-4 py-2 bg-transparent text-xs font-bold text-[#123ADD] focus:outline-none"
+          class="flex items-center gap-2 w-full px-4 py-2 bg-transparent text-xs font-bold text-primary focus:outline-none"
           id="menu-button"
           aria-expanded={isOpen}
           aria-haspopup="true"

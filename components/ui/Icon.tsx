@@ -15,6 +15,7 @@ export type AvailableIcons =
   | "local_shipping"
   | "pan_zoom"
   | "share"
+  | "share-2"
   | "sell"
   | "check-circle"
   | "error"
@@ -38,7 +39,12 @@ export type AvailableIcons =
   | "favorite-pdp"
   | "ArrowSlide"
   | "rain"
-  | "18";
+  | "18"
+  | "whatsapp"
+  | "facebook"
+  | "copy-paste"
+  | "mail"
+  | "x-twitter";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   /**

@@ -21,7 +21,7 @@ export interface Props extends SectionHeaderProps {
 }
 
 export default function TabbedProductShelf(
-  { tabs, title, cta, tabIndex }: Props,
+  { tabs, title, tabIndex }: Props,
 ) {
   const ti = typeof tabIndex === "number"
     ? Math.min(Math.max(tabIndex, 0), tabs.length)
@@ -48,7 +48,7 @@ export default function TabbedProductShelf(
 
   return (
     <Section.Container {...viewItemListEvent}>
-      <Section.Header title={title} cta={cta} />
+      <Section.Header title={title} />
 
       <Section.Tabbed tabs={tabs} current={ti}>
         {!products?.length

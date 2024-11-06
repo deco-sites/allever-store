@@ -5,6 +5,7 @@ import { clx } from "../../sdk/clx.ts";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
 import { useComponent } from "../Component.tsx";
 import { type SectionProps } from "@deco/deco";
+import { useScript } from "@deco/deco/hooks";
 interface NoticeProps {
   title?: string;
   description?: string;
@@ -23,6 +24,20 @@ export interface Props {
   /** @hide true */
   status?: "success" | "failed";
 }
+const onLoad = () => {
+  (document.getElementById("birthday") as HTMLInputElement).oninput = (e) => {
+    const target = e.target as HTMLInputElement;
+    const value = target.value.replace(/\D/g, "");
+    if (value.length > 2 && value.length <= 4) {
+      target.value = value.replace(/(\d{2})(\d{1,2})/, "$1/$2").substring(0, 10);
+    } else if (value.length > 4) {
+      target.value = value.replace(
+        /(\d{2})(\d{2})(\d{1,4})/,
+        "$1/$2/$3",
+      ).substring(0, 10);
+    }
+  };
+};
 export async function action(props: Props, req: Request, ctx: AppContext) {
   const platform = usePlatform();
   const form = await req.formData();
@@ -97,61 +112,70 @@ function Newsletter({
     );
   }
   return (
-    <div class="bg-[#123ADD]">
-      <Section.Container>
-        <div class="flex space-between flex-col lg:flex-row items-center px-5 py-11 gap-5">
-          <Notice {...empty} />
+    <>
+      <div class="bg-primary">
+        <Section.Container>
+          <div class="flex space-between flex-col lg:flex-row items-center px-5 py-11 gap-5">
+            <Notice {...empty} />
 
-          <form
-            class="flex justify-center flex-col lg:gap-4 w-full"
-            hx-swap="outerHTML"
-            hx-post={useComponent(import.meta.url)}
-            hx-target="closest section"
-          >
-            <div class="flex gap-[13px] lg:gap-[10px] flex-col lg:flex-row">
-              <input
-                name="name"
-                class="p-4 border border-white rounded-[20px] bg-transparent placeholder-white outline-0 text-white"
-                type="text"
-                placeholder={namePlaceholder}
-                pattern="^[a-zA-ZÀ-ÿ\s'-]{2,}$"
-              />
-
-              <input
-                name="email"
-                class="p-4 border border-white rounded-[20px] bg-transparent placeholder-white outline-0 text-white"
-                type="email"
-                placeholder={emailPlaceholder}
-                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-              />
-              <input
-                id="birthday"
-                name="birthday"
-                class="p-4 border border-white rounded-[20px] bg-transparent placeholder-white outline-0 text-white"
-                type="text"
-                pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/(19|20)\d\d$"
-                maxLength={10}
-                placeholder={birthdayPlaceholder}
-              />
-              <button
-                class="bg-[#000] rounded-[20px] px-[21px] py-[13px] "
-                type="submit"
-              >
-                <span class="[.htmx-request_&]:hidden inline text-white ">
-                  {label}
-                </span>
-                <span class="[.htmx-request_&]:inline hidden loading loading-spinner" />
-              </button>
-            </div>
-            <p
-              class="text-white text-[13px] mt-[13px] lg:mt-0"
-              dangerouslySetInnerHTML={{ __html: textLegal }}
+            <form
+              class="flex justify-center flex-col lg:gap-4 w-full"
+              hx-swap="outerHTML"
+              hx-post={useComponent(import.meta.url)}
+              hx-target="closest section"
             >
-            </p>
-          </form>
-        </div>
-      </Section.Container>
-    </div>
+              <div class="flex gap-[13px] lg:gap-[10px] flex-col lg:flex-row">
+                <input
+                  name="name"
+                  class="p-4 border border-white rounded-[20px] bg-transparent placeholder-white outline-0 text-white"
+                  type="text"
+                  placeholder={namePlaceholder}
+                  pattern="^[a-zA-ZÀ-ÿ\s'-]{2,}$"
+                />
+
+                <input
+                  name="email"
+                  class="p-4 border border-white rounded-[20px] bg-transparent placeholder-white outline-0 text-white"
+                  type="email"
+                  placeholder={emailPlaceholder}
+                  pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                />
+                <input
+                  id="birthday"
+                  name="birthday"
+                  class="p-4 border border-white rounded-[20px] bg-transparent placeholder-white outline-0 text-white"
+                  type="text"
+                  pattern="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/(19|20)\d\d$"
+                  maxLength={10}
+                  placeholder={birthdayPlaceholder}
+                />
+                <button
+                  class="bg-black rounded-[20px] px-[21px] py-[13px] "
+                  type="submit"
+                >
+                  <span class="[.htmx-request_&]:hidden inline text-white ">
+                    {label}
+                  </span>
+                  <span class="[.htmx-request_&]:inline hidden loading loading-spinner" />
+                </button>
+              </div>
+              <p
+                class="text-white text-[13px] mt-[13px] lg:mt-0"
+                dangerouslySetInnerHTML={{ __html: textLegal }}
+              >
+              </p>
+            </form>
+          </div>
+        </Section.Container>
+      </div>
+      <script
+        type="text/javascript"
+        defer
+        dangerouslySetInnerHTML={{
+          __html: useScript(onLoad),
+        }}
+      />
+    </>
   );
 }
 export default Newsletter;

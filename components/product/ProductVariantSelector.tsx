@@ -3,7 +3,7 @@ import { clx } from "../../sdk/clx.ts";
 import { relative } from "../../sdk/url.ts";
 import { useId } from "../../sdk/useId.ts";
 import { useVariantPossibilities } from "../../sdk/useVariantPossiblities.ts";
-import { useSection } from "@deco/deco/hooks";
+import { useScript, useSection } from "@deco/deco/hooks";
 interface Props {
   product: Product;
 }
@@ -23,8 +23,8 @@ const useStyles = (value: string, checked: boolean) => {
   }
   return clx(
     "p-3 rounded-[10px] text-xs font-bold w-max",
-    checked && "bg-[#123ADD] text-white ",
-    !checked && "bg-[#D3D3D3] text-black ",
+    checked && "bg-primary text-white ",
+    !checked && "bg-middle-gray text-black ",
   );
 };
 export const Ring = ({ value, checked = false, class: _class }: {
@@ -41,11 +41,12 @@ export const Ring = ({ value, checked = false, class: _class }: {
   );
 };
 function VariantSelector({ product }: Props) {
-  const { url, isVariantOf } = product;
+  const { url, isVariantOf, image: images } = product;
   const hasVariant = isVariantOf?.hasVariant ?? [];
   const possibilities = useVariantPossibilities(hasVariant, product);
   const relativeUrl = relative(url);
   const id = useId();
+  const hasMeasurementTableImage = images?.find(img => img.name === "measurementtable") || null;
   if (Object.keys(possibilities).length === 0) {
     return null;
   }
@@ -58,7 +59,22 @@ function VariantSelector({ product }: Props) {
     >
       {Object.keys(possibilities).map((name) => (
         <li class="flex flex-col gap-2">
-          <span class="text-base font-bold uppercase">{name}</span>
+          <span class="text-base font-bold uppercase">
+            {name}
+            {name.toLowerCase() === "tamanho" && hasMeasurementTableImage && (
+              <button 
+                class="btn btn-ghost text-dark-gray underline h-auto min-h-auto hover:bg-transparent" 
+                hx-on:click={
+                  useScript(() => {
+                    // @ts-ignore .
+                    document.getElementById("measurement_table")?.showModal();
+                  })
+                }
+              >
+                Guia de medidas
+              </button>
+            )}
+          </span>
           <ul class="flex flex-row gap-2 mb-[10px] flex-wrap">
             {Object.entries(possibilities[name])
               .filter(([value]) => value)

@@ -8,7 +8,8 @@
     "description": "Improve your page performance with deco.cx ",
     "titleTemplate": "%s | Allever",
     "descriptionTemplate": "%s | Deco.cx",
-    "favicon": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11097/089e6d24-1be6-44a3-a736-b209a82ae728"
+    "favicon": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11097/089e6d24-1be6-44a3-a736-b209a82ae728",
+    "themeColor": "#123ADD"
   },
   "theme": {
     "__resolveType": "Deco"

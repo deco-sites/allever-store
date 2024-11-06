@@ -91,7 +91,7 @@ export default function Searchbar(
             <input
               type="text"
               name={NAME}
-              class={`rounded-[30px] outline-none py-[8.5px] px-5 placeholder-[#D3D3D3] w-full lg:w-auto`}
+              class={`rounded-[30px] outline-none py-[8.5px] px-5 placeholder-middle-gray w-full lg:w-auto`}
               placeholder={placeholder}
               autocomplete="off"
               data-hx-target={`#${slot}`}

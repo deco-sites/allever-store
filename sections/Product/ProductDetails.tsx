@@ -15,6 +15,8 @@ export interface Props {
   isMobile: boolean;
   /** @hidden */
   productRecommendations: Product[];
+  /** @title Omitir seção de entrega? */
+  hiddenShipping?: boolean;
 }
 const onLoad = (productId: string, productName: string, image: string) => {
   // @ts-ignore _trustvox exists
@@ -76,6 +78,7 @@ export default function ProductDetails({
   newsFlag,
   isMobile,
   productRecommendations,
+  hiddenShipping = false,
 }: SectionProps<typeof loader>) {
   if (!page) {
     return (
@@ -140,19 +143,20 @@ export default function ProductDetails({
           flags={[internationalFlag, promoFlag, newsFlag]}
           page={page}
           device={device}
+          hiddenShipping={hiddenShipping}
         />
         <BuyTogether
           page={page}
           device={device}
           productRecommendations={productRecommendations}
         />
-        <div class="border border-x-0 border-b-[#a8a8a8] border-t-0 lg:border-t-[1px] lg:border-t-[#a8a8a8] mt-0 lg:mt-12">
+        <div class="border border-x-0 border-b-dark-gray border-t-0 lg:border-t-[1px] lg:border-t-dark-gray mt-0 lg:mt-12">
           <Description page={page} />
         </div>
         {additionalProperty.length > 0 && (
           <div
             id="specifications"
-            class="pt-32 -mt-32 border border-x-0 border-b-[#a8a8a8] border-t-0"
+            class="pt-32 -mt-32 border border-x-0 border-b-dark-gray border-t-0"
           >
             <Collapsable
               class="container px-5"

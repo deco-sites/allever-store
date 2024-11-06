@@ -72,7 +72,7 @@ export default function ProductAd({
           <p class="text-sm text-dark-gray line-through">
             {formatPrice(listPrice, offers?.priceCurrency)}
           </p>
-          <p class="font-semibold sm:text-right text-xl lg:text-xl text-signature-blue">
+          <p class="font-semibold sm:text-right text-xl lg:text-xl text-primary">
             {formatPrice(pix, offers?.priceCurrency)}
           </p>
         </div>

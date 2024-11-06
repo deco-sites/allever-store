@@ -24,7 +24,7 @@ function QuantitySelector(
       <div class="flex ">
         <button
           type="button"
-          class="text-[#123ADD] text-sm font-bold"
+          class="text-primary text-sm font-bold"
           hx-on:click={useScript(onClick, -1)}
           disabled={disabled}
         >
@@ -51,7 +51,7 @@ function QuantitySelector(
         </div>
         <button
           type="button"
-          class="text-[#123ADD] text-sm font-bold"
+          class="text-primary text-sm font-bold"
           hx-on:click={useScript(onClick, 1)}
           disabled={disabled}
         >

@@ -31,7 +31,7 @@ export default function Form({ items }: Props) {
         />
         <button
           type="submit"
-          class="no-animation bg-[#123ADD] text-white text-xs font-semibold rounded-[39px] p-4 max-w-[127px] w-full"
+          class="no-animation bg-primary text-white text-xs font-semibold rounded-[39px] p-4 max-w-[127px] w-full"
         >
           <span class="[.htmx-request_&]:hidden inline">Calcular</span>
           <span class="hidden [.htmx-request_&]:inline-block loading loading-spinner loading-xs" />

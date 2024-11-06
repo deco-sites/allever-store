@@ -115,7 +115,7 @@ function PageResult(props: SectionProps<typeof loader>) {
             </a>
           )}
 
-          <span class="py-2 px-3 border border-[#123ADD]">
+          <span class="py-2 px-3 border border-primary">
             {zeroIndexedOffsetPage + 1}
           </span>
           {nextPageUrl
@@ -268,7 +268,7 @@ function Result(props: SectionProps<typeof loader>) {
                       id={controls}
                       aside={
                         <div class="bg-base-100 flex flex-col h-full divide-y overflow-y-hidden min-w-[85vw]">
-                          <div class="flex justify-between items-center bg-[#123ADD]">
+                          <div class="flex justify-between items-center bg-primary">
                             <p class="text-[20px] font-semibold py-[17px] flex items-center text-white px-5">
                               Filtros
                             </p>

@@ -56,7 +56,7 @@ const About = ({ title, html, socials }: Props) => {
           </div>
         </div>
       )}
-      <p class="text-xs sm:text-sm text-[#a8a8a8]">
+      <p class="text-xs sm:text-sm text-dark-gray">
         Allever Ltda - CNPJ: 43.757.816/0001-77 - Rua Francisco Regin, 339,
         Centro, Cornélio Procópio, PR, CEP - 86300-000 - faleconosco@allever.com
         - (11) 4200-0010

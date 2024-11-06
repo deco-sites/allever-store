@@ -5,16 +5,15 @@ import { useSection } from "@deco/deco/hooks";
 export interface Props {
   /** @description Section title */
   title?: string;
-  /** @description See all link */
-  cta?: string;
+  displayOfferTag?: boolean;
 }
-function Header({ title, cta }: Props) {
+function Header({ title, displayOfferTag = false }: Props) {
   if (!title) {
     return null;
   }
   return (
     <div class={clx("flex justify-between items-center gap-2")}>
-      <span class="text-2xl sm:text-3xl font-semibold">{title}</span>
+      <span class="text-2xl sm:text-3xl font-semibold">{displayOfferTag && <span class="text-primary font-semibold uppercase">[Oferta]{" "}</span>}{title}</span>
     </div>
   );
 }

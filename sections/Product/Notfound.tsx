@@ -20,7 +20,7 @@ const Notfound = (
     title,
     content =
       "Não encontramos a página que você tentou </br> acessar. <b>Que tal fazer uma nova busca?</b>",
-    help = "Precisa de ajuda? <b class='text-[#123ADD]'>Fale conosco:</b>",
+    help = "Precisa de ajuda? <b class='text-primary'>Fale conosco:</b>",
     cta,
   }: Props,
 ) => {
@@ -29,7 +29,7 @@ const Notfound = (
       {title &&
         (
           <div class="container px-5">
-            <p class="text-[32px] lg:text-[64px] text-[#d3d3d3] text-start lg:text-center mx-auto border-b-2 border-[#d3d3d3] py-[35px]">
+            <p class="text-[32px] lg:text-[64px] text-middle-gray text-start lg:text-center mx-auto border-b-2 border-middle-gray py-[35px]">
               {title}
             </p>
           </div>
@@ -37,7 +37,7 @@ const Notfound = (
       <div class={`mx-auto flex flex-col items-center px-5`}>
         <p
           class={`text-black font-normal justify-center py-[45px] text-start lg:text-center text-base lg:text-[30px] w-full gap-1 lg:leading-[45px] ${
-            !title && "border-b-2 border-[#d3d3d3]"
+            !title && "border-b-2 border-middle-gray"
           }`}
           dangerouslySetInnerHTML={{ __html: content }}
         >
@@ -51,7 +51,7 @@ const Notfound = (
       </div>
       <div class="py-5 px-5 flex justify-center ">
         <a
-          class="max-w-[427px] w-full bg-[#123ADD] rounded-[20px] text-white text-base flex justify-center py-[13px] gap-[10px]"
+          class="max-w-[427px] w-full bg-primary rounded-[20px] text-white text-base flex justify-center py-[13px] gap-[10px]"
           href={cta?.link}
         >
           <Icon id="contact-white" width={23} height={23.77} />

@@ -246,11 +246,10 @@
         "link": "https://confi.com.vc/lojas-confiaveis/detalhes?id=130774"
       },
       {
-        "image": "https://service.yourviews.com.br/Image/a0f94ea6-814e-4300-8b76-7518549747c5/Footer.jpg",
-        "link": "https://www.lojaconfiavel.com/allever",
-        "alt": "selo loja confiável ",
-        "width": 68,
-        "height": 70
+        "image": "https://deco-sites-assets.s3.sa-east-1.amazonaws.com/allever-store/f7fcaadf-5692-484d-a526-c1b0092d90a3/pci.png",
+        "alt": "PCI VTEX",
+        "width": 69,
+        "height": 42
       }
     ],
     "hideSeal": false

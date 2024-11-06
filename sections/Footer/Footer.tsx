@@ -1,12 +1,12 @@
 import { type ImageWidget } from "apps/admin/widgets.ts";
+import { Head } from "$fresh/runtime.ts";
 import Image from "apps/website/components/Image.tsx";
 import PoweredByDeco from "./PoweredByDeco.tsx";
 import PoweredByVtex from "./PoweredByVtex.tsx";
 import PoweredByWave from "./PoweredByWave.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import Collapsable from "../../components/ui/Collapsable.tsx";
-import { useDevice } from "@deco/deco/hooks";
-import { useScript } from "deco/hooks/useScript.ts";
+import { useDevice, useScript } from "@deco/deco/hooks";
 /** @titleBy title */
 interface Item {
   /**
@@ -213,6 +213,21 @@ function CertifiedComponent({ title, certifieds }: CertifiedProps) {
             })
           }}
         />
+        {/* <div data-trustvox-certificate-fixed="data-trustvox-certificate-fixed" />
+        <script
+          type="text/javascript"
+          defer
+          dangerouslySetInnerHTML={{
+            __html: useScript(() => {
+              const script = document.createElement("script");
+              script.type = "text/javascript";
+              script.src = "//certificate.trustvox.com.br/widget.js";
+              script.defer = true;
+              console.log("script", script);
+              document.body.appendChild(script);
+            })
+          }}
+        /> */}
       </div>
     </div>
   );
@@ -221,12 +236,12 @@ function Service({ title, label, button }: Service) {
   return (
     <div class="flex gap-[21px] flex-col max-w-[200px]">
       {title && <p class="text-base font-normal">{title}</p>}
-      {label && <p class="text-base font-normal text-[#888888]">{label}</p>}
+      {label && <p class="text-base font-normal text-dark-gray">{label}</p>}
       {button?.label && button?.link && (
         <a
           href={button.link}
           target="_blank"
-          class="flex justify-center gap-[10px] px-5 py-[13px] bg-[#123ADD] text-white rounded-[20px] hover:bg-blue-600 text-center"
+          class="flex justify-center gap-[10px] px-5 py-[13px] bg-primary text-white rounded-[20px] hover:bg-blue-600 text-center"
         >
           <Icon id="contact-white" />
           {button.label}
@@ -292,7 +307,7 @@ function Footer(
                   <p class="text-base max-w-[180px]">{label}</p>
                   <ul class="flex mt-5 gap-[3px]">
                     {social.map(({ image, href, alt }) => (
-                      <li class="bg-[#123ADD] p-[9px] rounded-[7px]">
+                      <li class="bg-primary p-[9px] rounded-[7px]">
                         <a href={href} target="_blank">
                           <Image
                             src={image}
@@ -322,7 +337,7 @@ function Footer(
                             links[0].children.map(({ title, href }) => (
                               <li>
                                 <a
-                                  class="text-base font-normal text-[#888888]"
+                                  class="text-base font-normal text-dark-gray"
                                   href={href}
                                 >
                                   {title}
@@ -346,7 +361,7 @@ function Footer(
                             links[3].children.map(({ title, href }) => (
                               <li>
                                 <a
-                                  class="text-base font-normal text-[#888888]"
+                                  class="text-base font-normal text-dark-gray"
                                   href={href}
                                 >
                                   {title}
@@ -373,7 +388,7 @@ function Footer(
                             links[1].children.map(({ title, href }) => (
                               <li>
                                 <a
-                                  class="text-base font-normal text-[#888888]"
+                                  class="text-base font-normal text-dark-gray"
                                   href={href}
                                 >
                                   {title}
@@ -407,7 +422,7 @@ function Footer(
                               links[2].children.map(({ title, href }) => (
                                 <li>
                                   <a
-                                    class="text-base font-normal text-[#888888]"
+                                    class="text-base font-normal text-dark-gray"
                                     href={href}
                                   >
                                     {title}
@@ -440,9 +455,9 @@ function Footer(
                 </ul>
               </div>
             </div>
-            <div class="bg-[#e7e5e5]">
+            <div class="bg-light-gray">
               <div class="container flex space-between">
-                <p class="text-[#A8A8A8] text-xs sm:text-sm leading-[25px] px-5 py-5 lg:max-w-[1094px]">
+                <p class="text-dark-gray text-xs sm:text-sm leading-[25px] px-5 py-5 lg:max-w-[1094px]">
                   {copyright}
                 </p>
                 <div class="flex flex-nowrap items-end justify-center gap-5 p-5">
@@ -461,7 +476,7 @@ function Footer(
               <p class="text-base">{label}</p>
               <ul class="flex mt-5 gap-[10px]">
                 {social.map(({ image, href, alt }) => (
-                  <li class="bg-[#123ADD] p-[9px] rounded-[7px]">
+                  <li class="bg-primary p-[9px] rounded-[7px]">
                     <a href={href} target="_blank">
                       <Image
                         src={image}
@@ -500,7 +515,7 @@ function Footer(
                           key={href}
                         >
                           <a
-                            class="text-base font-normal text-[#888888]"
+                            class="text-base font-normal text-dark-gray"
                             target="_blank"
                             href={href}
                           >
@@ -528,7 +543,7 @@ function Footer(
               <img loading="lazy" src={logo} alt={label} width={144} />
             </div>
             <div>
-              <p class="text-[#888] text-xs py-5 ">
+              <p class="text-dark-gray text-xs py-5 ">
                 {copyright}
               </p>
             </div>

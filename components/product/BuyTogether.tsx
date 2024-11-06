@@ -206,7 +206,7 @@ export default function BuyTogether({
                   hiddenFlags={true}
                 />
               </div>
-              <span class="text-signature-blue text-3xl font-bold">+</span>
+              <span class="text-primary text-3xl font-bold">+</span>
               {recommendations.splice(0, 2).map(
                 (item: Product, index: number, arr: Product[]) => {
                   const { offers } = item;
@@ -262,7 +262,7 @@ export default function BuyTogether({
                         />
                       </div>
                       {(index + 1) < arr.length && (
-                        <span class="text-signature-blue text-3xl font-bold">
+                        <span class="text-primary text-3xl font-bold">
                           +
                         </span>
                       )}
@@ -273,10 +273,10 @@ export default function BuyTogether({
               {device === "desktop" &&
                 (
                   <div class="flex flex-col gap-4 items-center justify-center px-6">
-                    <div class="text-[#123ADD] font-normal text-[30px]">
+                    <div class="text-primary font-normal text-[30px]">
                       <span
                         id="pix-price"
-                        class="text-[40px] font-semibold text-[#123ADD]"
+                        class="text-[40px] font-semibold text-primary"
                       >
                         R$ 0
                       </span>{" "}
@@ -303,10 +303,10 @@ export default function BuyTogether({
       {device === "mobile" && recommendations.length > 0 &&
         (
           <div class="flex flex-col gap-4 items-center justify-center pb-6 pt-3 border-b-middle-gray">
-            <div class="text-[#123ADD] font-normal text-[30px]">
+            <div class="text-primary font-normal text-[30px]">
               <span
                 id="pix-price"
-                class="text-[40px] font-semibold text-[#123ADD]"
+                class="text-[40px] font-semibold text-primary"
               >
                 R$ 0
               </span>{" "}

@@ -3,7 +3,7 @@ export function LoadingFallback() {
     <div class="container px-0 lg:px-5">
       <div class="flex flex-col gap-4 sm:gap-6 w-full">
         <div class="px-5 sm:px-0">
-          <div class="skeleton h-[34px] lg:h-[70px] w-full" />
+          <div class="skeleton h-[34px] lg:h-[48px] w-full" />
         </div>
         <div class="px-5 sm:px-0 lg:hidden">
           <div class="skeleton h-[44px] w-full" />

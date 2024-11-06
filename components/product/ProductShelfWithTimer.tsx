@@ -15,7 +15,7 @@ export interface Timer {
    */
   expireAt?: string;
 }
-export interface Props extends SectionHeaderProps, Timer {
+export interface Props extends Timer, SectionHeaderProps {
   products: Product[] | null;
 }
 export const loader = (props: Props, _req: Request, ctx: AppContext) => {
@@ -32,10 +32,11 @@ export default function ProductShelf({
   promoFlag,
   newsFlag,
   products, 
-  title, 
-  cta, 
-  expireAt 
+  title,
+  expireAt,
+  displayOfferTag = false
 }: SectionProps<typeof loader>) {
+  console.log("expireAt", expireAt);
   const id = useId();
   if (!products || products.length === 0) {
     return null;
@@ -62,11 +63,12 @@ export default function ProductShelf({
         {...viewItemListEvent}
       >
         <div class="flex flex-wrap items-center gap-x-10 gap-y-[0.5rem] px-[18px] lg:px-[25px]">
-          <Section.Header title={title} cta={cta} />
+          <Section.Header title={title} displayOfferTag={displayOfferTag} />
           {expireAt && (
-            <div class="bg-primary px-3 py-2 lg:py-[15px] rounded-[10px]">
+            <div class="bg-primary px-4 py-2 rounded-xl">
               <CampaignTimer
                 expiresAt={expireAt}
+                type={2}
                 id={id}
               />
             </div>

@@ -89,7 +89,7 @@ function BannerItem(
             {action.subTitle}
           </span>
           <button
-            class="bg-white hover:bg-[#123ADD] px-[50px] py-[10px] text-black hover:text-white ease-in duration-300 rounded-full absolute bottom-[20px]"
+            class="bg-white hover:bg-primary px-[50px] py-[10px] text-black hover:text-white ease-in duration-300 rounded-full absolute bottom-[20px]"
             aria-label={action.label}
           >
             {action.label}
@@ -185,7 +185,7 @@ function Carousel({ images = [], preload, interval }: Props) {
                   index={index}
                   class={clx(
                     "bg-black h-3 w-3 no-animation rounded-full",
-                    "disabled:w-8 disabled:bg-base-100 disabled:opacity-100 transition-[width] bg-[#123ADD]",
+                    "disabled:w-8 disabled:bg-base-100 disabled:opacity-100 transition-[width] bg-primary",
                   )}
                 >
                 </Slider.Dot>

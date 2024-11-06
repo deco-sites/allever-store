@@ -4,32 +4,11 @@ import WishlistButton from "../wishlist/WishlistButton.tsx";
 import { clx } from "../../sdk/clx.ts";
 import { relative } from "../../sdk/url.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
-import { useScript } from "@deco/deco/hooks";
 import { formatPrice } from "../../sdk/format.ts";
 import { useSendEvent } from "../../sdk/useSendEvent.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import type { Product, PropertyValue } from "apps/commerce/types.ts";
 import MinicartAdd from "./MinicartAdd.tsx";
-
-const onLoadTrustvox = () => {
-  // @ts-ignore _trustvox_shelf_rate exists
-  globalThis.window._trustvox_shelf_rate = [["_storeId", 121576]];
-
-  const productStars = document.getElementById("trustvox-script-stars");
-
-  if (productStars === null) {
-    const script = document.createElement("script");
-
-    script.id = "trustvox-script-stars";
-    script.async = true;
-    script.type = "text/javascript";
-    script.src = "//rate.trustvox.com.br/widget.js";
-
-    document.head.append(script);
-  } else {
-    productStars.remove();
-  }
-};
 
 interface Props {
   flags?: [internationalFlag: string, promoFlag: string, newsFlag: string];
@@ -128,7 +107,7 @@ function ProductCard({
           {percent > 1 && inStock && !hiddenFlags
             ? (
               <span
-                class="text-xs font-semibold text-white uppercase bg-[#123ADD] text-center text-white px-2 py-1 rounded-[6px]"
+                class="text-xs font-semibold text-white uppercase bg-primary text-center text-white px-2 py-1 rounded-[6px]"
               >
                 {percent}% off
               </span>
@@ -178,13 +157,13 @@ function ProductCard({
         <a href={relativeUrl} class="flex flex-col gap-2">
           <div class="flex flex-col gap-1">
             {hasInternationalFlag && (
-              <p class="px-1 sm:px-6 py-1 flex items-center justify-center bg-[#000] text-white font-semibold text-[10px] sm:text-xs">
+              <p class="px-1 sm:px-6 py-1 flex items-center justify-center bg-black text-white font-semibold text-[10px] sm:text-xs">
                 Compra Internacional
               </p>
             )}
           </div>
           {brand?.name && inStock && (
-            <p class="text-sm text-[#d3d3d3] capitalize">{brand?.name}</p>
+            <p class="text-sm text-middle-gray capitalize">{brand?.name}</p>
           )}
           <p class="font-normal text-sm text-ellipsis font-bold line-clamp-2 h-10">
             {title}
@@ -198,12 +177,12 @@ function ProductCard({
                       {formatPrice(listPrice, offers?.priceCurrency)}
                     </span>
                   )}
-                <span class="font-semibold text-xl text-signature-blue">
+                <span class="font-semibold text-xl text-primary">
                   {pix > 0
                     ? formatPrice(pix, offers?.priceCurrency)
                     : formatPrice(price, offers?.priceCurrency)} {pix > 0 &&
                     (
-                      <span class="text-signature-blue font-normal text-base">
+                      <span class="text-primary font-normal text-base">
                         no pix
                       </span>
                     )}
@@ -231,7 +210,7 @@ function ProductCard({
             <MinicartAdd
               product={product}
               seller={seller}
-              class="flex items-center justify-center gap-3 mt-2 bg-signature-blue border-0 text-white py-2 text-center font-semibold rounded-full"
+              class="flex items-center justify-center gap-3 mt-2 bg-primary border-0 text-white py-2 text-center font-semibold rounded-full"
               item={item}
             />
           )}

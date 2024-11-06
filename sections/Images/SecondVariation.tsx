@@ -11,7 +11,7 @@ const SecondVariation = ({ title, items }: SecondVariationProps) => {
             <div>
               {title && <p class="text-3xl font-semibold">{title}</p>}
             </div>
-            <div class="flex flex-wrap lg:grid grid-cols-12 gap-[0.5rem] lg:gap-4">
+            <div class="flex flex-wrap md:grid grid-cols-12 gap-[0.5rem] lg:gap-4">
               {items?.map((item, index) => (
                 <a
                   href={item.Link}
@@ -50,7 +50,7 @@ const SecondVariation = ({ title, items }: SecondVariationProps) => {
                       <Image
                         src={item.mobile?.Image
                           ? item.mobile?.Image
-                          : `https:placehold.co/${item.mobile?.Width}x${item.mobile?.Height}`}
+                          : `https://placehold.co/${item.mobile?.Width}x${item.mobile?.Height}`}
                         alt={item.Alt ||
                           "esse é um banner de uma marca tradicional"}
                         width={item.mobile?.Width}

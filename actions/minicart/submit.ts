@@ -58,7 +58,7 @@ const cartFrom = (form: FormData) => {
       cart.action = value.toString();
     } else if (name === "platform-cart") {
       cart.platformCart = safeParse(decodeURIComponent(value.toString()));
-    } else if (name.startsWith("item::")) {
+    } else if (name?.startsWith("item::")) {
       const [_, it] = name.split("::");
       cart.items[Number(it)] = Number(value);
     } else if (name === "add-to-cart") {

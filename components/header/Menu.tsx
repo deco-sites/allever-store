@@ -30,12 +30,12 @@ function MenuItem({ item }: { item: INavItem }) {
       title={
         <div
           className={`${
-            item.ishighlighted ? "text-[#123ADD] font-semibold" : "text-black"
+            item.ishighlighted ? "text-primary font-semibold" : "text-black"
           } flex items-center justify-between group`}
         >
           <a
             href={item.url}
-            class="h-[61px] flex items-center text-sm"
+            class="h-14 flex items-center text-sm"
           >
             {item.name}
           </a>
@@ -55,7 +55,7 @@ function MenuItem({ item }: { item: INavItem }) {
               <li key={index}>
                 <a
                   href={node.url}
-                  class="h-[61px] flex items-center  text-[#888888] text-sm"
+                  class="h-14 flex items-center text-dark-gray text-sm"
                 >
                   {node.name}
                 </a>
@@ -72,24 +72,24 @@ function Menu({ navItems }: Props) {
   return (
     <>
       <div class="bg-white min-h-screen">
-        <div class="text-signature-blue font-semibold px-4">
+        <div class="text-primary font-semibold px-4">
           <a
             id="loginButton"
-            class="h-[61px] flex items-center font-semibold text-sm border-b border-b-middle-gray"
+            class="h-14 flex items-center font-semibold text-sm border-b border-b-middle-gray"
           >
-            <Icon class="mr-[10px]" id="account_blue" />
+            <Icon class="mr-2" id="account_blue" />
             <span />
           </a>
           <a
             href="/atendimento"
-            class="h-[61px] flex items-center font-semibold text-sm border-b border-b-middle-gray"
+            class="h-14 flex items-center font-semibold text-sm border-b border-b-middle-gray"
           >
-            <Icon class="mr-[10px]" id="sac" />
+            <Icon class="mr-2" id="sac" />
             Atendimento
           </a>
         </div>
         <div class="flex flex-col">
-          <ul class="px-4 flex-grow flex flex-col divide-y divide-[#D3D3D3]">
+          <ul class="px-4 flex-grow flex flex-col divide-y divide-middle-gray">
             {navItems.map((item) => (
               <li>
                 <MenuItem item={item} />

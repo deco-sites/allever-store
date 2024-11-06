@@ -57,7 +57,7 @@ function Suggestions(
         {hasTerms && (
           <div class="flex flex-col col-span-1">
             <span
-              class="font-extrabold text-sm uppercase text-[#123ADD] pb-3"
+              class="font-extrabold text-sm uppercase text-primary pb-3"
               role="heading"
               aria-level={3}
             >
@@ -69,7 +69,7 @@ function Suggestions(
                   {/* TODO @gimenes: use name and action from searchbar form */}
                   <a href={`${ACTION}?${NAME}=${term}`}>
                     <span
-                      class="text-[#888888] text-sm"
+                      class="text-dark-gray text-sm"
                       dangerouslySetInnerHTML={{ __html: term }}
                     />
                   </a>

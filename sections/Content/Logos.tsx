@@ -15,7 +15,6 @@ export interface Props extends SectionHeaderProps {
 
 function Logos({
   title,
-  cta,
   images = [
     {
       alt: "deco",
@@ -31,7 +30,7 @@ function Logos({
 }: Props) {
   return (
     <Section.Container>
-      <Section.Header title={title} cta={cta} />
+      <Section.Header title={title} />
 
       <ul class="flex flex-wrap items-center justify-center gap-2 sm:gap-4 px-5 sm:px-0">
         {images.map((item) => (

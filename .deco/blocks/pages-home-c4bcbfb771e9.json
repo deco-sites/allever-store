@@ -20,7 +20,7 @@
             "href": "/",
             "label": "Confira"
           },
-          "mobile": "https://placehold.co/390x800"
+          "mobile": "https://placehold.co/640x800"
         }
       ],
       "preload": true
@@ -212,7 +212,19 @@
       ],
       "Title": "Compre Por Categorias",
       "layout": "Categoria",
-      "visibleItems": 8
+      "visibleItems": 8,
+      "categories": [
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {},
+        {}
+      ]
     },
     {
       "__resolveType": "site/sections/Spacer.tsx",
@@ -224,7 +236,7 @@
         {
           "image": {
             "desktop": "https://placehold.co/1440x285",
-            "mobile": "https://placehold.co/390x504",
+            "mobile": "https://placehold.co/640x504",
             "alt": "banner 100% de marca x"
           },
           "matcher": "/"
@@ -241,7 +253,6 @@
         "__resolveType": "site/sections/Product/ProductShelfWithTimer.tsx",
         "title": "Teste do Timer",
         "cta": "Confira",
-        "expireAt": "2024-11-01T02:59:00.000Z",
         "hideLabel": true,
         "products": {
           "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
@@ -251,7 +262,9 @@
             "count": 10,
             "hideUnavailableItems": true
           }
-        }
+        },
+        "expireAt": "2024-12-01T02:59:00.000Z",
+        "displayOfferTag": true
       }
     },
     {
@@ -264,45 +277,45 @@
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 334,
+            "Width": 360,
             "Height": 398
           },
           "mobile": {
-            "Width": 356,
-            "Height": 206
+            "Width": 600,
+            "Height": 300
           }
         },
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 334,
+            "Width": 360,
             "Height": 398
           },
           "mobile": {
-            "Width": 356,
-            "Height": 206
+            "Width": 600,
+            "Height": 300
           }
         },
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 334,
+            "Width": 360,
             "Height": 398
           },
           "mobile": {
-            "Width": 356,
-            "Height": 206
+            "Width": 600,
+            "Height": 300
           }
         },
         {
           "Loading": "eager",
           "desktop": {
-            "Width": 334,
+            "Width": 360,
             "Height": 398
           },
           "mobile": {
-            "Width": 356,
-            "Height": 206
+            "Width": 600,
+            "Height": 300
           }
         }
       ]
@@ -322,7 +335,7 @@
         },
         "similars": false
       },
-      "expireAt": "2024-11-01T02:59:00.000Z"
+      "expireAt": "2024-12-01T02:59:00.000Z"
     },
     {
       "__resolveType": "site/sections/Spacer.tsx",
@@ -355,7 +368,7 @@
             "Height": 398
           },
           "mobile": {
-            "Width": 390,
+            "Width": 640,
             "Height": 504
           }
         },
@@ -412,7 +425,7 @@
           "Height": 144
         },
         "mobile": {
-          "Width": 390,
+          "Width": 640,
           "Height": 144
         }
       }
@@ -541,7 +554,7 @@
             "Width": 872
           },
           "mobile": {
-            "Width": 450,
+            "Width": 309,
             "Height": 350
           }
         },
@@ -563,8 +576,8 @@
           "Height": 144
         },
         "mobile": {
-          "Width": 390,
-          "Height": 144
+          "Width": 640,
+          "Height": 250
         }
       }
     },
@@ -651,8 +664,8 @@
             "Width": 647
           },
           "mobile": {
-            "Width": 354,
-            "Height": 213
+            "Width": 600,
+            "Height": 380
           }
         },
         {
@@ -662,8 +675,8 @@
             "Width": 747
           },
           "mobile": {
-            "Width": 172,
-            "Height": 140
+            "Width": 300,
+            "Height": 250
           }
         },
         {
@@ -673,8 +686,8 @@
             "Width": 747
           },
           "mobile": {
-            "Width": 172,
-            "Height": 140
+            "Width": 300,
+            "Height": 250
           }
         }
       ]
@@ -712,8 +725,8 @@
             "Height": 505
           },
           "mobile": {
-            "Width": 356,
-            "Height": 213
+            "Width": 600,
+            "Height": 359
           }
         },
         {
@@ -723,8 +736,8 @@
             "Height": 239
           },
           "mobile": {
-            "Width": 170,
-            "Height": 140
+            "Width": 300,
+            "Height": 247
           }
         },
         {
@@ -734,8 +747,8 @@
             "Height": 239
           },
           "mobile": {
-            "Width": 170,
-            "Height": 140
+            "Width": 300,
+            "Height": 247
           }
         },
         {
@@ -745,8 +758,8 @@
             "Height": 239
           },
           "mobile": {
-            "Width": 170,
-            "Height": 140
+            "Width": 300,
+            "Height": 247
           }
         },
         {
@@ -756,8 +769,8 @@
             "Height": 239
           },
           "mobile": {
-            "Width": 170,
-            "Height": 140
+            "Width": 300,
+            "Height": 247
           }
         }
       ]
@@ -767,146 +780,23 @@
       "size": "medium"
     },
     {
-      "__resolveType": "site/sections/Category/CarouselCategory.tsx",
-      "layout": "Marca",
-      "category": [
-        {
-          "image": "https://placehold.co/113x105",
-          "Link": "/",
-          "Rounded": true,
-          "desktop": {
-            "Width": 159,
-            "Height": 160
-          },
-          "mobile": {
-            "Width": 113,
-            "Height": 105
-          }
-        },
-        {
-          "image": "https://placehold.co/113x105",
-          "Link": "/",
-          "Rounded": true,
-          "desktop": {
-            "Width": 159,
-            "Height": 160
-          },
-          "mobile": {
-            "Width": 113,
-            "Height": 105
-          }
-        },
-        {
-          "image": "https://placehold.co/113x105",
-          "Link": "/",
-          "Rounded": true,
-          "desktop": {
-            "Width": 159,
-            "Height": 160
-          },
-          "mobile": {
-            "Width": 113,
-            "Height": 105
-          }
-        },
-        {
-          "image": "https://placehold.co/113x105",
-          "Link": "/",
-          "Rounded": true,
-          "desktop": {
-            "Width": 159,
-            "Height": 160
-          },
-          "mobile": {
-            "Width": 113,
-            "Height": 105
-          }
-        },
-        {
-          "image": "https://placehold.co/113x105",
-          "Link": "/",
-          "Rounded": true,
-          "desktop": {
-            "Width": 159,
-            "Height": 160
-          },
-          "mobile": {
-            "Width": 113,
-            "Height": 105
-          }
-        },
-        {
-          "image": "https://placehold.co/113x105",
-          "Link": "/",
-          "Rounded": true,
-          "desktop": {
-            "Width": 159,
-            "Height": 160
-          },
-          "mobile": {
-            "Width": 113,
-            "Height": 105
-          }
-        },
-        {
-          "image": "https://placehold.co/113x105",
-          "Link": "/",
-          "Rounded": true,
-          "desktop": {
-            "Width": 159,
-            "Height": 160
-          },
-          "mobile": {
-            "Width": 113,
-            "Height": 105
-          }
-        },
-        {
-          "image": "https://placehold.co/113x105",
-          "Link": "/",
-          "Rounded": true,
-          "desktop": {
-            "Width": 159,
-            "Height": 160
-          },
-          "mobile": {
-            "Width": 113,
-            "Height": 105
-          }
-        },
-        {
-          "image": "https://placehold.co/113x105",
-          "Link": "/",
-          "Rounded": true,
-          "desktop": {
-            "Width": 159,
-            "Height": 160
-          },
-          "mobile": {
-            "Width": 113,
-            "Height": 105
-          }
-        },
-        {
-          "image": "https://placehold.co/113x105",
-          "Link": "/",
-          "Rounded": true,
-          "desktop": {
-            "Width": 159,
-            "Height": 160
-          },
-          "mobile": {
-            "Width": 113,
-            "Height": 105
-          }
-        },
-        {}
-      ],
-      "Title": "Compre Por Marcas",
-      "rounded": true,
-      "Rounded": true,
-      "maxItems": 7,
-      "visibleItems": 7
+      "__resolveType": "website/sections/Rendering/Lazy.tsx",
+      "section": {
+        "__resolveType": "site/sections/Category/CarouselBrand.tsx",
+        "title": "Compre por Marcas",
+        "brands": [
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {},
+          {}
+        ]
+      }
     },
     {
       "__resolveType": "site/sections/Spacer.tsx",

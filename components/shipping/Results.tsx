@@ -52,13 +52,13 @@ export default function Results({ result }: ComponentProps<typeof action>) {
     <ul class="flex flex-col gap-4 pt-4">
       {methods.map((method) => (
         <li class="flex justify-between items-center border-base-200 not-first-child:border-t">
-          <div class="text-xs text-[#a8a8a8] font-semibold">
+          <div class="text-xs text-dark-gray font-semibold">
             Entrega {method.name}
           </div>
-          <div class="text-xs text-[#a8a8a8] font-semibold">
+          <div class="text-xs text-dark-gray font-semibold">
             até {formatShippingEstimate(method.shippingEstimate)}
           </div>
-          <div class="text-xs text-[#a8a8a8] font-semibold text-right">
+          <div class="text-xs text-dark-gray font-semibold text-right">
             {method.price === 0 ? "Grátis" : (
               formatPrice(method.price / 100, "BRL", "pt-BR")
             )}

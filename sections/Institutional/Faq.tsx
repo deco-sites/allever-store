@@ -57,7 +57,7 @@ const Faq = ({ faq }: Props) => {
                     }
                   >
                     <div
-                      className="text-sm fluid-text text-[#888] mt-2"
+                      className="text-sm fluid-text text-dark-gray mt-2"
                       dangerouslySetInnerHTML={{
                         __html: q.response?.toString() || "",
                       }}

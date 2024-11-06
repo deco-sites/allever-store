@@ -31,11 +31,11 @@ function Card({ image, href, label }: Item) {
     </a>
   );
 }
-function CategoryGrid({ title, cta, items }: Props) {
+function CategoryGrid({ title, items }: Props) {
   const device = useDevice();
   return (
     <Section.Container>
-      <Section.Header title={title} cta={cta} />
+      <Section.Header title={title} />
 
       {device === "desktop"
         ? (

@@ -43,7 +43,7 @@ function PaymentMethods({ offers, installment }: PaymentMethodsProps) {
           // @ts-ignore showModal exists on DaisyUI
           document.getElementById("payment-methods")?.showModal()
         )}
-        class="underline text-signature-blue text-left"
+        class="underline text-primary text-left"
       >
         Ver formas de pagamento
       </button>
@@ -53,7 +53,7 @@ function PaymentMethods({ offers, installment }: PaymentMethodsProps) {
             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
           </form>
           <h3 class="font-semibold text-base text-black mb-4">
-            Métodos de <span class="text-signature-blue">[pagamento]</span>
+            Métodos de <span class="text-primary">[pagamento]</span>
           </h3>
           <div className="flex">
             <div class="flex flex-col gap-8">
@@ -73,14 +73,14 @@ function PaymentMethods({ offers, installment }: PaymentMethodsProps) {
                   const installmentsButton = document.querySelector(
                     "button#installments > div",
                   );
-                  pixButton?.classList.add("border-signature-blue");
+                  pixButton?.classList.add("border-primary");
                   pixButton?.classList.remove("border-dark-gray");
                   installmentsButton?.classList.add("border-dark-gray");
-                  installmentsButton?.classList.remove("border-signature-blue");
+                  installmentsButton?.classList.remove("border-primary");
                 })}
               >
-                <div class="w-20 h-20 flex items-center justify-center border-2 border-signature-blue rounded-full">
-                  <Icon id="pix" width={44} height={48} />
+                <div class="w-20 h-20 flex items-center justify-center border-2 border-primary rounded-full">
+                  <Icon id="pix" width={46} height={50} class="-mr-[3px] -mb-[2px]" />
                 </div>
                 Pix
               </button>
@@ -101,8 +101,8 @@ function PaymentMethods({ offers, installment }: PaymentMethodsProps) {
                     "button#installments > div",
                   );
                   pixButton?.classList.add("border-dark-gray");
-                  pixButton?.classList.remove("border-signature-blue");
-                  installmentsButton?.classList.add("border-signature-blue");
+                  pixButton?.classList.remove("border-primary");
+                  installmentsButton?.classList.add("border-primary");
                   installmentsButton?.classList.remove("border-dark-gray");
                 })}
               >
@@ -114,7 +114,7 @@ function PaymentMethods({ offers, installment }: PaymentMethodsProps) {
             </div>
             <div class="grow pl-4 lg:pl-6 ml-4 lg:ml-6 border-l border-dark-gray">
               <div id="pix" class="flex flex-col gap-4">
-                <p class="text-2xl text-[#123ADD] font-semibold flex flex-wrap items-center gap-x-2">
+                <p class="text-2xl text-primary font-semibold flex flex-wrap items-center gap-x-2">
                   {!!pixInstallment && formatPrice(pixInstallment)}
                   <span class="text-normal">no PIX</span>
                 </p>

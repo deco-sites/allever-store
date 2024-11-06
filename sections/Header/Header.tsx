@@ -148,7 +148,7 @@ const Mobile = ({ logo, searchbar }: Props) => (
           layout="searchBar"
           title="Buscar"
           drawer={SEARCHBAR_DRAWER_ID}
-          background="bg-[#123ADD]"
+          background="bg-primary"
           color="text-white"
         >
           <div class="w-screen overflow-y-auto">

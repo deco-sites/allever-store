@@ -58,10 +58,10 @@ const Deals = ({ deals, preload }: Props) => {
                     loading={preload ? "lazy" : "eager"}
                   />
                   <div className="flex items-start flex-col">
-                    <p className="text-base font-semibold text-[#000]">
+                    <p className="text-base font-semibold text-dark">
                       {deal.title}
                     </p>
-                    <p className="text-base font-normal text-[#a8a8a8]">
+                    <p className="text-base font-normal text-dark-gray">
                       {deal.label}
                     </p>
                   </div>
@@ -86,10 +86,10 @@ const Deals = ({ deals, preload }: Props) => {
                   loading={preload ? "lazy" : "eager"}
                 />
                 <div className="flex items-start flex-col">
-                  <p className="text-base font-semibold text-[#000]">
+                  <p className="text-base font-semibold text-black">
                     {deal.title}
                   </p>
-                  <p className="text-base font-normal text-[#a8a8a8]">
+                  <p className="text-base font-normal text-dark-gray">
                     {deal.label}
                   </p>
                 </div>

@@ -69,7 +69,7 @@ const FifthVariation = ({ slide, title }: FifthVariationProps) => {
                 {slide?.map((item, index) => (
                   <Slider.Item
                     index={index}
-                    class="carousel-item justify-center first:pl-5 last:pr-5 max-w-[75vw] w-full"
+                    class="carousel-item justify-center first:pl-5 last:pr-5"
                     key={index}
                   >
                     <a href={item.Link} class="flex ">

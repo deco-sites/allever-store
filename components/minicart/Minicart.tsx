@@ -105,7 +105,7 @@ function ProductRecommendations({
     <div class="w-full lg:w-[400px] lg:h-full border border-y-0 border-l-0 border-r-middle-gray">
       <div class="px-5 py-5 lg:py-8 border border-x-0 border-t-0 border-b-middle-gray">
         <span class="block text-left lg:text-center lg:max-w-[210px] text-lg lg:text-2xl lg:mx-auto">
-          Você também pode <b class="text-signature-blue">[Gostar]</b>
+          Você também pode <b class="text-primary">[Gostar]</b>
         </span>
       </div>
       <div class="flex flex-row max-lg:overflow-x-auto lg:flex-col gap-4 lg:overflow-y-auto lg:max-h-[calc(100vh-129px)] px-5 lg:px-12 py-5">
@@ -200,7 +200,7 @@ export default function Cart(
           )}
         >
           {/* Cart header */}
-          <div class="bg-[#123ADD] flex justify-between text-white w-full gap-[5px] py-[13px] px-[35px] h-[58px] items-center">
+          <div class="bg-primary flex justify-between text-white w-full gap-[5px] py-[13px] px-[35px] h-[58px] items-center">
             <div class="flex gap-[5px]">
               <p class="font-semibold text-base">Meu carrinho</p>
               {count === 0 ? null : (
@@ -235,7 +235,7 @@ export default function Cart(
                 </div>
                 <label
                   for={MINICART_DRAWER_ID}
-                  class="bg-[#1BAE32] py-[15px] w-full rounded-full text-white px-6 text-sm cursor-pointer"
+                  class="bg-signature-green py-[15px] w-full rounded-full text-white px-6 text-sm cursor-pointer"
                 >
                   Clique aqui e <b>veja os produtos</b> {">"}
                 </label>
@@ -309,7 +309,7 @@ export default function Cart(
                   <hr class="max-w-[90%] m-auto" />
                   <div class="p-4">
                     <a
-                      class="bg-[#1BAE32] w-full no-animation flex items-center justify-center py-[10px] w-full rounded-full"
+                      class="bg-signature-green w-full no-animation flex items-center justify-center py-[10px] w-full rounded-full"
                       href={checkoutHref}
                       hx-on:click={useScript(sendBeginCheckoutEvent)}
                     >
@@ -321,7 +321,7 @@ export default function Cart(
                     </a>
                     <label
                       for={MINICART_DRAWER_ID}
-                      class="flex w-full justify-center mt-4 text-[#123ADD] text-base"
+                      class="flex w-full justify-center mt-4 text-primary text-base"
                     >
                       OU CONTINUAR COMPRANDO
                     </label>
