@@ -249,6 +249,7 @@ function ProductInfo({
               ? (
                 <>
                   <div
+                    id="product-page"
                     data-trustvox-product-code={productGroupID}
                   />
                   <div class="flex flex-col gap-2">
@@ -434,6 +435,7 @@ function ProductInfo({
                     {title}
                   </h1>
                   <div
+                    id="product-page"
                     data-trustvox-product-code={productGroupID}
                   />
                   <WishlistButton item={item} pdp={true} />
