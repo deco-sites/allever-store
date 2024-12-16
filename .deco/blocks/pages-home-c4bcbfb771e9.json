@@ -258,12 +258,12 @@
           "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
           "props": {
             "sort": "price:desc",
-            "collection": "149",
+            "collection": "159",
             "count": 10,
             "hideUnavailableItems": true
           }
         },
-        "expireAt": "2024-12-01T02:59:00.000Z",
+        "expireAt": "2025-12-31T02:59:00.000Z",
         "displayOfferTag": true
       }
     },
@@ -350,7 +350,7 @@
         "props": {
           "term": "tv",
           "count": 6,
-          "query": "tv"
+          "query": "159"
         }
       }
     },
@@ -440,7 +440,7 @@
         "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
         "props": {
           "sort": "price:asc",
-          "query": "fone de ouvido",
+          "query": "fone",
           "count": 12,
           "fuzzy": "automatic",
           "term": "tv"
@@ -513,9 +513,9 @@
       "products": {
         "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
         "props": {
-          "query": "fone de ouvido",
+          "query": "suporte",
           "sort": "price:asc",
-          "count": 12,
+          "count": 10,
           "fuzzy": "automatic",
           "term": "tv"
         }
@@ -532,7 +532,7 @@
       "products": {
         "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
         "props": {
-          "query": "fone de ouvido",
+          "query": "tv",
           "sort": "price:asc",
           "count": 12,
           "fuzzy": "automatic",
@@ -592,7 +592,7 @@
       "products": {
         "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
         "props": {
-          "query": "fone de ouvido",
+          "query": "teste",
           "sort": "price:asc",
           "count": 12,
           "fuzzy": "automatic",
@@ -642,7 +642,7 @@
       "products": {
         "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
         "props": {
-          "query": "fone de ouvido",
+          "query": "brinquedo",
           "sort": "price:asc",
           "count": 12,
           "fuzzy": "automatic",
@@ -703,11 +703,11 @@
       "products": {
         "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
         "props": {
-          "query": "fone de ouvido",
           "sort": "price:asc",
           "count": 12,
           "fuzzy": "automatic",
-          "term": "tv"
+          "term": "tv",
+          "query": "cafeteira"
         }
       }
     },

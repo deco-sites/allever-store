@@ -5,7 +5,7 @@
   },
   "platform": "vtex",
   "publicUrl": "secure.allever.com",
-  "account": "allever",
+  "account": "t62543",
   "appKey": {
     "__resolveType": "website/loaders/secret.ts",
     "encrypted": "676c47712b2bb7350c8e5825de57efe3d317caa0e939f2133867cb61d9d7d157"
