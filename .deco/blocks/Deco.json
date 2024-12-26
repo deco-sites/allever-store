@@ -22,7 +22,7 @@
       }
     ]
   },
-  "colorScheme": "any",
+  "colorScheme": "light",
   "otherStyles": {
     "--rounded-box": "11px",
     "--rounded-badge": "6px",
@@ -32,9 +32,9 @@
   },
   "mode": "dark",
   "mainColors": {
-    "primary": "#123ADD",
+    "primary": "#123add",
     "base-100": "#F2F2F2",
-    "secondary": "#FFF",
+    "secondary": "#000000",
     "success": "#219259",
     "warning": "#a39e0f",
     "error": "#d10a0a",
