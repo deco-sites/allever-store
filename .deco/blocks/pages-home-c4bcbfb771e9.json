@@ -251,19 +251,18 @@
       "__resolveType": "website/sections/Rendering/Lazy.tsx",
       "section": {
         "__resolveType": "site/sections/Product/ProductShelfWithTimer.tsx",
-        "title": "Teste do Timer",
+        "title": "AUDIO E VIDEO",
         "cta": "Confira",
         "hideLabel": true,
         "products": {
           "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
           "props": {
-            "sort": "price:desc",
-            "collection": "159",
-            "count": 10,
-            "hideUnavailableItems": true
+            "sort": "orders:desc",
+            "count": 12,
+            "collection": "150"
           }
         },
-        "expireAt": "2025-12-31T02:59:00.000Z",
+        "expireAt": "2025-02-01T02:59:00.000Z",
         "displayOfferTag": true
       }
     },
