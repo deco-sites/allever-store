@@ -5802,6 +5802,9 @@ details.collapse summary::-webkit-details-marker {
 .ease-out {
   transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
+.is-homepage #header-wrapper {
+  position: absolute;
+}
 .is-scrolled #header {
   position: fixed;
   top: 0px;

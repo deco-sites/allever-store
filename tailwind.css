@@ -41,6 +41,10 @@
 }
 
 @layer utilities {
+  .is-homepage #header-wrapper {
+    @apply absolute;
+  }
+
   .is-scrolled #header {
     @apply top-0 fixed bg-primary;
   }
