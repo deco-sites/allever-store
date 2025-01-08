@@ -6,12 +6,6 @@
   },
   "sections": [
     {
-      "__resolveType": "website/sections/Rendering/Lazy.tsx",
-      "section": {
-        "__resolveType": "commerce/sections/Seo/SeoPDPV2.tsx"
-      }
-    },
-    {
       "__resolveType": "site/sections/Header/Header.tsx",
       "navItems": [
         {

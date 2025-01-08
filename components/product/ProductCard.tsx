@@ -35,11 +35,12 @@ export const getFlagCluster = (
   flag: string,
   additionalProperty?: PropertyValue[],
 ) => {
-  return additionalProperty?.find((prop) => {
+  const propertie = additionalProperty?.find((prop) => {
     if (prop.name === "cluster") {
       return prop.propertyID === flag;
     }
   });
+  return propertie;
 };
 
 function ProductCard({

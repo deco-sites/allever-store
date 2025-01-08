@@ -140,6 +140,7 @@ function ProductInfo({
   const { breadcrumbList, product } = page;
   const { productID, offers, isVariantOf, brand, additionalProperty, image: images } = product;
   const title = isVariantOf?.name ?? product.name;
+  const model = isVariantOf?.model ?? "";
   const productGroupID = isVariantOf?.productGroupID ?? "";
   const {
     pix = 0,
@@ -204,7 +205,7 @@ function ProductInfo({
           </h1>
           <div class="flex items-center justify-between">
             <p class="text-dark-gray m-0 text-xs">
-              Cod: {productID} | {brand?.name}
+              Cod: {model} | {brand?.name}
             </p>
             {/* @ts-ignore . */}
             <button class="btn btn-ghost text-dark-gray underline text-xs font-normal hover:bg-transparent" hx-on:click={useScript(() => document.getElementById("share_product")?.showModal())}>
@@ -263,6 +264,11 @@ function ProductInfo({
                       <span class="text-[20px] font-semibold text-black leading-[1]">
                         {formatPrice(price, offers?.priceCurrency)}
                       </span>
+                      {percent >= 1 && (
+                        <div class="text-xs font-semibold text-white uppercase bg-primary text-center text-white px-2 py-1 rounded-[6px] w-fit">
+                          {percent} % off
+                        </div>
+                      )}
                     </div>
                     {price > pix && pix > 0 &&
                       (
@@ -275,11 +281,6 @@ function ProductInfo({
                           </p>
                         </div>
                       )}
-                    {percent >= 1 && (
-                      <div class="text-xs font-semibold text-white uppercase bg-primary text-center text-white px-2 py-1 rounded-[6px] w-fit">
-                        {percent} % off
-                      </div>
-                    )}
                     <p
                       class={`${
                         price === pix
@@ -442,7 +443,7 @@ function ProductInfo({
                 </div>
                 <div className="flex items-center justify-between">
                   <p class="text-dark-gray">
-                    Cod: {productID} | {brand?.name}
+                    Cod: {model} | {brand?.name}
                   </p>
                   {/* @ts-ignore . */}
                   <button class="btn btn-ghost text-dark-gray underline text-sm hover:bg-transparent p-0 min-h-unset h-auto" hx-on:click={useScript(() => document.getElementById("share_product")?.showModal())}>
@@ -493,6 +494,11 @@ function ProductInfo({
                         <span class="text-[20px] font-semibold text-black leading-[1]">
                           {formatPrice(price, offers?.priceCurrency)}
                         </span>
+                        {percent >= 1 && (
+                          <span class="text-xs font-semibold text-white uppercase bg-primary text-center text-white px-2 py-1 rounded-[6px] w-fit">
+                            {percent} % off
+                          </span>
+                        )}
                       </div>
                       {pix > 0 && price > pix &&
                         (
@@ -503,11 +509,6 @@ function ProductInfo({
                                 no PIX
                               </span>
                             </p>
-                            {percent >= 1 && (
-                              <span class="ml-3 text-xs font-semibold text-white uppercase bg-primary text-center text-white px-2 py-1 rounded-[6px] w-fit">
-                                {percent} % off
-                              </span>
-                            )}
                           </div>
                         )}
                       <div class="fluid-text">

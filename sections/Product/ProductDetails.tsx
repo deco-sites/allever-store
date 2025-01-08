@@ -11,9 +11,9 @@ import type { Product, ProductDetailsPage } from "apps/commerce/types.ts";
 export interface Props {
   /** @title Integration */
   page: ProductDetailsPage | null;
-  /** @hidden */
+  /** @hide */
   isMobile: boolean;
-  /** @hidden */
+  /** @hide */
   productRecommendations: Product[];
   /** @title Omitir seção de entrega? */
   hiddenShipping?: boolean;

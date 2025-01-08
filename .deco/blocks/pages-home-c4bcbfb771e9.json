@@ -342,14 +342,14 @@
     },
     {
       "__resolveType": "site/sections/Product/ProductShelf.tsx",
-      "title": "Vitrine 1",
+      "title": "Vitrine Teste",
       "cta": "#",
       "products": {
         "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
         "props": {
           "term": "tv",
-          "count": 6,
-          "query": "159"
+          "count": 10,
+          "query": "140"
         }
       }
     },

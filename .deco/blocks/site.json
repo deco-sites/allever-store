@@ -65,6 +65,9 @@
     "replaces": [],
     "includeScriptsToHead": {
       "includes": []
+    },
+    "includeScriptsToBody": {
+      "includes": []
     }
   },
   "flavor": {
@@ -77,9 +80,9 @@
     "api": {},
     "my": {}
   },
-  "newsFlag": "40",
   "shelfFlag1": "163",
-  "promoFlag": "157",
-  "internationalFlag": "160",
-  "minicartSuggestion": "159"
+  "promoFlag": "140",
+  "internationalFlag": "140",
+  "minicartSuggestion": "140",
+  "newsFlag": "140"
 }
