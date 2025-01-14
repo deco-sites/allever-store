@@ -62,6 +62,29 @@ export default defineApp(async (_req, ctx) => {
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.css" />
         <script src="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.umd.js" />
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        {/* @ts-ignore . */}
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;&display=swap" rel="stylesheet"></link>
+
+        {/* <style
+          dangerouslySetInnerHTML={{
+            __html: `
+              .poppins-regular {
+                font-family: "Poppins", serif;
+                font-weight: 400;
+                font-style: normal;
+              }
+
+              .poppins-medium {
+                font-family: "Poppins", serif;
+                font-weight: 500;
+                font-style: normal;
+              }
+            `,
+          }}
+        /> */}
       </Head>
 
       {/* Rest of Preact tree */}

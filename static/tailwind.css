@@ -460,12 +460,13 @@ html {
   html,
   body {
     font-size: 16px;
-    font-family: var(--font-family);
+    /* font-family: var(--font-family); */
+    font-family: "Poppins", serif;
     scroll-behavior: smooth;
   }
 
   * {
-    font-family: var(--font-family);
+    /* font-family: var(--font-family); */
   }
 
   /** Remove default styles from input[type=number] */
@@ -1628,6 +1629,42 @@ html {
 .stack > *:nth-child(1) {
   transform: translateY(0) scale(1);
   z-index: 3;
+  opacity: 1;
+}
+.swap {
+  position: relative;
+  display: inline-grid;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  place-content: center;
+  cursor: pointer;
+}
+.swap > * {
+  grid-column-start: 1;
+  grid-row-start: 1;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  transition-property: transform, opacity;
+}
+.swap input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+}
+.swap .swap-on,
+.swap .swap-indeterminate,
+.swap input:indeterminate ~ .swap-on {
+  opacity: 0;
+}
+.swap input:checked ~ .swap-off,
+.swap-active .swap-off,
+.swap input:indeterminate ~ .swap-off {
+  opacity: 0;
+}
+.swap input:checked ~ .swap-on,
+.swap-active .swap-on,
+.swap input:indeterminate ~ .swap-indeterminate {
   opacity: 1;
 }
 .tabs {
