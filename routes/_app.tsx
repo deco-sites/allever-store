@@ -63,9 +63,8 @@ export default defineApp(async (req, ctx) => {
           <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" />
         )}
         {/* Web Manifest */}
-        {!isOnAdmin && (
-          <link rel="manifest" href={asset("/site.webmanifest")} />
-        )}
+        <link rel="manifest" href={asset("/site.webmanifest")} />
+
         {!isOnAdmin && (
           <script
             type="text/javascript"
