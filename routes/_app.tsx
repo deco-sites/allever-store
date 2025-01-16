@@ -2,6 +2,9 @@ import { asset, Head } from "$fresh/runtime.ts";
 import { defineApp } from "$fresh/server.ts";
 import { useScript } from "@deco/deco/hooks";
 import { Context } from "@deco/deco";
+
+const ADMIN_PATH = "/live/previews";
+
 declare global {
   interface Window {
     _trustvox_shelf_rate: Array<[
@@ -20,18 +23,23 @@ function setupTrustvoxRateConfig(storeId: string) {
   window._trustvox_shelf_rate.push(["_productContainer", "body"]);
   window._trustvox_shelf_rate.push(["_watchSubtree", "true"]);
 }
-export default defineApp(async (_req, ctx) => {
+export default defineApp(async (req, ctx) => {
   const revision = await Context.active().release?.revision();
+  const url = new URL(req.url);
+  const isOnAdmin = url.pathname.includes(ADMIN_PATH);
   return (
     <>
       {/* Include Icons and manifest */}
       <Head>
         {/* Enable View Transitions API */}
-        <style
-          dangerouslySetInnerHTML={{
-            __html: `@view-transition { navigation: auto; }`,
-          }}
-        />
+
+        {!isOnAdmin && (
+          <style
+            dangerouslySetInnerHTML={{
+              __html: `@view-transition { navigation: auto; }`,
+            }}
+          />
+        )}
 
         {/* Tailwind v3 CSS file */}
         <link
@@ -45,30 +53,54 @@ export default defineApp(async (_req, ctx) => {
           href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
         />
 
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1"
+        {!isOnAdmin && (
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1"
+          />
+        )}
+        {!isOnAdmin && (
+          <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" />
+        )}
+        {/* Web Manifest */}
+        {!isOnAdmin && (
+          <link rel="manifest" href={asset("/site.webmanifest")} />
+        )}
+        {!isOnAdmin && (
+          <script
+            type="text/javascript"
+            dangerouslySetInnerHTML={{
+              __html: useScript(setupTrustvoxRateConfig, "121576"),
+            }}
+          />
+        )}
+        {!isOnAdmin && (
+          <script
+            defer
+            type="text/javascript"
+            src="//rate.trustvox.com.br/widget.js"
+          />
+        )}
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.css"
+        />
+        {!isOnAdmin && (
+          <script src="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.umd.js" />
+        )}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+
+        {/* @ts-ignore . */}
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;&display=swap"
+          rel="stylesheet"
         />
 
-        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" />
-
-        {/* Web Manifest */}
-        <link rel="manifest" href={asset("/site.webmanifest")} />
-      
-        <script type="text/javascript" dangerouslySetInnerHTML={{
-          __html: useScript(setupTrustvoxRateConfig, "121576")
-        }} />
-        <script defer type="text/javascript" src="//rate.trustvox.com.br/widget.js" />
-
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.css" />
-        <script src="https://cdn.jsdelivr.net/npm/zoomist@2/zoomist.umd.js" />
-
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        {/* @ts-ignore . */}
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;&display=swap" rel="stylesheet"></link>
-
-        {/* <style
+        {
+          /* <style
           dangerouslySetInnerHTML={{
             __html: `
               .poppins-regular {
@@ -84,16 +116,18 @@ export default defineApp(async (_req, ctx) => {
               }
             `,
           }}
-        /> */}
+        /> */
+        }
       </Head>
 
       {/* Rest of Preact tree */}
       <ctx.Component />
-
-      <script
-        type="module"
-        dangerouslySetInnerHTML={{ __html: useScript(serviceWorkerScript) }}
-      />
+      {!isOnAdmin && (
+        <script
+          type="module"
+          dangerouslySetInnerHTML={{ __html: useScript(serviceWorkerScript) }}
+        />
+      )}
     </>
   );
 });
