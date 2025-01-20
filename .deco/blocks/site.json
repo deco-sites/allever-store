@@ -56,7 +56,10 @@
     "defaultSegment": {
       "channelPrivacy": "public"
     },
-    "salesChannel": "1"
+    "salesChannel": "1",
+    "appKey": {
+      "__resolveType": "website/loaders/secret.ts"
+    }
   },
   "platform": "vtex",
   "__resolveType": "site/apps/site.ts",
