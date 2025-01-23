@@ -255,9 +255,9 @@
         "cta": "Confira",
         "hideLabel": true,
         "products": {
-          "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
+          "__resolveType": "vtex/loaders/legacy/productList.ts",
           "props": {
-            "sort": "orders:desc",
+            "sort": "OrderByReleaseDateDESC",
             "count": 12,
             "collection": "150"
           }
@@ -324,17 +324,19 @@
       "size": "medium"
     },
     {
-      "__resolveType": "site/sections/Content/ShowCaseCounter.tsx",
-      "Label": "algum sub titulo",
-      "product": {
-        "__resolveType": "vtex/loaders/intelligentSearch/productDetailsPage.ts",
-        "slug": {
-          "__resolveType": "website/functions/requestToParam.ts",
-          "param": "/tomada-antena-tv-coaxial-orion-–-schneider-14172/p"
+      "__resolveType": "website/sections/Rendering/Lazy.tsx",
+      "section": {
+        "__resolveType": "site/sections/Content/ShowCaseCounter.tsx",
+        "Label": "Só HOJE",
+        "product": {
+          "__resolveType": "vtex/loaders/legacy/productDetailsPage.ts",
+          "slug": {
+            "__resolveType": "website/functions/requestToParam.ts",
+            "param": "inversor-gerador-solar-on-grid-15kw-trifasico-380v-sg15rt---sungrow-25"
+          }
         },
-        "similars": false
-      },
-      "expireAt": "2025-02-01T02:59:00.000Z"
+        "expireAt": "2025-02-01T02:59:00.000Z"
+      }
     },
     {
       "__resolveType": "site/sections/Spacer.tsx",
