@@ -35,11 +35,10 @@ const ShowCaseCounter = ({
     return null;
   }
 
-  //lg:bg-primary
   return (
     <div
       id={id}
-      class=" px-5 lg:px-0 rounded-[10px] lg:rounded-none bg-black"
+      class=" px-5 lg:px-0 rounded-[10px] lg:rounded-none lg:bg-primary"
     >
       <div class="flex items-center justify-center flex-wrap container p-5 gap-x-10 gap-y-3 lg:py-[100px] bg-primary rounded-[10px] lg:rounded-none">
         <div class="flex flex-col justify-unset lg:justify-center">
