@@ -35,21 +35,11 @@ const ShowCaseCounter = ({
     return null;
   }
 
-  const difference = +new Date(expireAt) - +new Date();
-
-  const days = Math.max(Math.floor(difference / (1000 * 60 * 60 * 24)), 0);
-  const hours = Math.max(Math.floor((difference / (1000 * 60 * 60)) % 24), 0);
-  const minutes = Math.max(Math.floor((difference / 1000 / 60) % 60), 0);
-  const seconds = Math.max(Math.floor((difference / 1000) % 60), 0);
-
-  if (seconds === 0 && minutes === 0 && hours === 0 && days === 0) {
-    return null;
-  }
-
+  //lg:bg-primary
   return (
     <div
       id={id}
-      class="lg:bg-primary px-5 lg:px-0 rounded-[10px] lg:rounded-none"
+      class=" px-5 lg:px-0 rounded-[10px] lg:rounded-none bg-black"
     >
       <div class="flex items-center justify-center flex-wrap container p-5 gap-x-10 gap-y-3 lg:py-[100px] bg-primary rounded-[10px] lg:rounded-none">
         <div class="flex flex-col justify-unset lg:justify-center">

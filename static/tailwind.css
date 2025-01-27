@@ -7288,11 +7288,6 @@ details>summary::marker {
     border-top-color: rgb(168 168 168 / var(--tw-border-opacity));
   }
 
-  .lg\:bg-primary {
-    --tw-bg-opacity: 1;
-    background-color: var(--fallback-p,oklch(var(--p)/var(--tw-bg-opacity)));
-  }
-
   .lg\:bg-white {
     --tw-bg-opacity: 1;
     background-color: rgb(255 255 255 / var(--tw-bg-opacity));
