@@ -191,7 +191,6 @@ function ProductInfo({
   const measurementTableImage = 
     ((images as ImageObject[])?.find(img => img.name === "measurementtable") as ImageObject) 
       || null;
-  console.log("measurementTableImage", measurementTableImage);
 
   if (device === "mobile" || device === "tablet") {
     return (
@@ -354,7 +353,7 @@ function ProductInfo({
                     )}
                     {!hiddenShipping && (
                       <div class="w-[calc(100%+40px)] -mx-[20px] px-[20px] pt-1.5 pb-4 border border-b-dark-gray border-t-0">
-                        <div class="lg:max-w-[338px]">
+                        <div>
                           <ShippingSimulationForm
                             items={[{
                               id: Number(product.sku),
@@ -588,7 +587,7 @@ function ProductInfo({
                         </div>
                       )}
                     {!hiddenShipping && (
-                      <div class="lg:max-w-[338px]">
+                      <div>
                         <ShippingSimulationForm
                           items={[{
                             id: Number(product.sku),

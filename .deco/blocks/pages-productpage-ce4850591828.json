@@ -187,6 +187,20 @@
     },
     {
       "__resolveType": "Footer Component"
+    },
+    {
+      "__resolveType": "website/sections/Rendering/Lazy.tsx",
+      "section": {
+        "__resolveType": "site/sections/Spacer.tsx",
+        "size": "medium"
+      }
+    },
+    {
+      "__resolveType": "website/sections/Rendering/Lazy.tsx",
+      "section": {
+        "__resolveType": "site/sections/Spacer.tsx",
+        "size": "medium"
+      }
     }
   ],
   "__resolveType": "website/pages/Page.tsx"

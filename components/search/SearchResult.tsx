@@ -201,6 +201,7 @@ function Result(props: SectionProps<typeof loader>) {
   function extractSearchTerms() {
     const newURL = new URL(url);
     const search = newURL.search;
+    console.log("search", search);
     const pathname = newURL.pathname;
     const match = search.match(/q=([^&]*)/);
     if (!match) {
@@ -215,9 +216,15 @@ function Result(props: SectionProps<typeof loader>) {
     }
   }
   const result = extractSearchTerms();
+  const {
+    seo: {
+      title
+    }
+  } = page;
   const sortBy = sortOptions.length > 0 && (
     <Sort sortOptions={sortOptions} url={url} />
   );
+  console.log("pageInfo", page);
   return (
     <>
       {device === "desktop" && (
@@ -226,7 +233,7 @@ function Result(props: SectionProps<typeof loader>) {
             <div class="border-b border-gray-300 mb-8">
               <div class="flex items-center space-between w-full container py-8 px-5">
                 <h1 class="text-xl lg:text-3xl uppercase font-semibold flex items-center">
-                  {result}{" "}
+                  {title}{" "}
                   <span class="text-base lg:text-xl ml-2">
                     [{page.pageInfo.records}]
                   </span>
@@ -250,7 +257,7 @@ function Result(props: SectionProps<typeof loader>) {
                     <div class="border-b border-gray-300">
                       <div class="flex items-center space-between w-full pt-5 pb-6 container mt-[5px]">
                         <h1 class="px-5 text-[20px] uppercase font-semibold flex items-center">
-                          {result}{" "}
+                          {title}{" "}
                           <span class="text-[14px] font-normal ml-4">
                             [{page.pageInfo.records}]
                           </span>
