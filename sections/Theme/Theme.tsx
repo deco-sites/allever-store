@@ -262,11 +262,12 @@ function Section({
     ...toVariables(theme),
     [
       "--font-family",
-      font?.family ||
-      "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif",
+      "Poppins, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif",
     ],
   ]
     .map(([name, value]) => ({ name, value }));
+
+  console.log("font", font);
 
   return (
     <SiteTheme

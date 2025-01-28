@@ -93,25 +93,42 @@ export default defineApp(async (req, ctx) => {
 
         <link rel="preconnect" href="https://fonts.gstatic.com" />
 
-        {
-          /* <style
+        {/* <style
           dangerouslySetInnerHTML={{
             __html: `
-              .poppins-regular {
-                font-family: "Poppins", serif;
+              @font-face {
+                font-family: 'Poppins', serif;
+                src: url('${asset("/Poppins-Light.ttf")}') format('ttf');
+                font-weight: 300;
+                font-style: normal;
+              }
+              @font-face {
+                font-family: 'Poppins', serif;
+                src: url('${asset("/Poppins-Regular.ttf")}') format('ttf');
                 font-weight: 400;
                 font-style: normal;
               }
-
-              .poppins-medium {
-                font-family: "Poppins", serif;
+              @font-face {
+                font-family: 'Poppins', serif;
+                src: url('${asset("/Poppins-Medium.ttf")}') format('ttf');
                 font-weight: 500;
+                font-style: normal;
+              }
+              @font-face {
+                font-family: 'Poppins', serif;
+                src: url('${asset("/Poppins-SemiBold.ttf")}') format('ttf');
+                font-weight: 600;
+                font-style: normal;
+              }
+              @font-face {
+                font-family: 'Poppins', serif;
+                src: url('${asset("/Poppins-Bold.ttf")}') format('ttf');
+                font-weight: 700;
                 font-style: normal;
               }
             `,
           }}
-        /> */
-        }
+        /> */}
       </Head>
 
       {/* Rest of Preact tree */}

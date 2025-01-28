@@ -12,10 +12,19 @@
       {
         "variations": [
           {
+            "weight": "300"
+          },
+          {
             "weight": "400"
           },
           {
             "weight": "500"
+          },
+          {
+            "weight": "600"
+          },
+          {
+            "weight": "700"
           }
         ],
         "family": "Poppins"
