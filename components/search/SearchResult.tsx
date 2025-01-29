@@ -201,7 +201,6 @@ function Result(props: SectionProps<typeof loader>) {
   function extractSearchTerms() {
     const newURL = new URL(url);
     const search = newURL.search;
-    console.log("search", search);
     const pathname = newURL.pathname;
     const match = search.match(/q=([^&]*)/);
     if (!match) {
@@ -224,7 +223,6 @@ function Result(props: SectionProps<typeof loader>) {
   const sortBy = sortOptions.length > 0 && (
     <Sort sortOptions={sortOptions} url={url} />
   );
-  console.log("pageInfo", page);
   return (
     <>
       {device === "desktop" && (

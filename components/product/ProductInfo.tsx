@@ -17,11 +17,14 @@ import ProductSubscription from "./Subscription/Form.tsx";
 import { useScript } from "@deco/deco/hooks";
 import { getFlagCluster } from "./ProductCard.tsx";
 import Icon from "../ui/Icon.tsx";
+import Price from "./Price.tsx";
 interface Props {
   page: ProductDetailsPage | null;
   flags?: [internationalFlag: string, promoFlag: string, newsFlag: string] | [];
   device: Device;
   hiddenShipping: boolean;
+  subscriptionTitle: string;
+  subscriptionTopics: string;
 }
 const onLoad = () => {
   const handleScroll = () => {
@@ -126,11 +129,90 @@ function MeasurementTable({
     </dialog>
   )
 }
+function SubscriptionPrice({
+  price,
+  discount,
+  title,
+  topics,
+}: {
+  price: number,
+  discount: number,
+  title: string,
+  topics: string[]
+}) {
+  const priceDiscount = price * (discount / 100);
+  const total = price - priceDiscount;
+  return (
+    <>
+      <div class="w-full rounded-2xl border border-dark-gray p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1">
+        <div class="text-primary flex items-center gap-2 text-xl font-semibold">
+          <Icon id="bookmark" />
+          {formatPrice(total)}
+        </div>
+        <div class="pl-[33px] sm:pl-0">Para assinantes <span class="text-primary">[allever]</span></div>
+        <button 
+          class="pl-[33px] sm:pl-0 underline text-dark-gray text-sm"
+          hx-on:click={
+            useScript(() => {
+              // @ts-ignore .
+              document.getElementById("subscripton_info")?.showModal();
+            })
+          }  
+        >
+          O que é a assinatura?
+        </button>
+      </div>
+      <dialog id="subscripton_info" class="modal">
+        <div class="modal-box">
+          <form method="dialog">
+            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            <div 
+              class="text-black font-semibold uppercase text-lg mb-3"
+              dangerouslySetInnerHTML={{
+                __html: title
+              }} 
+            />
+            <div class="text-sm text-black font-semibold">
+              <span>Por que assinar?</span>
+              {topics.map((topic) => (
+                <div class="flex items-center gap-3 border-b border-middle-gray py-3">
+                  <div class="flex-grow max-w-[24px]">
+                    <Icon
+                      id="check-circle"
+                      class="text-primary"
+                    />  
+                  </div>
+                  {topic}
+                </div>
+              ))}
+              <button 
+                class="btn btn-primary w-full mt-3"
+                hx-on:click={
+                  useScript(() => {
+                    // @ts-ignore .
+                    document.getElementById("subscripton_info")?.showModal();
+                  })
+                }  
+              >
+                Entendido
+              </button>
+            </div>
+          </form>
+        </div>
+        <form method="dialog" class="modal-backdrop">
+          <button>close</button>
+        </form>
+      </dialog>
+    </>
+  )
+}
 function ProductInfo({
   page,
   flags = [],
   device,
   hiddenShipping,
+  subscriptionTitle,
+  subscriptionTopics
 }: Props) {
   if (page === null) {
     throw new Error("Missing Product Details Page Info");
@@ -160,6 +242,10 @@ function ProductInfo({
   const percent = listPrice && price
     ? Math.round(((listPrice - price) / listPrice) * 100)
     : 0;
+  const hasSubscription = additionalProperty?.find((prop) =>
+    prop.value?.toLowerCase().indexOf("assinatura") !== -1
+  )?.value || "0";
+  const subscriptionValue = parseInt(hasSubscription.replace(/\D/g, ""));
   const breadcrumb = {
     ...breadcrumbList,
     itemListElement: breadcrumbList?.itemListElement.slice(0, -1),
@@ -215,14 +301,14 @@ function ProductInfo({
           </div>
           {hasPromoFlag &&
             (
-              <p class="text-xs font-semibold text-white uppercase bg-[#F22E2E] text-center text-white px-2 py-1 rounded-[6px] w-full">
+              <p class="text-xs font-semibold text-white uppercase bg-[#F22E2E] text-center text-white px-2 py-1 rounded-full w-full">
                 Promoção
               </p>
             )}
           {hasInternationalFlag &&
             (
               <div class="flex w-full">
-                <p class="text-xs font-semibold text-white uppercase bg-black text-center text-white px-2 py-1 rounded-[6px] w-full">
+                <p class="text-xs font-semibold text-white uppercase bg-black text-center text-white px-2 py-1 rounded-full w-full">
                   Produto internacional{" "}
                   <a
                     class="underline"
@@ -238,7 +324,7 @@ function ProductInfo({
             <div class="w-full max-w-[151px]">
               {hasNewsFlag &&
                 (
-                  <p class="text-xs font-semibold text-white uppercase bg-[#FFA318] text-center text-white px-2 py-1 rounded-[6px]">
+                  <p class="text-xs font-semibold text-white uppercase bg-[#FFA318] text-center text-white px-2 py-1 rounded-full">
                     Novidade
                   </p>
                 )}
@@ -252,52 +338,13 @@ function ProductInfo({
                     id="product-page"
                     data-trustvox-product-code={productGroupID}
                   />
-                  <div class="flex flex-col gap-2">
-                    <div class="flex gap-1 items-center">
-                      {listPrice > price &&
-                        (
-                          <span class="line-through text-base text-dark-gray leading-[1]">
-                            {formatPrice(listPrice, offers?.priceCurrency)}
-                          </span>
-                        )}
-                      <span class="text-[20px] font-semibold text-black leading-[1]">
-                        {formatPrice(price, offers?.priceCurrency)}
-                      </span>
-                      {percent >= 1 && (
-                        <div class="text-xs font-semibold text-white uppercase bg-primary text-center text-white px-2 py-1 rounded-[6px] w-fit">
-                          {percent} % off
-                        </div>
-                      )}
-                    </div>
-                    {price > pix && pix > 0 &&
-                      (
-                        <div class="flex flex-col items-start">
-                          <p class="text-[40px] font-semibold text-primary leading-[1]">
-                            {formatPrice(pix)}
-                            <span class="text-primary font-normal text-[30px] ml-2 leading-[1]">
-                              no PIX
-                            </span>
-                          </p>
-                        </div>
-                      )}
-                    <p
-                      class={`${
-                        price === pix
-                          ? "font-semibold text-primary text-xl"
-                          : "text-black text-base"
-                      } leading-[1]`}
-                    >
-                      ou {installment?.billingDuration}x de {formatPrice(
-                        installment?.billingIncrement,
-                        offers!.priceCurrency!,
-                      )}
-                    </p>
-                  </div>
+                  <Price type="details" product={product} isMobile={true} />
                   <PaymentMethods
                     offers={offers}
-                    installment={installment?.price.toString() || ""}
+                    pix={pix}
                   />
                   <ProductSelector product={product} />
+                  {subscriptionValue > 0 && <SubscriptionPrice price={price} discount={subscriptionValue} title={subscriptionTitle} topics={subscriptionTopics} />}
                   <div class="w-[calc(100%+40px)] -mx-[20px] px-[20px] py-4 border border-y-dark-gray flex flex-col gap-3">
                     <>
                       {inventory > 0 && inventory <= 9 && (
@@ -320,6 +367,8 @@ function ProductInfo({
                       product={product}
                       item={item}
                       seller={seller}
+                      title={subscriptionTitle} 
+                      topics={subscriptionTopics}
                     />
                     <p class="text-xs font-normal text-black">
                       Vendido e entregue por:{" "}
@@ -370,46 +419,15 @@ function ProductInfo({
           </div>
         </div>
         <div class="fixed bottom-0 left-0 right-0 rounded-t-2xl bg-white shadow-2xl z-10">
-          <div class="container px-5 py-4 grid grid-cols-6 gap-4 items-center">
-            <div class="flex flex-col col-span-3">
-              <div class="flex flex-col items-start">
-                {pix > 0 && price > pix
-                  ? (
-                    <p class="text-lg font-semibold text-primary">
-                      {formatPrice(pix, offers?.priceCurrency)}
-                      <span class="text-primary font-normal text-xs ml-2">
-                        no PIX
-                      </span>
-                    </p>
-                  )
-                  : (
-                    <p class="text-lg font-semibold text-black">
-                      {formatPrice(price, offers?.priceCurrency)}
-                    </p>
-                  )}
-              </div>
-              <p
-                class={`${
-                  price === pix
-                    ? "font-semibold text-primary text-lg max-[390px]:text-base"
-                    : "text-black text-xs"
-                } leading-[1]`}
-              >
-                ou {installment?.billingDuration}x de {formatPrice(
-                  installment?.billingIncrement,
-                  offers!.priceCurrency!,
-                )}
-              </p>
-            </div>
-            <div class="col-span-3">
-              <AddToCartButton
-                item={item}
-                seller={seller}
-                product={product}
-                class="uppercase bg-signature-green text-base flex justify-center items-center gap-2 py-3 rounded-full no-animation text-white font-semibold hover:bg-[#1bae3299]"
-                disabled={false}
-              />
-            </div>
+          <div class="container px-5 py-4 flex gap-4 items-center">
+            <Price type="fixed" product={product} isMobile={true} />
+            <AddToCartButton
+              item={item}
+              seller={seller}
+              product={product}
+              class="uppercase bg-signature-green text-base flex justify-center items-center gap-2 py-3 rounded-full no-animation text-white font-semibold hover:bg-[#1bae3299]"
+              disabled={false}
+            />
           </div>
         </div>
       </>
@@ -441,7 +459,7 @@ function ProductInfo({
                   <WishlistButton item={item} pdp={true} />
                 </div>
                 <div className="flex items-center justify-between">
-                  <p class="text-dark-gray">
+                  <p class="text-dark-gray text-sm">
                     Cod: {model} | {brand?.name}
                   </p>
                   {/* @ts-ignore . */}
@@ -450,27 +468,21 @@ function ProductInfo({
                     Compartilhe
                   </button>
                 </div>
+                {hasNewsFlag &&
+                  (
+                    <p class="text-xs font-semibold text-white uppercase bg-[#FFA318] text-center text-white px-2 py-1 rounded-full max-w-40">
+                      Novidade
+                    </p>
+                  )}
               </div>
               {availability === "https://schema.org/InStock" &&
                 (
                   <>
-                    <div class="flex gap-[5px]">
-                      {hasPromoFlag &&
-                        (
-                          <p class="text-xs font-semibold text-white uppercase bg-[#F22E2E] text-center text-white px-2 py-1 rounded-[6px]">
-                            Promoção
-                          </p>
-                        )}
-                      {hasNewsFlag &&
-                        (
-                          <p class="text-xs font-semibold text-white uppercase bg-[#FFA318] text-center text-white px-2 py-1 rounded-[6px]">
-                            Novidade
-                          </p>
-                        )}
+                    <div class="flex flex-col gap-[5px]">
                       {hasInternationalFlag &&
                         (
                           <div class="flex w-full">
-                            <p class="text-xs font-semibold text-white uppercase bg-black text-center text-white px-2 py-1 rounded-[6px] w-full">
+                            <p class="text-xs font-semibold text-white uppercase bg-black text-center text-white px-2 py-1 rounded-full w-full">
                               Produto internacional{" "}
                               <a
                                 class="underline"
@@ -482,54 +494,19 @@ function ProductInfo({
                           </div>
                         )}
                     </div>
-                    <div class="flex flex-col gap-2">
-                      <div class="flex gap-2 items-center">
-                        {listPrice > price &&
-                          (
-                            <span class="line-through text-base text-dark-gray leading-[1]">
-                              {formatPrice(listPrice, offers?.priceCurrency)}
-                            </span>
-                          )}
-                        <span class="text-[20px] font-semibold text-black leading-[1]">
-                          {formatPrice(price, offers?.priceCurrency)}
-                        </span>
-                        {percent >= 1 && (
-                          <span class="text-xs font-semibold text-white uppercase bg-primary text-center text-white px-2 py-1 rounded-[6px] w-fit">
-                            {percent} % off
-                          </span>
-                        )}
-                      </div>
-                      {pix > 0 && price > pix &&
-                        (
-                          <div class="flex items-center">
-                            <p class="text-[40px] font-semibold text-primary leading-[1]">
-                              {formatPrice(pix, offers?.priceCurrency)}
-                              <span class="text-primary font-normal text-[30px] ml-2 leading-[1]">
-                                no PIX
-                              </span>
-                            </p>
-                          </div>
-                        )}
-                      <div class="fluid-text">
-                        <p
-                          class={`${
-                            price === pix
-                              ? "font-semibold text-primary text-xl"
-                              : "text-black text-base"
-                          }`}
-                        >
-                          ou {installment?.billingDuration}x de {formatPrice(
-                            installment?.billingIncrement,
-                            offers!.priceCurrency!,
-                          )}
+                    <Price type="details" product={product} isMobile={false} />
+                    {hasPromoFlag &&
+                      (
+                        <p class="text-xs font-semibold text-white uppercase bg-[#F22E2E] text-center text-white px-2 py-1 rounded-full max-w-40">
+                          Promoção
                         </p>
-                      </div>
-                    </div>
+                      )}
                     <PaymentMethods
                       offers={offers}
-                      installment={installment?.price.toString() || ""}
+                      pix={pix}
                     />
                     <ProductSelector product={product} />
+                    {subscriptionValue > 0 && <SubscriptionPrice price={price} discount={subscriptionValue} title={subscriptionTitle} topics={subscriptionTopics} />}
                     <div class="flex flex-col gap-3">
                       <AddToCartButton
                         item={item}
@@ -542,6 +519,8 @@ function ProductInfo({
                         product={product}
                         item={item}
                         seller={seller}
+                        title={subscriptionTitle} 
+                        topics={subscriptionTopics}
                       />
                       {inventory > 0 && inventory <= 9 && (
                         <div>
@@ -618,36 +597,7 @@ function ProductInfo({
             <div class="hidden lg:block text-xl font-semibold text-black col-span-3">
               {title}
             </div>
-            <div class="flex flex-col col-span-2">
-              <div class="flex flex-col items-start">
-                {pix > 0 && price > pix
-                  ? (
-                    <p class="text-2xl font-semibold text-primary">
-                      {formatPrice(pix, offers?.priceCurrency)}
-                      <span class="text-primary font-normal text-xl ml-2">
-                        no PIX
-                      </span>
-                    </p>
-                  )
-                  : (
-                    <p class="text-xl font-semibold text-black">
-                      {formatPrice(price, offers?.priceCurrency)}
-                    </p>
-                  )}
-              </div>
-              <p
-                class={`${
-                  price === pix
-                    ? "font-semibold text-primary text-xl"
-                    : "text-black text-base"
-                } leading-[1]`}
-              >
-                ou {installment?.billingDuration}x de {formatPrice(
-                  installment?.billingIncrement,
-                  offers!.priceCurrency!,
-                )}
-              </p>
-            </div>
+            <Price type="fixed" product={product} isMobile={false} />
             <div class="col-span-2">
               <AddToCartButton
                 item={item}
@@ -661,7 +611,7 @@ function ProductInfo({
         </div>
         <script
           type="module"
-          dangerouslySetInnerHTML={{ __html: useScript(onLoad, id) }}
+          dangerouslySetInnerHTML={{ __html: useScript(onLoad) }}
         />
       </>
     );

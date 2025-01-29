@@ -4012,6 +4012,9 @@ details.collapse summary::-webkit-details-marker {
 .inline {
   display: inline;
 }
+.\!flex {
+  display: flex !important;
+}
 .flex {
   display: flex;
 }
@@ -4301,6 +4304,9 @@ details.collapse summary::-webkit-details-marker {
 .max-w-24 {
   max-width: 6rem;
 }
+.max-w-40 {
+  max-width: 10rem;
+}
 .max-w-6xl {
   max-width: 72rem;
 }
@@ -4339,6 +4345,9 @@ details.collapse summary::-webkit-details-marker {
 }
 .max-w-\[212px\] {
   max-width: 212px;
+}
+.max-w-\[24px\] {
+  max-width: 24px;
 }
 .max-w-\[252px\] {
   max-width: 252px;
@@ -4915,6 +4924,10 @@ details.collapse summary::-webkit-details-marker {
 .border-none {
   border-style: none;
 }
+.\!border-primary {
+  --tw-border-opacity: 1 !important;
+  border-color: var(--fallback-p,oklch(var(--p)/var(--tw-border-opacity))) !important;
+}
 .border-base-100 {
   --tw-border-opacity: 1;
   border-color: var(--fallback-b1,oklch(var(--b1)/var(--tw-border-opacity)));
@@ -5334,6 +5347,9 @@ details.collapse summary::-webkit-details-marker {
 }
 .pl-\[10px\] {
   padding-left: 10px;
+}
+.pl-\[33px\] {
+  padding-left: 33px;
 }
 .pr-2 {
   padding-right: 0.5rem;
@@ -6711,6 +6727,10 @@ details>summary::marker {
     align-items: flex-end;
   }
 
+  .sm\:items-center {
+    align-items: center;
+  }
+
   .sm\:justify-between {
     justify-content: space-between;
   }
@@ -6784,6 +6804,10 @@ details>summary::marker {
   .sm\:py-5 {
     padding-top: 1.25rem;
     padding-bottom: 1.25rem;
+  }
+
+  .sm\:pl-0 {
+    padding-left: 0px;
   }
 
   .sm\:pl-4 {

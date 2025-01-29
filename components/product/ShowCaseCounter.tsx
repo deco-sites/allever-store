@@ -24,7 +24,7 @@ interface Props {
 
 const ShowCaseCounter = ({
   Title =
-    "<p class='flex gap-[5px]'><span class='font-bold'>[Oferta]</span> <span class='font-semibold'> Relâmpago</span></p> ",
+    "<p class='flex gap-[5px]'><span class='font-bold'>[Oferta]</span> <span class='font-regular'> Relâmpago</span></p> ",
   Label = "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum",
   expireAt,
   product,

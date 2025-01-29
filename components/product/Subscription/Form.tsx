@@ -9,6 +9,8 @@ export interface Props {
   item: AnalyticsItem;
   seller: string;
   product: Product;
+  title: string;
+  topics: string[];
 }
 const onLoad = () => {
   const form = document.querySelector("#modal_subscription");
@@ -37,7 +39,7 @@ const onLoad = () => {
     });
   }
 };
-export default function ProductSubscription({ product }: Props) {
+export default function ProductSubscription({ product, title, topics }: Props) {
   const slot = useId();
   if (!product) {
     return null;
@@ -73,32 +75,25 @@ export default function ProductSubscription({ product }: Props) {
               ✕
             </button>
           </form>
-          <h2 class="text-black font-semibold uppercase text-lg mb-3">
-            ASSINE E COMPRE COM ATÉ <b class="text-primary">[10% OFF]</b>
-          </h2>
-          <div class="mb-5 text-sm text-black font-semibold">
-            <h3>Por que assinar?</h3>
-            <div class="flex items-center gap-3 border-b border-middle-gray py-3">
-              <Icon
-                id="check-circle"
-                class="text-primary"
-              />
-              10% OFF no site em todas as compras com assinatura
-            </div>
-            <div class="flex items-center gap-3 border-b border-middle-gray py-3">
-              <Icon
-                id="check-circle"
-                class="text-primary"
-              />
-              Edite os produtos e as datas, pause ou cancele a qualquer momento!
-            </div>
-            <div class="flex items-center gap-3 border-b border-middle-gray py-3">
-              <Icon
-                id="check-circle"
-                class="text-primary"
-              />
-              Sem taxas de Adesão, Mensalidade ou Cancelamento
-            </div>
+          <div 
+            class="text-black font-semibold uppercase text-lg mb-3"
+            dangerouslySetInnerHTML={{
+              __html: title
+            }} 
+          />
+          <div class="text-sm text-black font-semibold">
+            <span>Por que assinar?</span>
+            {topics.map((topic) => (
+              <div class="flex items-center gap-3 border-b border-middle-gray py-3">
+                <div class="flex-grow max-w-[24px]">
+                  <Icon
+                    id="check-circle"
+                    class="text-primary"
+                  />  
+                </div>
+                {topic}
+              </div>
+            ))}
           </div>
           <form
             id="subscription-form"

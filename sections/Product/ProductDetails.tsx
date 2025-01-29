@@ -11,12 +11,15 @@ import type { Product, ProductDetailsPage } from "apps/commerce/types.ts";
 export interface Props {
   /** @title Integration */
   page: ProductDetailsPage | null;
-  /** @hide */
-  isMobile: boolean;
-  /** @hide */
-  productRecommendations: Product[];
   /** @title Omitir seção de entrega? */
   hiddenShipping?: boolean;
+  /** 
+   * @title Título da Seção de Assinatura
+   * @format rich-text 
+  */
+  subscriptionTitle?: string;
+  /** @title Tópicos da Seção de Assinatura */
+  subscriptionTopics?: string[];
 }
 const onLoad = (productId: string, productName: string, image: string) => {
   // @ts-ignore _trustvox exists
@@ -79,6 +82,12 @@ export default function ProductDetails({
   isMobile,
   productRecommendations,
   hiddenShipping = false,
+  subscriptionTitle = "ASSINE E COMPRE COM ATÉ <b class='text-primary'>[10% OFF]</b>",
+  subscriptionTopics = [
+    "10% OFF no site em todas as compras com assinatura",
+    "Edite os produtos e as datas, pause ou cancele a qualquer momento!",
+    "Sem taxas de Adesão, Mensalidade ou Cancelamento"
+  ]
 }: SectionProps<typeof loader>) {
   if (!page) {
     return (
@@ -144,6 +153,8 @@ export default function ProductDetails({
           page={page}
           device={device}
           hiddenShipping={hiddenShipping}
+          subscriptionTitle={subscriptionTitle}
+          subscriptionTopics={subscriptionTopics}
         />
         <BuyTogether
           page={page}

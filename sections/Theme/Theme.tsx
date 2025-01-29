@@ -267,8 +267,6 @@ function Section({
   ]
     .map(([name, value]) => ({ name, value }));
 
-  console.log("font", font);
-
   return (
     <SiteTheme
       fonts={font ? [font] : undefined}
