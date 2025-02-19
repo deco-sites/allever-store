@@ -12,10 +12,10 @@
     {
       "__resolveType": "site/sections/Institutional/ImageComponent.tsx",
       "mobile": {
-        "Image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11097/bf85bfb5-6e24-4d4d-a450-36053014d7bf"
+        "Image": "https://data.decoassets.com/allever-store/fdb29077-3794-4ebb-9291-e636d2ab7a9e/fev25_BANNERS-institucionais-trabalhe-conosco.jpg"
       },
       "desktop": {
-        "Image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11097/8a94e642-e362-4eb1-a884-70e28b00c4c5"
+        "Image": "https://data.decoassets.com/allever-store/715032be-e2a0-4c3c-adc8-2f973ba572d1/fev25_DESK-trabalhe-conosco.jpg"
       }
     },
     {

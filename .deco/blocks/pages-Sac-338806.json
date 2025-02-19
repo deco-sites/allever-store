@@ -13,10 +13,10 @@
     {
       "__resolveType": "site/sections/Institutional/ImageComponent.tsx",
       "desktop": {
-        "Image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11097/9e8b6bee-3750-4698-81b4-bf0d2a18b826"
+        "Image": "https://data.decoassets.com/allever-store/0e3a1a0f-f7f7-4dfb-b863-1df904658372/fev25_DESK-sac.jpg"
       },
       "mobile": {
-        "Image": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11097/214d0cf9-b13a-4097-b270-716b49e892be"
+        "Image": "https://data.decoassets.com/allever-store/b138a180-f217-44f5-b2fb-776134cf2d00/fev25_BANNERS-mob-sac.jpg"
       },
       "Loading": "lazy",
       "Alt": "Banner de da marca allever"

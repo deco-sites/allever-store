@@ -14,13 +14,31 @@
       "__resolveType": "site/sections/Images/Carousel.tsx",
       "images": [
         {
-          "desktop": "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/11097/18bae574-1324-4994-9929-5cf47fddbf73",
-          "alt": "/",
+          "desktop": "https://data.decoassets.com/allever-store/329c158c-6213-413a-bfc4-9b4d29d5ea28/banner-topo-atualizado-desk.jpg",
           "action": {
             "href": "/",
             "label": "Confira"
           },
-          "mobile": "https://placehold.co/640x800"
+          "mobile": "https://data.decoassets.com/allever-store/c4a04654-373d-47fe-ba41-9974b3668060/Mobile-topo-1.jpg",
+          "alt": "Banner-topo-1"
+        },
+        {
+          "desktop": "https://data.decoassets.com/allever-store/4a746a37-6e3c-4a02-91f7-2ce261b51ee9/banner-topo-atualizado-desk-2.jpg",
+          "alt": "Banner-topo-2",
+          "action": {
+            "href": "/",
+            "label": "Confira"
+          },
+          "mobile": "https://data.decoassets.com/allever-store/63dd11f7-1640-49de-a0c9-73d365cd3ce3/Mobile-topo-2.jpg"
+        },
+        {
+          "desktop": "https://data.decoassets.com/allever-store/89236ee8-5693-4d7b-9f4a-4b0a870e2cf5/dez24-DESK-allever-teste-(2).jpg",
+          "alt": "Banner-topo-3",
+          "action": {
+            "href": "/",
+            "label": "Confira"
+          },
+          "mobile": "https://data.decoassets.com/allever-store/f0b3791e-4c14-4256-be1d-c2e9daaa82a9/dez24-MOB-allever-teste-(2).jpg"
         }
       ],
       "preload": true
@@ -214,16 +232,42 @@
       "layout": "Categoria",
       "visibleItems": 8,
       "categories": [
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {},
-        {}
+        {
+          "image": "https://data.decoassets.com/allever-store/3b8a9dcb-e23c-429b-a183-ec367e191abd/categoria-artigos-festa.jpg",
+          "label": "Artigos de Festa"
+        },
+        {
+          "image": "https://data.decoassets.com/allever-store/8a53a16b-8bb0-4aad-b804-7843cf73d35a/categoria-beleza.jpg",
+          "label": "Beleza"
+        },
+        {
+          "image": "https://data.decoassets.com/allever-store/c27d7dc4-dca7-4556-9ed4-8eee9c6cf0cd/categoria-brinquedos.jpg",
+          "label": "Brinquedos"
+        },
+        {
+          "image": "https://data.decoassets.com/allever-store/63b22ffd-c7cd-4902-bef2-d7608b829c80/categoria-Camera.jpg",
+          "label": "Câmera"
+        },
+        {
+          "image": "https://data.decoassets.com/allever-store/59444eb4-280a-4632-b06b-063a8201ad73/categoria-Eletrodomesticos.jpg",
+          "label": "Eletro"
+        },
+        {
+          "image": "https://data.decoassets.com/allever-store/7ea0099e-f860-46c1-b822-b34350171e59/categoria-Ferramentas.jpg",
+          "label": "Ferramentas"
+        },
+        {
+          "image": "https://data.decoassets.com/allever-store/5f3212c3-e15a-4cca-847c-130fada81d3a/jan25_BANNER3-iluminacao.jpg",
+          "label": "Iluminação"
+        },
+        {
+          "image": "https://data.decoassets.com/allever-store/62a620dc-e12a-4904-bdd2-b1147073c481/categoria-Panela.jpg",
+          "label": "Panelas"
+        },
+        {
+          "image": "https://data.decoassets.com/allever-store/dead8bda-a42d-44dc-a06d-1bad22c6400c/categoria-som.jpg",
+          "label": "Som"
+        }
       ]
     },
     {
@@ -235,8 +279,8 @@
       "banners": [
         {
           "image": {
-            "desktop": "https://placehold.co/1440x285",
-            "mobile": "https://placehold.co/640x504",
+            "desktop": "https://data.decoassets.com/allever-store/65c3514f-ecf1-4f89-8f5f-893f9c6f5944/banner-horizontal-meio-atualizado-desk.jpg",
+            "mobile": "https://data.decoassets.com/allever-store/ec687634-c9cc-4693-9214-fbb6df9baaaa/banner-horizontal-meio-atualizado-mob.jpg",
             "alt": "banner 100% de marca x"
           },
           "matcher": "/"
@@ -255,14 +299,14 @@
         "cta": "Confira",
         "hideLabel": true,
         "products": {
-          "__resolveType": "vtex/loaders/legacy/productList.ts",
+          "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
           "props": {
-            "sort": "OrderByReleaseDateDESC",
+            "sort": "price:asc",
             "count": 12,
-            "collection": "150"
+            "collection": "139"
           }
         },
-        "expireAt": "2025-02-01T02:59:00.000Z",
+        "expireAt": "2025-03-01T02:59:00.000Z",
         "displayOfferTag": true
       }
     },
@@ -277,44 +321,52 @@
           "Loading": "eager",
           "desktop": {
             "Width": 360,
-            "Height": 398
+            "Height": 398,
+            "Image": "https://data.decoassets.com/allever-store/7d17ed7d-863b-4918-8275-8bef87c4347c/banner-desk-modular-1.jpg"
           },
           "mobile": {
             "Width": 600,
-            "Height": 300
+            "Height": 300,
+            "Image": "https://data.decoassets.com/allever-store/670883cb-1a37-453f-b0a3-c5f65157218e/fev25_MOB-banner-1.jpg"
           }
         },
         {
           "Loading": "eager",
           "desktop": {
             "Width": 360,
-            "Height": 398
+            "Height": 398,
+            "Image": "https://data.decoassets.com/allever-store/6f8683a6-7799-4eda-b804-4196fc77fab9/banner-desk-modular-2.jpg"
           },
           "mobile": {
             "Width": 600,
-            "Height": 300
+            "Height": 300,
+            "Image": "https://data.decoassets.com/allever-store/199b752c-cf67-403d-a827-004a7183ab6a/fev25_MOB-banner-2.jpg"
           }
         },
         {
           "Loading": "eager",
           "desktop": {
             "Width": 360,
-            "Height": 398
+            "Height": 398,
+            "Image": "https://data.decoassets.com/allever-store/7a93a649-52c4-430d-9eae-032c818812c9/banner-desk-modular-3.jpg"
           },
           "mobile": {
             "Width": 600,
-            "Height": 300
+            "Height": 300,
+            "Image": "https://data.decoassets.com/allever-store/ccef71c0-819c-4887-b63e-d9b272f56b3b/fev25_MOB-banner-3.jpg"
           }
         },
         {
           "Loading": "eager",
           "desktop": {
             "Width": 360,
-            "Height": 398
+            "Height": 398,
+            "Image": "https://data.decoassets.com/allever-store/d167e505-79a8-414a-b059-487a89840c27/banner-desk-modular-4.jpg"
           },
           "mobile": {
             "Width": 600,
-            "Height": 300
+            "Height": 300,
+            "Image": "https://data.decoassets.com/allever-store/aa7f2428-e4db-4d4a-8e4b-25284b87c22a/fev25_MOB-banner-4.jpg"
           }
         }
       ]
@@ -329,13 +381,10 @@
         "__resolveType": "site/sections/Content/ShowCaseCounter.tsx",
         "Label": "Só HOJE",
         "product": {
-          "__resolveType": "vtex/loaders/legacy/productDetailsPage.ts",
-          "slug": {
-            "__resolveType": "website/functions/requestToParam.ts",
-            "param": "inversor-gerador-solar-on-grid-15kw-trifasico-380v-sg15rt---sungrow-25"
-          }
+          "__resolveType": "vtex/loaders/intelligentSearch/productDetailsPage.ts",
+          "slug": "liquidificador-electrolux-700w-com-copo-de-vidro-tecnologiatruflow-experience-ebs30-127v-27774"
         },
-        "expireAt": "2025-02-01T02:59:00.000Z"
+        "expireAt": "2025-03-01T02:59:00.000Z"
       }
     },
     {
@@ -366,33 +415,39 @@
           "Loading": "eager",
           "desktop": {
             "Width": 450,
-            "Height": 398
+            "Height": 398,
+            "Image": "https://data.decoassets.com/allever-store/8c16c788-520b-4054-80d3-409823a154be/jan25_BANNER19-modular-1-(1).jpg"
           },
           "mobile": {
             "Width": 640,
-            "Height": 504
+            "Height": 504,
+            "Image": "https://data.decoassets.com/allever-store/410a27ff-e4be-4f02-a5a0-2b889f139df6/317x350-1-MOB-3.jpg"
           }
         },
         {
           "Loading": "eager",
           "desktop": {
             "Width": 450,
-            "Height": 398
+            "Height": 398,
+            "Image": "https://data.decoassets.com/allever-store/fec35127-84f4-46ae-96df-b6b0b2a4b849/jan25_BANNER20-modular-2.jpg"
           },
           "mobile": {
             "Width": 317,
-            "Height": 350
+            "Height": 350,
+            "Image": "https://data.decoassets.com/allever-store/ef99fce0-1c3b-48f9-a764-e4c882c22564/317x350-1-MOB-1.jpg"
           }
         },
         {
           "Loading": "eager",
           "desktop": {
             "Width": 450,
-            "Height": 398
+            "Height": 398,
+            "Image": "https://data.decoassets.com/allever-store/08279142-bab0-4d94-b920-e7cbad7e602b/jan25_BANNER21-modular-3.jpg"
           },
           "mobile": {
             "Width": 317,
-            "Height": 350
+            "Height": 350,
+            "Image": "https://data.decoassets.com/allever-store/ae5b5bd1-0b9d-4fee-bdbc-896dd9fe4bec/317x350-1-MOB-2.jpg"
           }
         }
       ],
@@ -401,33 +456,39 @@
           "Loading": "eager",
           "desktop": {
             "Width": 1410,
-            "Height": 439
+            "Height": 439,
+            "Image": "https://data.decoassets.com/allever-store/5d605ab9-048e-4299-8022-960d1de774b4/jan25_BANNER17-carrrossel-1.jpg"
           },
           "mobile": {
             "Width": 317,
-            "Height": 350
+            "Height": 350,
+            "Image": "https://data.decoassets.com/allever-store/96741846-a319-4348-abdc-c326bcfabf29/390x504.jpg"
           }
         },
         {
           "Loading": "eager",
           "desktop": {
             "Width": 1410,
-            "Height": 439
+            "Height": 439,
+            "Image": "https://data.decoassets.com/allever-store/611c122b-0187-4977-8199-360e48a2822a/jan25_BANNER18-carrrossel-2.jpg"
           },
           "mobile": {
             "Width": 317,
-            "Height": 350
+            "Height": 350,
+            "Image": "https://data.decoassets.com/allever-store/14ca0bdf-a25d-4c5c-b98a-d1f68771dcb0/390x504-1.jpg"
           }
         }
       ],
       "bannerFull": {
         "desktop": {
           "Width": 1410,
-          "Height": 144
+          "Height": 144,
+          "Image": "https://data.decoassets.com/allever-store/861cf510-44cc-4c2c-aeb4-511aef2655c1/jan25_BANNER19-modular-1.jpg"
         },
         "mobile": {
           "Width": 640,
-          "Height": 144
+          "Height": 144,
+          "Image": "https://data.decoassets.com/allever-store/06382224-3cbb-4b9c-b5f7-884e08cc14e2/390-x-144.jpg"
         }
       }
     },
@@ -461,44 +522,52 @@
           "Loading": "eager",
           "desktop": {
             "Width": 872,
-            "Height": 398
+            "Height": 398,
+            "Image": "https://data.decoassets.com/allever-store/8498768d-9fb8-43af-8512-172875452314/jan25_BANNER23-820x498-1.jpg"
           },
           "mobile": {
             "Width": 309,
-            "Height": 350
+            "Height": 350,
+            "Image": "https://data.decoassets.com/allever-store/a0497229-f4db-4b67-a059-5d188a164f82/317x350.jpg"
           }
         },
         {
           "Loading": "eager",
           "desktop": {
             "Width": 450,
-            "Height": 398
+            "Height": 398,
+            "Image": "https://data.decoassets.com/allever-store/b4032d5b-407f-481d-a3ec-f03dc51510ad/modular-2.jpg"
           },
           "mobile": {
             "Width": 309,
-            "Height": 350
+            "Height": 350,
+            "Image": "https://data.decoassets.com/allever-store/8ccb37b5-8452-4cca-b7d8-540f41ec8483/317x350-1.jpg"
           }
         },
         {
           "Loading": "eager",
           "desktop": {
             "Width": 450,
-            "Height": 398
+            "Height": 398,
+            "Image": "https://data.decoassets.com/allever-store/91fe5c59-f3e5-405f-a9bb-2bf238b9fa0b/modular-1.jpg"
           },
           "mobile": {
             "Width": 309,
-            "Height": 350
+            "Height": 350,
+            "Image": "https://data.decoassets.com/allever-store/3b04859a-2002-4586-8170-4fb6807e60c9/317x350-2.jpg"
           }
         },
         {
           "Loading": "eager",
           "desktop": {
             "Width": 872,
-            "Height": 398
+            "Height": 398,
+            "Image": "https://data.decoassets.com/allever-store/2bb70134-022e-4ab0-a808-acb73059f79c/jan25_BANNER26-820x498-2.jpg"
           },
           "mobile": {
             "Width": 309,
-            "Height": 350
+            "Height": 350,
+            "Image": "https://data.decoassets.com/allever-store/101c59bc-19ff-4e40-97e3-1f9af6cbd629/317x350-3.jpg"
           }
         }
       ]
@@ -552,33 +621,39 @@
           "Loading": "eager",
           "desktop": {
             "Height": 350,
-            "Width": 872
+            "Width": 872,
+            "Image": "https://data.decoassets.com/allever-store/3b75750e-a062-4f2b-9b6c-f023863255af/jan25_BANNER27-820x498-1.jpg"
           },
           "mobile": {
             "Width": 309,
-            "Height": 350
+            "Height": 350,
+            "Image": "https://data.decoassets.com/allever-store/5e72b42a-c4c4-4f01-b8a0-9fa669c2106b/317x350-(1).jpg"
           }
         },
         {
           "Loading": "eager",
           "desktop": {
             "Width": 500,
-            "Height": 398
+            "Height": 398,
+            "Image": "https://data.decoassets.com/allever-store/4dfb5e9f-0e6a-4146-a0e9-7b889501c941/modular-2-seu-home.jpg"
           },
           "mobile": {
             "Width": 309,
-            "Height": 350
+            "Height": 350,
+            "Image": "https://data.decoassets.com/allever-store/f48fa104-6f91-47c4-8ea0-c2845cb7ce54/317x350-1-(1).jpg"
           }
         }
       ],
       "bannerFull": {
         "desktop": {
           "Width": 1410,
-          "Height": 144
+          "Height": 144,
+          "Image": "https://data.decoassets.com/allever-store/d97388e2-7018-45fa-87df-4aef7f750085/jan25_BANNER29-1249-144.jpg"
         },
         "mobile": {
           "Width": 640,
-          "Height": 250
+          "Height": 250,
+          "Image": "https://data.decoassets.com/allever-store/994d5265-35d5-426e-b503-409b278dbade/390x144-(1).jpg"
         }
       }
     },
@@ -612,22 +687,26 @@
           "Loading": "eager",
           "desktop": {
             "Width": 1410,
-            "Height": 439
+            "Height": 439,
+            "Image": "https://data.decoassets.com/allever-store/34cd82dc-5e97-47ba-9a6c-8185a91beb40/jan25_BANNER27-820x498-1-(2).jpg"
           },
           "mobile": {
             "Width": 356,
-            "Height": 213
+            "Height": 213,
+            "Image": "https://data.decoassets.com/allever-store/69a4c9d0-a540-4e42-85bc-c5d9e1d4b76d/356x213-1.jpg"
           }
         },
         {
           "Loading": "eager",
           "desktop": {
             "Width": 1410,
-            "Height": 439
+            "Height": 439,
+            "Image": "https://data.decoassets.com/allever-store/207e7bf9-aa2f-4206-9b2b-d7bf2e41e26a/jan25_BANNER27-820x498-1-1.jpg"
           },
           "mobile": {
             "Width": 356,
-            "Height": 213
+            "Height": 213,
+            "Image": "https://data.decoassets.com/allever-store/3dc06356-e250-4301-b960-a971ee3b2035/356x213-2.jpg"
           }
         }
       ]
@@ -662,7 +741,8 @@
           "Loading": "eager",
           "desktop": {
             "Height": 451,
-            "Width": 647
+            "Width": 647,
+            "Image": "https://data.decoassets.com/allever-store/178073ad-3ced-4c71-9bfb-2f65d9c3dc92/jan25_BANNER27-555x450.jpg"
           },
           "mobile": {
             "Width": 600,
@@ -673,22 +753,26 @@
           "Loading": "eager",
           "desktop": {
             "Height": 213,
-            "Width": 747
+            "Width": 747,
+            "Image": "https://data.decoassets.com/allever-store/be06fe2e-173d-4eef-a507-f0154cd08148/jan25_BANNER28-675x214.jpg"
           },
           "mobile": {
             "Width": 300,
-            "Height": 250
+            "Height": 250,
+            "Image": "https://data.decoassets.com/allever-store/fd3b55c9-87f1-4963-8ff9-b08e42f3a886/172x140.jpg"
           }
         },
         {
           "Loading": "eager",
           "desktop": {
             "Height": 213,
-            "Width": 747
+            "Width": 747,
+            "Image": "https://data.decoassets.com/allever-store/9c088df0-29d0-4ee2-a35f-1592ce718545/jan25_BANNER28-675x214-1.jpg"
           },
           "mobile": {
             "Width": 300,
-            "Height": 250
+            "Height": 250,
+            "Image": "https://data.decoassets.com/allever-store/a410bfc3-e90f-416e-a77e-7b16566799f9/172x140-1.jpg"
           }
         }
       ]
@@ -723,55 +807,65 @@
           "Loading": "eager",
           "desktop": {
             "Width": 555,
-            "Height": 505
+            "Height": 505,
+            "Image": "https://data.decoassets.com/allever-store/be732a09-a2e0-4a4c-b706-0aeb04ccb648/jan25_BANNER27-555x450-(1).jpg"
           },
           "mobile": {
             "Width": 600,
-            "Height": 359
+            "Height": 359,
+            "Image": "https://data.decoassets.com/allever-store/5273b54a-2632-48a6-a431-bb0245d5e351/356x213-3.jpg"
           }
         },
         {
           "Loading": "eager",
           "desktop": {
             "Width": 412,
-            "Height": 239
+            "Height": 239,
+            "Image": "https://data.decoassets.com/allever-store/5a7cea2d-41f6-4083-8d15-6e8efd67fd00/331-x-240.jpg"
           },
           "mobile": {
             "Width": 300,
-            "Height": 247
+            "Height": 247,
+            "Image": "https://data.decoassets.com/allever-store/5216411c-00a2-4a8b-b64b-aca77ecf0041/172-140-ultimo-mosaico-1.jpg"
           }
         },
         {
           "Loading": "eager",
           "desktop": {
             "Width": 412,
-            "Height": 239
+            "Height": 239,
+            "Image": "https://data.decoassets.com/allever-store/09f3bec8-13ea-422d-b89b-3a5375969082/331-x-240-1.jpg"
           },
           "mobile": {
             "Width": 300,
-            "Height": 247
+            "Height": 247,
+            "Image": "https://data.decoassets.com/allever-store/f156df33-aba8-4a57-b8cd-93a621a31c22/172-140-ultimo-mosaico-2.jpg"
           }
         },
         {
           "Loading": "eager",
           "desktop": {
             "Width": 412,
-            "Height": 239
+            "Height": 239,
+            "Image": "https://data.decoassets.com/allever-store/a9f9b2ef-6403-4796-b550-b2a080861363/331-x-240-2.jpg"
           },
           "mobile": {
             "Width": 300,
-            "Height": 247
+            "Height": 247,
+            "Image": "https://data.decoassets.com/allever-store/3d8ff331-1383-4a05-a30f-fe4fa22384d6/172-140-ultimo-mosaico-3.jpg"
           }
         },
         {
           "Loading": "eager",
           "desktop": {
             "Width": 412,
-            "Height": 239
+            "Height": 239,
+            "Image": "https://data.decoassets.com/allever-store/7066023b-5f28-4edd-8783-b4e194e8046f/331-x-240-3.jpg"
           },
           "mobile": {
             "Width": 300,
-            "Height": 247
+            "Height": 247,
+            "Image": "https://data.decoassets.com/allever-store/2d922a75-97ce-4697-b16e-05b2edd5143c/172-140-ultimo-mosaico-4.jpg"
           }
         }
       ]
@@ -786,16 +880,34 @@
         "__resolveType": "site/sections/Category/CarouselBrand.tsx",
         "title": "Compre por Marcas",
         "brands": [
-          {},
-          {},
-          {},
-          {},
-          {},
-          {},
-          {},
-          {},
-          {},
-          {}
+          {
+            "image": "https://data.decoassets.com/allever-store/7852c4bb-8724-4f29-aead-33f08452737f/jan25_BANNER-39-marca.jpg",
+            "label": "Philips"
+          },
+          {
+            "image": "https://data.decoassets.com/allever-store/9cf38766-0cce-4f9a-bebf-8b605c60a7b7/jan25_BANNER-40-marca.jpg",
+            "label": "Lorenzetti"
+          },
+          {
+            "image": "https://data.decoassets.com/allever-store/2c28addd-e049-4eb5-8555-27ebae8ae48f/jan25_BANNER-41-marca.jpg",
+            "label": "Schneider"
+          },
+          {
+            "image": "https://data.decoassets.com/allever-store/ed699b3d-455f-498a-a1da-ca440fe32cb0/jan25_BANNER-45-marca.jpg",
+            "label": "GAMA"
+          },
+          {
+            "image": "https://data.decoassets.com/allever-store/bf5bfac1-7fc4-418d-a44d-d3de1bed144b/jan25_BANNER-43-marca.jpg",
+            "label": "Mondial"
+          },
+          {
+            "image": "https://data.decoassets.com/allever-store/7059b109-69da-415f-85f4-0b9b13895d1c/jan25_BANNER-44-marca.jpg",
+            "label": "Hydra"
+          },
+          {
+            "image": "https://data.decoassets.com/allever-store/0c94a502-76c8-445d-800a-1e2135832755/jan25_BANNER-46-marca.jpg",
+            "label": "IRWIN"
+          }
         ]
       }
     },

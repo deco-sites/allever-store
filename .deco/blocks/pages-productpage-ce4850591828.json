@@ -148,7 +148,7 @@
       "buyTogether": {
         "__resolveType": "Preview vtex/loaders/intelligentSearch/productList.ts"
       },
-      "hiddenShipping": false,
+      "hiddenShipping": true,
       "subscriptionTopics": [
         "10% OFF no site em todas as compras com assinatura",
         "Edite os produtos e as datas, pause ou cancele a qualquer momento!",
