@@ -1,4 +1,4 @@
-import { ProductDetailsPage, ImageObject } from "apps/commerce/types.ts";
+import { ImageObject, ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { formatPrice } from "../../sdk/format.ts";
 import { useId } from "../../sdk/useId.ts";
@@ -16,6 +16,7 @@ import type { Device } from "apps/website/matchers/device.ts";
 import ProductSubscription from "./Subscription/Form.tsx";
 import { useScript } from "@deco/deco/hooks";
 import { getFlagCluster } from "./ProductCard.tsx";
+import SelectedVariantNames from "./SelectedVariantNames.tsx";
 import Icon from "../ui/Icon.tsx";
 import Price from "./Price.tsx";
 interface Props {
@@ -47,23 +48,44 @@ function ShareModal() {
       <dialog id="share_product" class="modal">
         <div class="modal-box">
           <form method="dialog">
-            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
           </form>
           <div class="text-base font-semibold mb-5">Compartilhar</div>
           <div class="flex items-center gap-3">
-            <a id="share-x" class="flex items-center justify-center w-14 h-14 rounded-full border border-primary" target="_blank">
+            <a
+              id="share-x"
+              class="flex items-center justify-center w-14 h-14 rounded-full border border-primary"
+              target="_blank"
+            >
               <Icon id="x-twitter" width={27} height={25} />
             </a>
-            <a id="share-facebook" class="flex items-center justify-center w-14 h-14 rounded-full border border-primary" target="_blank">
+            <a
+              id="share-facebook"
+              class="flex items-center justify-center w-14 h-14 rounded-full border border-primary"
+              target="_blank"
+            >
               <Icon id="facebook" width={15} height={29} />
             </a>
-            <a id="share-email" class="flex items-center justify-center w-14 h-14 rounded-full border border-primary" target="_blank">
+            <a
+              id="share-email"
+              class="flex items-center justify-center w-14 h-14 rounded-full border border-primary"
+              target="_blank"
+            >
               <Icon id="mail" width={29} height={25} />
             </a>
-            <a id="share-whatsapp" class="flex items-center justify-center w-14 h-14 rounded-full border border-primary" target="_blank">
+            <a
+              id="share-whatsapp"
+              class="flex items-center justify-center w-14 h-14 rounded-full border border-primary"
+              target="_blank"
+            >
               <Icon id="whatsapp" width={27} height={28} />
             </a>
-            <button id="share-copy" class="flex items-center justify-center w-14 h-14 rounded-full border border-primary">
+            <button
+              id="share-copy"
+              class="flex items-center justify-center w-14 h-14 rounded-full border border-primary"
+            >
               <Icon id="copy-paste" width={27} height={28} />
             </button>
           </div>
@@ -80,23 +102,41 @@ function ShareModal() {
             const productURL = encodeURIComponent(window.location.href);
             const shareLinks = {
               x: `https://twitter.com/intent/tweet?url=${productURL}&text=Confira este produto!`, // Link para X
-              facebook: `https://www.facebook.com/sharer/sharer.php?u=${productURL}`, // Link para Facebook
-              email: `mailto:?subject=Confira este produto&body=Veja este produto interessante: ${productURL}`, // Link para E-mail
-              whatsapp: `https://api.whatsapp.com/send?text=Confira este produto: ${productURL}` // Link para WhatsApp
+              facebook:
+                `https://www.facebook.com/sharer/sharer.php?u=${productURL}`, // Link para Facebook
+              email:
+                `mailto:?subject=Confira este produto&body=Veja este produto interessante: ${productURL}`, // Link para E-mail
+              whatsapp:
+                `https://api.whatsapp.com/send?text=Confira este produto: ${productURL}`, // Link para WhatsApp
             };
-            
+
             function copyToClipboard() {
               navigator.clipboard.writeText(window.location.href)
                 .then(() => alert("Link copiado!"))
                 .catch((err) => console.error("Erro ao copiar o link: ", err));
             }
 
-            document.getElementById('share-x')?.setAttribute('href', shareLinks.x);
-            document.getElementById('share-facebook')?.setAttribute('href', shareLinks.facebook);
-            document.getElementById('share-email')?.setAttribute('href', shareLinks.email);
-            document.getElementById('share-whatsapp')?.setAttribute('href', shareLinks.whatsapp);
-            document.getElementById('share-copy')?.addEventListener('click', copyToClipboard);
-          })
+            document.getElementById("share-x")?.setAttribute(
+              "href",
+              shareLinks.x,
+            );
+            document.getElementById("share-facebook")?.setAttribute(
+              "href",
+              shareLinks.facebook,
+            );
+            document.getElementById("share-email")?.setAttribute(
+              "href",
+              shareLinks.email,
+            );
+            document.getElementById("share-whatsapp")?.setAttribute(
+              "href",
+              shareLinks.whatsapp,
+            );
+            document.getElementById("share-copy")?.addEventListener(
+              "click",
+              copyToClipboard,
+            );
+          }),
         }}
       />
     </>
@@ -106,14 +146,16 @@ interface MeasurementTable {
   image?: ImageObject | null;
 }
 function MeasurementTable({
-  image
+  image,
 }: MeasurementTable) {
   if (!image) return null;
   return (
     <dialog id="measurement_table" class="modal">
       <div class="modal-box">
         <form method="dialog">
-          <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+          <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+            ✕
+          </button>
           <div class="text-base font-semibold mb-5">Guia de Medidas</div>
           <img
             class="w-full object-contain bg-white rounded-xl lg:rounded-3xl"
@@ -127,7 +169,7 @@ function MeasurementTable({
         <button>close</button>
       </form>
     </dialog>
-  )
+  );
 }
 function SubscriptionPrice({
   price,
@@ -135,10 +177,10 @@ function SubscriptionPrice({
   title,
   topics,
 }: {
-  price: number,
-  discount: number,
-  title: string,
-  topics: string[]
+  price: number;
+  discount: number;
+  title: string;
+  topics: string[];
 }) {
   const priceDiscount = price * (discount / 100);
   const total = price - priceDiscount;
@@ -149,15 +191,15 @@ function SubscriptionPrice({
           <Icon id="bookmark" />
           {formatPrice(total)}
         </div>
-        <div class="pl-[33px] sm:pl-0">Para assinantes <span class="text-primary">[allever]</span></div>
-        <button 
+        <div class="pl-[33px] sm:pl-0">
+          Para assinantes <span class="text-primary">[allever]</span>
+        </div>
+        <button
           class="pl-[33px] sm:pl-0 underline text-dark-gray text-sm"
-          hx-on:click={
-            useScript(() => {
-              // @ts-ignore .
-              document.getElementById("subscripton_info")?.showModal();
-            })
-          }  
+          hx-on:click={useScript(() => {
+            // @ts-ignore .
+            document.getElementById("subscripton_info")?.showModal();
+          })}
         >
           O que é a assinatura?
         </button>
@@ -165,12 +207,14 @@ function SubscriptionPrice({
       <dialog id="subscripton_info" class="modal">
         <div class="modal-box">
           <form method="dialog">
-            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-            <div 
+            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+            <div
               class="text-black font-semibold uppercase text-lg mb-3"
               dangerouslySetInnerHTML={{
-                __html: title
-              }} 
+                __html: title,
+              }}
             />
             <div class="text-sm text-black font-semibold">
               <span>Por que assinar?</span>
@@ -180,19 +224,17 @@ function SubscriptionPrice({
                     <Icon
                       id="check-circle"
                       class="text-primary"
-                    />  
+                    />
                   </div>
                   {topic}
                 </div>
               ))}
-              <button 
+              <button
                 class="btn btn-primary w-full mt-3"
-                hx-on:click={
-                  useScript(() => {
-                    // @ts-ignore .
-                    document.getElementById("subscripton_info")?.showModal();
-                  })
-                }  
+                hx-on:click={useScript(() => {
+                  // @ts-ignore .
+                  document.getElementById("subscripton_info")?.showModal();
+                })}
               >
                 Entendido
               </button>
@@ -204,7 +246,7 @@ function SubscriptionPrice({
         </form>
       </dialog>
     </>
-  )
+  );
 }
 function ProductInfo({
   page,
@@ -212,7 +254,7 @@ function ProductInfo({
   device,
   hiddenShipping,
   subscriptionTitle,
-  subscriptionTopics
+  subscriptionTopics,
 }: Props) {
   if (page === null) {
     throw new Error("Missing Product Details Page Info");
@@ -220,7 +262,14 @@ function ProductInfo({
   const id = useId();
   const [internationalFlag, promoFlag, newsFlag] = flags;
   const { breadcrumbList, product } = page;
-  const { productID, offers, isVariantOf, brand, additionalProperty, image: images } = product;
+  const {
+    productID,
+    offers,
+    isVariantOf,
+    brand,
+    additionalProperty,
+    image: images,
+  } = product;
   const title = isVariantOf?.name ?? product.name;
   const model = isVariantOf?.model ?? "";
   const productGroupID = isVariantOf?.productGroupID ?? "";
@@ -242,9 +291,10 @@ function ProductInfo({
   const percent = listPrice && price
     ? Math.round(((listPrice - price) / listPrice) * 100)
     : 0;
-  const hasSubscription = additionalProperty?.find((prop) =>
-    prop.value?.toLowerCase().indexOf("assinatura") !== -1
-  )?.value || "0";
+  const hasSubscription =
+    additionalProperty?.find((prop) =>
+      prop.value?.toLowerCase().indexOf("assinatura") !== -1
+    )?.value || "0";
   const subscriptionValue = parseInt(hasSubscription.replace(/\D/g, ""));
   const breadcrumb = {
     ...breadcrumbList,
@@ -274,9 +324,11 @@ function ProductInfo({
       offer.seller !== seller;
   }) || [];
 
-  const measurementTableImage = 
-    ((images as ImageObject[])?.find(img => img.name === "measurementtable") as ImageObject) 
-      || null;
+  const measurementTableImage =
+    ((images as ImageObject[])?.find((img) =>
+      img.name === "measurementtable"
+    ) as ImageObject) ||
+    null;
 
   if (device === "mobile" || device === "tablet") {
     return (
@@ -285,15 +337,18 @@ function ProductInfo({
         <MeasurementTable image={measurementTableImage} />
         <div class="flex flex-col gap-3 px-5 pt-5">
           <Breadcrumb itemListElement={page.breadcrumbList.itemListElement} />
-          <h1 class="text-base font-semibold">
-            {title}
-          </h1>
+          <SelectedVariantNames product={product} />
           <div class="flex items-center justify-between">
             <p class="text-dark-gray m-0 text-xs">
               Cod: {model} | {brand?.name}
             </p>
             {/* @ts-ignore . */}
-            <button class="btn btn-ghost text-dark-gray underline text-xs font-normal hover:bg-transparent" hx-on:click={useScript(() => document.getElementById("share_product")?.showModal())}>
+            <button
+              class="btn btn-ghost text-dark-gray underline text-xs font-normal hover:bg-transparent"
+              hx-on:click={useScript(() =>
+                document.getElementById("share_product")?.showModal()
+              )}
+            >
               <Icon id="share-2" width={20} height={20} />
               Compartilhe
             </button>
@@ -344,7 +399,14 @@ function ProductInfo({
                     pix={pix}
                   />
                   <ProductSelector product={product} />
-                  {subscriptionValue > 0 && <SubscriptionPrice price={price} discount={subscriptionValue} title={subscriptionTitle} topics={subscriptionTopics} />}
+                  {subscriptionValue > 0 && (
+                    <SubscriptionPrice
+                      price={price}
+                      discount={subscriptionValue}
+                      title={subscriptionTitle}
+                      topics={subscriptionTopics}
+                    />
+                  )}
                   <div class="w-[calc(100%+40px)] -mx-[20px] px-[20px] py-4 border border-y-dark-gray flex flex-col gap-3">
                     <>
                       {inventory > 0 && inventory <= 9 && (
@@ -367,7 +429,7 @@ function ProductInfo({
                       product={product}
                       item={item}
                       seller={seller}
-                      title={subscriptionTitle} 
+                      title={subscriptionTitle}
                       topics={subscriptionTopics}
                     />
                     <p class="text-xs font-normal text-black">
@@ -400,19 +462,19 @@ function ProductInfo({
                         ))}
                       </div>
                     )}
-                    {!hiddenShipping && (
-                      <div class="w-[calc(100%+40px)] -mx-[20px] px-[20px] pt-1.5 pb-4 border border-b-dark-gray border-t-0">
-                        <div>
-                          <ShippingSimulationForm
-                            items={[{
-                              id: Number(product.sku),
-                              quantity: 1,
-                              seller: seller,
-                            }]}
-                          />
-                        </div>
+                  {!hiddenShipping && (
+                    <div class="w-[calc(100%+40px)] -mx-[20px] px-[20px] pt-1.5 pb-4 border border-b-dark-gray border-t-0">
+                      <div>
+                        <ShippingSimulationForm
+                          items={[{
+                            id: Number(product.sku),
+                            quantity: 1,
+                            seller: seller,
+                          }]}
+                        />
                       </div>
-                    )}
+                    </div>
+                  )}
                 </>
               )
               : <OutOfStock productID={productID} />}
@@ -425,7 +487,7 @@ function ProductInfo({
               item={item}
               seller={seller}
               product={product}
-              class="uppercase bg-signature-green text-base flex justify-center items-center gap-2 py-3 rounded-full no-animation text-white font-semibold hover:bg-[#1bae3299]"
+              class="uppercase bg-signature-green text-base flex justify-center items-center gap-2 p-3 rounded-full no-animation text-white font-semibold hover:bg-[#1bae3299]"
               disabled={false}
             />
           </div>
@@ -448,10 +510,8 @@ function ProductInfo({
                 itemListElement={page.breadcrumbList.itemListElement}
               />
               <div class="flex flex-col gap-3 border border-x-0 border-y-dark-gray py-6">
-                <div class="flex items-center gap-4">
-                  <h1 class="text-xl font-bold flex-grow">
-                    {title}
-                  </h1>
+                <div class="flex items-center gap-4 justify-between">
+                  <SelectedVariantNames product={product} />
                   <div
                     id="product-page"
                     data-trustvox-product-code={productGroupID}
@@ -463,7 +523,12 @@ function ProductInfo({
                     Cod: {model} | {brand?.name}
                   </p>
                   {/* @ts-ignore . */}
-                  <button class="btn btn-ghost text-dark-gray underline text-sm hover:bg-transparent p-0 min-h-unset h-auto" hx-on:click={useScript(() => document.getElementById("share_product")?.showModal())}>
+                  <button
+                    class="btn btn-ghost text-dark-gray underline text-sm hover:bg-transparent p-0 min-h-unset h-auto"
+                    hx-on:click={useScript(() =>
+                      document.getElementById("share_product")?.showModal()
+                    )}
+                  >
                     <Icon id="share-2" />
                     Compartilhe
                   </button>
@@ -506,7 +571,14 @@ function ProductInfo({
                       pix={pix}
                     />
                     <ProductSelector product={product} />
-                    {subscriptionValue > 0 && <SubscriptionPrice price={price} discount={subscriptionValue} title={subscriptionTitle} topics={subscriptionTopics} />}
+                    {subscriptionValue > 0 && (
+                      <SubscriptionPrice
+                        price={price}
+                        discount={subscriptionValue}
+                        title={subscriptionTitle}
+                        topics={subscriptionTopics}
+                      />
+                    )}
                     <div class="flex flex-col gap-3">
                       <AddToCartButton
                         item={item}
@@ -519,7 +591,7 @@ function ProductInfo({
                         product={product}
                         item={item}
                         seller={seller}
-                        title={subscriptionTitle} 
+                        title={subscriptionTitle}
                         topics={subscriptionTopics}
                       />
                       {inventory > 0 && inventory <= 9 && (

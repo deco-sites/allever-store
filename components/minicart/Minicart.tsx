@@ -108,7 +108,7 @@ function ProductRecommendations({
           Você também pode <b class="text-primary">[Gostar]</b>
         </span>
       </div>
-      <div class="flex flex-row max-lg:overflow-x-auto lg:flex-col gap-4 lg:overflow-y-auto lg:max-h-[calc(100vh-129px)] px-5 lg:px-12 py-5">
+      <div class="flex flex-row max-lg:overflow-x-auto lg:flex-col gap-4 lg:overflow-y-auto lg:max-h-[calc(100vh-140px)] px-5 lg:px-12 pt-5 pb-10">
         {recommendations.map((item: Product, index: number) => (
           <ProductCard
             key={index}

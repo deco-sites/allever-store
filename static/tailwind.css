@@ -867,14 +867,6 @@ html {
 .carousel-end .carousel-item {
   scroll-snap-align: end;
 }
-.chat {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  -moz-column-gap: 0.75rem;
-       column-gap: 0.75rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
-}
 .checkbox {
   flex-shrink: 0;
   --chkbg: var(--fallback-bc,oklch(var(--bc)/1));
@@ -4835,9 +4827,6 @@ details.collapse summary::-webkit-details-marker {
 .rounded-none {
   border-radius: 0px;
 }
-.rounded-sm {
-  border-radius: 0.125rem;
-}
 .rounded-xl {
   border-radius: 0.75rem;
 }
@@ -5305,6 +5294,9 @@ details.collapse summary::-webkit-details-marker {
 .py-\[8\.5px\] {
   padding-top: 8.5px;
   padding-bottom: 8.5px;
+}
+.pb-10 {
+  padding-bottom: 2.5rem;
 }
 .pb-14 {
   padding-bottom: 3.5rem;
@@ -7067,8 +7059,8 @@ details>summary::marker {
     max-height: 600px;
   }
 
-  .lg\:max-h-\[calc\(100vh-129px\)\] {
-    max-height: calc(100vh - 129px);
+  .lg\:max-h-\[calc\(100vh-140px\)\] {
+    max-height: calc(100vh - 140px);
   }
 
   .lg\:max-h-screen {

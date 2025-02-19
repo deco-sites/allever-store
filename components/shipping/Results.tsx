@@ -65,8 +65,8 @@ export default function Results({ result }: ComponentProps<typeof action>) {
         });
         
         return (
-          <li class="grid grid-cols-4 border-base-200 not-first-child:border-t">
-            <div class="col-span-2 text-xs text-dark-gray font-semibold">
+          <li class="grid grid-cols-3 border-base-200 not-first-child:border-t">
+            <div class="text-xs text-dark-gray font-semibold">
               {method.name}
             </div>
             <div class="text-xs text-dark-gray font-semibold">

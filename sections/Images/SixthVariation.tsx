@@ -50,16 +50,16 @@ const SixthVariation = ({ title, items }: SixthVariationProps) => {
                         class="object-cover rounded-[40px] w-full h-full"
                       />
                     </a>
-                    <a href={items[1].Link} class="block">
+                    <a href={items[2].Link} class="block">
                       <Image
-                        src={items[1].desktop?.Image ||
+                        src={items[2].desktop?.Image ||
                           `https://placehold.co/${items[1].desktop?.Width}x${
-                            items[1].desktop?.Height
+                            items[2].desktop?.Height
                           }`}
-                        alt={items[1].Alt ||
+                        alt={items[2].Alt ||
                           "esse é um banner de uma marca tradicional"}
-                        width={items[1].desktop?.Width}
-                        height={items[1].desktop?.Height}
+                        width={items[2].desktop?.Width}
+                        height={items[2].desktop?.Height}
                         fetchPriority="low"
                         class="object-cover rounded-[40px] w-full h-full"
                       />

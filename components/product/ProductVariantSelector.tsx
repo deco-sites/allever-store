@@ -41,6 +41,7 @@ export const Ring = ({ value, checked = false, class: _class }: {
   );
 };
 function VariantSelector({ product }: Props) {
+  console.log(product)
   const { url, isVariantOf, image: images } = product;
   const hasVariant = isVariantOf?.hasVariant ?? [];
   const possibilities = useVariantPossibilities(hasVariant, product);
