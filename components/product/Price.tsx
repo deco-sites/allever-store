@@ -15,12 +15,32 @@ export default function Price({
 }: Props) {
   const { offers } = product;
   const offer = useOffer(offers);
-  const { pix, listPrice = 0, price = 0, availability, installment } = offer;
+  const {
+    pix,
+    listPrice = 0,
+    price = 0,
+    seller = "1",
+    lowPrice,
+    availability,
+    installment,
+  } = offer;
+
+  console.log(
+    type === "shelf" ? "vitrine de produtos: " : "pagina de produtos",
+    "listPrice",
+    formatPrice(listPrice),
+    "Price",
+    formatPrice(price),
+    "LowPrice",
+    formatPrice(lowPrice),
+    "Pix",
+    formatPrice(pix),
+  );
+
   const percent = listPrice && price
     ? Math.round(((listPrice - price) / listPrice) * 100)
     : 0;
-  console.log("percent", percent);
-  const hasPixDiscount = pix > 0 && pix < price;
+  const hasPixDiscount = pix > 0 && pix <= price;
 
   if (type === "shelf") {
     return (
@@ -28,16 +48,25 @@ export default function Price({
         {availability === "https://schema.org/InStock"
           ? (
             <div class="flex flex-col">
-              {listPrice > price &&
-                (
-                  <span class="line-through font-normal text-dark-gray text-xs">
-                    {formatPrice(
-                      listPrice,
-                      offers?.priceCurrency,
-                    )}
-                  </span>
-                )}
-              <span class="font-semibold text-xl text-primary">
+              <div class="flex flex-col items-start gap-2">
+                {listPrice > price &&
+                  (
+                    <span class="line-through text-base text-dark-gray leading-[1]">
+                      {formatPrice(
+                        listPrice,
+                        offers?.priceCurrency,
+                      )}
+                    </span>
+                  )}
+                {price && !pix &&
+                  (
+                    <span class="text-xl font-semibold text-black leading-[1]">
+                      {formatPrice(price)}
+                    </span>
+                  )}
+              </div>
+              {
+                /* <span class="font-semibold text-xl text-primary">
                 {hasPixDiscount
                   ? formatPrice(pix, offers?.priceCurrency)
                   : formatPrice(price, offers?.priceCurrency)}{" "}
@@ -47,7 +76,29 @@ export default function Price({
                       no pix
                     </span>
                   )}
-              </span>
+              </span> */
+              }
+              {hasPixDiscount
+                ? (
+                  <div class="flex flex-col items-start">
+                    <p class="font-semibold text-xl text-primary flex items-center gap-1">
+                      {formatPrice(pix)}
+                      <span class="text-primary font-normal text-base">
+                        no PIX
+                      </span>
+                    </p>
+                  </div>
+                )
+                : (
+                  <>
+                    <span class="text-xl font-semibold text-black">
+                      {formatPrice(
+                        listPrice,
+                        offers?.priceCurrency,
+                      )}
+                    </span>
+                  </>
+                )}
               <span class="text-dark-gray text-xs">
                 ou {installment?.billingDuration}x de {formatPrice(
                   installment?.billingIncrement,

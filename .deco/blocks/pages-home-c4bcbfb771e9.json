@@ -392,15 +392,18 @@
       "size": "medium"
     },
     {
-      "__resolveType": "site/sections/Product/ProductShelf.tsx",
-      "title": "Vitrine Teste",
-      "cta": "#",
-      "products": {
-        "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
-        "props": {
-          "term": "tv",
-          "count": 10,
-          "query": "140"
+      "__resolveType": "website/sections/Rendering/Lazy.tsx",
+      "section": {
+        "__resolveType": "site/sections/Product/ProductShelf.tsx",
+        "title": "Vitrine Teste",
+        "cta": "#",
+        "products": {
+          "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
+          "props": {
+            "term": "tv",
+            "count": 10,
+            "query": "140"
+          }
         }
       }
     },

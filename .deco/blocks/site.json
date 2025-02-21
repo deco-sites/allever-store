@@ -94,5 +94,48 @@
   "promoFlag": "140",
   "internationalFlag": "140",
   "minicartSuggestion": "169",
-  "newsFlag": "140"
+  "newsFlag": "140",
+  "productFlags": [
+    {
+      "textColor": "#fffafa",
+      "Bgcolor": "#F22E2E",
+      "position": "TOP",
+      "collectionID": "169",
+      "text": "<p>teste - flag 1</p>",
+      "width": "fit-content",
+      "title": "Promoção",
+      "label": "<p><strong>PROMOÇÃO</strong></p>"
+    },
+    {
+      "textColor": "#ffffff",
+      "Bgcolor": "#FFA318",
+      "position": "BOTTOM",
+      "collectionID": "169",
+      "text": "<p>teste - flag 2 <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"/tomada-para-antena-de-tv-ilus-5tg9-9034---soprano-14198/p?skuId=16535\">saiba mais</a></p>",
+      "width": "fit-content",
+      "title": "Novidade",
+      "label": "<p>NOVIDADE</p>"
+    },
+    {
+      "textColor": "#ffffff",
+      "Bgcolor": "#000000",
+      "width": "fit-content",
+      "position": "BOTTOM",
+      "label": "<p><span>Produto internacional </span><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"#\"><span>Saiba mais</span></a></p>",
+      "title": "Produto internacional",
+      "collectionID": "169"
+    }
+  ],
+  "teaserRename": [
+    {
+      "currentName": "Novidades 5% (5% allever - 0% seller)",
+      "newName": "teste promoção wesley",
+      "className": "bg-black"
+    },
+    {
+      "currentName": "Novidades 5% (5% allever - 0% seller)",
+      "newName": "teste promoção wesley",
+      "className": "bg-black"
+    }
+  ]
 }

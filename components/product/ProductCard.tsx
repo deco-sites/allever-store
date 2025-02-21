@@ -1,6 +1,6 @@
 import Image from "apps/website/components/Image.tsx";
 import WishlistButton from "../wishlist/WishlistButton.tsx";
-
+import { ImageObject, ProductDetailsPage } from "apps/commerce/types.ts";
 import { clx } from "../../sdk/clx.ts";
 import { relative } from "../../sdk/url.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
@@ -9,9 +9,12 @@ import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalytic
 import type { Product, PropertyValue } from "apps/commerce/types.ts";
 import MinicartAdd from "./MinicartAdd.tsx";
 import Price from "./Price.tsx";
+import TeaserName from "./TeaserName.tsx";
+import { ProductFlag } from "../../apps/site.ts";
+import Flag from "../ui/Flag.tsx";
 
 interface Props {
-  flags?: [internationalFlag: string, promoFlag: string, newsFlag: string];
+  // flags?: [internationalFlag: string, promoFlag: string, newsFlag: string];
   product: Product;
   /** Preload card image */
   preload?: boolean;
@@ -26,6 +29,9 @@ interface Props {
   hiddenFlags?: boolean;
   productGroupID?: string;
   hiddenAddToCartButton?: boolean;
+  page: ProductDetailsPage | null;
+
+  productFlags: ProductFlag[];
 }
 
 const WIDTH = 270;
@@ -44,7 +50,8 @@ export const getFlagCluster = (
 };
 
 function ProductCard({
-  flags,
+  // flags,
+  productFlags,
   product,
   preload,
   itemListName,
@@ -52,12 +59,9 @@ function ProductCard({
   class: _class,
   hiddenFlags = false,
   hiddenAddToCartButton = true,
+  page,
 }: Props) {
-  const [
-    internationalFlag = "",
-    promoFlag = "",
-    newsFlag = "",
-  ] = flags ?? [];
+  
 
   const { url, image: images, offers, isVariantOf, brand, additionalProperty } =
     product;
@@ -66,10 +70,27 @@ function ProductCard({
   const title = isVariantOf?.name ?? product.name;
   const [front] = images ?? [];
 
-  const { pix, listPrice = 0, price = 0, seller = "1", availability, installment } =
-    useOffer(offers);
+  // const {
+  //   pix,
+  //   listPrice = 0,
+  //   price = 0,
+  //   seller = "1",
+  //   availability,
+  //   installment,
+  // } = useOffer(offers);
+
+  const {
+    pix,
+    listPrice = 0,
+    price = 0,
+    seller = "1",
+    availability,
+    installment,
+  } = useOffer(offers);
+
   const inStock = availability === "https://schema.org/InStock";
   const relativeUrl = relative(url);
+
   const percent = listPrice && price
     ? Math.round(((listPrice - price) / listPrice) * 100)
     : 0;
@@ -88,13 +109,13 @@ function ProductCard({
     },
   });
 
-  const hasInternationalFlag = getFlagCluster(
-    internationalFlag,
-    additionalProperty,
-  );
-  const hasPromoFlag = getFlagCluster(promoFlag, additionalProperty);
-  const hasNewsFlag = getFlagCluster(newsFlag, additionalProperty);
-
+  // const hasInternationalFlag = getFlagCluster(
+  //   internationalFlag,
+  //   additionalProperty,
+  // );
+  // const hasPromoFlag = getFlagCluster(promoFlag, additionalProperty);
+  // const hasNewsFlag = getFlagCluster(newsFlag, additionalProperty);
+  const propertyIDs = additionalProperty?.map((prop) => prop.propertyID);
   return (
     <div
       {...event}
@@ -105,25 +126,23 @@ function ProductCard({
     >
       <div class="flex items-start justify-between">
         <div class="flex flex-wrap gap-[5px]">
-          {percent > 1 && inStock && !hiddenFlags
-            ? (
-              <span
-                class="text-xs font-semibold text-white uppercase bg-primary text-center text-white px-2 py-1 rounded-[6px]"
-              >
-                {percent}% off
-              </span>
-            )
-            : null}
-          {hasNewsFlag && !hiddenFlags && (
-            <span
-              class={clx(
-                "text-xs font-semibold text-white uppercase bg-[#FFA318] text-center text-white px-2 py-1 rounded-[6px]",
-              )}
-            >
-              Novidade
-            </span>
+          {percent >= 1 && (
+            <div class="text-xs font-semibold text-white uppercase bg-primary text-center text-white px-2 py-1 rounded-full w-fit">
+              {percent} % off
+            </div>
           )}
-          {hasPromoFlag && !hiddenFlags && (
+          <TeaserName page={page} context="product-card" />
+          {productFlags?.map((flag) => {
+            console.log(flag)
+            return (
+              <>
+                {propertyIDs?.includes(flag.collectionID) && <Flag {...flag} />}
+              </>
+            );
+          })}
+
+          {
+            /* {hasPromoFlag && !hiddenFlags && (
             <span
               class={clx(
                 "text-xs font-semibold text-white uppercase bg-[#F22E2E] text-center text-white px-2 py-1 rounded-[6px]",
@@ -131,7 +150,8 @@ function ProductCard({
             >
               Promoção
             </span>
-          )}
+          )} */
+          }
         </div>
         <WishlistButton item={item} variant="icon" />
       </div>
@@ -157,11 +177,13 @@ function ProductCard({
       <div>
         <a href={relativeUrl} class="flex flex-col gap-2">
           <div class="flex flex-col gap-1">
-            {hasInternationalFlag && (
+            {
+              /* {hasInternationalFlag && (
               <p class="px-1 sm:px-6 py-1 flex items-center justify-center bg-black text-white font-semibold text-[10px] sm:text-xs">
                 Compra Internacional
               </p>
-            )}
+            )} */
+            }
           </div>
           {brand?.name && inStock && (
             <p class="text-sm text-middle-gray capitalize">{brand?.name}</p>

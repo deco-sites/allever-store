@@ -8,15 +8,16 @@ import { useScript } from "@deco/deco/hooks";
 import type { SectionProps } from "@deco/deco";
 import type { AppContext } from "../../apps/site.ts";
 import type { Product, ProductDetailsPage } from "apps/commerce/types.ts";
+
 export interface Props {
   /** @title Integration */
   page: ProductDetailsPage | null;
   /** @title Omitir seção de entrega? */
   hiddenShipping?: boolean;
-  /** 
+  /**
    * @title Título da Seção de Assinatura
-   * @format rich-text 
-  */
+   * @format rich-text
+   */
   subscriptionTitle?: string;
   /** @title Tópicos da Seção de Assinatura */
   subscriptionTopics?: string[];
@@ -41,9 +42,10 @@ const onLoad = (productId: string, productName: string, image: string) => {
 };
 export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
   const {
-    internationalFlag = "",
-    promoFlag = "",
-    newsFlag = "",
+    productFlags = [],
+    // internationalFlag = "",
+    // promoFlag = "",
+    // newsFlag = "",
   } = ctx;
 
   const { page } = props;
@@ -59,9 +61,10 @@ export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
 
     return {
       ...props,
-      internationalFlag,
-      promoFlag,
-      newsFlag,
+      // internationalFlag,
+      // promoFlag,
+      // newsFlag,
+      productFlags,
       isMobile: ctx.device !== "desktop",
       productRecommendations,
     };
@@ -69,25 +72,28 @@ export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
 
   return {
     ...props,
-    internationalFlag,
-    promoFlag,
-    newsFlag,
+    // internationalFlag,
+    // promoFlag,
+    // newsFlag,
+    productFlags,
   };
 };
 export default function ProductDetails({
   page,
-  internationalFlag,
-  promoFlag,
+  // internationalFlag,
+  // promoFlag,
   newsFlag,
   isMobile,
+  productFlags,
   productRecommendations,
   hiddenShipping = false,
-  subscriptionTitle = "ASSINE E COMPRE COM ATÉ <b class='text-primary'>[10% OFF]</b>",
+  subscriptionTitle =
+    "ASSINE E COMPRE COM ATÉ <b class='text-primary'>[10% OFF]</b>",
   subscriptionTopics = [
     "10% OFF no site em todas as compras com assinatura",
     "Edite os produtos e as datas, pause ou cancele a qualquer momento!",
-    "Sem taxas de Adesão, Mensalidade ou Cancelamento"
-  ]
+    "Sem taxas de Adesão, Mensalidade ou Cancelamento",
+  ],
 }: SectionProps<typeof loader>) {
   if (!page) {
     return (
@@ -103,13 +109,21 @@ export default function ProductDetails({
   }
   if (page) {
     const { product } = page;
-    const { productID: productId, image: images, isVariantOf, additionalProperty: productProperties } = product;
-    const itsForAdults = productProperties?.find((p) => p.value === "Maior de 18") || null;
+    const {
+      productID: productId,
+      image: images,
+      isVariantOf,
+      additionalProperty: productProperties,
+    } = product;
+    const itsForAdults = productProperties?.find((p) =>
+      p.value === "Maior de 18"
+    ) || null;
     const productName = (isVariantOf?.name ?? product.name) || "";
     const [front] = images ?? [];
     const image = front?.url || "";
     const device = isMobile ? "mobile" : "desktop";
     const { additionalProperty = [] } = isVariantOf ?? {};
+
     return (
       <>
         {itsForAdults !== null && (
@@ -117,22 +131,33 @@ export default function ProductDetails({
             <dialog id="itsForAdults" class="modal">
               <div class="modal-box flex flex-col gap-3 items-center">
                 <Icon id="18" size={47} />
-                <p class="text-center text-sm">Olá! Precisamos confirmar a sua idade para continuar acessando a página!</p>
-                <h3 class="text-lg font-bold text-center">Você tem mais de 18 anos?</h3>
+                <p class="text-center text-sm">
+                  Olá! Precisamos confirmar a sua idade para continuar acessando
+                  a página!
+                </p>
+                <h3 class="text-lg font-bold text-center">
+                  Você tem mais de 18 anos?
+                </h3>
                 <div class="modal-action flex gap-3 justify-center !m-0">
                   <a class="btn m-0" href="/">Não</a>
                   <form method="dialog">
-                    <button 
+                    <button
                       class="btn btn-primary"
                       hx-on:click={useScript(() => {
                         if (!localStorage.getItem("showAdultModal")) {
                           localStorage.setItem("showAdultModal", "no");
                         }
-                      })}  
-                    >Sim</button>
+                      })}
+                    >
+                      Sim
+                    </button>
                   </form>
                 </div>
-                <p class="text-center text-xs text-dark-gray m-0">Continuando você estará aceitando as políticas de <b>Privacidade e termos de uso</b> e <b>políticas de cookies</b></p>
+                <p class="text-center text-xs text-dark-gray m-0">
+                  Continuando você estará aceitando as políticas de{" "}
+                  <b>Privacidade e termos de uso</b> e{" "}
+                  <b>políticas de cookies</b>
+                </p>
               </div>
             </dialog>
             <script
@@ -143,18 +168,19 @@ export default function ProductDetails({
                     // @ts-ignore showModal exists on daisyUi
                     itsForAdults.showModal();
                   }
-                })
+                }),
               }}
             />
           </>
         )}
         <ProductInfo
-          flags={[internationalFlag, promoFlag, newsFlag]}
+          // flags={[internationalFlag, promoFlag, newsFlag]}
           page={page}
           device={device}
           hiddenShipping={hiddenShipping}
           subscriptionTitle={subscriptionTitle}
           subscriptionTopics={subscriptionTopics}
+          productFlags={productFlags}
         />
         <BuyTogether
           page={page}

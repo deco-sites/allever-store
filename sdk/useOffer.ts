@@ -3,6 +3,7 @@ import type {
   UnitPriceSpecification,
 } from "apps/commerce/types.ts";
 
+
 const bestInstallment = (
   acc: UnitPriceSpecification | null,
   curr: UnitPriceSpecification,
@@ -51,7 +52,6 @@ export const useOffer = (aggregateOffer?: AggregateOffer) => {
     aggregateOffer?.offers.find((o) =>
       o.availability === "https://schema.org/InStock"
     ) || aggregateOffer?.offers[0];
-
   const listPrice = offer?.priceSpecification.find((spec) =>
     spec.priceType === "https://schema.org/ListPrice"
   );
@@ -64,14 +64,20 @@ export const useOffer = (aggregateOffer?: AggregateOffer) => {
   const inventory = offer?.inventoryLevel?.value;
   const seller = offer?.seller;
   const price = offer?.price;
+  const lowPrice = offer?.price
+  const sellerName = offer?.sellerName
+  const teasers = offer?.teasers || [];
 
   return {
+    sellerName,
     inventory,
     price,
     listPrice: listPrice?.price,
     availability,
     seller,
     pix,
+    lowPrice,
+    teasers,
     installment,
     installments: installment && price
       ? installmentToString(installment, price)

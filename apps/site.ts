@@ -10,7 +10,78 @@ import { rgb24 } from "std/fmt/colors.ts";
 import manifest, { type Manifest } from "../manifest.gen.ts";
 import type { Config } from "apps/vtex/loaders/config.ts";
 import { type App as A, type AppContext as AC } from "@deco/deco";
+
+import { Color, ImageWidget } from "apps/admin/widgets.ts";
+/**
+ * @titleBy title
+ */
+export interface ProductFlag {
+  /**
+   * @title Identificador da Flag
+   */
+  title?: string;
+  /**
+   * @title Texto da Flag
+   * @description Digite o texto da Flag
+   * @format rich-text
+   */
+  label: string;
+  /**
+   * @title Cor do texto
+   */
+  textColor: Color;
+  /**
+   * @title ID da coleção do produto
+   * @description Aponte o ID da coleção desejada
+   */
+  collectionID: string;
+  /**
+   * @title Cor de fundo da Flag
+   */
+  Bgcolor: Color;
+  /**
+   * @title Imagem de background da Flag
+   */
+  backgroundImage?: ImageWidget;
+
+  /**
+   * @title tamanho da Flag
+   */
+  width?: "100%" | "fit-content";
+  /**
+   * @title Posição da Flag
+   * @description Aplicada Apenas na PDP
+   */
+  position?: "TOP" | "CENTER" | "BOTTOM";
+}
+/**
+ * @titleBy newName
+ */
+export interface TeaserRename {
+  /**
+   * @title Nome da promoção
+   * @description Precisa ser exatamente como foi cadastrada na plataforma
+   */
+  currentName: string;
+  /**
+   * @title Use esse campo para renomear a promoção
+   */
+  newName: string;
+
+  className: string;
+}
+
 export type Props = {
+    /**
+   * @title Flag de promoção do produto
+   */
+  teaserRename?: TeaserRename[];
+  /**
+   * @title Flags de Produto
+   * @description Aponte o ID da coleção desejada
+   */
+  productFlags?: ProductFlag[];
+
   /**
    * @title Flags de Novidades
    * @description Insira o número da coleção:

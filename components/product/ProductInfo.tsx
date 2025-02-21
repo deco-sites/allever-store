@@ -19,14 +19,22 @@ import { getFlagCluster } from "./ProductCard.tsx";
 import SelectedVariantNames from "./SelectedVariantNames.tsx";
 import Icon from "../ui/Icon.tsx";
 import Price from "./Price.tsx";
+import TeaserName from "./TeaserName.tsx";
+import type { AppContext } from "../../apps/site.ts";
+import { ProductFlag, TeaserRename } from "../../apps/site.ts";
+import Flag from "../ui/Flag.tsx";
+
 interface Props {
   page: ProductDetailsPage | null;
-  flags?: [internationalFlag: string, promoFlag: string, newsFlag: string] | [];
+  // flags?: [internationalFlag: string, promoFlag: string, newsFlag: string] | [];
   device: Device;
   hiddenShipping: boolean;
   subscriptionTitle: string;
   subscriptionTopics: string;
+  productFlags: ProductFlag[];
+  teaserRenames: TeaserRename[];
 }
+
 const onLoad = () => {
   const handleScroll = () => {
     const fixedAddToCart = document.getElementById("fixed-add-to-cart");
@@ -250,7 +258,8 @@ function SubscriptionPrice({
 }
 function ProductInfo({
   page,
-  flags = [],
+  productFlags,
+  teaserRenames,
   device,
   hiddenShipping,
   subscriptionTitle,
@@ -260,7 +269,7 @@ function ProductInfo({
     throw new Error("Missing Product Details Page Info");
   }
   const id = useId();
-  const [internationalFlag, promoFlag, newsFlag] = flags;
+  // const [internationalFlag, promoFlag, newsFlag] = flags;
   const { breadcrumbList, product } = page;
   const {
     productID,
@@ -270,6 +279,7 @@ function ProductInfo({
     additionalProperty,
     image: images,
   } = product;
+
   const title = isVariantOf?.name ?? product.name;
   const model = isVariantOf?.model ?? "";
   const productGroupID = isVariantOf?.productGroupID ?? "";
@@ -278,16 +288,12 @@ function ProductInfo({
     price = 0,
     listPrice = 0,
     seller = "1",
+    sellerName,
     inventory = 0,
     installment,
     availability,
   } = useOffer(offers);
-  const hasInternationalFlag = getFlagCluster(
-    internationalFlag,
-    additionalProperty,
-  );
-  const hasPromoFlag = getFlagCluster(promoFlag, additionalProperty);
-  const hasNewsFlag = getFlagCluster(newsFlag, additionalProperty);
+
   const percent = listPrice && price
     ? Math.round(((listPrice - price) / listPrice) * 100)
     : 0;
@@ -307,6 +313,8 @@ function ProductInfo({
     price,
     listPrice,
   });
+  const propertyIDs = additionalProperty?.map((prop) => prop.propertyID);
+
   const viewItemEvent = useSendEvent({
     on: "view",
     event: {
@@ -318,6 +326,13 @@ function ProductInfo({
       },
     },
   });
+  const flagsPosition1 = productFlags.filter((flag) => flag.position === "TOP");
+  const flagsPosition2 = productFlags.filter((flag) =>
+    flag.position === "CENTER"
+  );
+  const flagsPosition3 = productFlags.filter((flag) =>
+    flag.position === "BOTTOM"
+  );
 
   const newOffers = offers?.offers.filter((offer) => {
     return offer.inventoryLevel.value && offer.inventoryLevel.value > 0 &&
@@ -354,13 +369,16 @@ function ProductInfo({
             </button>
             <WishlistButton item={item} pdp={true} />
           </div>
-          {hasPromoFlag &&
+          {
+            /* {hasPromoFlag &&
             (
               <p class="text-xs font-semibold text-white uppercase bg-[#F22E2E] text-center text-white px-2 py-1 rounded-full w-full">
                 Promoção
               </p>
-            )}
-          {hasInternationalFlag &&
+            )} */
+          }
+          {
+            /* {hasInternationalFlag &&
             (
               <div class="flex w-full">
                 <p class="text-xs font-semibold text-white uppercase bg-black text-center text-white px-2 py-1 rounded-full w-full">
@@ -373,17 +391,20 @@ function ProductInfo({
                   </a>
                 </p>
               </div>
-            )}
+            )} */
+          }
           <GallerySlider page={page} />
           <div class="flex justify-between">
-            <div class="w-full max-w-[151px]">
+            {
+              /* <div class="w-full max-w-[151px]">
               {hasNewsFlag &&
                 (
                   <p class="text-xs font-semibold text-white uppercase bg-[#FFA318] text-center text-white px-2 py-1 rounded-full">
                     Novidade
                   </p>
                 )}
-            </div>
+            </div> */
+            }
           </div>
           <div class="flex flex-col gap-3">
             {availability === "https://schema.org/InStock"
@@ -434,7 +455,7 @@ function ProductInfo({
                     />
                     <p class="text-xs font-normal text-black">
                       Vendido e entregue por:{" "}
-                      <span class="font-bold capitalize">{seller}</span>
+                      <span class="font-bold capitalize">{sellerName}</span>
                     </p>
                   </div>
                   {newOffers.length > 0 &&
@@ -501,7 +522,7 @@ function ProductInfo({
         <ShareModal />
         <MeasurementTable image={measurementTableImage} />
         <div class="container pt-12 px-5 grid grid-cols-2 gap-8">
-          <div class="col-span-1">
+          <div class="col-span-1 relative">
             <GallerySlider page={page} />
           </div>
           <div class="col-span-1">
@@ -533,39 +554,55 @@ function ProductInfo({
                     Compartilhe
                   </button>
                 </div>
-                {hasNewsFlag &&
-                  (
-                    <p class="text-xs font-semibold text-white uppercase bg-[#FFA318] text-center text-white px-2 py-1 rounded-full max-w-40">
-                      Novidade
-                    </p>
-                  )}
+
+                {flagsPosition1.length > 0 && (
+                  <div
+                    class={flagsPosition1.length >= 1 &&
+                      "flex lg:flex-row flex-col lg:gap-2 flex-wrap"}
+                  >
+                    {flagsPosition1.map((flag) =>
+                      propertyIDs?.includes(flag.collectionID)
+                        ? <Flag key={flag.collectionID} {...flag} />
+                        : null
+                    )}
+                  </div>
+                )}
               </div>
+              <TeaserName 
+              page={page} 
+              context="product-details"
+              teaserRenames={teaserRenames} />
               {availability === "https://schema.org/InStock" &&
                 (
                   <>
                     <div class="flex flex-col gap-[5px]">
-                      {hasInternationalFlag &&
-                        (
-                          <div class="flex w-full">
-                            <p class="text-xs font-semibold text-white uppercase bg-black text-center text-white px-2 py-1 rounded-full w-full">
-                              Produto internacional{" "}
-                              <a
-                                class="underline"
-                                href="#specifications"
-                              >
-                                Saiba mais
-                              </a>
-                            </p>
-                          </div>
-                        )}
+                      {flagsPosition2.length > 0 && (
+                        <div
+                          class={flagsPosition2.length >= 1 &&
+                            "flex lg:flex-row flex-col lg:gap-2 flex-wrap"}
+                        >
+                          {flagsPosition2.map((flag) =>
+                            propertyIDs?.includes(flag.collectionID)
+                              ? <Flag key={flag.collectionID} {...flag} />
+                              : null
+                          )}
+                        </div>
+                      )}
                     </div>
                     <Price type="details" product={product} isMobile={false} />
-                    {hasPromoFlag &&
-                      (
-                        <p class="text-xs font-semibold text-white uppercase bg-[#F22E2E] text-center text-white px-2 py-1 rounded-full max-w-40">
-                          Promoção
-                        </p>
-                      )}
+
+                    {flagsPosition3.length > 0 && (
+                      <div
+                        class={flagsPosition3.length > 1 &&
+                          "flex lg:flex-row flex-col lg:gap-2 flex-wrap"}
+                      >
+                        {flagsPosition3.map((flag) =>
+                          propertyIDs?.includes(flag.collectionID)
+                            ? <Flag key={flag.collectionID} {...flag} />
+                            : null
+                        )}
+                      </div>
+                    )}
                     <PaymentMethods
                       offers={offers}
                       pix={pix}
@@ -606,7 +643,7 @@ function ProductInfo({
                       )}
                       <p class="text-xs font-normal text-black">
                         Vendido e entregue por:{" "}
-                        <span class="font-bold capitalize">{seller}</span>
+                        <span class="font-bold capitalize">{sellerName}</span>
                       </p>
                     </div>
                     {newOffers.length > 0 &&
