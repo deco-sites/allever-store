@@ -15,7 +15,7 @@ export default function Flag({
             backgroundPosition: "center",
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
-            width: width
+            width: "fit-content"
           }}
           dangerouslySetInnerHTML={{ __html: label }}
          />

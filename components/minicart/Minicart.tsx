@@ -242,10 +242,10 @@ export default function Cart(
               </div>
             )
             : (
-              <>
+              <div class="h-[100vh]">
                 <ul
                   role="list"
-                  class="p-5 overflow-y-auto flex flex-col gap-2 w-full overflow-y-auto flex-grow"
+                  class="p-5 overflow-y-auto flex flex-col gap-2 w-full flex-grow"
                 >
                   {items.map((item, index) => (
                     <li>
@@ -327,7 +327,7 @@ export default function Cart(
                     </label>
                   </div>
                 </footer>
-              </>
+              </div>
             )}
         </div>
       </form>

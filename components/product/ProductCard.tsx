@@ -1,6 +1,6 @@
 import Image from "apps/website/components/Image.tsx";
 import WishlistButton from "../wishlist/WishlistButton.tsx";
-import {  ProductDetailsPage } from "apps/commerce/types.ts";
+import { ProductDetailsPage } from "apps/commerce/types.ts";
 import { clx } from "../../sdk/clx.ts";
 import { relative } from "../../sdk/url.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
@@ -31,6 +31,7 @@ interface Props {
   page: ProductDetailsPage | null;
 
   productFlags: ProductFlag[];
+  isBuyTogether?: boolean;
 }
 
 const WIDTH = 270;
@@ -59,6 +60,7 @@ function ProductCard({
   hiddenFlags = false,
   hiddenAddToCartButton = true,
   page,
+  isBuyTogether = false,
 }: Props) {
   const { url, image: images, offers, isVariantOf, brand, additionalProperty } =
     product;
@@ -109,7 +111,11 @@ function ProductCard({
       <div class="flex items-start justify-between">
         <div class="flex flex-wrap gap-[5px]">
           {percent >= 1 && (
-            <div class="text-xs font-semibold text-white uppercase bg-primary text-center text-white px-2 py-1 rounded-full w-fit">
+            <div
+              class={`text-xs font-semibold text-white uppercase bg-primary text-center text-white px-2 py-1 rounded-full w-fit ${
+                isBuyTogether && "ml-8"
+              }`}
+            >
               {percent}% off
             </div>
           )}

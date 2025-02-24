@@ -286,8 +286,11 @@ function ProductInfo({
     inventory = 0,
     installment,
     availability,
-    teasers
+    teasers,
   } = useOffer(offers);
+
+  console.log(teasers)
+
 
   const percent = listPrice && price
     ? Math.round(((listPrice - price) / listPrice) * 100)
@@ -320,10 +323,8 @@ function ProductInfo({
       },
     },
   });
-  
-  const flagsPosition1 = productFlags.filter((flag) => 
-    flag.position === "TOP"
-  );
+
+  const flagsPosition1 = productFlags.filter((flag) => flag.position === "TOP");
   const flagsPosition2 = productFlags.filter((flag) =>
     flag.position === "CENTER"
   );
@@ -341,7 +342,7 @@ function ProductInfo({
       img.name === "measurementtable"
     ) as ImageObject) ||
     null;
-  
+
   const propertyIDs = additionalProperty?.map((prop) => prop.propertyID);
   const renderFlag = (
     flag: ProductFlag,
@@ -349,8 +350,9 @@ function ProductInfo({
     const teaserNames = teasers?.map((prop) => prop.name);
     const propertyIDs = additionalProperty?.map((prop) => prop.propertyID);
 
-    const hasTeaser = 
-      teaserNames.some((t) => t.indexOf(flag.collectionID) !== -1);
+    const hasTeaser = teaserNames.some((t) =>
+      t.indexOf(flag.collectionID) !== -1
+    );
 
     if (
       propertyIDs?.includes(flag.collectionID) || hasTeaser
@@ -358,7 +360,7 @@ function ProductInfo({
       return <Flag {...flag} />;
     }
     return null;
-  }
+  };
 
   if (device === "mobile" || device === "tablet") {
     return (

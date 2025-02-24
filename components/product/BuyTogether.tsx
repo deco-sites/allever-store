@@ -204,6 +204,7 @@ export default function BuyTogether({
                   class="w-[216px] sm:w-[300px]"
                   product={product}
                   hiddenFlags={true}
+                  isBuyTogether={true}
                 />
               </div>
               <span class="text-primary text-3xl font-bold">+</span>
@@ -259,6 +260,7 @@ export default function BuyTogether({
                           class="w-[216px] sm:w-[300px]"
                           product={item}
                           hiddenFlags={true}
+                          isBuyTogether={true}
                         />
                       </div>
                       {(index + 1) < arr.length && (

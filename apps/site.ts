@@ -23,7 +23,6 @@ export interface ProductFlag {
   /**
    * @title Texto da Flag
    * @description Digite o texto da Flag
-   * @format rich-text
    */
   label: string;
   /**
@@ -32,7 +31,7 @@ export interface ProductFlag {
   textColor: Color;
   /**
    * @title ID da coleção do produto
-   * @description Aponte o ID da coleção desejada
+   * @description Aponte o ID da coleção ou o Name da Promoção desejada
    */
   collectionID: string;
   /**
@@ -43,11 +42,6 @@ export interface ProductFlag {
    * @title Imagem de background da Flag
    */
   backgroundImage?: ImageWidget;
-
-  /**
-   * @title tamanho da Flag
-   */
-  width?: "100%" | "fit-content";
   /**
    * @title Posição da Flag
    * @description Aplicada Apenas na PDP
