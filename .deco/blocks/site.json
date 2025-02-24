@@ -124,18 +124,15 @@
       "label": "<p><span>Produto internacional </span><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"#\"><span>Saiba mais</span></a></p>",
       "title": "Produto internacional",
       "collectionID": "169"
-    }
-  ],
-  "teaserRename": [
-    {
-      "currentName": "Novidades 5% (5% allever - 0% seller)",
-      "newName": "teste promoção wesley",
-      "className": "bg-black"
     },
     {
-      "currentName": "Novidades 5% (5% allever - 0% seller)",
-      "newName": "teste promoção wesley",
-      "className": "bg-black"
+      "textColor": "#fff",
+      "Bgcolor": "#000000",
+      "width": "100%",
+      "position": "TOP",
+      "title": "Novidades 5%",
+      "label": "<p>Novidades</p>",
+      "collectionID": "Novidades 5%"
     }
   ]
 }

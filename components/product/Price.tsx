@@ -19,23 +19,9 @@ export default function Price({
     pix,
     listPrice = 0,
     price = 0,
-    seller = "1",
-    lowPrice,
     availability,
     installment,
   } = offer;
-
-  console.log(
-    type === "shelf" ? "vitrine de produtos: " : "pagina de produtos",
-    "listPrice",
-    formatPrice(listPrice),
-    "Price",
-    formatPrice(price),
-    "LowPrice",
-    formatPrice(lowPrice),
-    "Pix",
-    formatPrice(pix),
-  );
 
   const percent = listPrice && price
     ? Math.round(((listPrice - price) / listPrice) * 100)
@@ -65,19 +51,6 @@ export default function Price({
                     </span>
                   )}
               </div>
-              {
-                /* <span class="font-semibold text-xl text-primary">
-                {hasPixDiscount
-                  ? formatPrice(pix, offers?.priceCurrency)
-                  : formatPrice(price, offers?.priceCurrency)}{" "}
-                {hasPixDiscount &&
-                  (
-                    <span class="text-primary font-normal text-base">
-                      no pix
-                    </span>
-                  )}
-              </span> */
-              }
               {hasPixDiscount
                 ? (
                   <div class="flex flex-col items-start">
@@ -135,7 +108,7 @@ export default function Price({
             </span>
             {percent >= 1 && (
               <div class="text-xs font-semibold text-white uppercase bg-primary text-center text-white px-2 py-1 rounded-full w-fit">
-                {percent} % off
+                {percent}% off
               </div>
             )}
           </div>
@@ -182,7 +155,7 @@ export default function Price({
             </span>
             {percent >= 1 && (
               <span class="text-xs font-semibold text-white uppercase bg-primary text-center text-white px-2 py-1 rounded-full w-fit">
-                {percent} % off
+                {percent}% off
               </span>
             )}
           </div>

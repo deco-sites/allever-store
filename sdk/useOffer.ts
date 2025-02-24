@@ -55,6 +55,9 @@ export const useOffer = (aggregateOffer?: AggregateOffer) => {
   const listPrice = offer?.priceSpecification.find((spec) =>
     spec.priceType === "https://schema.org/ListPrice"
   );
+  const price = offer?.priceSpecification.find((spec) =>
+    spec.priceType === "https://schema.org/SalePrice"
+  );
 
   const availability = offer?.availability;
   const installment = offer?.priceSpecification.reduce(bestInstallment, null);
@@ -63,24 +66,21 @@ export const useOffer = (aggregateOffer?: AggregateOffer) => {
   })?.price || 0;
   const inventory = offer?.inventoryLevel?.value;
   const seller = offer?.seller;
-  const price = offer?.price;
-  const lowPrice = offer?.price
-  const sellerName = offer?.sellerName
+  const sellerName = offer?.sellerName;
   const teasers = offer?.teasers || [];
 
   return {
     sellerName,
     inventory,
-    price,
+    price: price?.price,
     listPrice: listPrice?.price,
     availability,
     seller,
     pix,
-    lowPrice,
-    teasers,
     installment,
     installments: installment && price
-      ? installmentToString(installment, price)
+      ? installmentToString(installment, price?.price)
       : null,
+    teasers
   };
 };

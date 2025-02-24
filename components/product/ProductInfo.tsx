@@ -15,13 +15,10 @@ import GallerySlider from "./Gallery.tsx";
 import type { Device } from "apps/website/matchers/device.ts";
 import ProductSubscription from "./Subscription/Form.tsx";
 import { useScript } from "@deco/deco/hooks";
-import { getFlagCluster } from "./ProductCard.tsx";
 import SelectedVariantNames from "./SelectedVariantNames.tsx";
 import Icon from "../ui/Icon.tsx";
 import Price from "./Price.tsx";
-import TeaserName from "./TeaserName.tsx";
-import type { AppContext } from "../../apps/site.ts";
-import { ProductFlag, TeaserRename } from "../../apps/site.ts";
+import { ProductFlag } from "../../apps/site.ts";
 import Flag from "../ui/Flag.tsx";
 
 interface Props {
@@ -32,7 +29,6 @@ interface Props {
   subscriptionTitle: string;
   subscriptionTopics: string;
   productFlags: ProductFlag[];
-  teaserRenames: TeaserRename[];
 }
 
 const onLoad = () => {
@@ -259,7 +255,6 @@ function SubscriptionPrice({
 function ProductInfo({
   page,
   productFlags,
-  teaserRenames,
   device,
   hiddenShipping,
   subscriptionTitle,
@@ -269,7 +264,6 @@ function ProductInfo({
     throw new Error("Missing Product Details Page Info");
   }
   const id = useId();
-  // const [internationalFlag, promoFlag, newsFlag] = flags;
   const { breadcrumbList, product } = page;
   const {
     productID,
@@ -292,6 +286,7 @@ function ProductInfo({
     inventory = 0,
     installment,
     availability,
+    teasers
   } = useOffer(offers);
 
   const percent = listPrice && price
@@ -313,7 +308,6 @@ function ProductInfo({
     price,
     listPrice,
   });
-  const propertyIDs = additionalProperty?.map((prop) => prop.propertyID);
 
   const viewItemEvent = useSendEvent({
     on: "view",
@@ -326,7 +320,10 @@ function ProductInfo({
       },
     },
   });
-  const flagsPosition1 = productFlags.filter((flag) => flag.position === "TOP");
+  
+  const flagsPosition1 = productFlags.filter((flag) => 
+    flag.position === "TOP"
+  );
   const flagsPosition2 = productFlags.filter((flag) =>
     flag.position === "CENTER"
   );
@@ -344,6 +341,24 @@ function ProductInfo({
       img.name === "measurementtable"
     ) as ImageObject) ||
     null;
+  
+  const propertyIDs = additionalProperty?.map((prop) => prop.propertyID);
+  const renderFlag = (
+    flag: ProductFlag,
+  ) => {
+    const teaserNames = teasers?.map((prop) => prop.name);
+    const propertyIDs = additionalProperty?.map((prop) => prop.propertyID);
+
+    const hasTeaser = 
+      teaserNames.some((t) => t.indexOf(flag.collectionID) !== -1);
+
+    if (
+      propertyIDs?.includes(flag.collectionID) || hasTeaser
+    ) {
+      return <Flag {...flag} />;
+    }
+    return null;
+  }
 
   if (device === "mobile" || device === "tablet") {
     return (
@@ -369,6 +384,7 @@ function ProductInfo({
             </button>
             <WishlistButton item={item} pdp={true} />
           </div>
+          {productFlags.map(renderFlag)}
           {
             /* {hasPromoFlag &&
             (
@@ -568,10 +584,6 @@ function ProductInfo({
                   </div>
                 )}
               </div>
-              <TeaserName 
-              page={page} 
-              context="product-details"
-              teaserRenames={teaserRenames} />
               {availability === "https://schema.org/InStock" &&
                 (
                   <>

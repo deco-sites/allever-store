@@ -54,28 +54,8 @@ export interface ProductFlag {
    */
   position?: "TOP" | "CENTER" | "BOTTOM";
 }
-/**
- * @titleBy newName
- */
-export interface TeaserRename {
-  /**
-   * @title Nome da promoção
-   * @description Precisa ser exatamente como foi cadastrada na plataforma
-   */
-  currentName: string;
-  /**
-   * @title Use esse campo para renomear a promoção
-   */
-  newName: string;
-
-  className: string;
-}
 
 export type Props = {
-    /**
-   * @title Flag de promoção do produto
-   */
-  teaserRename?: TeaserRename[];
   /**
    * @title Flags de Produto
    * @description Aponte o ID da coleção desejada
