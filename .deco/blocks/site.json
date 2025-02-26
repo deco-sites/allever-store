@@ -104,53 +104,29 @@
       "text": "<p>teste - flag 1</p>",
       "width": "fit-content",
       "title": "Promoção",
-      "label": "<p><strong>PROMOÇÃO</strong></p>"
-    },
-    {
-      "textColor": "#fff",
-      "Bgcolor": "#000000",
-      "position": "TOP",
-      "collectionID": "(10% no PIX - (10% ALLEVER) SPLITADA)",
-      "width": "100%",
-      "title": "(10% no PIX - (10% ALLEVER) SPLITADA)",
-      "label": "<p>Novidades</p>"
+      "label": "Promoção",
+      "id": "164"
     },
     {
       "textColor": "#ffffff",
       "Bgcolor": "#FFA318",
-      "width": "fit-content",
       "position": "BOTTOM",
-      "label": "<p>NOVIDADE</p>",
+      "collectionID": "169",
+      "width": "fit-content",
       "title": "Novidade",
-      "collectionID": "169",
-      "text": "<p>teste - flag 2 <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"/tomada-para-antena-de-tv-ilus-5tg9-9034---soprano-14198/p?skuId=16535\">saiba mais</a></p>"
+      "label": "Novidade",
+      "text": "<p>teste - flag 2 <a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"/tomada-para-antena-de-tv-ilus-5tg9-9034---soprano-14198/p?skuId=16535\">saiba mais</a></p>",
+      "id": "164"
     },
     {
       "textColor": "#ffffff",
       "Bgcolor": "#000000",
       "width": "fit-content",
-      "position": "BOTTOM",
-      "title": "Produto internacional",
-      "label": "<p><span>Produto internacional </span><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"#\"><span>Saiba mais</span></a></p>",
-      "collectionID": "169"
-    },
-    {
-      "title": "Produto internacional",
-      "label": "<p><span>Produto internacional </span><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"#\"><span>Saiba mais</span></a></p>",
-      "textColor": "#ffffff",
-      "collectionID": "169",
-      "Bgcolor": "#000000",
       "position": "CENTER",
-      "width": "fit-content"
-    },
-    {
+      "label": "Produto internacional",
       "title": "Produto internacional",
-      "label": "<p><span>Produto internacional </span><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"#\"><span>Saiba mais</span></a></p>",
-      "textColor": "#ffffff",
       "collectionID": "169",
-      "Bgcolor": "#000000",
-      "position": "CENTER",
-      "width": "fit-content"
+      "id": "164"
     }
   ]
 }

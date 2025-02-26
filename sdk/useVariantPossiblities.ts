@@ -14,6 +14,7 @@ const omit = new Set([
   "vtex.subscription.all",
   "vtex.subscription.eletrotrafo-10-off-assinatura",
   "assurant.insurance",
+  "activeSubscriptions"
 ]);
 
 export const useVariantPossibilities = (

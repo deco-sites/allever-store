@@ -3,7 +3,6 @@ import type {
   UnitPriceSpecification,
 } from "apps/commerce/types.ts";
 
-
 const bestInstallment = (
   acc: UnitPriceSpecification | null,
   curr: UnitPriceSpecification,

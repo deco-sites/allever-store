@@ -53,12 +53,9 @@ const useUrlRebased = (overrides: string | undefined, base: string) => {
 };
 function PageResult(props: SectionProps<typeof loader>) {
   const {
-    layout,
     startingPage = 0,
     url,
-    internationalFlag,
-    promoFlag,
-    newsFlag,
+    productFlags
   } = props;
   const page = props.page!;
   const { products, pageInfo } = page;
@@ -83,11 +80,11 @@ function PageResult(props: SectionProps<typeof loader>) {
         {products?.map((product, index) => (
           <ProductCard
             key={`product-card-${product.productID}`}
-            flags={[internationalFlag, promoFlag, newsFlag]}
             product={product}
             preload={index === 0}
             index={offset + index}
             class="h-full min-w-[160px] max-w-[300px]"
+            productFlags={productFlags}
           />
         ))}
       </div>
@@ -356,18 +353,12 @@ function SearchResult({ page, ...props }: SectionProps<typeof loader>) {
   return <Result {...props} page={page} />;
 }
 export const loader = (props: Props, req: Request, ctx: AppContext) => {
-  const {
-    internationalFlag = "",
-    promoFlag = "",
-    newsFlag = "",
-  } = ctx;
+  const { productFlags = [] } = ctx;
 
   return {
     ...props,
     url: req.url,
-    internationalFlag,
-    promoFlag,
-    newsFlag,
+    productFlags,
   };
 };
 export default SearchResult;

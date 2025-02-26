@@ -4,10 +4,11 @@ import BuyTogether from "../../components/product/BuyTogether.tsx";
 import ProductInfo from "../../components/product/ProductInfo.tsx";
 import Description from "../../components/product/Description.tsx";
 import ProductGrid from "../../components/product/ProductGrid.tsx";
+import { useOffer } from "../../sdk/useOffer.ts";
 import { useScript } from "@deco/deco/hooks";
 import type { SectionProps } from "@deco/deco";
 import type { AppContext } from "../../apps/site.ts";
-import type { Product, ProductDetailsPage } from "apps/commerce/types.ts";
+import type { ProductDetailsPage } from "apps/commerce/types.ts";
 
 export interface Props {
   /** @title Integration */
@@ -22,6 +23,7 @@ export interface Props {
   /** @title Tópicos da Seção de Assinatura */
   subscriptionTopics?: string[];
 }
+
 const onLoad = (productId: string, productName: string, image: string) => {
   // @ts-ignore _trustvox exists
   globalThis._trustvox = [
@@ -40,49 +42,50 @@ const onLoad = (productId: string, productName: string, image: string) => {
   const _trustvox_shelf_rate = globalThis._trustvox_shelf_rate || [];
   _trustvox_shelf_rate.push(["_storeId", "121576"]);
 };
-export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
-  const {
-    productFlags = [],
-    // internationalFlag = "",
-    // promoFlag = "",
-    // newsFlag = "",
-  } = ctx;
 
+export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
+  const { productFlags = [], device } = ctx;
   const { page } = props;
   if (page) {
     const { product } = page;
+    // const { productID, offers } = product;
+    // const { seller = "1" } = useOffer(offers);
+    // const items = [{
+    //   id: parseInt(productID),
+    //   quantity: 1,
+    //   seller
+    // }];
+
+    // const cartSimulation = await (ctx as any).invoke.vtex.actions.cart.simulation({
+    //   items,
+    //   country: 'BRA',
+    //   postalCode: '12954400',
+    //   RnbBehavior: 1,
+    // });
 
     // deno-lint-ignore no-explicit-any
-    const productRecommendations = await (ctx as any).invoke.vtex.loaders.legacy
-      .relatedProductsLoader({
-        crossSelling: "whosawalsosaw",
-        id: product.inProductGroupWithID,
-      });
+    const productRecommendations = await (ctx as any).invoke.vtex.loaders.legacy.relatedProductsLoader({
+      id: product.inProductGroupWithID,
+      crossSelling: "whosawalsosaw",
+    });
 
     return {
       ...props,
-      // internationalFlag,
-      // promoFlag,
-      // newsFlag,
       productFlags,
-      isMobile: ctx.device !== "desktop",
+      isMobile: device !== "desktop",
       productRecommendations,
     };
   }
 
   return {
     ...props,
-    // internationalFlag,
-    // promoFlag,
-    // newsFlag,
+    isMobile: device !== "desktop",
     productFlags,
+    productRecommendations: []
   };
 };
 export default function ProductDetails({
   page,
-  // internationalFlag,
-  // promoFlag,
-  newsFlag,
   isMobile,
   productFlags,
   productRecommendations,
@@ -174,7 +177,6 @@ export default function ProductDetails({
           </>
         )}
         <ProductInfo
-          // flags={[internationalFlag, promoFlag, newsFlag]}
           page={page}
           device={device}
           hiddenShipping={hiddenShipping}

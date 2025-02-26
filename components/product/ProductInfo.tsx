@@ -1,9 +1,7 @@
 import { ImageObject, ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { formatPrice } from "../../sdk/format.ts";
-import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
-import { useSendEvent } from "../../sdk/useSendEvent.ts";
 import ShippingSimulationForm from "../shipping/Form.tsx";
 import WishlistButton from "../wishlist/WishlistButton.tsx";
 import AddToCartButton from "./AddToCartButton.tsx";
@@ -23,11 +21,10 @@ import Flag from "../ui/Flag.tsx";
 
 interface Props {
   page: ProductDetailsPage | null;
-  // flags?: [internationalFlag: string, promoFlag: string, newsFlag: string] | [];
   device: Device;
   hiddenShipping: boolean;
   subscriptionTitle: string;
-  subscriptionTopics: string;
+  subscriptionTopics: string[];
   productFlags: ProductFlag[];
 }
 
@@ -254,16 +251,13 @@ function SubscriptionPrice({
 }
 function ProductInfo({
   page,
-  productFlags,
   device,
+  productFlags,
   hiddenShipping,
   subscriptionTitle,
-  subscriptionTopics,
+  subscriptionTopics = [],
 }: Props) {
-  if (page === null) {
-    throw new Error("Missing Product Details Page Info");
-  }
-  const id = useId();
+  if (page === null) throw new Error("Missing Product Details Page Info");
   const { breadcrumbList, product } = page;
   const {
     productID,
@@ -274,7 +268,6 @@ function ProductInfo({
     image: images,
   } = product;
 
-  const title = isVariantOf?.name ?? product.name;
   const model = isVariantOf?.model ?? "";
   const productGroupID = isVariantOf?.productGroupID ?? "";
   const {
@@ -284,17 +277,10 @@ function ProductInfo({
     seller = "1",
     sellerName,
     inventory = 0,
-    installment,
     availability,
     teasers,
   } = useOffer(offers);
-
-  console.log(teasers)
-
-
-  const percent = listPrice && price
-    ? Math.round(((listPrice - price) / listPrice) * 100)
-    : 0;
+  
   const hasSubscription =
     additionalProperty?.find((prop) =>
       prop.value?.toLowerCase().indexOf("assinatura") !== -1
@@ -312,26 +298,6 @@ function ProductInfo({
     listPrice,
   });
 
-  const viewItemEvent = useSendEvent({
-    on: "view",
-    event: {
-      name: "view_item",
-      params: {
-        item_list_id: "product",
-        item_list_name: "Product",
-        items: [item],
-      },
-    },
-  });
-
-  const flagsPosition1 = productFlags.filter((flag) => flag.position === "TOP");
-  const flagsPosition2 = productFlags.filter((flag) =>
-    flag.position === "CENTER"
-  );
-  const flagsPosition3 = productFlags.filter((flag) =>
-    flag.position === "BOTTOM"
-  );
-
   const newOffers = offers?.offers.filter((offer) => {
     return offer.inventoryLevel.value && offer.inventoryLevel.value > 0 &&
       offer.seller !== seller;
@@ -343,7 +309,14 @@ function ProductInfo({
     ) as ImageObject) ||
     null;
 
-  const propertyIDs = additionalProperty?.map((prop) => prop.propertyID);
+  const flagsPosition1 = productFlags.filter((flag) => flag.position === "TOP");
+  const flagsPosition2 = productFlags.filter((flag) =>
+    flag.position === "CENTER"
+  );
+  const flagsPosition3 = productFlags.filter((flag) =>
+    flag.position === "BOTTOM"
+  );
+
   const renderFlag = (
     flag: ProductFlag,
   ) => {
@@ -351,11 +324,11 @@ function ProductInfo({
     const propertyIDs = additionalProperty?.map((prop) => prop.propertyID);
 
     const hasTeaser = teaserNames.some((t) =>
-      t.indexOf(flag.collectionID) !== -1
+      t.indexOf(flag.id) !== -1
     );
 
     if (
-      propertyIDs?.includes(flag.collectionID) || hasTeaser
+      propertyIDs?.includes(flag.id) || hasTeaser
     ) {
       return <Flag {...flag} />;
     }
@@ -374,7 +347,6 @@ function ProductInfo({
             <p class="text-dark-gray m-0 text-xs">
               Cod: {model} | {brand?.name}
             </p>
-            {/* @ts-ignore . */}
             <button
               class="btn btn-ghost text-dark-gray underline text-xs font-normal hover:bg-transparent"
               hx-on:click={useScript(() =>
@@ -386,43 +358,13 @@ function ProductInfo({
             </button>
             <WishlistButton item={item} pdp={true} />
           </div>
-          {productFlags.map(renderFlag)}
-          {
-            /* {hasPromoFlag &&
-            (
-              <p class="text-xs font-semibold text-white uppercase bg-[#F22E2E] text-center text-white px-2 py-1 rounded-full w-full">
-                Promoção
-              </p>
-            )} */
-          }
-          {
-            /* {hasInternationalFlag &&
-            (
-              <div class="flex w-full">
-                <p class="text-xs font-semibold text-white uppercase bg-black text-center text-white px-2 py-1 rounded-full w-full">
-                  Produto internacional{" "}
-                  <a
-                    class="underline"
-                    href="#specifications"
-                  >
-                    Saiba mais
-                  </a>
-                </p>
-              </div>
-            )} */
-          }
+          <div class="flex flex-wrap gap-2">
+            {flagsPosition1.map(renderFlag)}
+            {flagsPosition2.map(renderFlag)}
+          </div>
           <GallerySlider page={page} />
-          <div class="flex justify-between">
-            {
-              /* <div class="w-full max-w-[151px]">
-              {hasNewsFlag &&
-                (
-                  <p class="text-xs font-semibold text-white uppercase bg-[#FFA318] text-center text-white px-2 py-1 rounded-full">
-                    Novidade
-                  </p>
-                )}
-            </div> */
-            }
+          <div class="flex flex-wrap gap-2">
+            {flagsPosition3.map(renderFlag)}
           </div>
           <div class="flex flex-col gap-3">
             {availability === "https://schema.org/InStock"
@@ -561,7 +503,6 @@ function ProductInfo({
                   <p class="text-dark-gray text-sm">
                     Cod: {model} | {brand?.name}
                   </p>
-                  {/* @ts-ignore . */}
                   <button
                     class="btn btn-ghost text-dark-gray underline text-sm hover:bg-transparent p-0 min-h-unset h-auto"
                     hx-on:click={useScript(() =>
@@ -572,51 +513,20 @@ function ProductInfo({
                     Compartilhe
                   </button>
                 </div>
-
-                {flagsPosition1.length > 0 && (
-                  <div
-                    class={flagsPosition1.length >= 1 &&
-                      "flex lg:flex-row flex-col lg:gap-2 flex-wrap"}
-                  >
-                    {flagsPosition1.map((flag) =>
-                      propertyIDs?.includes(flag.collectionID)
-                        ? <Flag key={flag.collectionID} {...flag} />
-                        : null
-                    )}
-                  </div>
-                )}
+                <div class="flex flex-wrap gap-2">
+                  {flagsPosition1.map(renderFlag)}
+                </div>
               </div>
               {availability === "https://schema.org/InStock" &&
                 (
                   <>
-                    <div class="flex flex-col gap-[5px]">
-                      {flagsPosition2.length > 0 && (
-                        <div
-                          class={flagsPosition2.length >= 1 &&
-                            "flex lg:flex-row flex-col lg:gap-2 flex-wrap"}
-                        >
-                          {flagsPosition2.map((flag) =>
-                            propertyIDs?.includes(flag.collectionID)
-                              ? <Flag key={flag.collectionID} {...flag} />
-                              : null
-                          )}
-                        </div>
-                      )}
+                    <div class="flex flex-wrap gap-2">
+                      {flagsPosition2.map(renderFlag)}
                     </div>
                     <Price type="details" product={product} isMobile={false} />
-
-                    {flagsPosition3.length > 0 && (
-                      <div
-                        class={flagsPosition3.length > 1 &&
-                          "flex lg:flex-row flex-col lg:gap-2 flex-wrap"}
-                      >
-                        {flagsPosition3.map((flag) =>
-                          propertyIDs?.includes(flag.collectionID)
-                            ? <Flag key={flag.collectionID} {...flag} />
-                            : null
-                        )}
-                      </div>
-                    )}
+                    <div class="flex flex-wrap gap-2">
+                      {flagsPosition3.map(renderFlag)}
+                    </div>
                     <PaymentMethods
                       offers={offers}
                       pix={pix}
@@ -718,7 +628,7 @@ function ProductInfo({
         >
           <div class="container px-5 py-4 grid grid-cols-4 lg:grid-cols-7 gap-12 items-center">
             <div class="hidden lg:block text-xl font-semibold text-black col-span-3">
-              {title}
+              <SelectedVariantNames product={product} />
             </div>
             <Price type="fixed" product={product} isMobile={false} />
             <div class="col-span-2">

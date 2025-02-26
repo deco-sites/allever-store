@@ -1,6 +1,5 @@
 import Image from "apps/website/components/Image.tsx";
 import WishlistButton from "../wishlist/WishlistButton.tsx";
-import { ProductDetailsPage } from "apps/commerce/types.ts";
 import { clx } from "../../sdk/clx.ts";
 import { relative } from "../../sdk/url.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
@@ -28,8 +27,6 @@ interface Props {
   hiddenFlags?: boolean;
   productGroupID?: string;
   hiddenAddToCartButton?: boolean;
-  page: ProductDetailsPage | null;
-
   productFlags: ProductFlag[];
   isBuyTogether?: boolean;
 }
@@ -50,33 +47,28 @@ export const getFlagCluster = (
 };
 
 function ProductCard({
-  // flags,
   productFlags,
   product,
   preload,
   itemListName,
   index,
   class: _class,
-  hiddenFlags = false,
   hiddenAddToCartButton = true,
-  page,
   isBuyTogether = false,
 }: Props) {
   const { url, image: images, offers, isVariantOf, brand, additionalProperty } =
     product;
 
   const productGroupID = isVariantOf?.productGroupID ?? "";
-  const title = isVariantOf?.name ?? product.name;
+  const title = product.name ?? "";
   const [front] = images ?? [];
 
   const {
-    pix,
     listPrice = 0,
     price = 0,
     seller = "1",
     teasers,
-    availability,
-    installment,
+    availability
   } = useOffer(offers);
 
   const inStock = availability === "https://schema.org/InStock";
@@ -100,6 +92,31 @@ function ProductCard({
     },
   });
 
+  const flagsPosition1 = productFlags.filter((flag) => 
+    flag.position !== "CENTER"
+  );
+  const flagsPosition2 = productFlags.filter((flag) =>
+    flag.position === "CENTER"
+  );
+
+  const renderFlag = (
+    flag: ProductFlag,
+  ) => {
+    const teaserNames = teasers?.map((prop) => prop.name);
+    const propertyIDs = additionalProperty?.map((prop) => prop.propertyID);
+
+    const hasTeaser = teaserNames.some((t) =>
+      t.indexOf(flag.id) !== -1
+    );
+
+    if (
+      propertyIDs?.includes(flag.id) || hasTeaser
+    ) {
+      return <Flag {...flag} type="product-card" />;
+    }
+    return null;
+  };
+
   return (
     <div
       {...event}
@@ -109,16 +126,17 @@ function ProductCard({
       )}
     >
       <div class="flex items-start justify-between">
-        <div class="flex flex-wrap gap-[5px]">
+        <div class="flex flex-wrap gap-2">
           {percent >= 1 && (
             <div
-              class={`text-xs font-semibold text-white uppercase bg-primary text-center text-white px-2 py-1 rounded-full w-fit ${
+              class={`text-xs font-semibold text-white uppercase bg-primary text-center text-white px-2 py-1 rounded-full ${
                 isBuyTogether && "ml-8"
               }`}
             >
               {percent}% off
             </div>
           )}
+          {flagsPosition1.map(renderFlag)}
         </div>
         <WishlistButton item={item} variant="icon" />
       </div>
@@ -142,6 +160,11 @@ function ProductCard({
         </a>
       </figure>
       <div>
+        {flagsPosition2.length > 0 && (
+          <div class="flex flex-col items-stretch my-2">
+            {flagsPosition2.map(renderFlag)}
+          </div>
+        )}
         <a href={relativeUrl} class="flex flex-col gap-2">
           {brand?.name && inStock && (
             <p class="text-sm text-middle-gray capitalize">{brand?.name}</p>

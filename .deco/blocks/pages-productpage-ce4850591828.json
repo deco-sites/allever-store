@@ -129,32 +129,28 @@
     {
       "__resolveType": "site/sections/Product/ProductDetails.tsx",
       "page": {
-        "__resolveType": "commerce/loaders/product/extensions/detailsPage.ts",
-        "data": {
-          "__resolveType": "vtex/loaders/legacy/productDetailsPage.ts",
-          "slug": {
-            "__resolveType": "website/functions/requestToParam.ts",
-            "param": "slug"
-          }
-        },
-        "extensions": [],
+        "__resolveType": "vtex/loaders/intelligentSearch/productDetailsPage.ts",
         "seo": {
           "noIndexing": false
         },
         "product": {
           "isAccessoryOrSparePartFor": []
+        },
+        "slug": {
+          "__resolveType": "website/functions/requestToParam.ts",
+          "param": "slug"
         }
       },
       "buyTogether": {
         "__resolveType": "Preview vtex/loaders/intelligentSearch/productList.ts"
       },
-      "hiddenShipping": true,
+      "hiddenShipping": false,
       "subscriptionTopics": [
         "10% OFF no site em todas as compras com assinatura",
         "Edite os produtos e as datas, pause ou cancele a qualquer momento!",
         "Sem taxas de Adesão, Mensalidade ou Cancelamento"
       ],
-      "subscriptionTitle": "<p>Assine e compre com até <span style=\"color: #123add\">[10% OFF]</span></p>"
+      "subscriptionTitle": "<p>Assine e compre com até <span style=\"color: rgb(18, 58, 221)\">[10% OFF]</span></p>"
     },
     {
       "__resolveType": "website/sections/Rendering/Lazy.tsx",

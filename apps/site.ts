@@ -13,16 +13,11 @@ import { type App as A, type AppContext as AC } from "@deco/deco";
 
 import { Color, ImageWidget } from "apps/admin/widgets.ts";
 /**
- * @titleBy title
+ * @titleBy label
  */
 export interface ProductFlag {
   /**
-   * @title Identificador da Flag
-   */
-  title?: string;
-  /**
    * @title Texto da Flag
-   * @description Digite o texto da Flag
    */
   label: string;
   /**
@@ -30,21 +25,21 @@ export interface ProductFlag {
    */
   textColor: Color;
   /**
-   * @title ID da coleção do produto
-   * @description Aponte o ID da coleção ou o Name da Promoção desejada
+   * @title ID
+   * @description Aponte o ID da coleção ou o Nome da Promoção desejada
    */
-  collectionID: string;
+  id: string;
   /**
    * @title Cor de fundo da Flag
    */
   Bgcolor: Color;
   /**
-   * @title Imagem de background da Flag
+   * @title Background da Flag
    */
   backgroundImage?: ImageWidget;
   /**
    * @title Posição da Flag
-   * @description Aplicada Apenas na PDP
+   * @description Aplicado Apenas na PDP
    */
   position?: "TOP" | "CENTER" | "BOTTOM";
 }
@@ -52,10 +47,8 @@ export interface ProductFlag {
 export type Props = {
   /**
    * @title Flags de Produto
-   * @description Aponte o ID da coleção desejada
    */
   productFlags?: ProductFlag[];
-
   /**
    * @title Flags de Novidades
    * @description Insira o número da coleção:

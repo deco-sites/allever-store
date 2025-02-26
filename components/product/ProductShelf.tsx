@@ -16,25 +16,18 @@ export interface Props extends SectionHeaderProps {
 
 export const loader = (
   props: Props,
-  req: Request,
+  _req: Request,
   ctx: AppContext,
 ) => {
-  const {
-    newsFlag = "",
-    promoFlag = "",
-    internationalFlag = "",
-  } = ctx;
+  const { productFlags = [] } = ctx;
 
-  return { ...props, internationalFlag, promoFlag, newsFlag };
+  return { ...props, productFlags };
 };
 
 export default function ProductShelf({
-  internationalFlag,
-  promoFlag,
-  newsFlag,
+  productFlags,
   products,
   title,
-  cta,
 }: SectionProps<typeof loader>) {
   const id = useId();
   if (!products || products.length === 0) {
@@ -67,8 +60,8 @@ export default function ProductShelf({
           <Section.Header title={title} />
         </div>
         <ProductSlider
-          flags={[internationalFlag, promoFlag, newsFlag]}
           products={products}
+          productFlags={productFlags}
           itemListName={title}
         />
       </Section.Container>

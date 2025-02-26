@@ -4,14 +4,15 @@ import { Product } from "apps/commerce/types.ts";
 import Icon from "../ui/Icon.tsx";
 import Slider from "../ui/Slider.tsx";
 import ProductCard from "./ProductCard.tsx";
+import type { ProductFlag } from "../../apps/site.ts";
 
 interface Props {
-  flags?: [internationalFlag: string, promoFlag: string, newsFlag: string];
   products: Product[];
+  productFlags: ProductFlag[];
   itemListName?: string;
 }
 
-function ProductSlider({ flags, products, itemListName }: Props) {
+function ProductSlider({ productFlags, products, itemListName }: Props) {
   const id = useId();
   return (
     <>
@@ -34,9 +35,9 @@ function ProductSlider({ flags, products, itemListName }: Props) {
                 )}
               >
                 <ProductCard
-                  flags={flags}
                   index={index}
                   product={product}
+                  productFlags={productFlags}
                   itemListName={itemListName}
                   class="w-[287px] sm:w-[300px]"
                 />

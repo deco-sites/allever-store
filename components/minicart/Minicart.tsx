@@ -114,6 +114,7 @@ function ProductRecommendations({
             key={index}
             class={_class}
             product={item}
+            productFlags={[]}
             hiddenAddToCartButton={false}
           />
         ))}
