@@ -11,37 +11,41 @@
       }
     },
     {
-      "__resolveType": "site/sections/Images/Carousel.tsx",
-      "images": [
-        {
-          "desktop": "https://data.decoassets.com/allever-store/329c158c-6213-413a-bfc4-9b4d29d5ea28/banner-topo-atualizado-desk.jpg",
-          "action": {
-            "href": "/",
-            "label": "Confira"
+      "__resolveType": "website/sections/Rendering/Lazy.tsx",
+      "section": {
+        "__resolveType": "site/sections/Images/Carousel.tsx",
+        "images": [
+          {
+            "desktop": "https://data.decoassets.com/allever-store/329c158c-6213-413a-bfc4-9b4d29d5ea28/banner-topo-atualizado-desk.jpg",
+            "action": {
+              "href": "/",
+              "label": "Confira"
+            },
+            "mobile": "https://data.decoassets.com/allever-store/c4a04654-373d-47fe-ba41-9974b3668060/Mobile-topo-1.jpg",
+            "alt": "Banner-topo-1"
           },
-          "mobile": "https://data.decoassets.com/allever-store/c4a04654-373d-47fe-ba41-9974b3668060/Mobile-topo-1.jpg",
-          "alt": "Banner-topo-1"
-        },
-        {
-          "desktop": "https://data.decoassets.com/allever-store/4a746a37-6e3c-4a02-91f7-2ce261b51ee9/banner-topo-atualizado-desk-2.jpg",
-          "alt": "Banner-topo-2",
-          "action": {
-            "href": "/",
-            "label": "Confira"
+          {
+            "desktop": "https://data.decoassets.com/allever-store/4a746a37-6e3c-4a02-91f7-2ce261b51ee9/banner-topo-atualizado-desk-2.jpg",
+            "alt": "Banner-topo-2",
+            "action": {
+              "href": "/",
+              "label": "Confira"
+            },
+            "mobile": "https://data.decoassets.com/allever-store/63dd11f7-1640-49de-a0c9-73d365cd3ce3/Mobile-topo-2.jpg"
           },
-          "mobile": "https://data.decoassets.com/allever-store/63dd11f7-1640-49de-a0c9-73d365cd3ce3/Mobile-topo-2.jpg"
-        },
-        {
-          "desktop": "https://data.decoassets.com/allever-store/89236ee8-5693-4d7b-9f4a-4b0a870e2cf5/dez24-DESK-allever-teste-(2).jpg",
-          "alt": "Banner-topo-3",
-          "action": {
-            "href": "/",
-            "label": "Confira"
-          },
-          "mobile": "https://data.decoassets.com/allever-store/f0b3791e-4c14-4256-be1d-c2e9daaa82a9/dez24-MOB-allever-teste-(2).jpg"
-        }
-      ],
-      "preload": true
+          {
+            "desktop": "https://data.decoassets.com/allever-store/89236ee8-5693-4d7b-9f4a-4b0a870e2cf5/dez24-DESK-allever-teste-(2).jpg",
+            "alt": "Banner-topo-3",
+            "action": {
+              "href": "/",
+              "label": "Confira"
+            },
+            "mobile": "https://data.decoassets.com/allever-store/f0b3791e-4c14-4256-be1d-c2e9daaa82a9/dez24-MOB-allever-teste-(2).jpg"
+          }
+        ],
+        "preload": false,
+        "interval": 3
+      }
     },
     {
       "__resolveType": "site/sections/Spacer.tsx",
@@ -404,7 +408,8 @@
             "count": 10,
             "query": "140"
           }
-        }
+        },
+        "displayOfferTag": false
       }
     },
     {
@@ -500,19 +505,22 @@
       "size": "medium"
     },
     {
-      "__resolveType": "site/sections/Product/ProductShelf.tsx",
-      "products": {
-        "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
-        "props": {
-          "sort": "price:asc",
-          "query": "fone",
-          "count": 12,
-          "fuzzy": "automatic",
-          "term": "tv"
-        }
-      },
-      "title": "Vitrine 1",
-      "cta": "#"
+      "__resolveType": "website/sections/Rendering/Lazy.tsx",
+      "section": {
+        "__resolveType": "site/sections/Product/ProductShelf.tsx",
+        "products": {
+          "__resolveType": "vtex/loaders/intelligentSearch/productList.ts",
+          "props": {
+            "sort": "price:asc",
+            "query": "fone",
+            "count": 12,
+            "fuzzy": "automatic",
+            "term": "tv"
+          }
+        },
+        "title": "Vitrine 1",
+        "cta": "#"
+      }
     },
     {
       "__resolveType": "site/sections/Spacer.tsx",
