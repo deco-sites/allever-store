@@ -66,7 +66,8 @@
     "appToken": {
       "__resolveType": "website/loaders/secret.ts",
       "encrypted": "6787aa440c887a7ee70fdcc2c1dd796366e9a01ffe8ed4a2f72b7678b1222a7fd7431506dab205faa99df828563af7dfc2a181b80b9c247f315f718fec2c6485b25a5c286b95a1ef2a0bb36502acc0852173b7542d5a98c603f7cf8267b46e98f34d54059e7d876d22b7dbc5a4784d57ef0f47da662796015f0a170b6b7fe27f68fbedfce34a5fa9c0e82ece3ce555a2"
-    }
+    },
+    "usePortalSitemap": true
   },
   "platform": "vtex",
   "__resolveType": "site/apps/site.ts",
@@ -78,6 +79,9 @@
     },
     "includeScriptsToBody": {
       "includes": []
+    },
+    "matcher": {
+      "__resolveType": "website/matchers/always.ts"
     }
   },
   "flavor": {
